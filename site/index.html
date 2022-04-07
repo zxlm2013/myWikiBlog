@@ -377,6 +377,29 @@ docs/
     index.md  # The documentation homepage.
     ...       # Other markdown pages, images and other files.
 </code></pre>
+<p>Hypothesis:         <span class="arithmatex">\(h_\theta(x)=\theta^Tx=\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n\)</span></p>
+<p>Parameters:         <span class="arithmatex">\(\theta_0,\theta_1,...,\theta_n\)</span></p>
+<p>Cost function: <br />
+$$
+J(\theta_0,\theta_1,...,\theta_n)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2
+$$
+Gradient descent:
+Repeat{
+$$
+\theta_j :=\theta_j-\alpha\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)
+$$
+​        }（simultaneously update for every j=0, 1, 2, ..., n)）</p>
+<p>推导一： <span class="arithmatex">\(\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)=?\)</span></p>
+<p>Let's first work it for the case if we have only one training example <span class="arithmatex">\((x,y)\)</span>, so that we can neglect the sum in the definition <span class="arithmatex">\(J\)</span>. We have:
+$$
+\begin{aligned} 
+\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)&amp;=
+\frac {1} {2}\frac{\partial}{\partial \theta_j}(h_\theta(x)-y)^2\
+&amp;=2\cdot\frac{1}{2}\cdot(h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(h_\theta(x)-y)\
+&amp;=(h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n)\
+&amp;=(h_\theta(x)-y)\cdot x_j
+\end{aligned}
+$$</p>
 
               
             </article>
