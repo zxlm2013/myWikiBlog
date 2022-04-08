@@ -58,11 +58,6 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
-        
-        <a href="#use" class="md-skip">
-          Skip to content
-        </a>
-      
     </div>
     <div data-md-component="announce">
       
@@ -230,79 +225,9 @@
       
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          1.1 Gradient descent
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         1.1 Gradient descent
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#use" class="md-nav__link">
-    Use
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#play-together" class="md-nav__link">
-    Play Together
-  </a>
-  
-    <nav class="md-nav" aria-label="Play Together">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0x" class="md-nav__link">
-    0.x
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1x" class="md-nav__link">
-    1.x
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
-    CLI
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    License
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -345,78 +270,6 @@
               </div>
             
             
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#use" class="md-nav__link">
-    Use
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#play-together" class="md-nav__link">
-    Play Together
-  </a>
-  
-    <nav class="md-nav" aria-label="Play Together">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#0x" class="md-nav__link">
-    0.x
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1x" class="md-nav__link">
-    1.x
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cli" class="md-nav__link">
-    CLI
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#license" class="md-nav__link">
-    License
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -453,41 +306,12 @@ $$
 <p>Let's first work it for the case if we have only one training example <span class="arithmatex">\((x,y)\)</span>, so that we can neglect the sum in the definition <span class="arithmatex">\(J\)</span>. We have:
 $$
 \begin{split}
-\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n) &amp; =  \frac {1} {2}\frac{\partial}{\partial \theta_j}(h_\theta(x)-y)^2 \\
+\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n) &amp; =  \frac {1} {2}\frac{\partial}{\partial \theta_j}\left(h_\theta\left(x\right)-y\right)^2 \\
  &amp; = 2\cdot\frac{1}{2}\cdot(h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(h_\theta(x)-y) \\
  &amp; = (h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n) \\
  &amp; = (h_\theta(x)-y)\cdot x_j
 \end{split}
 $$</p>
-<h2 id="use">Use</h2>
-<p><strong>Build</strong></p>
-<div class="highlight"><pre><span></span><code>npm run build
-
-<span class="c1"># or</span>
-
-yarn build
-</code></pre></div>
-<p><strong>Server</strong></p>
-<div class="highlight"><pre><span></span><code>npm run dev
-
-<span class="c1"># or</span>
-
-yarn dev
-</code></pre></div>
-<h2 id="play-together">Play Together</h2>
-<h3 id="0x">0.x</h3>
-<p><code>vuepress-theme-reco@0.x</code> 是基于 <code>vuepress@0.x</code> 的博客主题。</p>
-<p><code>vuepress@0.x</code> 功能比较简单，只适合书写简单的文档，但好在支持主题自定义，而个人又希望能够用它来书写博客，原因就是它足够的简洁，毫无疑问，这也符合很多程序员的观念，也就是在这种情况下，<code>vuepress-theme-reco@0.x</code> 的第一个版本经过一个通宵而产生。</p>
-<p>主题开源不久，很多朋友通过各种联系方式，给到很多好的意见和建议，所以我个人也在积极地更新。</p>
-<p>因为我是一名前端开发工程师，开发的过程中，总是想着能不能加入一些炫酷的效果，有很多次都是添加上又去掉，反反复复，最后都是被 <strong>简洁</strong> 的这个原则阻止掉，毕竟，现在我是将它当作一个产品来看待，并不是一个技术或者是技巧的尝试项目。</p>
-<h3 id="1x">1.x</h3>
-<p>随着不断有用户过来询问：为什么 <code>vuepress-theme-reco@0.x</code> 不能在 <code>vuepress@1.x</code> 上使用？本来只是打算对 <code>vuepress-theme-reco@0.x</code> 进行简单的bug修复的我，终究还是忍不住，开始了 <code>vuepress-theme-reco@1.x</code> 的开发。又是在一个寂静的凌晨两点半（晚上就是出活快），我默默地开始了。</p>
-<p>主题升级的关键也就是 <code>@vuepress/plugin-blog</code> 这款官方插件，它不需要再去麻烦地过滤数据，将分类和标签的相关信息直接存在 <code>$categories</code> 和 <code>$tags</code> 这两个全局变量中。借助于 <code>@vuepress/plugin-blog</code>，分类和标签功能更容易实现，但也有了一些局限。接下来两三天的时间，都是在进行功能的迁移和一些bug的修复。</p>
-<p><code>vuepress-theme-reco@0.x</code> 的开发中，更加深刻地明白了模块化和组件化编程的重要性，如果当初没有把一些功能进行封装，而是直接简单的复制，这次升级也不会这么顺利。模块拆分的越细，使用就会越灵活。</p>
-<h3 id="cli">CLI</h3>
-<p>还是衷心地希望能有更多的朋友参与进来，更快地去完善它。接下来时间允许的情况下，我会开源一款自动生成博客的脚手架，略过配置步骤，直接书写优质内容，这也是我后来逐渐形成的一种信念，就是希望能让这款主题，功能越完善，使用越来越简单。</p>
-<h2 id="license">License</h2>
-<p><a href="https://github.com/recoluan/vuepress-theme-reco/blob/master/LICENSE">MIT</a></p>
 
               
             </article>
