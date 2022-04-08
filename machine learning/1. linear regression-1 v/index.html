@@ -505,7 +505,7 @@
 <p>一种可能的表达方式为：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span>，因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>线性回归中<mark class="critic"><strong>线性</strong></mark>的含义： <mark class="critic">因变量<strong>y</strong>对于<strong>未知的回归系数</strong>（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是<strong>线性</strong>的。</mark></p>
+<p>线性回归中<ins class="critic"><strong>线性</strong></ins>的含义： 因变量<ins class="critic"><strong>y</strong></ins>对于<ins class="critic"><strong>未知的回归系数</strong></ins>（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是<ins class="critic"><strong>线性</strong></ins>的。</p>
 </div>
 <h2 id="2">2. 代价函数</h2>
 <div class="admonition info">
@@ -545,8 +545,8 @@
 </tbody>
 </table>
 <p>Hypothesis:    <span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0}+\theta_{1}x\)</span></p>
-<p>Parameters：<span class="arithmatex">\(\theta_{0}\)</span> ， <span class="arithmatex">\(\theta_{1}\)</span></p>
-<p>通过上一节，我们知道了，我们<strong>要完成</strong>朋友的需求（<strong>根据他房子的大小预测房价</strong>），就<strong>需要知道</strong>假设函数    <span class="arithmatex">\(h\)</span>，我们也对    <span class="arithmatex">\(h\)</span>     做出这样一种假设：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0}+\theta_{1}x\)</span>。通过观察这个函数，我们可以把这个问题转化为求<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>，从而当你朋友把房子大小告诉你，你将其代入公式即可得到预测的房价。那么，我们如何选择呢<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>？</p>
+<p>Parameters: <span class="arithmatex">\(\theta_{0}\)</span> ， <span class="arithmatex">\(\theta_{1}\)</span></p>
+<p>通过上一节，我们知道了，我们要完成朋友的<strong>需求（根据他房子的大小预测房价</strong>），要知道假设函数    <span class="arithmatex">\(h\)</span>，我们对    <span class="arithmatex">\(h\)</span>     做出这样一种假设：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0}+\theta_{1}x\)</span>。通过观察这个函数，我们可以把这个问题转化为求<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>，从而当你朋友把房子大小告诉你，你将其代入公式即可得到预测的房价。那么，我们如何选择呢<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>？</p>
 <p>首先，我们先直观理解<span class="arithmatex">\(h_\theta \left( x \right)\)</span> ---下图是<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>取不同值时，<span class="arithmatex">\(h\)</span>的整体图像。</p>
 <p><img alt="1_2_1_figure_of_h" src="../../assets/images/1_2_1_figure_of_h.png" /></p>
 
