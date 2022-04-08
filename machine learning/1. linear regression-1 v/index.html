@@ -433,7 +433,7 @@
 2 - 1 - Model Representation (8 min).mkv</p>
 </div>
 <h3 id="11">1.1 举例引入</h3>
-<p>我们这里有一个<strong>俄勒冈州波特兰市的住房价格</strong>的数据集，数据集<strong>包含</strong>：<code>房屋尺寸</code>，房屋<code>出售价格</code>......然后，你有一个朋友。他有一套1250平的房子，他需要你告诉他这房子能卖多少钱。我们该怎么做？</p>
+<p>我们这里有一个俄勒冈州波特兰市的<strong>住房价格数据集</strong>，数据集包含：房屋<strong>尺寸</strong>，房屋<strong>出售价格</strong>......然后，你有一个朋友。他有一套1250平的房子，他需要你告诉他这房子能卖多少钱。我们该怎么做？</p>
 <h3 id="12">1.2 模型描述</h3>
 <p>1.1 中的部分数据集如下表所示：</p>
 <table>
@@ -467,7 +467,7 @@
 </tbody>
 </table>
 <p>上述数据集，我们通常称为<strong>训练集</strong>（<strong>training set</strong>）。</p>
-<p>为了方便描述和后面公式推导将这个问题进行如下标记（Notion）：</p>
+<p>为了<strong>方便描述</strong>和后面<strong>公式推导</strong>将这个问题进行如下<strong>标记（Notion）</strong>：</p>
 <table>
 <thead>
 <tr>
@@ -498,14 +498,14 @@
 </tr>
 </tbody>
 </table>
-<p>好了，下面先来明确一下我们已知条件和要做的事：</p>
-<p>我们已知了训练集（<span class="arithmatex">\(m\)</span>组数据：<span class="arithmatex">\((x^{(1)}, y^{(1)})\)</span>, <span class="arithmatex">\((x^{(2)}, y^{(2)})\)</span>, ...<span class="arithmatex">\((x^{(m)}, y^{(m)})\)</span>, 其中<span class="arithmatex">\((x^{(i)}, y^{(i)})\)</span>代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为<span class="arithmatex">\(h\)</span>，即<strong>hypothesis(假设)</strong>。而这个函数<span class="arithmatex">\(h\)</span>的输入是房屋尺寸，输出就是房屋价格。因此，<span class="arithmatex">\(h\)</span> 是一个从<span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(y\)</span> 的函数映射。</p>
+<p>好了，下面先来<strong>明确一下</strong>我们<strong>已知条件</strong>和<strong>要做的事</strong>：</p>
+<p><mark class="critic">我们已知了训练集（<span class="arithmatex">\(m\)</span>组数据：<span class="arithmatex">\((x^{(1)}, y^{(1)})\)</span>, <span class="arithmatex">\((x^{(2)}, y^{(2)})\)</span>, ...<span class="arithmatex">\((x^{(m)}, y^{(m)})\)</span>, 其中<span class="arithmatex">\((x^{(i)}, y^{(i)})\)</span>代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为<span class="arithmatex">\(h\)</span>，即<strong>hypothesis(假设)</strong>。而这个函数<span class="arithmatex">\(h\)</span>的输入是房屋尺寸，输出就是房屋价格。</mark>因此，<span class="arithmatex">\(h\)</span> 是一个从<span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(y\)</span> 的函数映射。</p>
 <p><img alt="1_1_1_training_flow" src="../../assets/images/1_1_1_training_flow.png" /></p>
 <p>那么，对于我们这个问题，我们应该如何描述<span class="arithmatex">\(h\)</span>？</p>
-<p>一种可能的表达方式为：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span>，因为只含有一个特征/输入变量，因此这样的问题叫作单变量<u>线性回归</u> 问题。</p>
+<p>一种可能的表达方式为：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span>，因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>线性回归中线性的含义： 因变量y对于未知的回归系数（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是线性的。</p>
+<p>线性回归中<mark class="critic"><strong>线性</strong></mark>的含义： <mark class="critic">因变量<strong>y</strong>对于<strong>未知的回归系数</strong>（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是<strong>线性</strong>的。</mark></p>
 </div>
 <h2 id="2">2. 代价函数</h2>
 <div class="admonition info">
