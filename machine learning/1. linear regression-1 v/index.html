@@ -13,7 +13,7 @@
     
     
       
-        <title>1. 模型描述 - 大白的知识库</title>
+        <title>一. 单变量线性回归 - 大白的知识库</title>
       
     
     
@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#11" class="md-skip">
+        <a href="#1" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1. 模型描述
+              一. 单变量线性回归
             
           </span>
         </div>
@@ -243,12 +243,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          1. 单变量线性回归
+          一. 单变量线性回归
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        1. 单变量线性回归
+        一. 单变量线性回归
       </a>
       
         
@@ -265,23 +265,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 模型描述
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 模型描述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#11" class="md-nav__link">
     1.1 举例引入
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#12" class="md-nav__link">
     1.2 模型描述
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 代价函数
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 代价函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     2.1 代价函数的引入
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -301,7 +327,7 @@
   
     <li class="md-nav__item">
       <a href="../2.%20linear%20regression-m%20v/" class="md-nav__link">
-        2. 多变量线性回归
+        二. 多变量线性回归
       </a>
     </li>
   
@@ -339,23 +365,49 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 模型描述
+  </a>
+  
+    <nav class="md-nav" aria-label="1. 模型描述">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#11" class="md-nav__link">
     1.1 举例引入
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#12" class="md-nav__link">
     1.2 模型描述
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 代价函数
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 代价函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#21" class="md-nav__link">
     2.1 代价函数的引入
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -373,14 +425,15 @@
                 
 
 
-  <h1>1. 单变量线性回归</h1>
+  <h1>一. 单变量线性回归</h1>
 
+<h2 id="1">1. 模型描述</h2>
 <p>::: tip 参考视频: </p>
 <p>2 - 1 - Model Representation (8 min).mkv</p>
 <p>:::</p>
-<h2 id="11">1.1 举例引入</h2>
+<h3 id="11">1.1 举例引入</h3>
 <p>我们这里有一个<strong>俄勒冈州波特兰市的住房价格</strong>的数据集，数据集<strong>包含</strong>：<code>房屋尺寸</code>，房屋<code>出售价格</code>......然后，你有一个朋友。他有一套1250平的房子，他需要你告诉他这房子能卖多少钱。我们该怎么做？</p>
-<h2 id="12">1.2 模型描述</h2>
+<h3 id="12">1.2 模型描述</h3>
 <p>1.1 中的部分数据集如下表所示：</p>
 <table>
 <thead>
@@ -453,10 +506,11 @@
 <p class="admonition-title">Note</p>
 <p>线性回归中线性的含义： 因变量y对于未知的回归系数（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是线性的。</p>
 </div>
+<h2 id="2">2. 代价函数</h2>
 <p>::: tip 参考视频: </p>
 <p>2 - 2 - Cost Function (8 min).mkv</p>
 <p>:::</p>
-<h2 id="21">2.1 代价函数的引入</h2>
+<h3 id="21">2.1 代价函数的引入</h3>
 <p>Training Set</p>
 <table>
 <thead>
@@ -522,13 +576,13 @@
       
       
         
-        <a href="../2.%20linear%20regression-m%20v/" class="md-footer__link md-footer__link--next" aria-label="Next: 2. 多变量线性回归" rel="next">
+        <a href="../2.%20linear%20regression-m%20v/" class="md-footer__link md-footer__link--next" aria-label="Next: 二. 多变量线性回归" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              2. 多变量线性回归
+              二. 多变量线性回归
             </div>
           </div>
           <div class="md-footer__button md-icon">
