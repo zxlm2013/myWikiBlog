@@ -542,14 +542,12 @@
 </tbody>
 </table>
 <p>好了，下面先来<strong>明确一下</strong>我们<strong>已知条件</strong>和<strong>要做的事</strong>：</p>
-<p>我们已知了训练集（m组数据：(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), ...(x^{(m)}, y^{(m)}), 其中(x^{(i)}, y^{(i)})代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为h，即<strong>hypothesis(假设)</strong>。而这个函数h的输入是房屋尺寸，输出就是房屋价格。因此，h 是一个从x 到 y 的函数映射。</p>
+<p>我们已知了训练集（m组数据：<span class="arithmatex">\((x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), ...(x^{(m)}, y^{(m)}), 其中(x^{(i)}, y^{(i)})\)</span>代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为h，即<strong>hypothesis(假设)</strong>。而这个函数h的输入是房屋尺寸，输出就是房屋价格。因此，h 是一个从x 到 y 的函数映射。</p>
 <p><img alt="1_1_1_training_flow" src="../../assets/images/1_1_1_training_flow.png" /></p>
 <p>那么，对于我们这个问题，我们应该如何描述<span class="arithmatex">\(h\)</span>？</p>
 <p>一种可能的表达方式为：
 $$
-\begin{equation}
-h_\theta \left( x \right)=\theta_{0} + \theta_{1}x
-\end{equation}
+h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\tag{1.2.1}
 $$
 因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
 <div class="admonition note">
@@ -618,23 +616,35 @@ $$
 <p>so that <span class="arithmatex">\(h_\theta(x)\)</span>  is close to  <span class="arithmatex">\(y\)</span>  for our training examples  <span class="arithmatex">\((x, y)\)</span></p>
 <p>将我们的任务以公式化标记，即：</p>
 <div class="arithmatex">\[
-\mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
+\mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2 \tag{2.1.1}
 \]</div>
 <p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的直线与那些点有很好的拟合，那我们把每一个点预测得到的值<span class="arithmatex">\(\Big(\)</span>将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\Big)\)</span>与真实值y求一个差的平方。再把这些平方累加。即:</p>
 <div class="arithmatex">\[
-\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
+\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2 \tag{2.1.2}
 \]</div>
-<p>我们只要让这个平方和最小即可。
-注意, 
-关于求和项前面<span class="arithmatex">\(\frac{1}{2m}\)</span>:</p>
+<p>我们只要让这个平方和最小即可。</p>
+<p>注意, </p>
 <ul>
-<li><span class="arithmatex">\(\frac{1}{m}\)</span>是因为求和项有m个，这里除以m，是求平均值。</li>
+<li>
+<p>关于式(2.1.1)前面<span class="arithmatex">\(\frac{1}{2m}\)</span>:</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\frac{1}{m}\)</span>是因为求和项有m个，这里除以m，是求平均值。</p>
+</li>
 <li><span class="arithmatex">\(\frac{1}{2}\)</span>为了后面求导消去</li>
-<li>其实这个<span class="arithmatex">\(\frac{1}{2m}\)</span>对我们求最小值没有任何影响，只是为了计算方便这么写。</li>
-</ul>
-<p>关于这个平方和的几何意义：</p>
-<ul>
-<li>所有数据点与拟合直线在y轴方向的截距的平方和</li>
+<li>
+<p>其实这个<span class="arithmatex">\(\frac{1}{2m}\)</span>对我们求最小值没有任何影响，只是为了计算方便这么写。</p>
+</li>
+<li>
+<p>关于式(2.1.2)的几何意义：</p>
+</li>
+<li>
+<p>所有数据点与拟合直线在y轴方向的截距的平方和</p>
+</li>
+<li>
+<p>在本例子中，</p>
+</li>
+<li><span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span></li>
 </ul>
 
               
