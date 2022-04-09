@@ -545,7 +545,13 @@
 <p>我们已知了训练集（m组数据：(x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), ...(x^{(m)}, y^{(m)}), 其中(x^{(i)}, y^{(i)})代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为h，即<strong>hypothesis(假设)</strong>。而这个函数h的输入是房屋尺寸，输出就是房屋价格。因此，h 是一个从x 到 y 的函数映射。</p>
 <p><img alt="1_1_1_training_flow" src="../../assets/images/1_1_1_training_flow.png" /></p>
 <p>那么，对于我们这个问题，我们应该如何描述<span class="arithmatex">\(h\)</span>？</p>
-<p>一种可能的表达方式为：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span>，因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
+<p>一种可能的表达方式为：
+$$
+\begin{equation}
+h_\theta \left( x \right)=\theta_{0} + \theta_{1}x
+\end{equation}
+$$
+因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>线性回归中<ins class="critic">线性</ins>的含义： 因变量<ins class="critic">y</ins>对于<ins class="critic">未知的回归系数</ins>（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是<ins class="critic">线性</ins>的。</p>
@@ -614,16 +620,21 @@
 <div class="arithmatex">\[
 \mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
 \]</div>
-<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的<span class="arithmatex">\(h_\theta(x)\)</span>与那些点有很好的拟合，那我们把每一个点预测得到的值\Big(将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\)</span>\Big)与真实值y求一个差的平方。再把这些平方累加。即:</p>
+<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的直线与那些点有很好的拟合，那我们把每一个点预测得到的值<span class="arithmatex">\(\Big(\)</span>将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\Big)\)</span>与真实值y求一个差的平方。再把这些平方累加。即:</p>
 <div class="arithmatex">\[
 \sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
 \]</div>
-<p>我们只要让这个平方和最小即可。</p>
-<p>注意, 求和项前面<code>1/2m</code>:</p>
+<p>我们只要让这个平方和最小即可。
+注意, 
+关于求和项前面<span class="arithmatex">\(\frac{1}{2m}\)</span>:</p>
 <ul>
-<li><code>1/m</code>是因为求和项有m个，这里除以m，是求平均值。</li>
-<li><code>1/2</code>为了后面求导消去</li>
-<li>其实这个<code>1/2m</code>对我们求最小值没有任何影响，只是为了计算方便这么写。</li>
+<li><span class="arithmatex">\(\frac{1}{m}\)</span>是因为求和项有m个，这里除以m，是求平均值。</li>
+<li><span class="arithmatex">\(\frac{1}{2}\)</span>为了后面求导消去</li>
+<li>其实这个<span class="arithmatex">\(\frac{1}{2m}\)</span>对我们求最小值没有任何影响，只是为了计算方便这么写。</li>
+</ul>
+<p>关于这个平方和的几何意义：</p>
+<ul>
+<li>所有数据点与拟合直线在y轴方向的截距的平方和</li>
 </ul>
 
               
