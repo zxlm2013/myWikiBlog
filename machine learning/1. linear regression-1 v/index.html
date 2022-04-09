@@ -638,6 +638,15 @@ $$
 <ul>
 <li><span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span></li>
 </ul>
+<p>通常，为了方便起见，我们定义一个函数，也就是代价函数(cost function)，如下：</p>
+<div class="arithmatex">\[
+J(\theta_0,\theta_1)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2\tag{2.1.3}
+\]</div>
+<p>我们的最终目标就转化为：</p>
+<div class="arithmatex">\[
+\mathop{minimize} \limits_{\theta_0,\ \theta_1}J(\theta_0,\theta_1)
+\]</div>
+<p>这里我们定义的式(2.1.3)损失函数, 也被称为平方误差函数(squared error function)。然而，损失函数不止这一种形式，但是在回归问题中，平方误差函数都是比较合理和比较常用的选择。</p>
 
               
             </article>
