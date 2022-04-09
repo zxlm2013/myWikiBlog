@@ -602,7 +602,7 @@
 </ul>
 <p><img alt="1_2_2_datasets_in_figrue" src="../../assets/images/1_2_2_datasets_in_figrue.png" /></p>
 <ul>
-<li>我们要做的就是绘制一条直线（下图蓝色的线）尽量地与上面那些点有和好的拟合，这条直线就是h_\theta(x)。如何确定这条直线也就是确定\theta_0和\theta_1。</li>
+<li>我们要做的就是绘制一条直线（下图蓝色的线）尽量地与上面那些点有和好的拟合，这条直线就是<span class="arithmatex">\(h_\theta(x)\)</span>。如何确定这条直线也就是确定<span class="arithmatex">\(\theta_0\)</span>和<span class="arithmatex">\(\theta_1\)</span>。</li>
 </ul>
 <p><img alt="1_2_3_line_fit" src="../../assets/images/1_2_3_line_fit.png" /></p>
 <ul>
@@ -614,16 +614,15 @@
 <div class="arithmatex">\[
 \mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
 \]</div>
-<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的$h_\theta(x)与那些点有很好的拟合，那我们把每一个点预测得到的值(将x代入假设函数可得到，即h_\theta(x))与真实值y求一个差的平方。再把这些平方累加。即</p>
+<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的<span class="arithmatex">\(h_\theta(x)\)</span>与那些点有很好的拟合，那我们把每一个点预测得到的值(将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\)</span>)与真实值y求一个差的平方。再把这些平方累加。即</p>
 <p>$$
  \sum\limits_{i=1}<sup _i_="(i)">{m}\Big(h_\theta(x</sup>)-y<sup>{(i)}\Big)</sup>2
  $$</p>
 <p>我们只要让这个平方和最小即可。</p>
-<p>注意：</p>
-<p>求和项前面的<span class="arithmatex">\(\frac{1}{2m}\)</span>：
-- <span class="arithmatex">\(\frac{1}{m}\)</span> 是因为求和项有m个，这里除以m，是求个平均值。
-- <span class="arithmatex">\(\frac{1}{2}\)</span> 为了后面求导消去
-- 其实这个<span class="arithmatex">\(\frac{1}{2m}\)</span>对我们求最小值没有任何影响，只是为了计算方便这么写。</p>
+<p>注意, 求和项前面<code>1/2m</code>：
+- <code>1/m</code>是因为求和项有m个，这里除以m，是求个平均值。
+- <code>1/2</code>为了后面求导消去
+- 其实这个<code>1/2m</code>对我们求最小值没有任何影响，只是为了计算方便这么写。</p>
 
               
             </article>
