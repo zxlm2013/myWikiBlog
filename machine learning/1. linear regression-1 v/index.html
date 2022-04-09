@@ -614,9 +614,11 @@
 <div class="arithmatex">\[
 \mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2
 \]</div>
-<blockquote>
-<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的<span class="arithmatex">\(h_\theta(x)与那些点有很好的拟合，那我们把每一个点预测得到的值(将x代入假设函数可得到，即h_\theta(x))与真实值y求一个差的平方。再把这些平方累加。即\)</span>\sum\limits_{i=1}<sup _i_="(i)">{m}\Big(h_\theta(x</sup>)-y<sup>{(i)}\Big)</sup>2$。我们只要让这个平方和最小即可。</p>
-</blockquote>
+<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的$h_\theta(x)与那些点有很好的拟合，那我们把每一个点预测得到的值(将x代入假设函数可得到，即h_\theta(x))与真实值y求一个差的平方。再把这些平方累加。即</p>
+<p>$$
+ \sum\limits_{i=1}<sup _i_="(i)">{m}\Big(h_\theta(x</sup>)-y<sup>{(i)}\Big)</sup>2
+ $$
+ 我们只要让这个平方和最小即可。</p>
 <p>注意：</p>
 <p>求和项前面的<span class="arithmatex">\(\frac{1}{2m}\)</span>：
   - <span class="arithmatex">\(\frac{1}{m}\)</span> 是因为求和项有m个，这里除以m，是求个平均值。
