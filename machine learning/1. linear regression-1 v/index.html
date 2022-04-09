@@ -594,8 +594,26 @@
 <p><img alt="1_2_1_figure_of_h" src="../../assets/images/1_2_1_figure_of_h.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>上面图像为了方便省略了<span class="arithmatex">\(\theta\)</span>下标，即<span class="arithmatex">\(h_\theta(x)=h(x)\)</span></p>
+<p>上面图像为了方便省略了<span class="arithmatex">\(\theta\)</span>下标，即 <span class="arithmatex">\(h_\theta(x) = h(x)\)</span>，后面也可能会这样做。</p>
 </div>
+<p><strong>结合图像描述我们的任务</strong></p>
+<ul>
+<li>把训练集数据绘制在下图中（并非上面的房价训练集，仅举例示意）</li>
+</ul>
+<p><img alt="1649472340227" src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\1649472340227.png" /></p>
+<ul>
+<li>我们要做的就是绘制一条直线（下图蓝色的线）尽量地与上面那些点有和好的拟合，这条直线就是<span class="arithmatex">\(h_\theta(x) <span class="arithmatex">\(。如何确定这条直线也就是确定\)</span>\theta_0\)</span>和<span class="arithmatex">\(\theta_1\)</span>。</li>
+</ul>
+<p><img alt="1649473313242" src="C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\1649473313242.png" /></p>
+<ul>
+<li>我们的idea：</li>
+</ul>
+<p>Choose \theta_0, \theta_1</p>
+<p>so that h_\theta(x)  is close to  y  for our training examples  (x, y)</p>
+<p>将我们的任务以公式化标记，即：
+$$
+\mathop{minimize} \limits_{\theta_0, \theta_1}   \frac {1} {2m}\cdot\sum\limits_{i=1}<sup _i_="(i)">{m}\Big(h_\theta(x</sup>)-y<sup>{(i)}\Big)</sup>2
+$$</p>
 
               
             </article>
