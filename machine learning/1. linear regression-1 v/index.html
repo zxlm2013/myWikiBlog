@@ -355,6 +355,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 梯度下降
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -452,6 +459,13 @@
         <li class="md-nav__item">
   <a href="#4-ii" class="md-nav__link">
     4. 代价函数的直观理解II
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 梯度下降
   </a>
   
 </li>
@@ -692,6 +706,30 @@ Now you remember the optimization objective for our learning algorithm is we wan
 2 - 4 - Cost Function - Intuition II (9 min).mkv</p>
 </div>
 <p><img alt="1_4_1_J_3D" src="../../assets/images/1_4_1_J_3D.png" /></p>
+<p>代价函数的样子，则可以看出在三维空间中存在一个使得<span class="arithmatex">\(J(\theta_{0}, \theta_{1})\)</span>最小的点。</p>
+<p><img alt="1_4_2_h&amp;Jdenggaoxian" src="../../assets/images/1_4_2_h%26Jdenggaoxian.png" /></p>
+<p>通过这些图形，我希望你能更好地理解这些代价函数 <span class="arithmatex">\(J\)</span> 所表达的值是什么样的，它们对应的假设函数是什么样的，以及什么样的假设对应的点，更接近于代价函数 <span class="arithmatex">\(J\)</span> 的最小值。</p>
+<p>当然，我们真正需要的是一种有效的算法，能够自动地找出这些使代价函数 <span class="arithmatex">\(J\)</span> 取最小值的参数 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 来。</p>
+<p>我们也不希望编个程序把这些点画出来，然后人工的方法来读出这些点的数值，这很明显不是一个好办法。我们会遇到更复杂、更高维度、更多参数的情况，而这些情况是很难画出图的，因此更无法将其可视化，因此我们真正需要的是编写程序来找出这些最小化代价函数的 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 的值，在下一节视频中，我们将介绍一种算法，能够自动地找出能使代价函数 <span class="arithmatex">\(J\)</span> 最小化的参数 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 的值。</p>
+<h2 id="5">5. 梯度下降</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 5 - Gradient Descent (11 min).mkv</p>
+</div>
+<p>梯度下降是一个用来求函数最小值的算法，我们将使用梯度下降算法来求出代价函数<span class="arithmatex">\(J(\theta_{0}, \theta_{1})\)</span> 的最小值。</p>
+<p>梯度下降背后的思想是：开始时我们随机选择一个参数的组合<span class="arithmatex">\(\left( {\theta_{0}},{\theta_{1}},......,{\theta_{n}} \right)\)</span>，计算代价函数，然后我们寻找下一个能让代价函数值下降最多的参数组合。我们持续这么做直到找到一个局部最小值（<strong>local minimum</strong>），因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是全局最小值（<strong>global minimum</strong>），选择不同的初始参数组合，可能会找到不同的局部最小值。</p>
+<p><img alt="1_5_1_J_dif_start" src="../../assets/images/1_5_1_J_dif_start.png" /></p>
+<p>想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</p>
+<p>批量梯度下降（<strong>batch gradient descent</strong>）算法的公式为：</p>
+<div class="arithmatex">\[
+repeat until convergence {\\\\
+\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)\\\\
+\\\\}
+\]</div>
+<p>其中 <span class="arithmatex">\(\alpha\)</span> 是学习率（<strong>learning rate</strong>），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。</p>
+<p>在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span> ，当 <span class="arithmatex">\(j=0\)</span> 和<span class="arithmatex">\(j=1\)</span>时，会产生更新，所以你将更新<span class="arithmatex">\(J\left( {\theta_{0}} \right)\)</span>和<span class="arithmatex">\(J\left( {\theta_{1}} \right)\)</span>。实现梯度下降算法的微妙之处是，在这个表达式中，如果你要更新这个等式，你需要同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>，我的意思是在这个等式中，我们要这样更新：<span class="arithmatex">\({\theta_{0}}\)</span>:= <span class="arithmatex">\({\theta_{0}}\)</span> ，并更新<span class="arithmatex">\({\theta_{1}}\)</span>:= <span class="arithmatex">\({\theta_{1}}\)</span>。</p>
+<p>实现方法是：你应该计算公式右边的部分，通过那一部分计算出<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>的值，然后同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>。</p>
+<p>让我进一步阐述这个过程：</p>
 
               
             </article>
