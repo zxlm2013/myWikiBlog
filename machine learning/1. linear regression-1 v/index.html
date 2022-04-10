@@ -721,11 +721,11 @@ Now you remember the optimization objective for our learning algorithm is we wan
 <p><img alt="1_5_1_J_dif_start" src="../../assets/images/1_5_1_J_dif_start.png" /></p>
 <p>想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</p>
 <p>批量梯度下降（<strong>batch gradient descent</strong>）算法的公式为：</p>
-<div class="arithmatex">\[
-repeat until convergence {\\\\
-\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)\\\\
-\\\\}
-\]</div>
+<p>repeat until convergence {
+$$
+\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)
+$$
+}</p>
 <p>其中 <span class="arithmatex">\(\alpha\)</span> 是学习率（<strong>learning rate</strong>），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。</p>
 <p>在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span> ，当 <span class="arithmatex">\(j=0\)</span> 和<span class="arithmatex">\(j=1\)</span>时，会产生更新，所以你将更新<span class="arithmatex">\(J\left( {\theta_{0}} \right)\)</span>和<span class="arithmatex">\(J\left( {\theta_{1}} \right)\)</span>。实现梯度下降算法的微妙之处是，在这个表达式中，如果你要更新这个等式，你需要同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>，我的意思是在这个等式中，我们要这样更新：<span class="arithmatex">\({\theta_{0}}\)</span>:= <span class="arithmatex">\({\theta_{0}}\)</span> ，并更新<span class="arithmatex">\({\theta_{1}}\)</span>:= <span class="arithmatex">\({\theta_{1}}\)</span>。</p>
 <p>实现方法是：你应该计算公式右边的部分，通过那一部分计算出<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>的值，然后同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>。</p>
