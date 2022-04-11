@@ -59,7 +59,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#_1" class="md-skip">
+        <a href="#1" class="md-skip">
           跳转至
         </a>
       
@@ -322,8 +322,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    二. 多变量线性回归
+  <a href="#1" class="md-nav__link">
+    1. 多维特征
   </a>
   
 </li>
@@ -368,8 +368,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    二. 多变量线性回归
+  <a href="#1" class="md-nav__link">
+    1. 多维特征
   </a>
   
 </li>
@@ -390,7 +390,76 @@
 
   <h1>二. 多变量线性回归</h1>
 
-<h2 id="_1">二. 多变量线性回归</h2>
+<h2 id="1">1. 多维特征</h2>
+<div class="admonition info">
+<p>参考视频:
+4 - 1 - Multiple Features (8 min).mkv</p>
+</div>
+<p>目前为止，我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征，例如房间数楼层等，构成一个含有多个变量的模型，模型中的特征为<span class="arithmatex">\(\left( {x_{1}},{x_{2}},...,{x_{n}} \right)\)</span>。</p>
+<table>
+<thead>
+<tr>
+<th align="center">Size (feet2)</th>
+<th align="center">Number   of bedrooms</th>
+<th align="center">Number   of floors</th>
+<th align="center">Age of home (years)</th>
+<th align="center">Price   ($1000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">2104</td>
+<td align="center">5</td>
+<td align="center">1</td>
+<td align="center">45</td>
+<td align="center">460</td>
+</tr>
+<tr>
+<td align="center">1416</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">40</td>
+<td align="center">232</td>
+</tr>
+<tr>
+<td align="center">1534</td>
+<td align="center">3</td>
+<td align="center">2</td>
+<td align="center">30</td>
+<td align="center">315</td>
+</tr>
+<tr>
+<td align="center">852</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">36</td>
+<td align="center">178</td>
+</tr>
+<tr>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+<td align="center">…</td>
+</tr>
+</tbody>
+</table>
+<p>增添更多特征后，我们引入一系列新的注释：</p>
+<p><span class="arithmatex">\(n\)</span> 代表特征的数量</p>
+<p><span class="arithmatex">\({x^{\left( i \right)}}\)</span> 代表第 <span class="arithmatex">\(i\)</span> 个训练实例，是特征矩阵中的第<span class="arithmatex">\(i\)</span>行，是一个<strong>向量</strong>（<strong>vector</strong>）。</p>
+<p>比方说，上图的</p>
+<div class="arithmatex">\[
+{x}^{(2)} =
+\begin{bmatrix}
+1416\\\ 3\\\ 2\\\ 40
+\end{bmatrix},
+\]</div>
+<p><span class="arithmatex">\({x}^{(2)}\text{=}\begin{bmatrix} 1416\\\ 3\\\ 2\\\ 40 \end{bmatrix}\)</span>，</p>
+<p><span class="arithmatex">\({x}_{j}^{\left( i \right)}\)</span>代表特征矩阵中第 <span class="arithmatex">\(i\)</span> 行的第 <span class="arithmatex">\(j\)</span> 个特征，也就是第 <span class="arithmatex">\(i\)</span> 个训练实例的第 <span class="arithmatex">\(j\)</span> 个特征。</p>
+<p>如上图的<span class="arithmatex">\(x_{2}^{\left( 2 \right)}=3,x_{3}^{\left( 2 \right)}=2\)</span>，</p>
+<p>支持多变量的假设 <span class="arithmatex">\(h\)</span> 表示为：<span class="arithmatex">\(h_{\theta}\left( x \right)={\theta_{0}}+{\theta_{1}}{x_{1}}+{\theta_{2}}{x_{2}}+...+{\theta_{n}}{x_{n}}\)</span>，</p>
+<p>这个公式中有<span class="arithmatex">\(n+1\)</span>个参数和<span class="arithmatex">\(n\)</span>个变量，为了使得公式能够简化一些，引入<span class="arithmatex">\(x_{0}=1\)</span>，则公式转化为：<span class="arithmatex">\(h_{\theta} \left( x \right)={\theta_{0}}{x_{0}}+{\theta_{1}}{x_{1}}+{\theta_{2}}{x_{2}}+...+{\theta_{n}}{x_{n}}\)</span></p>
+<p>此时模型中的参数是一个<span class="arithmatex">\(n+1\)</span>维的向量，任何一个训练实例也都是<span class="arithmatex">\(n+1\)</span>维的向量，特征矩阵<span class="arithmatex">\(X\)</span>的维度是 <span class="arithmatex">\(m*(n+1)\)</span>。 因此公式可以简化为：<span class="arithmatex">\(h_{\theta} \left( x \right)={\theta^{T}}X\)</span>，其中上标  <span class="arithmatex">\(T\)</span> 代表矩阵转置。</p>
 <p>下面，我们进行个人最喜欢的公式推导环节，哈哈。这里为了普遍性，还原了 <span class="arithmatex">\(\theta\)</span> 的普遍情况，也即有n个 <span class="arithmatex">\(\theta\)</span> 的情况。</p>
 <p>Hypothesis:         <span class="arithmatex">\(h_\theta(x)=\theta^Tx=\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n\)</span></p>
 <p>Parameters:         <span class="arithmatex">\(\theta_0,\theta_1,...,\theta_n\)</span></p>
