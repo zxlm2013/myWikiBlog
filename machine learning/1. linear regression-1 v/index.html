@@ -874,8 +874,6 @@ $$
 <p>先写到这里，后面打算附上习题和实操python代码。</p>
 <h2 id="8">8. 习题</h2>
 <h3 id="_1">第一题</h3>
-<ol>
-<li>
 <p>基于一个学生在大学一年级的表现，预测他在大学二年级表现。
 令x等于学生在大学第一年得到的“A”的个数（包括A-，A和A+成绩）学生在大学第一年得到的成绩。预测y的值：第二年获得的“A”级的数量
 这里每一行是一个训练数据。在线性回归中，我们的假设 <span class="arithmatex">\(h_\theta(x)=\theta_0+\theta_1x\)</span>，并且我们使用 m 来表示训练示例的数量。</p>
@@ -906,49 +904,44 @@ $$
 </tbody>
 </table>
 <p><strong>对于上面给出的训练集</strong>（注意，此训练集也可以在本测验的其他问题中引用），<strong>m 的值是多少</strong>？</p>
-</li>
-</ol>
 <h3 id="_2">第二题</h3>
-<ol>
-<li>这个问题，假设我们使用第一题中的训练集。并且，我们代价函数的定义是 
-   <span class="arithmatex">\(J(\theta_0,\theta_1)=\frac{1}{2m}\sum\limits_{i=1}^{m}\big(h_\theta(x^{(i)})-y^{(i)}\big)^2\)</span>
-   求 <span class="arithmatex">\(J(0, 1)\)</span>?</li>
-</ol>
+<p>假设我们使用第一题中的训练集。并且，我们代价函数的定义是 
+<span class="arithmatex">\(J(\theta_0,\theta_1)=\frac{1}{2m}\sum\limits_{i=1}^{m}\big(h_\theta(x^{(i)})-y^{(i)}\big)^2\)</span>
+求 <span class="arithmatex">\(J(0, 1)\)</span>?</p>
 <h3 id="_3">第三题</h3>
-<ol>
-<li>令问题1中，线性回归假设的 <span class="arithmatex">\(\theta_0=-1, \theta_1=2\)</span>, 求 <span class="arithmatex">\(h_\theta(6)\)</span>?</li>
-</ol>
+<p>令问题1中，线性回归假设的 <span class="arithmatex">\(\theta_0=-1, \theta_1=2\)</span>, 求 <span class="arithmatex">\(h_\theta(6)\)</span>?</p>
 <h3 id="_4">第四题</h3>
-<ol>
-<li>
 <p>代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 与 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的关系如下图所示。图中中给出了相同代价函数的等高线图。根据图示，选择正确的选项（选出所有正确项）
-    <img alt="1_8_4" src="../../assets/images/1_8_4.png" /> <br />
-    <p style="margin-top:10px"></p></p>
-<p>A. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最小值
-<p style="margin-top:10px"></p></p>
-<p>B. 点P（图2的全局最小值）对应于图1的点C
-<p style="margin-top:10px"></p></p>
-<p>C. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近C点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在C点有最小值
-<p style="margin-top:10px"></p></p>
-<p>D. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最大值
-<p style="margin-top:10px"></p></p>
+<img alt="1_8_4" src="../../assets/images/1_8_4.png" />   </p>
+<p style="margin-top:10px"></p>
+
+<p>A. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最小值</p>
+<p style="margin-top:10px"></p>
+
+<p>B. 点P（图2的全局最小值）对应于图1的点C</p>
+<p style="margin-top:10px"></p>
+
+<p>C. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近C点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在C点有最小值</p>
+<p style="margin-top:10px"></p>
+
+<p>D. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最大值</p>
+<p style="margin-top:10px"></p>
+
 <p>E. 点P（图2的全局最小值）对应于图1的点A</p>
-</li>
-</ol>
 <h3 id="_5">第五题</h3>
-<ol>
-<li>
 <p>假设对于某个线性回归问题（比如预测房价），我们有一些训练集，对于我们的训练集，我们能够找到一些 <span class="arithmatex">\(\theta_0, \theta_1\)</span> ，使得  <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span>  。以下哪项陈述是正确的？（选出所有正确项）</p>
-<p><p style="margin-top:20px"></p></p>
-<p>A. 为了实现这一点，我们必须有 <span class="arithmatex">\(\theta_0=0, \theta_1=0\)</span> ，这样才能使 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span>
-<p style="margin-top:10px"></p></p>
-<p>B. 对于满足 theta_0, \theta_1) = 0 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span>
-<p style="margin-top:10px"></p></p>
-<p>C. 这是不可能的：通过 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的定义，不可能存在 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 使得 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span>
-<p style="margin-top:10px"></p></p>
+<p style="margin-top:20px"></p>
+
+<p>A. 为了实现这一点，我们必须有 <span class="arithmatex">\(\theta_0=0, \theta_1=0\)</span> ，这样才能使 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
+<p style="margin-top:10px"></p>
+
+<p>B. 对于满足 theta_0, \theta_1) = 0 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span></p>
+<p style="margin-top:10px"></p>
+
+<p>C. 这是不可能的：通过 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的定义，不可能存在 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 使得 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
+<p style="margin-top:10px"></p>
+
 <p>D. 即使对于我们还没有看到的新例子，我们也可以完美地预测y的值（例如，我们可以完美地预测我们尚未见过的新房的价格）</p>
-</li>
-</ol>
 
               
             </article>
