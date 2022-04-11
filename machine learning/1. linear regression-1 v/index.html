@@ -356,6 +356,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    8. 习题
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -454,6 +461,13 @@
         <li class="md-nav__item">
   <a href="#7" class="md-nav__link">
     7. 梯度下降法应用到线性回归模型
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    8. 习题
   </a>
   
 </li>
@@ -617,11 +631,11 @@ $$
 <p>so that <span class="arithmatex">\(h_\theta(x)\)</span>  is close to  <span class="arithmatex">\(y\)</span>  for our training examples  <span class="arithmatex">\((x, y)\)</span></p>
 <p>将我们的任务以公式化标记，即：</p>
 <div class="arithmatex">\[
-\mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2 \tag{2.1.1}
+\mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2\tag{2.1.1}
 \]</div>
 <p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的直线与那些点有很好的拟合，那我们把每一个点预测得到的值<span class="arithmatex">\(\Big(\)</span>将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\Big)\)</span>与真实值y求一个差的平方。再把这些平方累加。即:</p>
 <div class="arithmatex">\[
-\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2 \tag{2.1.2}
+\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2\tag{2.1.2}
 \]</div>
 <p>我们只要让这个平方和最小即可。</p>
 <p>注意, </p>
@@ -776,6 +790,79 @@ $$
 <p>如果你之前学过线性代数，有些同学之前可能已经学过高等线性代数，你应该知道有一种计算代价函数 <span class="arithmatex">\(J\)</span> 最小值的数值解法，不需要梯度下降这种迭代算法。在后面的课程中，我们也会谈到这个方法，它可以在不需要多步梯度下降的情况下，也能解出代价函数 <span class="arithmatex">\(J\)</span> 的最小值，这是另一种称为正规方程(<strong>normal equations</strong>)的方法。实际上在数据量较大的情况下，梯度下降法比正规方程要更适用一些。</p>
 <p>现在我们已经掌握了梯度下降，我们可以在不同的环境中使用梯度下降法，我们还将在不同的机器学习问题中大量地使用它。所以，祝贺自己<img alt="😂" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg" title=":joy:" />成功学会了第一个机器学习算法。</p>
 <p>先写到这里，后面打算附上习题和实操python代码。</p>
+<h2 id="8">8. 习题</h2>
+<ol>
+<li>
+<p>基于一个学生在大学一年级的表现，预测他在大学二年级表现。
+令x等于学生在大学第一年得到的“A”的个数（包括A-，A和A+成绩）学生在大学第一年得到的成绩。预测y的值：第二年获得的“A”级的数量
+这里每一行是一个训练数据。在线性回归中，我们的假设 <span class="arithmatex">\(h_\theta(x)=\theta_0+\theta_1x\)</span>，并且我们使用 m 来表示训练示例的数量。</p>
+<table>
+<thead>
+<tr>
+<th>x</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对于上面给出的训练集</strong>（注意，此训练集也可以在本测验的其他问题中引用），<strong>m 的值是多少</strong>？</p>
+</li>
+</ol>
+<p><br/></p>
+<ol>
+<li>这个问题，假设我们使用第一题中的训练集。并且，我们代价函数的定义是 
+   <span class="arithmatex">\(J(\theta_0,\theta_1)=\frac{1}{2m}\sum\limits_{i=1}^{m}\big(h_\theta(x^{(i)})-y^{(i)}\big)^2\)</span>
+   求 <span class="arithmatex">\(J(0, 1)\)</span>?</li>
+</ol>
+<p><br/></p>
+<ol>
+<li>令问题1中，线性回归假设的 <span class="arithmatex">\(\theta_0=-1, \theta_1=2\)</span>, 求 <span class="arithmatex">\(h_\theta(6)\)</span>?</li>
+</ol>
+<p><br/></p>
+<ol>
+<li>
+<p>代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 与 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的关系如下图所示。图中中给出了相同代价函数的等高线图。根据图示，选择正确的选项（选出所有正确项）
+    <img alt="1_8_4" src="../../assets/images/1_8_4.png" />   </p>
+<p>A. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最小值
+\
+B. 点P（图2的全局最小值）对应于图1的点C
+\
+C. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近C点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在C点有最小值
+\
+D. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最大值
+\
+E. 点P（图2的全局最小值）对应于图1的点A</p>
+</li>
+</ol>
+<p><br/></p>
+<ol>
+<li>假设对于某个线性回归问题（比如预测房价），我们有一些训练集，对于我们的训练集，我们能够找到一些 <span class="arithmatex">\(\theta_0, \theta_1\)</span> ，使得  <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span>  。以下哪项陈述是正确的？（选出所有正确项）
+    \
+    A. 为了实现这一点，我们必须有 <span class="arithmatex">\(\theta_0=0, \theta_1=0\)</span> ，这样才能使 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span>
+    \
+    B. 对于满足 theta_0, \theta_1) = 0 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span>
+    \
+    C. 这是不可能的：通过 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的定义，不可能存在 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 使得 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span>
+    \
+    D. 即使对于我们还没有看到的新例子，我们也可以完美地预测y的值（例如，我们可以完美地预测我们尚未见过的新房的价格）</li>
+</ol>
 
               
             </article>
