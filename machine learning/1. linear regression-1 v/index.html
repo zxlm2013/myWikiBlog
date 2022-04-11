@@ -358,10 +358,10 @@
       
         <li class="md-nav__item">
   <a href="#8" class="md-nav__link">
-    8. 习题
+    8. 习题 &amp;&amp; 参考答案
   </a>
   
-    <nav class="md-nav" aria-label="8. 习题">
+    <nav class="md-nav" aria-label="8. 习题 &amp;&amp; 参考答案">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -395,6 +395,13 @@
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    参考答案
   </a>
   
 </li>
@@ -508,10 +515,10 @@
       
         <li class="md-nav__item">
   <a href="#8" class="md-nav__link">
-    8. 习题
+    8. 习题 &amp;&amp; 参考答案
   </a>
   
-    <nav class="md-nav" aria-label="8. 习题">
+    <nav class="md-nav" aria-label="8. 习题 &amp;&amp; 参考答案">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -545,6 +552,13 @@
           <li class="md-nav__item">
   <a href="#_5" class="md-nav__link">
     第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    参考答案
   </a>
   
 </li>
@@ -872,7 +886,7 @@ $$
 <p>如果你之前学过线性代数，有些同学之前可能已经学过高等线性代数，你应该知道有一种计算代价函数 <span class="arithmatex">\(J\)</span> 最小值的数值解法，不需要梯度下降这种迭代算法。在后面的课程中，我们也会谈到这个方法，它可以在不需要多步梯度下降的情况下，也能解出代价函数 <span class="arithmatex">\(J\)</span> 的最小值，这是另一种称为正规方程(<strong>normal equations</strong>)的方法。实际上在数据量较大的情况下，梯度下降法比正规方程要更适用一些。</p>
 <p>现在我们已经掌握了梯度下降，我们可以在不同的环境中使用梯度下降法，我们还将在不同的机器学习问题中大量地使用它。所以，祝贺自己<img alt="😂" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg" title=":joy:" />成功学会了第一个机器学习算法。</p>
 <p>先写到这里，后面打算附上习题和实操python代码。</p>
-<h2 id="8">8. 习题</h2>
+<h2 id="8">8. 习题 &amp;&amp; 参考答案</h2>
 <h3 id="_1">第一题</h3>
 <p>基于一个学生在大学一年级的表现，预测他在大学二年级表现。
 令x等于学生在大学第一年得到的“A”的个数（包括A-，A和A+成绩）学生在大学第一年得到的成绩。预测y的值：第二年获得的“A”级的数量
@@ -929,19 +943,41 @@ $$
 
 <p>E. 点P（图2的全局最小值）对应于图1的点A</p>
 <h3 id="_5">第五题</h3>
-<p>假设对于某个线性回归问题（比如预测房价），我们有一些训练集，对于我们的训练集，我们能够找到一些 <span class="arithmatex">\(\theta_0, \theta_1\)</span> ，使得  <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span>  。以下哪项陈述是正确的？（选出所有正确项）</p>
+<p>假设对于某个线性回归问题（比如预测房价），我们有一些训练集，对于我们的训练集，我们能够找到一些 <span class="arithmatex">\(\theta_0, \theta_1\)</span> ，使得  <span class="arithmatex">\(J(\theta_0, \theta_1)=0\)</span>  。以下哪项陈述是正确的？（选出所有正确项）</p>
 <p style="margin-top:20px"></p>
 
 <p>A. 为了实现这一点，我们必须有 <span class="arithmatex">\(\theta_0=0, \theta_1=0\)</span> ，这样才能使 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
 <p style="margin-top:10px"></p>
 
-<p>B. 对于满足 theta_0, \theta_1) = 0 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span></p>
+<p>B. 对于满足 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span></p>
 <p style="margin-top:10px"></p>
 
 <p>C. 这是不可能的：通过 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的定义，不可能存在 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 使得 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
 <p style="margin-top:10px"></p>
 
 <p>D. 即使对于我们还没有看到的新例子，我们也可以完美地预测y的值（例如，我们可以完美地预测我们尚未见过的新房的价格）</p>
+<h3 id="_6">参考答案</h3>
+<details>
+<summary>CLICK ME</summary>
+
+第一题：4
+
+第二题：0.5
+由已知求 $J(0, 1)$, 可得：$\theta_0=0, \theta_0=1$
+所以 $h_\theta(x)=0+1\cdot x=x$
+最后, 将上述结果和训练集数据代入可得：
+$J(0, 1)=\frac{1}{2*4}[(3-2)^2+(1-2)^2+(0-1)^2+(4-3)^2]=0.5$
+
+第三题：11
+已知, $h_\theta(x)=\theta_0+\theta_1x$, $\theta_0=-1, \theta_1=2$
+所以将 $\theta_0, \theta_1$代入可得 $h_\theta(x)=-1+2x$
+让我们求 $h_\theta(6)$
+最后, $h_\theta(6)=-1+2*6=11$
+
+第四题：AE
+
+第五题：B
+</details>
 
               
             </article>
