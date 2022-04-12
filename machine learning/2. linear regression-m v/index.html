@@ -560,7 +560,7 @@ J(\theta)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2
 <p><span class="arithmatex">\({{\theta }_{1}}:={{\theta }_{1}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}})}x_{1}^{(i)}\)</span></p>
 <p><span class="arithmatex">\({{\theta }_{2}}:={{\theta }_{2}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}})}x_{2}^{(i)}\)</span></p>
 <p>...</p>
-<p><span class="arithmatex">\({{\theta }_{n}}:={{\theta }_{n}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}})}x_{2}^{(i)}\)</span></p>
+<p><span class="arithmatex">\({{\theta }_{n}}:={{\theta }_{n}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}})}x_{n}^{(i)}\)</span></p>
 <p>我们开始随机选择一系列的参数值，计算所有的预测结果后，再给所有的参数一个新的值，如此循环直到收敛。</p>
 <p>代码示例：</p>
 <p>计算代价函数
@@ -686,13 +686,53 @@ $$</p>
 <p><img alt="2_6_1" src="../../assets/images/2_6_1.png" /></p>
 <p>正规方程是通过求解下面的方程来找出使得代价函数最小的参数的：<span class="arithmatex">\(\frac{\partial}{\partial{\theta_{j}}}J\left( {\theta_{j}} \right)=0\)</span> 。
  假设我们的训练集特征矩阵为 <span class="arithmatex">\(X\)</span>（包含了 <span class="arithmatex">\({{x}_{0}}=1\)</span>）并且我们的训练集结果为向量 <span class="arithmatex">\(y\)</span>，则利用正规方程解出向量 <span class="arithmatex">\(\theta ={{\left( {X^T}X \right)}^{-1}}{X^{T}}y\)</span> 。</p>
-<p>以下面表格数据为例 <span class="arithmatex">\(m=4\)</span>：
-| <span class="arithmatex">\(x_0\)</span>   | Size (feet2) | Number   of bedrooms | Number   of floors | Age of home (years) | Price   ($1000) |
-| ---- | ------------ | -------------------- | ------------------ | ------------------- | --------------- |
-| 1    | 2104         | 5                    | 1                  | 45                  | 460             |
-| 1    | 1416         | 3                    | 2                  | 40                  | 232             |
-| 1    | 1534         | 3                    | 2                  | 30                  | 315             |
-| 1    | 852          | 2                    | 1                  | 36                  | 178             |</p>
+<p>以下面表格数据为例 <span class="arithmatex">\(m=4\)</span>：</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x_0\)</span></th>
+<th>Size (feet2)</th>
+<th>Number   of bedrooms</th>
+<th>Number   of floors</th>
+<th>Age of home (years)</th>
+<th>Price   ($1000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2104</td>
+<td>5</td>
+<td>1</td>
+<td>45</td>
+<td>460</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1416</td>
+<td>3</td>
+<td>2</td>
+<td>40</td>
+<td>232</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1534</td>
+<td>3</td>
+<td>2</td>
+<td>30</td>
+<td>315</td>
+</tr>
+<tr>
+<td>1</td>
+<td>852</td>
+<td>2</td>
+<td>1</td>
+<td>36</td>
+<td>178</td>
+</tr>
+</tbody>
+</table>
 <p><span class="arithmatex">\(X\ \text{=}\begin{bmatrix}1 &amp; 2104 &amp; 5 &amp; 1 &amp; 45\\1 &amp; 1416 &amp; 3 &amp; 2 &amp; 40\\ 1 &amp;1534 &amp; 3 &amp; 2 &amp; 30\\ 1 &amp; 852 &amp; 2 &amp; 1 &amp; 36\end{bmatrix}\)</span>，<span class="arithmatex">\(y\ \text{=}\begin{bmatrix} 460\\232\\315\\178\end{bmatrix}\)</span></p>
 <p><span class="arithmatex">\(X维度：(m,n+1),\ y的维度：(m,1)\)</span></p>
 <p>这时候求解 <span class="arithmatex">\(\theta\)</span> 只需一步:  <span class="arithmatex">\(\theta ={{\left( {X^T}X \right)}^{-1}}{X^{T}}y\)</span>。</p>
@@ -745,11 +785,14 @@ $$</p>
 <p>Cost function: </p>
 <div class="arithmatex">\[
 \begin{split}
-J(\theta_0,\theta_1,...,\theta_n) &amp; = \frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 \\&amp; = \frac {1} {2m}\sum\limits_{i=1}^{m}(\theta^Tx-y)^2
+J(\theta_0,\theta_1,...,\theta_n) &amp; = \frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 \\&amp; = \frac {1} {2m}(\theta^Tx-y)^2
 \end{split}
 \]</div>
-<p>正规方程是通过求解下面的方程来找出使得代价函数最小的参数：
+<p>正规方程是通过求解下面的方程来找出使得代价函数最小的参数即：
 <span class="arithmatex">\(\frac{\partial}{\partial\theta}J(\theta)=0\)</span></p>
+<div class="arithmatex">\[
+(\theta^Tx-y)^2=(\theta^Tx-y)^T(\theta^Tx-y)
+\]</div>
 
               
             </article>
