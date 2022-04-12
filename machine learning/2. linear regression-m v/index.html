@@ -343,8 +343,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-2-" class="md-nav__link">
-    3. 梯度下降法实用技巧2-学习率
+  <a href="#4-2-" class="md-nav__link">
+    4. 梯度下降法实用技巧2-学习率
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 特征和多项式回归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 正规方程
   </a>
   
 </li>
@@ -410,8 +424,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-2-" class="md-nav__link">
-    3. 梯度下降法实用技巧2-学习率
+  <a href="#4-2-" class="md-nav__link">
+    4. 梯度下降法实用技巧2-学习率
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 特征和多项式回归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 正规方程
   </a>
   
 </li>
@@ -614,11 +642,114 @@ $$</p>
 <a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">x_train</span> <span class="o">=</span> <span class="n">transfer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_train</span><span class="p">)</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="n">x_test</span> <span class="o">=</span> <span class="n">transfer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
 </code></pre></div></p>
-<h2 id="3-2-">3. 梯度下降法实用技巧2-学习率</h2>
+<h2 id="4-2-">4. 梯度下降法实用技巧2-学习率</h2>
 <div class="admonition info">
 <p>参考视频:
 4 - 4 - Gradient Descent in Practice II - Learning Rate (9 min).mkv</p>
 </div>
+<p>梯度下降算法收敛所需要的迭代次数根据模型的不同而不同，我们不能提前预知，我们可以绘制迭代次数和代价函数的图表来观测算法在何时趋于收敛。</p>
+<p><img alt="2_4_1_J_iterations" src="../../assets/images/2_4_1_J_iterations.png" /></p>
+<p>也有一些自动测试是否收敛的方法，例如将代价函数的变化值与某个阀值（例如0.001）进行比较，但通常看左上方这样的图表更好。</p>
+<p>不正确的学习率，会产生左侧上下两个图像。
+<img alt="2_4_2_no_proper_alpha" src="../../assets/images/2_4_2_no_proper_alpha.png" /></p>
+<p>梯度下降算法的每次迭代受到学习率的影响，如果学习率 <span class="arithmatex">\(\alpha\)</span> 过小，则达到收敛所需的迭代次数会非常高；如果学习率 <span class="arithmatex">\(\alpha\)</span> 过大，每次迭代可能不会减小代价函数，可能会越过局部最小值导致无法收敛。</p>
+<p>通常可以考虑尝试些学习率：</p>
+<p><span class="arithmatex">\(\alpha=0.001,0.003, 0.01，0.03，0.1，0.3，1，3，10\)</span></p>
+<h2 id="5">5. 特征和多项式回归</h2>
+<div class="admonition info">
+<p>参考视频:
+4 - 5 - Features and Polynomial Regression (8 min).mkv</p>
+</div>
+<p>如房价预测问题，</p>
+<p><img alt="2_5_1_house" src="../../assets/images/2_5_1_house.png" /></p>
+<p><span class="arithmatex">\(h_{\theta}\left( x \right)={\theta_{0}}+{\theta_{1}}\times{frontage}+{\theta_{2}}\times{depth}\)</span> </p>
+<p>当我们真正应用线性回归模型的时候，我们可以创造自己的特征即：
+<span class="arithmatex">\({x_{1}}=frontage\)</span>（临街宽度），<span class="arithmatex">\({x_{2}}=depth\)</span>（纵向深度），<span class="arithmatex">\(x=frontage*depth=area\)</span>（面积），
+则：<span class="arithmatex">\({h_{\theta}}\left( x \right)={\theta_{0}}+{\theta_{1}}x\)</span>。</p>
+<p><img alt="2_5_2_polynomial_regression" src="../../assets/images/2_5_2_polynomial_regression.png" /></p>
+<p>线性回归并不适用于所有数据，有时我们需要其他模型来适应我们的数据，比如一个二次方模型：<span class="arithmatex">\(h_{\theta}\left( x \right)={\theta_{0}}+{\theta_{1}}{x_{1}}+{\theta_{2}}{x_{2}^2}\)</span>
+ 或者三次方模型： <span class="arithmatex">\(h_{\theta}\left( x \right)={\theta_{0}}+{\theta_{1}}{x_{1}}+{\theta_{2}}{x_{2}^2}+{\theta_{3}}{x_{3}^3}\)</span> </p>
+<p>从上面图右侧，可以看出如果我们采用多项式回归模型，在运行梯度下降算法前特征缩放的重要性了。</p>
+<p>通常我们需要先观察数据然后再决定准备尝试怎样的模型。 另外，我们可以令：</p>
+<p><span class="arithmatex">\({{x}_{2}}=x_{2}^{2},{{x}_{3}}=x_{3}^{3}\)</span>，从而将模型转化为线性回归模型。</p>
+<p>根据函数图形特性，我们还可以使：</p>
+<p><span class="arithmatex">\({{{h}}_{\theta}}(x)={{\theta }_{0}}\text{+}{{\theta }_{1}}(size)+{{\theta}_{2}}{{(size)}^{2}}\)</span></p>
+<p>或者:</p>
+<p><span class="arithmatex">\({{{h}}_{\theta}}(x)={{\theta }_{0}}\text{+}{{\theta }_{1}}(size)+{{\theta }_{2}}\sqrt{size}\)</span></p>
+<p><img alt="2_5_3_choice_of_X" src="../../assets/images/2_5_3_choice_of_X.png" /></p>
+<h2 id="6">6. 正规方程</h2>
+<div class="admonition info">
+<p>参考视频:
+4 - 6 - Normal Equation (16 min).mkv</p>
+</div>
+<p>到目前为止，我们都在使用梯度下降算法，但是对于某些线性回归问题，正规方程方法是更好的解决方案。如：</p>
+<p><img alt="2_6_1" src="../../assets/images/2_6_1.png" /></p>
+<p>正规方程是通过求解下面的方程来找出使得代价函数最小的参数的：<span class="arithmatex">\(\frac{\partial}{\partial{\theta_{j}}}J\left( {\theta_{j}} \right)=0\)</span> 。
+ 假设我们的训练集特征矩阵为 <span class="arithmatex">\(X\)</span>（包含了 <span class="arithmatex">\({{x}_{0}}=1\)</span>）并且我们的训练集结果为向量 <span class="arithmatex">\(y\)</span>，则利用正规方程解出向量 <span class="arithmatex">\(\theta ={{\left( {X^T}X \right)}^{-1}}{X^{T}}y\)</span> 。</p>
+<p>以下面表格数据为例 <span class="arithmatex">\(m=4\)</span>：
+| <span class="arithmatex">\(x_0\)</span>   | Size (feet2) | Number   of bedrooms | Number   of floors | Age of home (years) | Price   ($1000) |
+| ---- | ------------ | -------------------- | ------------------ | ------------------- | --------------- |
+| 1    | 2104         | 5                    | 1                  | 45                  | 460             |
+| 1    | 1416         | 3                    | 2                  | 40                  | 232             |
+| 1    | 1534         | 3                    | 2                  | 30                  | 315             |
+| 1    | 852          | 2                    | 1                  | 36                  | 178             |</p>
+<p><span class="arithmatex">\(X\ \text{=}\begin{bmatrix}1 &amp; 2104 &amp; 5 &amp; 1 &amp; 45\\1 &amp; 1416 &amp; 3 &amp; 2 &amp; 40\\ 1 &amp;1534 &amp; 3 &amp; 2 &amp; 30\\ 1 &amp; 852 &amp; 2 &amp; 1 &amp; 36\end{bmatrix}\)</span>，<span class="arithmatex">\(y\ \text{=}\begin{bmatrix} 460\\232\\315\\178\end{bmatrix}\)</span></p>
+<p><span class="arithmatex">\(X维度：(m,n+1),\ y的维度：(m,1)\)</span></p>
+<p>这时候求解 <span class="arithmatex">\(\theta\)</span> 只需一步:  <span class="arithmatex">\(\theta ={{\left( {X^T}X \right)}^{-1}}{X^{T}}y\)</span>。</p>
+<p>将上面的例子推广到一般情况</p>
+<p><img alt="2_6_2" src="../../assets/images/2_6_2.png" /></p>
+<p>注：对于那些不可逆的矩阵（通常是因为特征之间不独立，如同时包含英尺为单位的尺寸和米为单位的尺寸两个特征，也有可能是特征数量大于训练集的数量），正规方程方法是不能用的。</p>
+<p>梯度下降与正规方程的比较：</p>
+<table>
+<thead>
+<tr>
+<th>梯度下降</th>
+<th>正规方程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>需要选择学习率<span class="arithmatex">\(\alpha\)</span></td>
+<td>不需要</td>
+</tr>
+<tr>
+<td>需要多次迭代</td>
+<td>一次运算得出</td>
+</tr>
+<tr>
+<td>当特征数量<span class="arithmatex">\(n\)</span>大时也能较好适用</td>
+<td>需要计算<span class="arithmatex">\({{\left( {{X}^{T}}X \right)}^{-1}}\)</span> 如果特征数量n较大则运算代价大，因为矩阵逆的计算时间复杂度为<span class="arithmatex">\(O\left( {{n}^{3}} \right)\)</span>，通常来说当<span class="arithmatex">\(n\)</span>小于10000 时还是可以接受的</td>
+</tr>
+<tr>
+<td>适用于各种类型的模型</td>
+<td>只适用于线性模型，不适合逻辑回归模型等其他模型</td>
+</tr>
+</tbody>
+</table>
+<p>总结一下，只要特征变量的数目并不大，标准方程是一个很好的计算参数$\theta $的替代方法。具体地说，<strong>只要特征变量数量小于一万，我通常使用正规方程法，而不使用梯度下降法。</strong></p>
+<p>随着我们要讲的学习算法越来越复杂，例如，当我们讲到分类算法，像逻辑回归算法，我们会看到，实际上对于那些算法，并不能使用标准方程法。对于那些更复杂的学习算法，我们将不得不仍然使用梯度下降法。因此，梯度下降法是一个非常有用的算法，可以用在有大量特征变量的线性回归问题。或者我们以后在课程中，会讲到的一些其他的算法，因为标准方程法不适合或者不能用在它们上。但对于这个特定的线性回归模型，标准方程法是一个比梯度下降法更快的替代算法。所以，根据具体的问题，以及你的特征变量的数量，这两种算法都是值得学习的。</p>
+<p>正规方程的<strong>python</strong>实现：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a> <span class="k">def</span> <span class="nf">normalEqn</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>   <span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="p">)</span><span class="nd">@X</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span> <span class="c1">#X.T@X等价于X.T.dot(X)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>   <span class="k">return</span> <span class="n">theta</span>
+</code></pre></div>
+<hr>
+
+<p>下面开始推导： <span class="arithmatex">\(\theta ={{\left( {X^T}X \right)}^{-1}}{X^{T}}y\)</span></p>
+<p>首先把已知都矩阵/向量化：</p>
+<p>Hypothesis:         <span class="arithmatex">\(h_\theta(x)=\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n=\theta^Tx\)</span></p>
+<p>Cost function: </p>
+<div class="arithmatex">\[
+\begin{split}
+J(\theta_0,\theta_1,...,\theta_n) &amp; = \frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2 \\&amp; = \frac {1} {2m}\sum\limits_{i=1}^{m}(\theta^Tx-y)^2
+\end{split}
+\]</div>
+<p>正规方程是通过求解下面的方程来找出使得代价函数最小的参数：
+<span class="arithmatex">\(\frac{\partial}{\partial\theta}J(\theta)=0\)</span></p>
 
               
             </article>
