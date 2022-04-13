@@ -13,7 +13,7 @@
     
     
       
-        <title>矩阵求导详解 - 大白的知识库</title>
+        <title>补充知识点I-矩阵求导 - 大白的知识库</title>
       
     
     
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              矩阵求导详解
+              补充知识点I-矩阵求导
             
           </span>
         </div>
@@ -300,12 +300,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          矩阵求导详解
+          补充知识点I-矩阵求导
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        矩阵求导详解
+        补充知识点I-矩阵求导
       </a>
       
         
@@ -375,6 +375,60 @@
           <li class="md-nav__item">
   <a href="#25" class="md-nav__link">
     2.5 交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    2.6 更多的交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    2.7 熟练使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 微分与全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 微分与全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1、一元函数的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="1、一元函数的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 普通函数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 复合函数的微分
   </a>
   
 </li>
@@ -500,6 +554,60 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    2.6 更多的交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    2.7 熟练使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 微分与全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 微分与全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1、一元函数的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="1、一元函数的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 普通函数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 复合函数的微分
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -524,10 +632,10 @@
                 
 
 
-  <h1>矩阵求导详解</h1>
+  <h1>补充知识点I-矩阵求导</h1>
 
 <div class="admonition info">
-<p>参考视频:
+<p>参考链接:
 <a href="https://zhuanlan.zhihu.com/p/288541909">矩阵求导公式的数学推导（矩阵求导——进阶篇）</a></p>
 </div>
 <h2 id="_1">一. 矩阵的迹</h2>
@@ -571,6 +679,30 @@
 <p><strong>证明：</strong></p>
 <p>把 <span class="arithmatex">\(B_{n \times m}\)</span> 看做是 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 的转置。由乘积的迹的本质，即 <span class="arithmatex">\((6)\)</span> 式可知，无论乘积怎么交换顺序， <span class="arithmatex">\(A_{m \times n}\)</span> 与 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 对应位置的元素相乘并相加，永远是不变的。</p>
 <p><strong>证毕。</strong></p>
+<h4 id="26">2.6 更多的交换律</h4>
+<div class="arithmatex">\[tr(ABC)=tr(CAB)=tr(BCA)\\\\ \tag{9}\]</div>
+<p>其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times p}, C_{p \times m}\)</span> 。</p>
+<p><strong>证明：</strong></p>
+<p>把两个矩阵的乘积看做一个矩阵，和另外的一个矩阵应用交换律即可。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="27">2.7 熟练使用</h4>
+<div class="arithmatex">\[tr(AB^T)=tr(B^TA)=tr(A^TB)=tr(BA^T)\\\\ \tag{10}\]</div>
+<p>其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span> 。</p>
+<p><strong>证明：</strong></p>
+<p>第一个和第二个是交换律，第二个和三个是转置，第三个和第四个是交换律。</p>
+<p><strong>证毕。</strong></p>
+<h2 id="_2">二. 微分与全微分</h2>
+<p>我们先来复习一下本科阶段所学的高等数学中的微分与全微分。</p>
+<h3 id="1_1">1、一元函数的微分</h3>
+<h4 id="11">1.1 普通函数的微分</h4>
+<p>设 <span class="arithmatex">\(y=f(x)\)</span> , <span class="arithmatex">\(y\)</span> 可导, 则其微分为：</p>
+<div class="arithmatex">\[\mathbb{d}y=\mathbb{d}f(x)=f'(x)\mathbb{d}x\\\\ \tag{11}\]</div>
+<h4 id="12">1.2 复合函数的微分</h4>
+<p>设 <span class="arithmatex">\(y=f(u), u=g(x)\)</span> , 均可导, 则 <span class="arithmatex">\(y\)</span> 微分为：</p>
+<div class="arithmatex">\[\mathbb{d}y=\mathbb{d}f(u)=f'(u)\mathbb{d}g(x)=f'(u)g'(x)\mathbb{d}x\\\\ \tag{12}\]</div>
+<p>乍一看很复杂，其实举个例子就很简单：</p>
+<p>设 <span class="arithmatex">\(y=sin(2x+1), u=2x+1\)</span> , 则 <span class="arithmatex">\(y\)</span> 的微分为：</p>
+<div class="arithmatex">\[\begin{align} \mathbb{d}y&amp;=\mathbb{d}(\sin{u})=\cos{u}\mathbb{d}u=\cos(2x+1)\mathbb{d}(2x+1) \\\\ &amp;=\cos(2x+1) \cdot 2 \mathbb{d}x=2\cos(2x+1) \mathbb{d}x \end{align} \\\\ \tag{13}\]</div>
 
               
             </article>
