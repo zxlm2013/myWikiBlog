@@ -558,11 +558,11 @@
 <p><strong>证毕。</strong></p>
 <h4 id="24">2.4 乘积的迹的本质</h4>
 <p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 其中一个矩阵乘以（左乘右乘都可以）另一个矩阵的转置的迹，本质是 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加，可以理解为向量的点积在矩阵上的推广，即：</p>
-<div class="arithmatex">\[\begin{align} \mathbb{tr}(\pmb{A}\pmb{B}^T)  &amp;= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &amp;  +a_{21}b_{21}+a_{22}b_{22}+ \cdots +a_{2n}b_{2n}\\ &amp; + \cdots \\ &amp; + a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots a_{mn}b_{mn} \end{align} \\\\ \tag{6}\]</div>
-<p><strong>证明</strong>
-$$
-\begin{align}  tr(\pmb{A}\pmb{B}^T) &amp;= tr( \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \ \end{bmatrix} \begin{bmatrix} b_{11} &amp; b_{21} &amp; \cdots &amp; b_{m1} \ b_{12} &amp; b_{22} &amp; \cdots &amp; b_{m2} \ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \ b_{1n} &amp; b_{2n} &amp; \cdots &amp; b_{mn} \ \end{bmatrix} )   \\   &amp;=  tr \begin{bmatrix} a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n} &amp; 不用管 &amp; \cdots &amp; 不用管 \ 不用管 &amp; a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n} &amp; \cdots &amp; 不用管 \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \ 不用管 &amp; 不用管 &amp; \cdots &amp; a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \ \end{bmatrix}<em 11="11">{m \times m} \\ &amp;= a</em>b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n}\ &amp; + a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n}\ &amp; +  \cdots \ &amp; +  a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \end{align} \\ \tag{7}
-$$</p>
+<div class="arithmatex">\[\begin{align} tr(\pmb{A}\pmb{B}^T)  &amp;= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &amp;  +a_{21}b_{21}+a_{22}b_{22}+ \cdots +a_{2n}b_{2n}\\ &amp; + \cdots \\ &amp; + a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots a_{mn}b_{mn} \end{align} \\\\ \tag{6}\]</div>
+<p><strong>证明</strong></p>
+<div class="arithmatex">\[
+\begin{align}  tr(\pmb{A}\pmb{B}^T) &amp;= tr( \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\ \end{bmatrix} \begin{bmatrix} b_{11} &amp; b_{21} &amp; \cdots &amp; b_{m1} \\ b_{12} &amp; b_{22} &amp; \cdots &amp; b_{m2} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ b_{1n} &amp; b_{2n} &amp; \cdots &amp; b_{mn} \\ \end{bmatrix} )   \\\\   &amp;=  tr \begin{bmatrix} a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n} &amp; 不用管 &amp; \cdots &amp; 不用管 \\ 不用管 &amp; a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n} &amp; \cdots &amp; 不用管 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 不用管 &amp; 不用管 &amp; \cdots &amp; a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \\ \end{bmatrix}_{m \times m} \\\\ &amp;= a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n}\\ &amp; + a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n}\\ &amp; +  \cdots \\ &amp; +  a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \end{align} \\\\ \tag{7}
+\]</div>
 <p><strong>证毕。</strong></p>
 <h4 id="25">2.5 交换律</h4>
 <p>矩阵乘积位置互换，迹不变</p>
