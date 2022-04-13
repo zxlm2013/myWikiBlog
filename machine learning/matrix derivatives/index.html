@@ -13,7 +13,7 @@
     
     
       
-        <title>补充知识点I-矩阵求导 - 大白的知识库</title>
+        <title>补充I - 矩阵求导 - 大白的知识库</title>
       
     
     
@@ -94,7 +94,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              补充知识点I-矩阵求导
+              补充I - 矩阵求导
             
           </span>
         </div>
@@ -300,12 +300,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          补充知识点I-矩阵求导
+          补充I - 矩阵求导
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        补充知识点I-矩阵求导
+        补充I - 矩阵求导
       </a>
       
         
@@ -429,6 +429,33 @@
           <li class="md-nav__item">
   <a href="#12" class="md-nav__link">
     1.2 复合函数的微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2、多元函数的全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="2、多元函数的全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 普通函数的全微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    2.2 复合函数的全微分
   </a>
   
 </li>
@@ -613,6 +640,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2、多元函数的全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="2、多元函数的全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 普通函数的全微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    2.2 复合函数的全微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -632,7 +686,7 @@
                 
 
 
-  <h1>补充知识点I-矩阵求导</h1>
+  <h1>补充I - 矩阵求导</h1>
 
 <div class="admonition info">
 <p>参考链接:
@@ -703,6 +757,18 @@
 <p>乍一看很复杂，其实举个例子就很简单：</p>
 <p>设 <span class="arithmatex">\(y=sin(2x+1), u=2x+1\)</span> , 则 <span class="arithmatex">\(y\)</span> 的微分为：</p>
 <div class="arithmatex">\[\begin{align} \mathbb{d}y&amp;=\mathbb{d}(\sin{u})=\cos{u}\mathbb{d}u=\cos(2x+1)\mathbb{d}(2x+1) \\\\ &amp;=\cos(2x+1) \cdot 2 \mathbb{d}x=2\cos(2x+1) \mathbb{d}x \end{align} \\\\ \tag{13}\]</div>
+<h3 id="2_1">2、多元函数的全微分</h3>
+<h4 id="21_1">2.1 普通函数的全微分</h4>
+<p>设 <span class="arithmatex">\(z=f(x,y), z\)</span> 可微, 则其全微分为：</p>
+<div class="arithmatex">\[\mathbb{d}z=\frac{\partial z}{\partial x}\mathbb{d}x+\frac{\partial z}{\partial y}\mathbb{d}y\\\\ \tag{14}\]</div>
+<h4 id="22_1">2.2 复合函数的全微分</h4>
+<p>设 <span class="arithmatex">\(z=f(u), u=\varphi(x,y), z\)</span> 可导, <span class="arithmatex">\(u\)</span>可微, 则其全微分为：</p>
+<div class="arithmatex">\[
+\begin{align}
+dz &amp; = df(u)-f'(u)du=f'(u)(\frac{\partial u}{\partial x}dx+\frac{\partial u}{\partial y}dy)\\
+&amp;=f'(u)\frac{\partial u}{\partial x}dx+f'(u)\frac{\partial u}{\partial y}dy
+\end{align}\\\ \tag{15}
+\]</div>
 
               
             </article>
