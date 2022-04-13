@@ -487,8 +487,42 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 乘法法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 商法则
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1、向量变元的实值标量函数
+  </a>
   
 </li>
         
@@ -716,8 +750,42 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 乘法法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 商法则
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1、向量变元的实值标量函数
+  </a>
   
 </li>
         
@@ -839,6 +907,19 @@ dz &amp; = d(sin(u)) = cosudu=cos(2x+y^2)d(2x+y^2)\\
 <h4 id="32">3.2 线性法则</h4>
 <p>相加再微分等于微分再相加，常数提外面</p>
 <div class="arithmatex">\[d(c_1u+c_2v)=c_1du+c_2dv\\\\ \tag{16.2}\]</div>
+<p>其中, 一元函数 <span class="arithmatex">\(u=u(x), v=v(x)\)</span> 或多元函数 <span class="arithmatex">\(u=u(x,y, v=v(x,y), c_1,c_2\)</span> 为常数。</p>
+<h4 id="33">3.3 乘法法则</h4>
+<p>前微后不微 + 前不微后微</p>
+<div class="arithmatex">\[d(uv)=d(u)v+ud(v)\\\\ \tag{26.3}\]</div>
+<h4 id="34">3.4 商法则</h4>
+<p>(上微下不微 减 上不微下微）<strong>除以</strong>（下的平方）</p>
+<div class="arithmatex">\[d(\frac{u}{v})=\frac{1}{v^2}(d(u)v-ud(v))\]</div>
+<p>其中, 一元函数 <span class="arithmatex">\(v=v(x)\neq0, u=u(x)\)</span> 或多元函数 <span class="arithmatex">\(v=v(x,y)\neq0, u=u(x,y)\)</span> 。</p>
+<h2 id="_3">三. 矩阵的微分</h2>
+<h3 id="1_2">1、向量变元的实值标量函数</h3>
+<div class="arithmatex">\[f(\pmb{x}),\pmb{x}=[x_1,x_2,\cdots,x_n]^T\\\\\]</div>
+<p>他其实就是多元函数, 设其可微, 则他的全微分, 即 <span class="arithmatex">\((14)\)</span> 式：</p>
+<div class="arithmatex">\[\begin{align} \mathbb{d}f(\pmb{x}) &amp;=\frac{\partial f}{\partial x_1}\mathbb{d}x_1+\frac{\partial f}{\partial x_2}\mathbb{d}x_2 + \cdots+\frac{\partial f}{\partial x_n}\mathbb{d}x_n\\\\  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} \mathbb{d}x_1 \\ \mathbb{d}x_2\\ \vdots \\ \mathbb{d}x_n \end{bmatrix}  \end{align}  \\\ \tag{17}\]</div>
 
               
             </article>
