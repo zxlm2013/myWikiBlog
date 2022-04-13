@@ -326,6 +326,46 @@
     一. 矩阵的迹
   </a>
   
+    <nav class="md-nav" aria-label="一. 矩阵的迹">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、一些性质(建议熟记)
+  </a>
+  
+    <nav class="md-nav" aria-label="2、一些性质(建议熟记)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量的迹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 线性法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -386,6 +426,46 @@
     一. 矩阵的迹
   </a>
   
+    <nav class="md-nav" aria-label="一. 矩阵的迹">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、一些性质(建议熟记)
+  </a>
+  
+    <nav class="md-nav" aria-label="2、一些性质(建议熟记)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量的迹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 线性法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -409,13 +489,26 @@
 <a href="https://zhuanlan.zhihu.com/p/288541909">矩阵求导公式的数学推导（矩阵求导——进阶篇）</a></p>
 </div>
 <h2 id="_1">一. 矩阵的迹</h2>
-<p><strong>1、定义</strong></p>
+<h3 id="1">1、定义</h3>
 <p><span class="arithmatex">\(n \times n\)</span>的<strong>方阵</strong> <span class="arithmatex">\(A_{n \times n}\)</span> 的主对角线元素之和就叫做矩阵 <span class="arithmatex">\(A\)</span> 的迹(trace), 记作 <span class="arithmatex">\(tr(A)\)</span> , 即: </p>
 <p><span class="arithmatex">\(\pmb{A}_{n \times n} = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \\ \end{bmatrix}_{n \times n}\\\\\)</span></p>
 <p><span class="arithmatex">\(A\)</span>的迹为: </p>
 <div class="arithmatex">\[
 tr(\pmb{A})=a_{11} + a_{22} + \cdots + a_{nn} = \sum_{i=1}^n{a_{ii}} \\\\ \tag{1}
 \]</div>
+<p>注意：只有<strong>方阵</strong>才有迹。</p>
+<h3 id="2">2、一些性质(建议熟记)</h3>
+<h4 id="21">2.1 标量的迹</h4>
+<p>对于一个标量 <span class="arithmatex">\(x\)</span> ,可以看成是 <span class="arithmatex">\(1 \times 1\)</span> 的矩阵，它的迹就是它自己。</p>
+<div class="arithmatex">\[
+x=tr(x)\\\\\tag{2}
+\]</div>
+<h4 id="22">2.2 线性法则</h4>
+<p>相加再求迹等于求迹再相加，标量提外面</p>
+<div class="arithmatex">\[
+tr(c_1A+c_2B)=c_1tr(A)+c_2tr(B)\\\\\tag{3}
+\]</div>
+<p>其中, <span class="arithmatex">\(c_1,c_2\)</span>为标量。</p>
 <p>哈哈哈，终于写出来了，明天继续。</p>
 
               
