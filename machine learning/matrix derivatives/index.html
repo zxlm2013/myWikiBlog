@@ -358,6 +358,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 乘积的迹的本质
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 交换律
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -458,6 +479,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 乘积的迹的本质
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 交换律
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -503,10 +545,32 @@
 <p>相加再求迹等于求迹再相加，标量提外面</p>
 <div class="arithmatex">\[tr(c_1A+c_2B)=c_1tr(A)+c_2tr(B)\\\\ \tag{3}\]</div>
 <p>其中, <span class="arithmatex">\(c_1,c_2\)</span>为标量。</p>
+<p><strong>证明：</strong></p>
 <div class="arithmatex">\[
 \begin{align} tr(c_1\pmb{A}+c_2\pmb{B})  &amp;= tr \begin{bmatrix} c_1a_{11}+c_2b_{11} &amp; c_1a_{12}+c_2b_{12} &amp; \cdots &amp; c_1a_{1n}+c_2b_{1n} \\ c_1a_{21}+c_2b_{21} &amp; c_1a_{22}+c_2b_{22} &amp; \cdots &amp; c_1a_{2n}+c_2b_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ c_1a_{n1}+c_2b_{n1} &amp; c_1a_{n2}+c_2b_{n2} &amp; \cdots &amp; c_1a_{nn}+c_2b_{nn} \\ \end{bmatrix}  \\\\  &amp;= (c_1a_{11}+c_2b_{11})+(c_1a_{22}+c_2b_{22})+\cdots + (c_1a_{nn}+c_2b_{nn})   \\\\  &amp;= c_1(a_{11}+a_{22}+\cdots+a_{nn}) + c_2(b_{11}+b_{22}+\cdots+b_{nn})  \\\\  &amp;= c_1tr(\pmb{A})+c_2tr(\pmb{B})  \end{align} \\\\ \tag{4}
 \]</div>
-<p>哈哈哈，终于写出来了，明天继续。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="23">2.3 转置</h4>
+<p>转置的迹等于原矩阵的迹</p>
+<div class="arithmatex">\[tr(A^T)=tr(A)\\\\ \tag{5}\]</div>
+<p><strong>证明：</strong></p>
+<p>因为转置不会改变主对角线的元素，故成立。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="24">2.4 乘积的迹的本质</h4>
+<p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 其中一个矩阵乘以（左乘右乘都可以）另一个矩阵的转置的迹，本质是 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加，可以理解为向量的点积在矩阵上的推广，即：</p>
+<div class="arithmatex">\[\begin{align} \mathbb{tr}(\pmb{A}\pmb{B}^T)  &amp;= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &amp;  +a_{21}b_{21}+a_{22}b_{22}+ \cdots +a_{2n}b_{2n}\\ &amp; + \cdots \\ &amp; + a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots a_{mn}b_{mn} \end{align} \\\\ \tag{6}\]</div>
+<p><strong>证明</strong>
+$$
+\begin{align}  tr(\pmb{A}\pmb{B}^T) &amp;= tr( \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \ \end{bmatrix} \begin{bmatrix} b_{11} &amp; b_{21} &amp; \cdots &amp; b_{m1} \ b_{12} &amp; b_{22} &amp; \cdots &amp; b_{m2} \ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \ b_{1n} &amp; b_{2n} &amp; \cdots &amp; b_{mn} \ \end{bmatrix} )   \\   &amp;=  tr \begin{bmatrix} a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n} &amp; 不用管 &amp; \cdots &amp; 不用管 \ 不用管 &amp; a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n} &amp; \cdots &amp; 不用管 \ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \ 不用管 &amp; 不用管 &amp; \cdots &amp; a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \ \end{bmatrix}<em 11="11">{m \times m} \\ &amp;= a</em>b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n}\ &amp; + a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n}\ &amp; +  \cdots \ &amp; +  a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \end{align} \\ \tag{7}
+$$</p>
+<p><strong>证毕。</strong></p>
+<h4 id="25">2.5 交换律</h4>
+<p>矩阵乘积位置互换，迹不变</p>
+<div class="arithmatex">\[tr(AB)=tr(BA)\\\\ \tag{8}\]</div>
+<p>其中， <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span>。</p>
+<p><strong>证明：</strong></p>
+<p>把 <span class="arithmatex">\(B_{n \times m}\)</span> 看做是 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 的转置。由乘积的迹的本质，即 <span class="arithmatex">\((6)\)</span> 式可知，无论乘积怎么交换顺序， <span class="arithmatex">\(A_{m \times n}\)</span> 与 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 对应位置的元素相乘并相加，永远是不变的。</p>
+<p><strong>证毕。</strong></p>
 
               
             </article>
