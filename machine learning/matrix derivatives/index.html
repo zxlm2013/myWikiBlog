@@ -533,6 +533,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3、矩阵变元的实矩阵函数
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -803,6 +810,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3、矩阵变元的实矩阵函数
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -933,15 +947,34 @@ dz &amp; = d(sin(u)) = cosudu=cos(2x+y^2)d(2x+y^2)\\
 <h3 id="1_2">1、向量变元的实值标量函数</h3>
 <div class="arithmatex">\[f(\pmb{x}),\pmb{x}=[x_1,x_2,\cdots,x_n]^T\\\\\]</div>
 <p>他其实就是多元函数, 设其可微, 则他的全微分, 即 <span class="arithmatex">\((14)\)</span> 式：</p>
-<div class="arithmatex">\[\begin{align} df(\pmb{x}) &amp;=\frac{\partial f}{\partial x_1}dx_1+\frac{\partial f}{\partial x_2}dx_2 + \cdots+\frac{\partial f}{\partial x_n}dx_n\\\\  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}  \end{align}  \\\ \tag{17}\]</div>
+<div class="arithmatex">\[
+\begin{align} df(\pmb{x}) &amp;=\frac{\partial f}{\partial x_1}dx_1+\frac{\partial f}{\partial x_2}dx_2 + \cdots+\frac{\partial f}{\partial x_n}dx_n\\\\  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}  \end{align}  \\\ \tag{17}
+\]</div>
 <p>结果是标量, 由 <span class="arithmatex">\((2)\)</span> 式可知, <span class="arithmatex">\((17)\)</span>式可写成迹的形式, 即:</p>
-<div class="arithmatex">\[\begin{align} df(\pmb{x})  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix} \\\\  &amp;=\mathbb{tr}\Big((\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}\Big)  \end{align}  \\\ \tag{18}\]</div>
+<div class="arithmatex">\[
+\begin{align} df(\pmb{x})  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix} \\\\  &amp;=\mathbb{tr}\Big((\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}\Big)  \end{align}  \\\ \tag{18}
+\]</div>
 <h3 id="2_2">2、矩阵变元的实值标量函数</h3>
-<div class="arithmatex">\[f(X), X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}\]</div>
+<div class="arithmatex">\[
+f(X), X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
+\]</div>
 <p>它也是多元函数，设其可微，则它的全微分，仍是 <span class="arithmatex">\((14)\)</span> 式: </p>
 <div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \end{align}  \\\ \tag{19}\]</div>
 <p>我们从这个结果中发现，它其实就是矩阵 <span class="arithmatex">\((\frac{\partial f}{\partial x_{ij}})_{i=1,\ j=1}^{m,\ n}\)</span> 与矩阵 <span class="arithmatex">\((dx_{ij})_{i=1,j=1}^{m,n}\)</span> 对应位置的元素相乘并相加，由 <span class="arithmatex">\((6)\)</span> 式可知， <span class="arithmatex">\((19)\)</span> 式也可以写成迹的形式，即：</p>
-<div class="arithmatex">\[\begin{align} \mathbb{d}f(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}\mathbb{d}x_{11}+\frac{\partial f}{\partial x_{12}}\mathbb{d}x_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}\mathbb{d}x_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}\mathbb{d}x_{21}+\frac{\partial f}{\partial x_{22}}\mathbb{d}x_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}\mathbb{d}x_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}\mathbb{d}x_{m1}+\frac{\partial f}{\partial x_{m2}}\mathbb{d}x_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}\mathbb{d}x_{mn}  \\\\  &amp;=\mathbb{tr}( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} \mathbb{d}x_{11}  &amp; \mathbb{d}x_{12} &amp; \cdots  &amp; \mathbb{d}x_{1n} \\ \mathbb{d}x_{21}  &amp; \mathbb{d}x_{22} &amp; \cdots  &amp; \mathbb{d}x_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \mathbb{d}x_{m1}  &amp; \mathbb{d}x_{m2} &amp; \cdots  &amp; \mathbb{d}x_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=\mathbb{tr}( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<h3 id="3_1">3、矩阵变元的实矩阵函数</h3>
+<div class="admonition info">
+<p>更多参考链接:
+<a href="https://zhuanlan.zhihu.com/p/263777564">矩阵求导的本质与分子布局、分母布局的本质（矩阵求导——本质篇）</a></p>
+</div>
+<div class="arithmatex">\[
+F(X), F_{p \times q}=(f_{ij})_{i=1, j=1}^{p,q}, X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
+\]</div>
+<p>矩阵变元的实矩阵函数，它的每个元素其实就是一个矩阵变元的实值标量函数 <span class="arithmatex">\(f_{i,j}(X)\)</span> 。</p>
+<p>我们定义：设  <span class="arithmatex">\(f_{i,j}(X)\)</span> 可微, 则矩阵变元的实矩阵函数的矩阵微分，就是对应每个位置的元素 <span class="arithmatex">\(f_{i,j}(X)\)</span> 求全微分，排列布局<strong>不变</strong>, 即：</p>
+<div class="arithmatex">\[
+\begin{align} d\pmb{F}_{p \times q}(\pmb{X}) &amp; = \begin{bmatrix} df_{11}(\pmb{X})&amp; df_{12}(\pmb{X}) &amp; \cdots &amp; df_{1q}(\pmb{X}) \\ df_{21}(\pmb{X})&amp; df_{22}(\pmb{X}) &amp; \cdots &amp; df_{2q}(\pmb{X}) \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\ df_{p1}(\pmb{X})&amp; df_{p2}(\pmb{X}) &amp; \cdots &amp; df_{pq}(\pmb{X})  \end{bmatrix}_{p \times q}  \end{align}  \\\ \tag{21}
+\]</div>
 
               
             </article>
