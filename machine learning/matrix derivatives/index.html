@@ -538,6 +538,60 @@
     3、矩阵变元的实矩阵函数
   </a>
   
+    <nav class="md-nav" aria-label="3、矩阵变元的实矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    3.1 四个法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 四个法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    a. 常数矩阵的矩阵微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    b. 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    c. 乘积法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    d. 转置法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    3.2 为什么要使用矩阵微分求导
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -815,6 +869,60 @@
     3、矩阵变元的实矩阵函数
   </a>
   
+    <nav class="md-nav" aria-label="3、矩阵变元的实矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    3.1 四个法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 四个法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    a. 常数矩阵的矩阵微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    b. 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    c. 乘积法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    d. 转置法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    3.2 为什么要使用矩阵微分求导
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -961,7 +1069,7 @@ f(X), X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
 <p>它也是多元函数，设其可微，则它的全微分，仍是 <span class="arithmatex">\((14)\)</span> 式: </p>
 <div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \end{align}  \\\ \tag{19}\]</div>
 <p>我们从这个结果中发现，它其实就是矩阵 <span class="arithmatex">\((\frac{\partial f}{\partial x_{ij}})_{i=1,\ j=1}^{m,\ n}\)</span> 与矩阵 <span class="arithmatex">\((dx_{ij})_{i=1,j=1}^{m,n}\)</span> 对应位置的元素相乘并相加，由 <span class="arithmatex">\((6)\)</span> 式可知， <span class="arithmatex">\((19)\)</span> 式也可以写成迹的形式，即：</p>
-<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=\mathbb{tr}( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=tr( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
 <h3 id="3_1">3、矩阵变元的实矩阵函数</h3>
 <div class="admonition info">
 <p>更多参考链接:
@@ -974,6 +1082,78 @@ F(X), F_{p \times q}=(f_{ij})_{i=1, j=1}^{p,q}, X_{m \times n}=(x_{ij})_{i=1,j=1
 <p>我们定义：设  <span class="arithmatex">\(f_{i,j}(X)\)</span> 可微, 则矩阵变元的实矩阵函数的矩阵微分，就是对应每个位置的元素 <span class="arithmatex">\(f_{i,j}(X)\)</span> 求全微分，排列布局<strong>不变</strong>, 即：</p>
 <div class="arithmatex">\[
 \begin{align} d\pmb{F}_{p \times q}(\pmb{X}) &amp; = \begin{bmatrix} df_{11}(\pmb{X})&amp; df_{12}(\pmb{X}) &amp; \cdots &amp; df_{1q}(\pmb{X}) \\ df_{21}(\pmb{X})&amp; df_{22}(\pmb{X}) &amp; \cdots &amp; df_{2q}(\pmb{X}) \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\ df_{p1}(\pmb{X})&amp; df_{p2}(\pmb{X}) &amp; \cdots &amp; df_{pq}(\pmb{X})  \end{bmatrix}_{p \times q}  \end{align}  \\\ \tag{21}
+\]</div>
+<h4 id="31_1">3.1 四个法则</h4>
+<h5 id="a">a. 常数矩阵的矩阵微分</h5>
+<div class="arithmatex">\[
+dA_{m \times n}=0_{m \times n}\\\ \tag{22.1}
+\]</div>
+<p><strong>证明:</strong></p>
+<p><span class="arithmatex">\(A\)</span>的每个元素都是常数, 由 <span class="arithmatex">\((16.1)\)</span> 得, 每个元素的微分都是 0。</p>
+<p><strong>证毕。</strong></p>
+<h5 id="b">b. 线性法则</h5>
+<p>相加再微分等于微分再相加, 常数提外面</p>
+<div class="arithmatex">\[
+d \big(c_1F(X)+c_2G(X)\big)=c_1dF(x)+c_2dG(x)\\\ \tag{22.2}
+\]</div>
+<p>其中, <span class="arithmatex">\(c_1,c_2\)</span> 是常数。</p>
+<p><strong>证明:</strong></p>
+<p><span class="arithmatex">\(c_1F(X)+c_2G(X)\)</span> 的每个元素都是 <span class="arithmatex">\(c_1f_{ij}(X)+c_2g_{ij}(X)\)</span>, 由 <span class="arithmatex">\((16.2)\)</span> 式可知, 每个元素的全微分是 <span class="arithmatex">\(c_1df_{ij}(X)+c_2dg_{ij}(X)\)</span> 。</p>
+<p><strong>证毕。</strong></p>
+<h5 id="c">c. 乘积法则</h5>
+<p>前微后不微 + 前不微后微</p>
+<div class="arithmatex">\[
+d \big(F(X)G(X) \big)=d\big(F(X)\big)G(X)+F(X)dG(X)\\\ \tag{22.3.1}
+\]</div>
+<p>其中, <span class="arithmatex">\(F_{p \times q}(X),\ G_{p \times q}(X)\)</span> 。</p>
+<p><strong>注意：</strong> 此时的微分是矩阵, <strong>不能</strong>交换乘机的左右顺序。</p>
+<p><strong>证明：</strong></p>
+<p><span class="arithmatex">\(F(X)G(X)\)</span> 的每个元素都是   , 由 <span class="arithmatex">\((16.2)\)</span> 式、 <span class="arithmatex">\((16.3)\)</span> 式可知, 每个元素的全微分是</p>
+<div class="arithmatex">\[
+\begin{align}
+d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q d(f_{ik}(\pmb{X})g_{kj}(\pmb{X})) \\\\
+&amp; = \sum_{k=1}^q[d(f_{ik}(\pmb{X}))g_{kj}(\pmb{X})+f_{ik}(\pmb{X})dg_{kj}(\pmb{X})] \\\\ 
+&amp; = \sum_{k=1}^q[d(f_{ik}(\pmb{X}))g_{kj}(\pmb{X})]+ \sum_{k=1}^q[f_{ik}(\pmb{X})dg_{kj}(\pmb{X})]   
+\end{align}  \\\ \tag{22.3.1a}
+\]</div>
+<p>结果左边的求和式，就是 <span class="arithmatex">\(d\big(F(X)\big)G(X)\)</span> 的每个元素，结果右边的求和式，就是 <span class="arithmatex">\(F(X)dG(X)\)</span> 的每个元素。</p>
+<p><strong>证毕。</strong></p>
+<p>由此，很容易得到更多个乘积的法则：</p>
+<div class="arithmatex">\[
+\mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X})+ \pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X}) \\\\ \tag{22.3.2}
+\]</div>
+<p><strong>证明：</strong></p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))  &amp;= \mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X})+\pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))  \\\\  &amp;=  \mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) +\pmb{F}(\pmb{X})[\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X}) + \pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X})]   \\\\  &amp;=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X})+ \pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X})  \end{align} \\\\ \tag{22.3.2a}
+\]</div>
+<h5 id="d">d. 转置法则</h5>
+<p>转置的矩阵微分等于矩阵微分的转置</p>
+<div class="arithmatex">\[
+\mathbb{d}\pmb{F}_{p \times q}^T(\pmb{X})=(\mathbb{d}\pmb{F}_{p \times q})^T\\\ \tag{22.4.1}
+\]</div>
+<p><strong>证明：</strong></p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}\pmb{F}^T_{p \times q}(\pmb{X})  &amp;= \mathbb{d} \begin{bmatrix}  f_{11}(\pmb{X})&amp; f_{21}(\pmb{X}) &amp; \cdots &amp; f_{p1}(\pmb{X}) \\ f_{12}(\pmb{X})&amp; f_{22}(\pmb{X}) &amp; \cdots &amp; f_{p2}(\pmb{X}) \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  f_{1q}(\pmb{X})&amp;f_{2q}(\pmb{X}) &amp; \cdots &amp; f_{pq}(\pmb{X})   \end{bmatrix}_{q \times p}   \\\\ &amp;= \begin{bmatrix}  \mathbb{d}f_{11}(\pmb{X})&amp; \mathbb{d}f_{21}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{p1}(\pmb{X}) \\ \mathbb{d}f_{12}(\pmb{X})&amp; \mathbb{d}f_{22}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{p2}(\pmb{X}) \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  \mathbb{d}f_{1q}(\pmb{X})&amp;\mathbb{d}f_{2q}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{pq}(\pmb{X})   \end{bmatrix}_{q \times p}   \\\\  &amp;= \begin{bmatrix} \mathbb{d}f_{11}(\pmb{X})&amp; \mathbb{d}f_{12}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{1q}(\pmb{X}) \\ \mathbb{d}f_{21}(\pmb{X})&amp; \mathbb{d}f_{22}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{2q}(\pmb{X}) \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\ \mathbb{d}f_{p1}(\pmb{X})&amp; \mathbb{d}f_{p2}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{pq}(\pmb{X})  \end{bmatrix}_{p \times q}^T \\\\ &amp;=  (\mathbb{d}\pmb{F}_{p \times q}(\pmb{X}))^T \end{align}  \\\ \tag{22.4.2}
+\]</div>
+<p><strong>证毕。</strong></p>
+<h4 id="32_1">3.2 为什么要使用矩阵微分求导</h4>
+<p><span class="arithmatex">\(\pmb{X}_{m \times n}\)</span> 自己就是矩阵变元 <span class="arithmatex">\(\pmb{X}_{m \times n}\)</span> 的实矩阵函数，他的每个元素是 <span class="arithmatex">\(x_{ij}\)</span>, 每个元素的全微分是 <span class="arithmatex">\(\pmb{d}x_{ij}\)</span> 。</p>
+<p>因此, <span class="arithmatex">\(\pmb{X}_{m \times n}\)</span>的矩阵微分是:</p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{d}\pmb{X}_{m \times n} &amp;=  \begin{bmatrix} \mathbb{d}x_{11}&amp; \mathbb{d}x_{12} &amp; \cdots &amp; \mathbb{d}x_{1n} \\  \mathbb{d}x_{21}&amp; \mathbb{d}x_{22} &amp; \cdots &amp; \mathbb{d}x_{2n} \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  \mathbb{d}x_{m1}&amp; \mathbb{d}x_{m2} &amp; \cdots &amp; \mathbb{d}x_{mn} \\  \end{bmatrix}_{m \times n}  
+\end{align}  \\\ \tag{23.1}
+\]</div>
+<p>向量 <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots,x_n]^T\)</span>的矩阵微分是:</p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}\pmb{x} &amp;=   \begin{bmatrix}  \mathbb{d}x_{1}\\   \mathbb{d}x_{2}\\   \vdots \\  \mathbb{d}x_{n} \\   \end{bmatrix}_{n \times 1}   \end{align}  \\\ \tag{23.2}
+\]</div>
+<p>于是，我们刚刚讲到的矩阵微分四个法则，对于 <span class="arithmatex">\(\pmb{dX}_{m \times n},\pmb{dx}\)</span> 也是适用的。</p>
+<p>我们现在回到矩阵变元的实值标量函数的全微分，即 <span class="arithmatex">\((20)\)</span> 式：</p>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=tr( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<p>观察 <span class="arithmatex">\((20)\)</span> 式的结果, 发现在 <span class="arithmatex">\(tr\)</span> 中, 左边的矩阵其实就是:</p>
+<div class="arithmatex">\[
+\begin{align} \text{D}_{\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \pmb{X}^T_{m\times n}} \\\\ &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \end{align} \\\\
 \]</div>
 
               
