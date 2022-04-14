@@ -614,6 +614,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#252" class="md-nav__link">
+    2.5.2 相等
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -904,6 +911,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#252" class="md-nav__link">
+    2.5.2 相等
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1004,7 +1018,7 @@ f_3(\pmb{x})
 \begin{bmatrix}
 x_1+x_2+x_3\\\\
 x_1^2+2x_2+2x_3\\\\
-x_1x_2+x_2+x_3\\\\
+x_1x_2+x_2+x_3
 \end{bmatrix}\\\\ \tag{e.g.5}
 \]</div>
 <h4 id="23">2.3 矩阵变元</h4>
@@ -1178,8 +1192,11 @@ f(\pmb {X}), \pmb {X}_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
 <h4 id="25">2.5 一些发现</h4>
 <h5 id="251">2.5.1 转置</h5>
 <p><strong><span class="arithmatex">\((9)\)</span>  式与 <span class="arithmatex">\((11)\)</span> 式互为转置</strong>； <span class="arithmatex">\((8)\)</span>  式与 <span class="arithmatex">\((10)\)</span> 式互为转置。</p>
+<h5 id="252">2.5.2 相等</h5>
+<p>当<strong>矩阵</strong>变元 <span class="arithmatex">\(\pmb{X}\)</span> 本身就是一个<strong>列向量</strong> <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots ,x_n]^T\)</span> 时, <span class="arithmatex">\((5)\)</span> 式、 <span class="arithmatex">\((8)\)</span> 式、 <span class="arithmatex">\((9)\)</span> 式<strong>相等</strong>; <span class="arithmatex">\((6)\)</span> 式、<span class="arithmatex">\((10)\)</span> 式、<span class="arithmatex">\((11)\)</span> 式<strong>相等</strong>; 当然, 前三个式子与后三个式子<strong>互为转置</strong>。</p>
+<p>这一发现说明，对于<strong>向量</strong>变元的<strong>实值标量函数</strong> <span class="arithmatex">\(f(\pmb {x})\)</span> , <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots ,x_n]^T\)</span> , 结果布局本质上有两种形式，一种是 <span class="arithmatex">\(\text{Jacobian}\)</span> 矩阵（<strong>已经成行向量了</strong>）形式，一种是<strong>梯度矩阵（已经成列向量了）</strong>形式。两种形式<strong>互为转置</strong>。</p>
 <p><br></p>
-<p><strong>后面到第四大块, 暂时用不到，所以就不记了。要用的时候再说。</strong></p>
+<p><strong>后面第三大块<u>矩阵变元的实矩阵函数, 暂时用不到</u>，所以就不记了。要用的时候再说。</strong></p>
 <h2 id="_4">四. 分子布局、分母布局的本质</h2>
 <p>看到这里，相信同学们对矩阵求导结果的布局有了很全面的了解了，无非就是<strong>分子的转置、向量化，分母的转置、向量化</strong>，它们的<strong>各种组合</strong>而已。</p>
 <p>结合上述知识，我们总结：</p>

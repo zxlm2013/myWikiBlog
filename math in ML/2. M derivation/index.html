@@ -1225,9 +1225,10 @@ d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q
 <p>于是，我们刚刚讲到的矩阵微分四个法则，对于 <span class="arithmatex">\(\pmb{dX}_{m \times n},\pmb{dx}\)</span> 也是适用的。</p>
 <p>我们现在回到矩阵变元的实值标量函数的全微分，即 <span class="arithmatex">\((20)\)</span> 式：</p>
 <div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=tr( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
-<p>观察 <span class="arithmatex">\((20)\)</span> 式的结果, 发现在 <span class="arithmatex">\(tr\)</span> 中, 左边的矩阵其实就是:</p>
+<p>观察 <span class="arithmatex">\((20)\)</span> 式的结果, 发现在 <span class="arithmatex">\(tr\)</span> 中, 左边的矩阵其实就是上一篇 (本质篇_9) 式: </p>
 <div class="arithmatex">\[
 \begin{align} \text{D}_{\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \pmb{X}^T_{m\times n}} \\\\ &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \end{align} \\\\
+\tag{本质篇_9}
 \]</div>
 <p>而右边的矩阵，其实就是 <span class="arithmatex">\((23.1)\)</span> 式: </p>
 <div class="arithmatex">\[
@@ -1239,7 +1240,7 @@ d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q
 <div class="arithmatex">\[
 \pmb{d}f(\pmb{X})= \pmb{tr}(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\pmb{dX})\\\\ \tag{24}
 \]</div>
-<p>别忘了我们的目标是什么，其实就是要求 <span class="arithmatex">\(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\)</span> 。所以，只要我们可以把一个矩阵变元的实值标量函数的全微分写成 <span class="arithmatex">\((24)\)</span> 式，我们就找到了矩阵求导的结果。（已经有人证明，这样的结果是唯一的。即若 <span class="arithmatex">\(\pmb{d}f(\pmb{X})=\pmb{tr}(A_1\pmb{dX})=\pmb{tr}(A_2\pmb{dX})\)</span> ，则 <span class="arithmatex">\(A_1=A2\)</span> )</p>
+<p>别忘了我们的目标是什么，其实就是要求 <span class="arithmatex">\(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\)</span> 。所以，只要我们可以把一个矩阵变元的实值标量函数的全微分写成 <span class="arithmatex">\((24)\)</span> 式，我们就找到了矩阵求导的结果。（已经有人证明，这样的结果是唯一的。即若 <span class="arithmatex">\(\pmb{d}f(\pmb{X})=\pmb{tr}(A_1\pmb{dX})=\pmb{tr}(A_2\pmb{dX})\)</span> ，则 <span class="arithmatex">\(A_1=A_2\)</span> )</p>
 
               
             </article>
