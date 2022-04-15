@@ -701,6 +701,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#33_1" class="md-nav__link">
+    3.3 如何使用矩阵微分求导
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1038,6 +1045,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#33_1" class="md-nav__link">
+    3.3 如何使用矩阵微分求导
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1329,6 +1343,7 @@ d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q
 \tag{25.2.1}
 \]</div>
 <p>其中, <span class="arithmatex">\(\pmb X_{n \times n}\)</span> 。</p>
+<p><strong>证明:</strong></p>
 <p>首先明确, 行列式是一个实值标量函数, 故可以使用 <span class="arithmatex">\((24)\)</span> 式。</p>
 <p>我们知道, 行列式可以按照一行展开, 即一行中每个元素乘以他的<strong>代数余子式</strong>然后求和。</p>
 <p>我们按照元素 <span class="arithmatex">\(x_{ij}\)</span> 所在的第 <span class="arithmatex">\(i\)</span> 行展开:</p>
@@ -1336,6 +1351,43 @@ d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q
 |\pmb X|=x_{i1}A_{i1}+x_{i2}A_{i2}+\cdots +x_{in}A_{in}\\\\
 \tag{25.2.a}
 \]</div>
+<p>因此，行列式对元素 <span class="arithmatex">\(x_{ij}\)</span> 的偏导，即为该元素对应的代数余子式。</p>
+<div class="arithmatex">\[
+\frac{\partial |\pmb X|}{\partial x_{ij}}=A_{ij}\\\\
+\tag{25.2.b}
+\]</div>
+<p>因此, 行列式对矩阵求导的结果为:</p>
+<div class="arithmatex">\[
+\begin{align} \frac{\partial |\pmb{X}|}{\partial \pmb{X}^T} &amp;=  \begin{bmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\ \end{bmatrix}  \end{align} \\\\ \tag{25.2.c}
+\]</div>
+<p>这个结果其实就是伴随矩阵 <span class="arithmatex">\(\pmb X^*\)</span>。</p>
+<p>又因为伴随矩阵和逆矩阵的关系: </p>
+<div class="arithmatex">\[
+\pmb X^{-1} = \frac{\pmb X^*}{|\pmb X|}\\\\
+\tag{25.2.d}
+\]</div>
+<p>代入 <span class="arithmatex">\((24)\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbb{d} |\pmb X| &amp; = \operatorname{tr}(\frac{\partial |\pmb X|}{\partial \pmb X^T})\\\\
+ &amp; = \operatorname{tr}(|\pmb X|\pmb X^{-1}\mathbb{d}\pmb X)
+\end{aligned}
+\]</div>
+<p>又因为行列式是标量，由 <span class="arithmatex">\((3)\)</span> 式，可以提到迹的外面，得:</p>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb X| = |\pmb X| \operatorname{tr}(\pmb X^{-1}\mathbb{d}\pmb X) = \operatorname{tr}(|\pmb X|\pmb X^{-1}\mathbb{d}\pmb X)\\\\
+\tag{25.2.1}
+\]</div>
+<p><strong>证毕。</strong></p>
+<p><span class="arithmatex">\(\pmb X_{n\times n}\)</span> 可以代入其他任意的矩阵函数:</p>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb F (\pmb X)| = |\pmb F (\pmb X)| \operatorname{tr}(\pmb F (\pmb X)^{-1}\mathbb{d}\pmb F (\pmb X)) = \operatorname{tr}(|\pmb F (\pmb X)|\pmb F (\pmb X)^{-1}\mathbb{d}\pmb F (\pmb X))\\\\
+\tag{25.2.2}
+\]</div>
+<h4 id="33_1">3.3 如何使用矩阵微分求导</h4>
+<p>对于实值标量函数 <span class="arithmatex">\(f (\pmb{X})\)</span>, <span class="arithmatex">\(\operatorname{tr}\big( f(\pmb X) \big)=f(\pmb X)\)</span> , <span class="arithmatex">\(\mathbb{d}f(\pmb X)=\operatorname{tr}\big( \mathbb{d}f(\pmb X) \big)\)</span></p>
+<p>所以有</p>
+<p><span class="arithmatex">\(\mathbb{d}f(\pmb X)=\mathbb{d}\big(\operatorname{tr}f(\pmb X)\big)=\operatorname{tr}\big( \mathbb{d}f(\pmb X) \big)\)</span></p>
 
               
             </article>
