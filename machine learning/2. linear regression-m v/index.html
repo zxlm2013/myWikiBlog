@@ -384,6 +384,19 @@
     7. The normal equations
   </a>
   
+    <nav class="md-nav" aria-label="7. The normal equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-matrix-derivatives" class="md-nav__link">
+    7.1 Matrix derivatives
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -547,6 +560,19 @@
   <a href="#7-the-normal-equations" class="md-nav__link">
     7. The normal equations
   </a>
+  
+    <nav class="md-nav" aria-label="7. The normal equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-matrix-derivatives" class="md-nav__link">
+    7.1 Matrix derivatives
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -884,12 +910,47 @@ $$</p>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>   <span class="k">return</span> <span class="n">theta</span>
 </code></pre></div>
-<p>以下是正规方程英文版(有详细推导-自己加上的)，其他内容来源于2006年麻省理工cs 2009机器学习note。</p>
+<p><br>
+<br>
+<br></p>
+<div class="admonition info">
+<p><strong>以下是正规方程英文版(有详细推导-自己加上的)，其他内容来源于2006年麻省理工cs 2009机器学习的note。</strong></p>
+</div>
 <h2 id="7-the-normal-equations">7. The normal equations</h2>
-<p>Gradient descent gives one way of minimizing J. Lets discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In this method, we will minimize J by explicitly taking its derivatives with respect to the θj’s, and setting them to zero. To enable us to do this without having to write reams of algebra and pages full of matrices of derivatives, lets introduce some notation for doing calculus with matrices.</p>
+<!--
+下面这个css用于控制p标签的两端对齐
+-->
+<style type="text/css">
+p{
+    text-align: justify;  /*文本左对齐*/
+}
+</style>
 
-<p><link rel="stylesheet" type="text/css" href="./../assets/css/my.css>"&gt;</p>
-<p>hahha123</p>
+<p>Gradient descent gives one way of minimizing <span class="arithmatex">\(J\)</span>. Lets discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In this method, we will minimize <span class="arithmatex">\(J\)</span> by explicitly taking its derivatives with respect to the <span class="arithmatex">\(θ_j's\)</span>, and setting them to zero. To enable us to do this without having to write reams of algebra and pages full of matrices of derivatives, lets introduce some notation for doing calculus with matrices.</p>
+<h3 id="71-matrix-derivatives">7.1 Matrix derivatives</h3>
+<p>For a function <span class="arithmatex">\(f\)</span> : <span class="arithmatex">\(\mathbb{R^{m\times n}} \rightarrow \mathbb{R}\)</span> mapping from <span class="arithmatex">\(\text{m-by-n}\)</span> matrices to the real numbers, we define the derivative of f with respect to A to be:</p>
+<div class="arithmatex">\[
+\nabla _Af(A)=\begin{bmatrix} \frac{\partial f}{\partial A_{11}} &amp; \cdots  &amp; \frac{\partial f}{\partial A_{1n}} \\\\ 
+\vdots  &amp; \ddots &amp; \vdots \\\\
+\frac{\partial f}{\partial A_{m1}} &amp; \cdots  &amp; \frac{\partial f}{\partial A_{mn}}\end{bmatrix}
+\]</div>
+<p>Thus, the gradient <span class="arithmatex">\(\nabla _Af(A)\)</span> is itself an <span class="arithmatex">\(\text{m-by-n}\)</span>  matrix, whose <span class="arithmatex">\((i,j)\)</span>-element is <span class="arithmatex">\(\frac{\partial f}{\partial A_{ij}}\)</span>. For example, suppose <span class="arithmatex">\(A =\bigl( \begin{smallmatrix} A_{11}  &amp; A_{12} \\ A_{21} &amp; A_{22} \end{smallmatrix} \bigr)\)</span> is a 2-by-2 matrix, and the function <span class="arithmatex">\(f\)</span>: <span class="arithmatex">\(\mathbb{R^{2\times 2}}\rightarrow \mathbb{R}\)</span> is given by</p>
+<div class="arithmatex">\[
+f(A)=\frac{3}{2}A_{11}+5A_{12}^2+A_{21}A_{22}
+\]</div>
+<p>Here, <span class="arithmatex">\(A_{ij}\)</span> denotes the <span class="arithmatex">\((i,j)\)</span> entry of the matrix <span class="arithmatex">\(A\)</span>. We then have</p>
+<div class="arithmatex">\[
+\nabla _Af(A)=\begin{bmatrix} 
+\frac{3}{2} &amp; 10A_{12}\\\\
+A_{22} &amp; A_{21}
+\end{bmatrix}
+\]</div>
+<p>We also introduce the <strong>trace</strong> opertator, written by "tr.". For an <span class="arithmatex">\(\text{n-by-n}\)</span> (square) matrix A, the trace of A is defined to be the sum of its diagonal entries:</p>
+<div class="arithmatex">\[
+\operatorname{tr}A=\sum_{i=1}^nA_{ii}
+\]</div>
+<p>If <span class="arithmatex">\(a\)</span> is a real number (i.e., a 1-by-1 matrix), then <span class="arithmatex">\(\operatorname{tr} a = a\)</span>. (If you haven't seen this "opertator notation" before, you should think of the trace of <span class="arithmatex">\(A\)</span> as <span class="arithmatex">\(\operatorname{tr}(A)\)</span>, or as application of the "trace" function to the matrix <span class="arithmatex">\(A\)</span>. It's more commonly written without the parentheses, however.）
+The trace opertator has the property that for two matrices <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> such that <span class="arithmatex">\(AB\)</span> is square, we have that <span class="arithmatex">\(\operatorname{tr}(AB)=\operatorname{tr}(BA)\)</span>. <a href="../math in ML/2. M derivation/#extending-the-theme/#25">证明请点我</a></p>
 
               
             </article>
