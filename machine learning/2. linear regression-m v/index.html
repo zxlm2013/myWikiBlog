@@ -970,7 +970,7 @@ A_{22} &amp; A_{21}
 <p><strong>证明:</strong></p>
 <p>由 <a href="../../math in ML/2. M derivation/#24">二.矩阵求导中---(6)式的证明</a> 我们可以知道：</p>
 <p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 其中<strong>一个矩阵乘以（左乘右乘都可以）另一个矩阵的 <mark>转置</mark> 的迹，本质是 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加</strong>。</p>
-<p>所以这里 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 相当于就是 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B^T\)</span>  每一个位置对应元素==相乘并相加==。
+<p>所以这里 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 相当于就是 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B^T\)</span>  每一个位置对应元素 <mark>相乘并相加</mark> 。
 其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span>。</p>
 <p>接着, 由 <a href="../../math in ML/1. M derivation essence/#23_1">二.矩阵求导本质---(11)式</a> 我们可以知道:</p>
 <p>这里求 <span class="arithmatex">\(\nabla_A \operatorname{tr}(AB)\)</span> 相当于 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 按照 <span class="arithmatex">\(A\)</span> 矩阵分布的每个位置元素求偏导。</p>
