@@ -966,7 +966,7 @@ A_{22} &amp; A_{21}
 <p>吴恩达老师不给你们证明，我来给你们证明<img alt="😎" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f60e.svg" title=":sunglasses:" /></p>
 <p>请在看下面推导之前, 务必先看懂我这个知识库中<strong>机器学习中的数学知识</strong>&ensp;---&ensp;( <strong>一. 矩阵求导本质 &amp;二. 矩阵求导</strong>)。</p>
 <p><img alt="2_7_1" src="../../assets/images/2_7_1.png" /></p>
-<p>I. $ \nabla_A \operatorname{tr}(AB)=B^T$</p>
+<p>I. <span class="arithmatex">\(\nabla_A \operatorname{tr}(AB)=B^T\)</span></p>
 <p><strong>证明:</strong></p>
 <p>由 <a href="../../math in ML/2. M derivation/#24">二.矩阵求导中---(6)式的证明</a> 我们可以知道：</p>
 <p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 其中<strong>一个矩阵乘以（左乘右乘都可以）另一个矩阵的 <mark>转置</mark> 的迹，本质是 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加</strong>。</p>
@@ -976,7 +976,7 @@ A_{22} &amp; A_{21}
 <p>这里求 $ \nabla_A \operatorname{tr}(AB)$ 相当于 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 按照 <span class="arithmatex">\(A\)</span> 矩阵分布的每个位置元素求偏导。</p>
 <p>所以, 综上所述, $ \nabla_A \operatorname{tr}(AB)=B^T$。</p>
 <p><strong>证毕。</strong></p>
-<p>II. $$ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T$$</p>
+<p>II. <span class="arithmatex">\(\nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T\)</span></p>
 <p><strong>证明:</strong></p>
 <p>由 <a href="../../math in ML/1. M derivation essence/#23_1">二.矩阵求导本质---(11)式</a> 可知:</p>
 <div class="arithmatex">\[
@@ -994,7 +994,7 @@ A_{22} &amp; A_{21}
 \end{align}
 \]</div>
 <p><strong>证毕。</strong></p>
-<p>III. $$ \nabla_A \operatorname{tr}ABA<sup>TC=CAB+C</sup>TAB^T \\$$</p>
+<p>III. <span class="arithmatex">\(\nabla_A \operatorname{tr}ABA^TC=CAB+C^TAB^T\)</span></p>
 <p><strong>证明:</strong></p>
 <p>首先, 我们要明确这里的 <span class="arithmatex">\(ABA^TC\)</span> 是关于 <span class="arithmatex">\(A\)</span> 矩阵的实值标量函数, 所以, 我们可以令 <span class="arithmatex">\(f(A)=ABA^TC\)</span>。</p>
 <div class="admonition note">
@@ -1011,7 +1011,7 @@ A_{22} &amp; A_{21}
 \pmb{d}f(\pmb{A})= \operatorname{tr}\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\pmb{dA}\Big)\\\\
 \tag{II.1}
 \]</div>
-<p>由我们证明的 II. $ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T$得:</p>
+<p>由我们证明的 II. <span class="arithmatex">\(\nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T\)</span>得:</p>
 <div class="arithmatex">\[
 \frac{\partial f(\pmb{A})}{\partial \pmb{A}^T} = \nabla _{\pmb A^T}f(\pmb A)=\big(\nabla _{\pmb A}f(\pmb A)\big)^T
 \]</div>
@@ -1037,17 +1037,17 @@ A_{22} &amp; A_{21}
 \end{aligned}
 \]</div>
 <blockquote>
-<p>数字是步骤 汉字是每一步依据
-01 -&gt; 02 实值标量函数的性质
-02 -&gt; 03 迹的交换律
-03 -&gt; 04 实值标量函数的性质
-04 -&gt; 05 矩阵微分的乘积法则
-05 -&gt; 06 夹层饼
-06 -&gt; 07 迹的线性法则, 迹的交换律
-07 -&gt; 08 矩阵微分的转置法则
-08 -&gt; 09 转置的迹等于原矩阵的迹
-09 -&gt; 10 迹的交换律
-10 -&gt; 11 迹的线性法则</p>
+<p>数字是步骤 汉字是每一步依据 <br>
+01 -&gt; 02 实值标量函数的性质 <br>
+02 -&gt; 03 迹的交换律 <br>
+03 -&gt; 04 实值标量函数的性质 <br>
+04 -&gt; 05 矩阵微分的乘积法则 <br>
+05 -&gt; 06 夹层饼 <br>
+06 -&gt; 07 迹的线性法则, 迹的交换律 <br>
+07 -&gt; 08 矩阵微分的转置法则 <br>
+08 -&gt; 09 转置的迹等于原矩阵的迹 <br>
+09 -&gt; 10 迹的交换律 <br>
+10 -&gt; 11 迹的线性法则 <br></p>
 </blockquote>
 <p>结合前面的 <span class="arithmatex">\((II.1)\)</span> 式可得:</p>
 <div class="arithmatex">\[
