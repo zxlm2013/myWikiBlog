@@ -964,7 +964,123 @@ A_{22} &amp; A_{21}
 <div class="arithmatex">\[\nabla_A|A|=|A|(A^{-1})^T\\\\\tag{4}\]</div>
 <hr />
 <p>吴恩达老师不给你们证明，我来给你们证明<img alt="😎" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f60e.svg" title=":sunglasses:" /></p>
+<p>请在看下面推导之前, 务必先看懂我这个知识库中<strong>机器学习中的数学知识</strong>&ensp;---&ensp;( <strong>一. 矩阵求导本质 &amp;二. 矩阵求导</strong>)。</p>
 <p><img alt="2_7_1" src="../../assets/images/2_7_1.png" /></p>
+<p>I. $ \nabla_A \operatorname{tr}(AB)=B^T$</p>
+<p><strong>证明:</strong></p>
+<p>由 <a href="../../math in ML/2. M derivation/#24">二.矩阵求导中---(6)式的证明</a> 我们可以知道：</p>
+<p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 其中<strong>一个矩阵乘以（左乘右乘都可以）另一个矩阵的 <mark>转置</mark> 的迹，本质是 <span class="arithmatex">\(C_{m \times n}, D_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加</strong>。</p>
+<p>所以这里 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 相当于就是 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B^T\)</span>  每一个位置对应元素==相乘并相加==。
+其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span>。</p>
+<p>接着, 由 <a href="../../math in ML/1. M derivation essence/#23_1">二.矩阵求导本质---(11)式</a> 我们可以知道:</p>
+<p>这里求 $ \nabla_A \operatorname{tr}(AB)$ 相当于 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 按照 <span class="arithmatex">\(A\)</span> 矩阵分布的每个位置元素求偏导。</p>
+<p>所以, 综上所述, $ \nabla_A \operatorname{tr}(AB)=B^T$。</p>
+<p><strong>证毕。</strong></p>
+<p>II. $$ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T$$</p>
+<p><strong>证明:</strong></p>
+<p>由 <a href="../../math in ML/1. M derivation essence/#23_1">二.矩阵求导本质---(11)式</a> 可知:</p>
+<div class="arithmatex">\[
+\begin{align}
+\nabla_{A^T}f(A) &amp;=
+\begin{bmatrix} \frac{\partial f}{\partial a_{11}} &amp; \cdots  &amp; \frac{\partial f}{\partial a_{m1}} 
+\\ \vdots &amp; \ddots &amp; \vdots 
+\\ \frac{\partial f}{\partial x_{1n}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{mn}} \\
+\end{bmatrix}\\\\
+ &amp; = \begin{bmatrix} \frac{\partial f}{\partial a_{11}} &amp; \cdots  &amp; \frac{\partial f}{\partial a_{1n}} 
+\\ \vdots &amp; \ddots &amp; \vdots 
+\\ \frac{\partial f}{\partial x_{m1}} &amp; \cdots &amp; \frac{\partial f}{\partial x_{mn}} \\
+\end{bmatrix}\\\\
+ &amp; = \big(\nabla_Af(A)\big)^T
+\end{align}
+\]</div>
+<p><strong>证毕。</strong></p>
+<p>III. $$ \nabla_A \operatorname{tr}ABA<sup>TC=CAB+C</sup>TAB^T \\$$</p>
+<p><strong>证明:</strong></p>
+<p>首先, 我们要明确这里的 <span class="arithmatex">\(ABA^TC\)</span> 是关于 <span class="arithmatex">\(A\)</span> 矩阵的实值标量函数, 所以, 我们可以令 <span class="arithmatex">\(f(A)=ABA^TC\)</span>。</p>
+<div class="admonition note">
+<p><strong>注意:</strong> 这里的标记, 由于 <span class="arithmatex">\(A\)</span> 其实是矩阵变元, 应该标记为 <span class="arithmatex">\(f(\pmb A)=\pmb A B \pmb A^TC\)</span>, 所以后面的推导过程,我们严谨一些, 将矩阵变元 <span class="arithmatex">\(A\)</span> 标记为 <span class="arithmatex">\(\pmb A\)</span>。</p>
+</div>
+<p>仔细想你会发现，对于实值标量函数 <span class="arithmatex">\(f (\pmb{A})\)</span>, <span class="arithmatex">\(\operatorname{tr}\big( f(\pmb A) \big)=f(\pmb A)\)</span> , <span class="arithmatex">\(\mathbb{d}f(\pmb A)=\operatorname{tr}\big( \mathbb{d}f(\pmb A) \big)\)</span></p>
+<p>所以有 <span class="arithmatex">\(\mathbb{d}f(\pmb A)=\mathbb{d}\big(\operatorname{tr}f(\pmb A)\big)=\operatorname{tr}\big( \mathbb{d}f(\pmb A) \big)\)</span> 。</p>
+<p>由 <a href="../../math in ML/2. M derivation/#32_1">二.矩阵求导本质---(24)式</a> 即:</p>
+<div class="arithmatex">\[
+\pmb{d}f(\pmb{X})= \operatorname{tr}\Big(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\pmb{dX}\Big)
+\]</div>
+<p>我们可以把一个矩阵变元的实值标量函数的全微分写成上式，我们就找到了矩阵求导的结果, 也即: </p>
+<div class="arithmatex">\[
+\pmb{d}f(\pmb{A})= \operatorname{tr}\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\pmb{dA}\Big)\\\\
+\tag{II.1}
+\]</div>
+<p>由我们证明的 II. $ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T$得:</p>
+<div class="arithmatex">\[
+\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T} = \nabla _{\pmb A^T}f(\pmb A)=\big(\nabla _{\pmb A}f(\pmb A)\big)^T
+\]</div>
+<p>所以我们要求的:</p>
+<div class="arithmatex">\[
+\nabla _{\pmb A}f(\pmb A)=\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\Big)^T \\\\
+\tag{II.2}
+\]</div>
+<p>最终我们的任务就是转化为求 <span class="arithmatex">\(\pmb{d}f(\pmb{A})\)</span> 的全微分, 下面开始推导：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\pmb{d}f(\pmb{A}) &amp; = \pmb{d}\pmb A B \pmb A^TC \\\\
+ &amp; = \pmb{d}\operatorname{tr}(\pmb A B \pmb A^TC)\\\\
+ &amp; = \pmb{d}\operatorname{tr}(C \pmb A B \pmb A^T)\\\\
+ &amp; = \operatorname{tr}\pmb{d}(C \pmb A B \pmb A^T)\\\\
+ &amp; = \operatorname{tr}\Big(\pmb{d}(C \pmb A) B \pmb A^T +  C \pmb A \pmb{d}(B \pmb A^T)\Big)\\\\
+ &amp; = \operatorname{tr}\Big(C(\pmb{d}\pmb A) B \pmb A^T +  C \pmb A B \pmb{d}\pmb A^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B \pmb{d}\pmb A^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B (\pmb{d}\pmb A)^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big(\pmb{d}\pmb A (B^T \pmb A^T C^T )\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( B^T\pmb A^T C^T  \pmb{d}\pmb A\Big)\\\\
+ &amp; = \operatorname{tr}\Big[(B \pmb A^T C + B^T\pmb A^T C^T) \pmb{d}\pmb A\Big]\\\\
+\end{aligned}
+\]</div>
+<blockquote>
+<p>数字是步骤 汉字是每一步依据
+01 -&gt; 02 实值标量函数的性质
+02 -&gt; 03 迹的交换律
+03 -&gt; 04 实值标量函数的性质
+04 -&gt; 05 矩阵微分的乘积法则
+05 -&gt; 06 夹层饼
+06 -&gt; 07 迹的线性法则, 迹的交换律
+07 -&gt; 08 矩阵微分的转置法则
+08 -&gt; 09 转置的迹等于原矩阵的迹
+09 -&gt; 10 迹的交换律
+10 -&gt; 11 迹的线性法则</p>
+</blockquote>
+<p>结合前面的 <span class="arithmatex">\((II.1)\)</span> 式可得:</p>
+<div class="arithmatex">\[
+\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}=B \pmb A^T C + B^T\pmb A^T C^T
+\]</div>
+<p>再结合前面的 <span class="arithmatex">\((II.1)\)</span> 式可得:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla _{\pmb A}f(\pmb A) &amp; = \Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\Big)^T \\\\
+&amp; = (B \pmb A^T C + B^T\pmb A^T C^T)^T\\\\
+&amp; = C^T \pmb A B^T + C \pmb A B 
+\end{aligned}
+\]</div>
+<p><strong>证毕。</strong></p>
+<p>IV. <span class="arithmatex">\(\nabla_A|A|=|A|(A^{-1})^T\\\\\)</span></p>
+<p><strong>证明:</strong></p>
+<p>由 <a href="../../math in ML/2. M derivation/#322">矩阵行列式微分 即(25.2.1)式</a>的证明可知:</p>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb A| = \operatorname{tr}(|\pmb A|\pmb A^{-1}\mathbb{d}\pmb A)
+\]</div>
+<p>再由 <a href="../../math in ML/2. M derivation/#32_1">二.矩阵求导本质---(24)式</a>可得：</p>
+<div class="arithmatex">\[
+\frac{\partial |\pmb A|}{\partial \pmb A^T}=|\pmb A|\pmb A^{-1}
+\]</div>
+<p>因此,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla _{\pmb A}|\pmb A| &amp; = (\frac{\partial |\pmb A|}{\partial \pmb A^T})^T \\\\
+&amp;=(|\pmb A|\pmb A^{-1})^T\\\\
+&amp;=|\pmb A|(\pmb A^{-1})^T
+\end{aligned}
+\]</div>
+<p><strong>证毕。</strong></p>
 
               
             </article>
