@@ -394,6 +394,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#72-least-squares-revisited" class="md-nav__link">
+    7.2 Least squares revisited
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -567,6 +574,13 @@
           <li class="md-nav__item">
   <a href="#71-matrix-derivatives" class="md-nav__link">
     7.1 Matrix derivatives
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-least-squares-revisited" class="md-nav__link">
+    7.2 Least squares revisited
   </a>
   
 </li>
@@ -1053,7 +1067,7 @@ A_{22} &amp; A_{21}
 <div class="arithmatex">\[
 \frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}=B \pmb A^T C + B^T\pmb A^T C^T
 \]</div>
-<p>再结合前面的 <span class="arithmatex">\((II.1)\)</span> 式可得:</p>
+<p>再结合前面的 <span class="arithmatex">\((II.2)\)</span> 式可得:</p>
 <div class="arithmatex">\[
 \begin{aligned}
 \nabla _{\pmb A}f(\pmb A) &amp; = \Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\Big)^T \\\\
@@ -1081,6 +1095,76 @@ A_{22} &amp; A_{21}
 \end{aligned}
 \]</div>
 <p><strong>证毕。</strong></p>
+<p>至此, 吴恩达老师省略的证明, 全部证明完毕。下面继续记笔记。</p>
+<hr />
+<p>To make our martix notation more concrete, let us now explain in detail the meaning of the first of these equations. Suppose we have some fixed matrix <span class="arithmatex">\(B \in \mathbb{R}^{n\times m}\)</span> . We can then define a function <span class="arithmatex">\(f :\mathbb{R}^{m\times n}\rightarrow \mathbb{R}\)</span> according to <span class="arithmatex">\(f(A)=AB\)</span>. Note that this definition makes sense, because if <span class="arithmatex">\(A \in \mathbb{R}^{m\times n}\)</span>, then <span class="arithmatex">\(AB\)</span> is a square matrix, and we can apply the trace operator to it; thus, <span class="arithmatex">\(f\)</span> does indeed map from <span class="arithmatex">\(\mathbb{R}^{m\times n}\)</span> to <span class="arithmatex">\(\mathbb{R}\)</span>. We can then apply our definition of matrix derivatives to find <span class="arithmatex">\(\nabla _Af(A)\)</span>, which will itself by an m-by-n matrix. Equation (1) above states that the <span class="arithmatex">\((i,j)\)</span> entry of this matrix will given by the <span class="arithmatex">\((i,j)\)</span>-entry of <span class="arithmatex">\(B^T\)</span> , or equivalently, by <span class="arithmatex">\(B_{j,i}\)</span> .</p>
+<p>&ensp; The proofs of Equation (1-3) are reasonably simply, and are left as an exercise to the reader. Equation (4) can be derived using adjoint representation of the inverse of a martix.</p>
+<h3 id="72-least-squares-revisited">7.2 Least squares revisited</h3>
+<p>Armed with the tools of matrix derivatives, let us now proceed to find in closed-form the value of <span class="arithmatex">\(\theta\)</span> that minimizes <span class="arithmatex">\(J(\theta)\)</span>. We begin by re-writing <span class="arithmatex">\(J\)</span> in matrix-vectorial notation.</p>
+<p>Giving a training set, define <strong>the design matrix</strong> <span class="arithmatex">\(X\)</span> to be the m-by-n matrix (actually m-by-n+1, if we include the intercept term) that contains the training examples' input values in its row:</p>
+<div class="arithmatex">\[
+X = \begin{bmatrix} --- &amp; (x^{(1)})^T &amp; --- \\\\ --- &amp; (x^{(2)})^T &amp;  ---
+\\\\ &amp; \vdots &amp;
+\\\\ --- &amp; (x^{(m)})^T &amp; ---
+\end{bmatrix}
+\]</div>
+<p>Also, let <span class="arithmatex">\(\vec{y}\)</span> be the m-dimensional vector containing all the target values from the training set:</p>
+<div class="arithmatex">\[
+\vec{y}=\begin{bmatrix} 
+y^{(1)}\\\\
+y^{(2)}\\\\
+\vdots\\\\
+y^{(m)}
+\end{bmatrix}
+\]</div>
+<p>Now, since <span class="arithmatex">\(h_\theta\big(x^{(i)}\big)=(x^{(i)})^T\theta\)</span>, we can easily verify that</p>
+<div class="arithmatex">\[
+\begin{aligned}
+X\theta-\vec{y} &amp;= 
+\begin{bmatrix} (x^{(1)})^T\theta \\\\  \vdots  \\\\
+(x^{(m)})^T\theta
+\end{bmatrix} - \begin{bmatrix}  y^{(1)}\\\\
+\vdots\\\\
+y^{(m)}
+\end{bmatrix}\\\\
+&amp; = \begin{bmatrix}
+(x^{(1)})^T\theta- y^{(1)} \\\\
+  \vdots \\\\
+(x^{(m)})^T\theta- y^{(m)} 
+\end{bmatrix}
+\end{aligned}
+\]</div>
+<p>Thus, using the fact for a vector <span class="arithmatex">\(z\)</span> , we have that <span class="arithmatex">\(z^Tz=\sum_{i}z_i^2\)</span> .</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{1}{2}(X\theta-\vec{y})^T(X\theta-\vec{y})&amp;=\frac{1}{2}\sum_{i=1}^m\Big(h_\theta(x^{(i)})- y^{(i)} \Big)^2\\\\
+&amp;=J(\theta)
+\end{aligned}
+\]</div>
+<p>Finally , to minimize <span class="arithmatex">\(J\)</span> , lets find its derivatives with respect to <span class="arithmatex">\(\theta\)</span> . Combining Equations (2) and (3) , we find that</p>
+<div class="arithmatex">\[
+\nabla _{A^T}\operatorname{tr}(ABA^TC)=B^TA^TC^T+BA^TC \\\\
+\tag{5}
+\]</div>
+<p>Hence,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla _\theta J(\theta) &amp; = \nabla _\theta \frac{1}{2}(X\theta-\vec{y})^T(X\theta-\vec{y}) \\\\
+&amp; = \frac{1}{2} \nabla _\theta(\theta^TX^TX\theta-\theta^TX^T \vec{y}-\vec{y}^TX \theta+\vec{y}^T \vec{y})\\\\
+&amp; = \frac{1}{2} \nabla _\theta \operatorname{tr}(\theta^TX^TX\theta-\theta^TX^T \vec{y}-\vec{y}^TX \theta+\vec{y}^T \vec{y})\\\\
+&amp; = \frac{1}{2} \nabla _\theta\Big(\operatorname{tr}(\theta^TX^TX\theta)-2\operatorname{tr}(\vec{y}^TX \theta)\Big)\\\\
+&amp; = \frac{1}{2}(X^TX \theta+X^TX \theta-2X^T \vec{y})\\\\
+&amp; = X^TX \theta-X^T \vec{y}
+\end{aligned}
+\]</div>
+<p>In the third step, we used the fact that the trace if a real number is just the real number; the fourth step used the fact that <span class="arithmatex">\(\operatorname{tr}(A)=\operatorname{tr}(A^T)\)</span> , and the fifth step used Equation (5) with <span class="arithmatex">\(A^T=\theta, B=B^T=X^TX\)</span> , and <span class="arithmatex">\(C=I\)</span>, and Equation (1). To minimize <span class="arithmatex">\(J\)</span> , we set its derivatives to zero, and obtain the normal equations:</p>
+<div class="arithmatex">\[
+X^TX \theta=X^T \vec{y}
+\]</div>
+<p>Thus, the value of <span class="arithmatex">\(\theta\)</span> that minimize <span class="arithmatex">\(J(\theta)\)</span> is given in closed form by the equation</p>
+<div class="arithmatex">\[
+\theta = (X^TX)^{-1}X^T \vec{y}
+\]</div>
 
               
             </article>
