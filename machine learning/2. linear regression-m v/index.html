@@ -921,12 +921,12 @@ $$</p>
 下面这个css用于控制p标签的两端对齐
 -->
 <style type="text/css">
-p{
-    text-align: justify;  /*文本左对齐*/
+p {
+    text-align: justify;  /*文本两端对齐*/
 }
 </style>
 
-<p>Gradient descent gives one way of minimizing <span class="arithmatex">\(J\)</span>. Lets discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In this method, we will minimize <span class="arithmatex">\(J\)</span> by explicitly taking its derivatives with respect to the <span class="arithmatex">\(θ_j's\)</span>, and setting them to zero. To enable us to do this without having to write reams of algebra and pages full of matrices of derivatives, lets introduce some notation for doing calculus with matrices.</p>
+<p>Gradient descent gives one way of minimizing <span class="arithmatex">\(J\)</span>. Lets discuss a second way of doing so, this time performing the minimization explicitly and without resorting to an iterative algorithm. In this method, we will minimize <span class="arithmatex">\(J\)</span> by explicitly taking its derivatives with respect to the <span class="arithmatex">\(θ_j's\)</span>, and setting them to zero. To enable us to do this without having to write reams of algebra and pages full of matrices of derivatives, lets introduce some notation for doing calculus with matrices. </p>
 <h3 id="71-matrix-derivatives">7.1 Matrix derivatives</h3>
 <p>For a function <span class="arithmatex">\(f\)</span> : <span class="arithmatex">\(\mathbb{R^{m\times n}} \rightarrow \mathbb{R}\)</span> mapping from <span class="arithmatex">\(\text{m-by-n}\)</span> matrices to the real numbers, we define the derivative of f with respect to A to be:</p>
 <div class="arithmatex">\[
@@ -945,18 +945,23 @@ f(A)=\frac{3}{2}A_{11}+5A_{12}^2+A_{21}A_{22}
 A_{22} &amp; A_{21}
 \end{bmatrix}
 \]</div>
-<p>We also introduce the <strong>trace</strong> opertator, written by "tr.". For an <span class="arithmatex">\(\text{n-by-n}\)</span> (square) matrix A, the trace of A is defined to be the sum of its diagonal entries:</p>
+<p>&ensp; We also introduce the <strong>trace</strong> opertator, written by "tr.". For an <span class="arithmatex">\(\text{n-by-n}\)</span> (square) matrix A, the trace of A is defined to be the sum of its diagonal entries:</p>
 <div class="arithmatex">\[
 \operatorname{tr}A=\sum_{i=1}^nA_{ii}
 \]</div>
 <p>If <span class="arithmatex">\(a\)</span> is a real number (i.e., a 1-by-1 matrix), then <span class="arithmatex">\(\operatorname{tr} a = a\)</span>. (If you haven't seen this "opertator notation" before, you should think of the trace of <span class="arithmatex">\(A\)</span> as <span class="arithmatex">\(\operatorname{tr}(A)\)</span>, or as application of the "trace" function to the matrix <span class="arithmatex">\(A\)</span>. It's more commonly written without the parentheses, however.）
-The trace opertator has the property that for two matrices <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> such that <span class="arithmatex">\(AB\)</span> is square, we have that <span class="arithmatex">\(\operatorname{tr}(AB)=\operatorname{tr}(BA)\)</span>. <a href="../../math in ML/2. M derivation/#25">证明请查看机器学习中的数学知识中关于迹的交换律的证明。</a> As corollaries of this, we also have, e.g.,</p>
+&ensp; The trace opertator has the property that for two matrices <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> such that <span class="arithmatex">\(AB\)</span> is square, we have that <span class="arithmatex">\(\operatorname{tr}(AB)=\operatorname{tr}(BA)\)</span>. <a href="../../math in ML/2. M derivation/#25">证明请查看机器学习中的数学知识中关于迹的交换律的证明。</a> As corollaries of this, we also have, e.g.,</p>
 <div class="arithmatex">\[ \operatorname{tr}(ABC)=\operatorname{tr}(CAB)=\operatorname{tr}(BCA)\]</div>
 <div class="arithmatex">\[ \operatorname{tr}(ABCD)=\operatorname{tr}(DABC)=\operatorname{tr}(CDAB)=\operatorname{tr}(BCDA)\]</div>
 <p>The following properties of the trace operator are also easily verified. Here, <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(B\)</span> are square matrices, and <span class="arithmatex">\(a\)</span> is a real number:</p>
 <div class="arithmatex">\[ \operatorname{tr}(A) = \operatorname{tr}(A^T)\]</div>
 <div class="arithmatex">\[ \operatorname{tr}(A+B) = \operatorname{tr}(A)+\operatorname{tr}(B)\]</div>
 <div class="arithmatex">\[ \operatorname{tr}(aA) = a \operatorname{tr}(A)\]</div>
+<p>&ensp; We We now state without proof some facts of matrix derivatives (we won’t need some of these until later this quarter). Equation (4) applies only to non-singular square matrices A, where |A| denotes the determinant of A. We have:</p>
+<div class="arithmatex">\[ \nabla_A \operatorname{tr}(AB)=B^T\\\\ \tag{1}\]</div>
+<div class="arithmatex">\[ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T \\\\\tag{2}\]</div>
+<div class="arithmatex">\[ \nabla_A \operatorname{tr}ABA^TC=CAB+C^TAB^T \\\\\tag{3} \]</div>
+<div class="arithmatex">\[\nabla_A|A|=|A|(A^{-1})^T\\\\\tag{4}\]</div>
 
               
             </article>
