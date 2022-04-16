@@ -973,8 +973,8 @@ A_{22} &amp; A_{21}
 <p>所以这里 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 相当于就是 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B^T\)</span>  每一个位置对应元素==相乘并相加==。
 其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span>。</p>
 <p>接着, 由 <a href="../../math in ML/1. M derivation essence/#23_1">二.矩阵求导本质---(11)式</a> 我们可以知道:</p>
-<p>这里求 $ \nabla_A \operatorname{tr}(AB)$ 相当于 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 按照 <span class="arithmatex">\(A\)</span> 矩阵分布的每个位置元素求偏导。</p>
-<p>所以, 综上所述, $ \nabla_A \operatorname{tr}(AB)=B^T$。</p>
+<p>这里求 <span class="arithmatex">\(\nabla_A \operatorname{tr}(AB)\)</span> 相当于 <span class="arithmatex">\(\operatorname{tr}(AB)\)</span> 按照 <span class="arithmatex">\(A\)</span> 矩阵分布的每个位置元素求偏导。</p>
+<p>所以, 综上所述, <span class="arithmatex">\(\nabla_A \operatorname{tr}(AB)=B^T\)</span>。</p>
 <p><strong>证毕。</strong></p>
 <p>II. <span class="arithmatex">\(\nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T\)</span></p>
 <p><strong>证明:</strong></p>
@@ -1004,11 +1004,11 @@ A_{22} &amp; A_{21}
 <p>所以有 <span class="arithmatex">\(\mathbb{d}f(\pmb A)=\mathbb{d}\big(\operatorname{tr}f(\pmb A)\big)=\operatorname{tr}\big( \mathbb{d}f(\pmb A) \big)\)</span> 。</p>
 <p>由 <a href="../../math in ML/2. M derivation/#32_1">二.矩阵求导本质---(24)式</a> 即:</p>
 <div class="arithmatex">\[
-\pmb{d}f(\pmb{X})= \operatorname{tr}\Big(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\pmb{dX}\Big)
+\mathbb{d}f(\pmb{X})= \operatorname{tr}\Big(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\mathbb{d}\pmb{X}\Big)
 \]</div>
 <p>我们可以把一个矩阵变元的实值标量函数的全微分写成上式，我们就找到了矩阵求导的结果, 也即: </p>
 <div class="arithmatex">\[
-\pmb{d}f(\pmb{A})= \operatorname{tr}\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\pmb{dA}\Big)\\\\
+\mathbb{d}f(\pmb{A})= \operatorname{tr}\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\mathbb{d}\pmb{A}\Big)\\\\
 \tag{II.1}
 \]</div>
 <p>由我们证明的 II. <span class="arithmatex">\(\nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T\)</span>得:</p>
@@ -1020,20 +1020,20 @@ A_{22} &amp; A_{21}
 \nabla _{\pmb A}f(\pmb A)=\Big(\frac{\partial f(\pmb{A})}{\partial \pmb{A}^T}\Big)^T \\\\
 \tag{II.2}
 \]</div>
-<p>最终我们的任务就是转化为求 <span class="arithmatex">\(\pmb{d}f(\pmb{A})\)</span> 的全微分, 下面开始推导：</p>
+<p>最终我们的任务就是转化为求 <span class="arithmatex">\(\mathbb{d}f(\pmb{A})\)</span> 的全微分, 下面开始推导：</p>
 <div class="arithmatex">\[
 \begin{aligned}
-\pmb{d}f(\pmb{A}) &amp; = \pmb{d}\pmb A B \pmb A^TC \\\\
- &amp; = \pmb{d}\operatorname{tr}(\pmb A B \pmb A^TC)\\\\
- &amp; = \pmb{d}\operatorname{tr}(C \pmb A B \pmb A^T)\\\\
- &amp; = \operatorname{tr}\pmb{d}(C \pmb A B \pmb A^T)\\\\
- &amp; = \operatorname{tr}\Big(\pmb{d}(C \pmb A) B \pmb A^T +  C \pmb A \pmb{d}(B \pmb A^T)\Big)\\\\
- &amp; = \operatorname{tr}\Big(C(\pmb{d}\pmb A) B \pmb A^T +  C \pmb A B \pmb{d}\pmb A^T\Big)\\\\
- &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B \pmb{d}\pmb A^T\Big)\\\\
- &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B (\pmb{d}\pmb A)^T\Big)\\\\
- &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big(\pmb{d}\pmb A (B^T \pmb A^T C^T )\Big)\\\\
- &amp; = \operatorname{tr}\Big(B \pmb A^T C\pmb{d}\pmb A \Big) + \operatorname{tr}\Big( B^T\pmb A^T C^T  \pmb{d}\pmb A\Big)\\\\
- &amp; = \operatorname{tr}\Big[(B \pmb A^T C + B^T\pmb A^T C^T) \pmb{d}\pmb A\Big]\\\\
+\mathbb{d}f(\pmb{A}) &amp; = \mathbb{d}\pmb A B \pmb A^TC \\\\
+ &amp; = \mathbb{d}\operatorname{tr}(\pmb A B \pmb A^TC)\\\\
+ &amp; = \mathbb{d}\operatorname{tr}(C \pmb A B \pmb A^T)\\\\
+ &amp; = \operatorname{tr}\mathbb{d}(C \pmb A B \pmb A^T)\\\\
+ &amp; = \operatorname{tr}\Big(\mathbb{d}(C \pmb A) B \pmb A^T +  C \pmb A \mathbb{d}(B \pmb A^T)\Big)\\\\
+ &amp; = \operatorname{tr}\Big(C(\mathbb{d}\pmb A) B \pmb A^T +  C \pmb A B \mathbb{d}\pmb A^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\mathbb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B \mathbb{d}\pmb A^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\mathbb{d}\pmb A \Big) + \operatorname{tr}\Big( C \pmb A B (\mathbb{d}\pmb A)^T\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\mathbb{d}\pmb A \Big) + \operatorname{tr}\Big(\mathbb{d}\pmb A (B^T \pmb A^T C^T )\Big)\\\\
+ &amp; = \operatorname{tr}\Big(B \pmb A^T C\mathbb{d}\pmb A \Big) + \operatorname{tr}\Big( B^T\pmb A^T C^T  \mathbb{d}\pmb A\Big)\\\\
+ &amp; = \operatorname{tr}\Big[(B \pmb A^T C + B^T\pmb A^T C^T) \mathbb{d}\pmb A\Big]\\\\
 \end{aligned}
 \]</div>
 <blockquote>
