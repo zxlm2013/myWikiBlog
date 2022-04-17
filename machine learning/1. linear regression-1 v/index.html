@@ -442,6 +442,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#2gradient-descent" class="md-nav__link">
+    2、Gradient Descent
+  </a>
+  
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-update-equations" class="md-nav__link">
+    2.1 Update Equations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-implementation" class="md-nav__link">
+    2.2 Implementation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -692,6 +719,33 @@
   <a href="#1plotting-the-data" class="md-nav__link">
     1、Plotting the Data
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2gradient-descent" class="md-nav__link">
+    2、Gradient Descent
+  </a>
+  
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-update-equations" class="md-nav__link">
+    2.1 Update Equations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-implementation" class="md-nav__link">
+    2.2 Implementation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1140,7 +1194,7 @@ p {
 <p>代码是在jupyter notebook上执行！！！
 请将每个代码块按顺序拷贝到cell中执行。</p>
 </div>
-<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">导入必要的库和数据</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块1 导入必要的库和数据</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
@@ -1188,6 +1242,86 @@ p {
 </code></pre></div>
 <p>输出图像：</p>
 <p><img alt="Ex1_data" src="../../assets/images/Ex1_data.png" /></p>
+<h3 id="2gradient-descent">2、Gradient Descent</h3>
+<p>In this part you will fit linear regression parameters <span class="arithmatex">\(\theta\)</span> to our dataset using gradient descent.</p>
+<h4 id="21-update-equations">2.1 Update Equations</h4>
+<p>The objective of linear regression is to minimize the cost function</p>
+<div class="arithmatex">\[
+J(\theta)=\sum_{i=1}^m{h_ \theta(x^{(i)}-y^{(i)})}^2
+\]</div>
+<p>where the hypothesis <span class="arithmatex">\(h_\theta(x)\)</span> is given by the linear model </p>
+<div class="arithmatex">\[
+h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
+\]</div>
+<p>&ensp; Recall that the parameters of your model are the <span class="arithmatex">\(\theta_j\)</span> values. These are the values you will adjust to minimize cost <span class="arithmatex">\(J(\theta)\)</span>. One way to do this is to use the batch descent algorithm. In batch gradient descent, each iteration performs the update</p>
+<div class="arithmatex">\[
+\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m{h_ \theta(x^{(i)}-y^{(i)})x_j^{(i)}}\\\\(simultaneously\  update\  \theta_j\  for\  all\ j )
+\]</div>
+<p>&ensp; With each step of gradient descent, your parameters <span class="arithmatex">\(\theta_j\)</span> come closer to the optomal values that will achieve that the lowest cost <span class="arithmatex">\(J(\theta)\)</span></p>
+<div class="admonition note implementation note">
+<p class="admonition-title">Note</p>
+<p>To take into accout the intercept term <span class="arithmatex">\((\theta_0)\)</span> , we add an additional first column to X and set it to all ones. This allows us to treat <span class="arithmatex">\(\theta_0\)</span> as simply another 'feature'.</p>
+</div>
+<h4 id="22-implementation">2.2 Implementation</h4>
+<p>In 代码块1, we have already set up the data for linear regression. In the following lines, we add another dimension to our data to accommodate the <span class="arithmatex">\(\theta_0\)</span> intercept term. We also initialize the initial parameters to 0 and the learning rate alpha to 0.01.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块2 设置X和y</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 这一步相当于设置所有 x~0~=1</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Ones&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># 可以先看一下目前data.shape</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="c1"># data.shape</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="c1">## 先获取data总列数</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="c1"># 从data中取到X和y</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="c1"># X : training data</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="c1"># y : target variable</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># X取所有行, 去最后一列</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># y取所有行, 最后一列</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="c1"># 可以分别检验一下X 和 y 是否正确</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="c1"># X.head()</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="c1"># y.head()</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出并观察下 X (训练集) and y (目标变量)是否正确。</p>
+<p>输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">X</span><span class="o">.</span> <span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<p>输出：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="n">Ones</span>    <span class="n">Population</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="mi">0</span>   <span class="mi">1</span>   <span class="mf">6.1101</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="mi">1</span>   <span class="mi">1</span>   <span class="mf">5.5277</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="mi">2</span>   <span class="mi">1</span>   <span class="mf">8.5186</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="mi">3</span>   <span class="mi">1</span>   <span class="mf">7.0032</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="mi">4</span>   <span class="mi">1</span>   <span class="mf">5.8598</span>
+</code></pre></div></p>
+<p>输入：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">y</span><span class="o">.</span> <span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<p>输出：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="mi">0</span>    <span class="mf">17.5920</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="mi">1</span>     <span class="mf">9.1302</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="mi">2</span>    <span class="mf">13.6620</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="mi">3</span>    <span class="mf">11.8540</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="mi">4</span>     <span class="mf">6.8233</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Name</span><span class="p">:</span> <span class="n">Profit</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></p>
 
               
             </article>
