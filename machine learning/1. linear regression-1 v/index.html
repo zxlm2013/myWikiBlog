@@ -1258,8 +1258,8 @@ h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
 \theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m{h_ \theta(x^{(i)}-y^{(i)})x_j^{(i)}}\\\\(simultaneously\  update\  \theta_j\  for\  all\ j )
 \]</div>
 <p>&ensp; With each step of gradient descent, your parameters <span class="arithmatex">\(\theta_j\)</span> come closer to the optomal values that will achieve that the lowest cost <span class="arithmatex">\(J(\theta)\)</span></p>
-<div class="admonition note implementation note">
-<p class="admonition-title">Note</p>
+<div class="admonition note">
+<p class="admonition-title">Implementation Note</p>
 <p>To take into accout the intercept term <span class="arithmatex">\((\theta_0)\)</span> , we add an additional first column to X and set it to all ones. This allows us to treat <span class="arithmatex">\(\theta_0\)</span> as simply another 'feature'.</p>
 </div>
 <h4 id="22-implementation">2.2 Implementation</h4>
@@ -1277,10 +1277,7 @@ h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
 <span class="normal"><a href="#__codelineno-3-11">11</a></span>
 <span class="normal"><a href="#__codelineno-3-12">12</a></span>
 <span class="normal"><a href="#__codelineno-3-13">13</a></span>
-<span class="normal"><a href="#__codelineno-3-14">14</a></span>
-<span class="normal"><a href="#__codelineno-3-15">15</a></span>
-<span class="normal"><a href="#__codelineno-3-16">16</a></span>
-<span class="normal"><a href="#__codelineno-3-17">17</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 这一步相当于设置所有 x~0~=1</span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 这一步相当于设置所有 x~0~=1</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Ones&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># 可以先看一下目前data.shape</span>
@@ -1293,13 +1290,10 @@ h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
 <a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="c1"># y : target variable</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># X取所有行, 去最后一列</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># y取所有行, 最后一列</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="c1"># 可以分别检验一下X 和 y 是否正确</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="c1"># X.head()</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="c1"># y.head()</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="c1"># 注意这里的X, y仍然包含行索引和列索引值</span>
 </code></pre></div>
 </td></tr></table>
-<p>输出并观察下 X (训练集) and y (目标变量)是否正确。</p>
+<p><strong>输出并观察下 X (训练集) and y (目标变量)是否正确。</strong></p>
 <p>输入：</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">X</span><span class="o">.</span> <span class="n">head</span><span class="p">()</span>
 </code></pre></div>
@@ -1322,6 +1316,30 @@ h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="mi">4</span>     <span class="mf">6.8233</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Name</span><span class="p">:</span> <span class="n">Profit</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
 </code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 从dataframe 取出value</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">value</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">value</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 可以检验一下 X和y的shape</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1"># X = X.shape</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1"># Y = y.shape</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="c1"># 将X和y转化成numpy array 加快计算速度</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="c1"># 设置迭代次数</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="n">iterations</span> <span class="o">=</span> <span class="mi">1500</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="c1"># 设置学习率</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.01</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>
+<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a><span class="c1"># 初始化theta </span>
+<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="c1"># 设置完成后，看下X y theta的维度</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">theta</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">((</span><span class="mi">97</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">97</span><span class="p">,),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
 
               
             </article>
