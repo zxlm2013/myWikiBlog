@@ -488,6 +488,26 @@
     2、Gradient Descent
   </a>
   
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-selecting-learning-rates" class="md-nav__link">
+    2.1 Selecting learning rates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3noramal-equation" class="md-nav__link">
+    3、Noramal Equation
+  </a>
+  
 </li>
         
       </ul>
@@ -759,6 +779,26 @@
           <li class="md-nav__item">
   <a href="#2gradient-descent" class="md-nav__link">
     2、Gradient Descent
+  </a>
+  
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-selecting-learning-rates" class="md-nav__link">
+    2.1 Selecting learning rates
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3noramal-equation" class="md-nav__link">
+    3、Noramal Equation
   </a>
   
 </li>
@@ -1471,13 +1511,159 @@ X^TX \theta=X^T \vec{y}
 </ul>
 <p>&ensp; The standard deviation is a way of measuring how much variation there is in the range of values of a particular feature (most data points will lie within <span class="arithmatex">\(\pm 2\)</span> standard deviation of the mean); this is an alternative to taking the range of values(max-min). </p>
 <p>&ensp; You will do this for all the features and your code should work with datasets of all sizes (any number of features / examples). Note that each column of the matrix X corresponds to one feature.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">对数据标准化并插入x0</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span>
+<span class="normal"><a href="#__codelineno-4-4">4</a></span>
+<span class="normal"><a href="#__codelineno-4-5">5</a></span>
+<span class="normal"><a href="#__codelineno-4-6">6</a></span>
+<span class="normal"><a href="#__codelineno-4-7">7</a></span>
+<span class="normal"><a href="#__codelineno-4-8">8</a></span>
+<span class="normal"><a href="#__codelineno-4-9">9</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 对数据进行特征-标准化</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="c1"># 注意pandas按列名取列是两个中括号</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Size&quot;</span><span class="p">,</span><span class="s2">&quot;Bedrooms&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Size&quot;</span><span class="p">,</span><span class="s2">&quot;Bedrooms&quot;</span><span class="p">]]</span><span class="o">-</span><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Size&quot;</span><span class="p">,</span><span class="s2">&quot;Bedrooms&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Size&quot;</span><span class="p">,</span><span class="s2">&quot;Bedrooms&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="c1"># 感觉把房价稍微缩放一下，不然对梯度影响太大</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">]]</span><span class="o">=</span><span class="n">data2</span><span class="p">[[</span><span class="s2">&quot;Price&quot;</span><span class="p">]]</span><span class="o">/</span><span class="mi">100000</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="c1"># 插入x0</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="n">data2</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Ones&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="n">data2</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
 <h3 id="2gradient-descent">2、Gradient Descent</h3>
 <p>Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in matrix X. The hypothesis function and the batch gradient descent update rule remain unchanged.</p>
 <div class="admonition note">
 <p class="admonition-title">Implement Note:</p>
-<p>In the multivariate case, the cost function can also be written in the following vectorized form: <span class="arithmatex">\(J(\theta)=\frac{1}{2m}(X\theta-y)^T(X\theta-y)\)</span> where <span class="arithmatex">\(X=\bigl( \begin{bmatrix} --- &amp; (x^{(1)})^T &amp; --- \\\\ --- &amp; (x^{(2)})^T &amp; ---\\\\ &amp; \vdots &amp; \\\\
---- &amp; (x^{(m)})^T &amp; --- \end{bmatrix} \bigr)\)</span></p>
+<p>In the multivariate case, the cost function can also be written in the following vectorized form: <span class="arithmatex">\(J(\theta)=\frac{1}{2m}(X\theta-y)^T(X\theta-y)\)</span> 
+where <span class="arithmatex">\(X=\bigl( \begin{bmatrix} --- &amp; (x^{(1)})^T &amp; --- \\\\ --- &amp; (x^{(2)})^T &amp; ---\\\\ &amp; \vdots &amp; \\\\
+--- &amp; (x^{(m)})^T &amp; --- \end{bmatrix} \bigr)\)</span> <span class="arithmatex">\(y= \begin{bmatrix} y^{(1)} \\\\  y^{(2)} \\\\  \vdots \\\\ y^{(m)} \end{bmatrix}\)</span>.
+The vectorized version is efficient when you are working with numerical cumputing tools like numpy. If you are an expert with matrix operations, you can prove to yourself that the two forms are equivalent.</p>
 </div>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">运行多变量梯度下降</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span>
+<span class="normal"><a href="#__codelineno-5-21">21</a></span>
+<span class="normal"><a href="#__codelineno-5-22">22</a></span>
+<span class="normal"><a href="#__codelineno-5-23">23</a></span>
+<span class="normal"><a href="#__codelineno-5-24">24</a></span>
+<span class="normal"><a href="#__codelineno-5-25">25</a></span>
+<span class="normal"><a href="#__codelineno-5-26">26</a></span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span>
+<span class="normal"><a href="#__codelineno-5-32">32</a></span>
+<span class="normal"><a href="#__codelineno-5-33">33</a></span>
+<span class="normal"><a href="#__codelineno-5-34">34</a></span>
+<span class="normal"><a href="#__codelineno-5-35">35</a></span>
+<span class="normal"><a href="#__codelineno-5-36">36</a></span>
+<span class="normal"><a href="#__codelineno-5-37">37</a></span>
+<span class="normal"><a href="#__codelineno-5-38">38</a></span>
+<span class="normal"><a href="#__codelineno-5-39">39</a></span>
+<span class="normal"><a href="#__codelineno-5-40">40</a></span>
+<span class="normal"><a href="#__codelineno-5-41">41</a></span>
+<span class="normal"><a href="#__codelineno-5-42">42</a></span>
+<span class="normal"><a href="#__codelineno-5-43">43</a></span>
+<span class="normal"><a href="#__codelineno-5-44">44</a></span>
+<span class="normal"><a href="#__codelineno-5-45">45</a></span>
+<span class="normal"><a href="#__codelineno-5-46">46</a></span>
+<span class="normal"><a href="#__codelineno-5-47">47</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="c1"># 获取数据的总列数</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">cols</span> <span class="o">=</span> <span class="n">data2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="c1"># 将数据拆分并转为ndarry分别放到X,y中</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="c1"># 中间看一下X，y以及X，y的维度是否正确</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="c1"># X.shape,y.shape</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="c1"># X, y</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="c1"># 初始化theta, 学习率alpha，迭代次数iters</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">3</span><span class="p">,])</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.01</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="n">iters</span> <span class="o">=</span> <span class="mi">1000</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="c1"># X.shape,y.shape,theta.shape</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="c1"># 定义代价函数并计算</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="k">def</span> <span class="nf">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a>    <span class="c1"># print((np.dot(X,theta)-y).shape)</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a>    <span class="n">inner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="c1"># 定义梯度下降算法</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a><span class="k">def</span> <span class="nf">gradientDescent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m: 样本的总个数</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># n: theta的总个数</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a>    <span class="c1"># 用一个向量来记录迭代过程中所有的cost值</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32"></a>    <span class="n">costs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34"></a>        <span class="n">costs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-5-35" name="__codelineno-5-35"></a>        <span class="c1"># theta是几个就要更新几个</span>
+<a id="__codelineno-5-36" name="__codelineno-5-36"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37"></a>            <span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">alpha</span> <span class="o">*</span> \
+<a id="__codelineno-5-38" name="__codelineno-5-38"></a>                <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39"></a>
+<a id="__codelineno-5-40" name="__codelineno-5-40"></a>    <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">costs</span>
+<a id="__codelineno-5-41" name="__codelineno-5-41"></a>
+<a id="__codelineno-5-42" name="__codelineno-5-42"></a>
+<a id="__codelineno-5-43" name="__codelineno-5-43"></a><span class="c1"># 运行梯度下降，分别接收更新后的theta值和每一步迭代的cost值</span>
+<a id="__codelineno-5-44" name="__codelineno-5-44"></a><span class="n">theta_hat</span><span class="p">,</span> <span class="n">costs</span> <span class="o">=</span> <span class="n">gradientDescent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">iters</span><span class="p">)</span>
+<a id="__codelineno-5-45" name="__codelineno-5-45"></a>
+<a id="__codelineno-5-46" name="__codelineno-5-46"></a><span class="c1"># get the cost (error) of the model</span>
+<a id="__codelineno-5-47" name="__codelineno-5-47"></a><span class="n">costs</span><span class="p">[</span><span class="n">iters</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">theta_hat</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">(</span><span class="mf">0.20435384903675252</span><span class="p">,</span> <span class="n">array</span><span class="p">([</span> <span class="mf">3.40397964</span><span class="p">,</span>  <span class="mf">1.09859063</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05879178</span><span class="p">]))</span>
+</code></pre></div></p>
+<h4 id="21-selecting-learning-rates">2.1 Selecting learning rates</h4>
+<p>In this part of the exercise, you will get to try out different learning rates for the dataset and find a learning rate that converages quickly.</p>
+<p>&ensp; We recommend trying values of the <strong>learning rate</strong> <span class="arithmatex">\(\alpha\)</span> on a log-scale, at multiplicative steps of about 3 times the previous value (i.e., <strong>0.3, 0.1, 0.03, 0.01</strong> and so on). You may also want to adjust the number of iterations you are running if that will help you see the overall trend in the curve.</p>
+<p>&ensp; Notice the changes in the convergence curves as the learning rate changes. With a small learning rate, you should find that gradient descent takes a very long time to converge to the optimal value. Conversely, with a large learning rate, gradient descent might not converge or might even diverge!</p>
+<p><img alt="Fig3_Convergence_of_gradient_descent with an appropriate learning rate" src="../../assets/images/Fig3_Convergence_of_gradient_descent.png" /></p>
+<h3 id="3noramal-equation">3、Noramal Equation</h3>
+<p>In the lecture videos, you learned that the closed-form solution to linear regression is</p>
+<div class="arithmatex">\[
+\theta = (X^TX)^{-1}X^Ty
+\]</div>
+<p>&ensp; Using this formula does not require any feature scaling, and you will get an exact solution in one calculation: there is no “loop until convergence” like in gradient descent.</p>
+<p><strong>再次提醒：</strong>
+<strong>梯度下降</strong>：需要选择学习率 <span class="arithmatex">\(\alpha\)</span>，需要多次迭代，当特征数量n大时也能较好适用，适用于各种类型的模型</p>
+<p><strong>正规方程</strong>：不需要选择学习率 <span class="arithmatex">\(\alpha\)</span>，一次计算得出，需要计算 <span class="arithmatex">\(X^TX\)</span>，如果特征数量n较大则运算代价大，因为矩阵逆的计算时间复杂度为𝑂(𝑛3)，<strong>通常来说当𝑛小于10000 时</strong>还是可以接受的，只适用于<strong>线性模型</strong>，不适合逻辑回归模型等其他模型。</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">正规方程计算theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="c1"># 利用公式一步计算出参数theta</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">theta_ne</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="nd">@X</span><span class="p">)</span><span class="nd">@X</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span> <span class="c1">#X.T@X等价于X.T.dot(X)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">theta_ne</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">array</span><span class="p">([</span> <span class="mf">3.4041266</span> <span class="p">,</span>  <span class="mf">1.1063105</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.06649474</span><span class="p">])</span>
+</code></pre></div>
+<p>我们用梯度下降算法计算的theta为：
+[ 3.40397964,  1.09859063, -0.05879178]</p>
+<p>两者相差不是特别大，说明我们梯度下降模型还是比较准确的，哈哈哈。至此，我已经掌握了两个算法，梯度下降模型和正规方程求解线性回归模型。我真棒，明天开始学习新的逻辑回归模型，加油！！！</p>
 
               
             </article>
