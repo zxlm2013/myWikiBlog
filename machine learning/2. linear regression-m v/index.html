@@ -1536,8 +1536,8 @@ X^TX \theta=X^T \vec{y}
 <p class="admonition-title">Implement Note:</p>
 <p>In the multivariate case, the cost function can also be written in the following vectorized form: <span class="arithmatex">\(J(\theta)=\frac{1}{2m}(X\theta-y)^T(X\theta-y)\)</span> 
 where <span class="arithmatex">\(X=\bigl( \begin{bmatrix} --- &amp; (x^{(1)})^T &amp; --- \\\\ --- &amp; (x^{(2)})^T &amp; ---\\\\ &amp; \vdots &amp; \\\\
---- &amp; (x^{(m)})^T &amp; --- \end{bmatrix} \bigr)\)</span> <span class="arithmatex">\(y= \begin{bmatrix} y^{(1)} \\\\  y^{(2)} \\\\  \vdots \\\\ y^{(m)} \end{bmatrix}\)</span>.
-The vectorized version is efficient when you are working with numerical cumputing tools like numpy. If you are an expert with matrix operations, you can prove to yourself that the two forms are equivalent.</p>
+--- &amp; (x^{(m)})^T &amp; --- \end{bmatrix} \bigr)\)</span> <span class="arithmatex">\(y= \begin{bmatrix} y^{(1)} \\\\  y^{(2)} \\\\  \vdots \\\\ y^{(m)} \end{bmatrix}\)</span>.</p>
+<p>The vectorized version is efficient when you are working with numerical cumputing tools like numpy. If you are an expert with matrix operations, you can prove to yourself that the two forms are equivalent.</p>
 </div>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">运行多变量梯度下降</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
