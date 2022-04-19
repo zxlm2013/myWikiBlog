@@ -1473,6 +1473,11 @@ X^TX \theta=X^T \vec{y}
 <p>&ensp; You will do this for all the features and your code should work with datasets of all sizes (any number of features / examples). Note that each column of the matrix X corresponds to one feature.</p>
 <h3 id="2gradient-descent">2、Gradient Descent</h3>
 <p>Previously, you implemented gradient descent on a univariate regression problem. The only difference now is that there is one more feature in matrix X. The hypothesis function and the batch gradient descent update rule remain unchanged.</p>
+<div class="admonition note">
+<p class="admonition-title">Implement Note:</p>
+<p>In the multivariate case, the cost function can also be written in the following vectorized form: <span class="arithmatex">\(J(\theta)=\frac{1}{2m}(X\theta-y)^T(X\theta-y)\)</span> where <span class="arithmatex">\(X=\bigl( \begin{bmatrix} --- &amp; (x^{(1)})^T &amp; --- \\\\ --- &amp; (x^{(2)})^T &amp; ---\\\\ &amp; \vdots &amp; \\\\
+--- &amp; (x^{(m)})^T &amp; --- \end{bmatrix} \bigr)\)</span></p>
+</div>
 
               
             </article>
