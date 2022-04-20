@@ -58,6 +58,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -324,9 +329,38 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          三. 逻辑回归
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         三. 逻辑回归
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、分类问题
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -422,6 +456,37 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、分类问题
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -431,7 +496,40 @@
 
   <h1>三. 逻辑回归</h1>
 
-<p>先搭好框架，明天开始学逻辑回归咯。</p>
+<h2 id="1">1、分类问题</h2>
+<div class="admonition info">
+<p>参考视频:
+6 - 1 - Classification (8 min).mkv</p>
+</div>
+<!--
+下面这个css用于控制p标签的两端对齐
+-->
+<style type="text/css">
+p {
+    text-align: justify;  /*文本两端对齐*/
+}
+</style>
+
+<p>下面我们开始讨论分类问题。在分类问题中, 你要预测的变量 <span class="arithmatex">\(y\)</span> 是离散的值, 我们将学习一种叫做逻辑回归 (Logistic Regression) 的算法, 这是目前最流行使用最广泛的一种学习算法。</p>
+<p>在分类问题中, 我们尝试预测的是结果是否属于某一个类（例如正确或错误）。分类问题的例子有: 判断一封电子邮件是否是垃圾邮件; 判断一次金融交易是否是欺诈; 之前我们也谈到了肿瘤分类问题的例子, 区别一个肿瘤是恶性的还是良性的。</p>
+<p><img alt="3_1_1_classification" src="../../assets/images/3_1_1_classification.png" />  </p>
+<p>我们现在要从只包含两类0和1的二分类开始, 后面我们将讨论多分类问题, 例如变量y可以取 0, 1, 2, 3 这几个值。我们将因变量 (dependent variable) 可能属于的两个类分别称为负向类 (negative class) 和正向类 (positive class) ,则因变量, 其中 0 表示负向类, 1 表示正向类。</p>
+<p>我们如何开发一个分类算法?</p>
+<p>这个例子中的训练集是对肿瘤进行恶性和良性分类得到的数据, 注意到恶性与否只有两个值, 0 (No) 以及 1 (Yes)。所以对于这个训练集, 我们可以做的是把我们已经学会的线性回归算法应用到这个数据集: 用直线对数据进行拟合。</p>
+<p><img alt="3_1_2_use_LR1" src="../../assets/images/3_1_2_use_LR1.png" /> </p>
+<p>如果我们想做出预测，我们可以设置分类器的阈值为0.5, 即纵坐标为0.5。</p>
+<ul>
+<li>如果假设函数输出一个值 &gt;= 0.5, 则可以预测 y=1</li>
+<li>如果假设函数输出一个值 &lt; 0.5, 则可以预测 y=0</li>
+</ul>
+<p>我们观察结果发现, 纵坐标0.5对应的横坐标右边我们将预测为正, 左边我们将预测为负。</p>
+<p>在这个特定的例子中, 线性回归做得很好也很正确。我们尝试改变一下这个问题, 我们将横轴延长一点。假设我们有一个训练样本位于右边远处。</p>
+<p><img alt="3_1_3_use_LR2" src="../../assets/images/3_1_3_use_LR2.png" /> </p>
+<p>如果我们使用原来绿色的线, 仍然能做完成很好的分类(把右侧最远的点算进去)。但是随着右侧最远处的点加入, 我们运行我们的线性回归算法我们会得到另一条数据的拟合直线(假设变为图中蓝色的线)。我们继续将阈值设为0.5, 我们会发现左右两边的预测结果有问题了。</p>
+<p>总结一下就是, 加了最远处的训练集后, 使得线性回归对数据的拟合直线从绿色的线变到了蓝色的线, 从而生成了一个更坏的假设。所以把线性回归模型应用到分类问题，并不是一个好主意。</p>
+<p>对于分类问题, <span class="arithmatex">\(y\)</span> 取值为 0 或者1，但如果你使用的是线性回归，那么假设函数的输出值可能远大于 1，或者远小于0，即使所有训练样本的标签 <span class="arithmatex">\(y\)</span> 都等于 0 或 1。尽管我们知道标签应该取值0 或者1，但是如果算法得到的值远大于1或者远小于0的话，就会感觉很奇怪。所以我们在接下来的要研究的算法就叫做逻辑回归算法，这个算法的性质是：它的输出值永远在0到 1 之间。</p>
+<p>顺便说一下，逻辑回归算法是分类算法，我们将它作为分类算法使用。有时候可能因为这个算法的名字中出现了“回归”使你感到困惑，但<strong>逻辑回归算法实际上是</strong>一种<strong>分类算法</strong>，它适用于标签取值离散的情况，如：0, 1。</p>
+<p>接下来，我们将开始学习逻辑回归算法的细节。</p>
 
               
             </article>
