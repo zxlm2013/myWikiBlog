@@ -554,7 +554,7 @@ p {
 <p>在这个特定的例子中, 线性回归做得很好也很正确。我们尝试改变一下这个问题, 我们将横轴延长一点。假设我们有一个训练样本位于右边远处。</p>
 <p><img alt="3_1_3_use_LR2" src="../../assets/images/3_1_3_use_LR2.png" /> </p>
 <p>如果我们使用原来绿色的线, 仍然能做完成很好的分类(把右侧最远的点算进去)。但是随着右侧最远处的点加入, 我们运行我们的线性回归算法我们会得到另一条数据的拟合直线(假设变为图中蓝色的线)。我们继续将阈值设为0.5, 我们会发现左右两边的预测结果有问题了。</p>
-<p>总结一下就是, 加了最远处的训练集后, 使得线性回归对数据的拟合直线从绿色的线变到了蓝色的线, 从而生成了一个更坏的假设。所以把线性回归模型应用到分类问题，并不是一个好主意。</p>
+<p><strong>总结一下就是, 加了最远处的训练集后, 使得线性回归对数据的拟合直线从绿色的线变到了蓝色的线, 从而生成了一个更坏的假设。所以把线性回归模型应用到分类问题，并不是一个好主意。</strong></p>
 <p>对于分类问题, <span class="arithmatex">\(y\)</span> 取值为 0 或者1，但如果你使用的是线性回归，那么假设函数的输出值可能远大于 1，或者远小于0，即使所有训练样本的标签 <span class="arithmatex">\(y\)</span> 都等于 0 或 1。尽管我们知道标签应该取值0 或者1，但是如果算法得到的值远大于1或者远小于0的话，就会感觉很奇怪。所以我们在接下来的要研究的算法就叫做逻辑回归算法，这个算法的性质是：它的输出值永远在0到 1 之间。</p>
 <p>顺便说一下，逻辑回归算法是分类算法，我们将它作为分类算法使用。有时候可能因为这个算法的名字中出现了“回归”使你感到困惑，但<strong>逻辑回归算法实际上是</strong>一种<strong>分类算法</strong>，它适用于标签取值离散的情况，如：0, 1。</p>
 <p>接下来，我们将开始学习逻辑回归算法的细节。</p>
@@ -572,6 +572,18 @@ h_{\theta}(x) = g(z)=g(\theta^Tx)
 <p>对比线性回归函数 <span class="arithmatex">\(h_\theta(x)=\theta^Tx\)</span>,  <span class="arithmatex">\(g\)</span> 表示逻辑函数 (logistic function), 复合起来, 则成为逻辑回归函数。</p>
 <p>逻辑函数是 S 型函数, 会将所有实数映射到(0, 1)范围。</p>
 <p>sigmoid 函数 (如下图) 是逻辑函数的特殊情况, 其公式为 <span class="arithmatex">\(g(z)=\frac{1}{1+e^{-z}}\)</span></p>
+<p><img alt="3_2_1_sigmoid" src="../../assets/images/3_2_1_sigmoid.png" /> </p>
+<p>应用sigmoid 函数, 则逻辑回归模型: <span class="arithmatex">\(h_\theta(x)=g(\theta^Tx)=\frac{1}{1+e^{-\theta^Tx}}\)</span></p>
+<p>逻辑回归模型中, <span class="arithmatex">\(h_\theta(x)\)</span> 的作用是, 根据输入 <span class="arithmatex">\(x\)</span> 以及参数 <span class="arithmatex">\(\theta\)</span> , 计算得出 "输出 <span class="arithmatex">\(y=1\)</span> " 的可能性(estimated probability), 概率学中表示为: </p>
+<div class="arithmatex">\[
+h_\theta(x) = P(y=1|x;\theta) = 1-P(y=0|x;\theta)\\\\
+P(y=1|x;\theta)+ P(y=0|x;\theta) = 1
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">注意</p>
+<p>上面第二个式子是针对我们现在研究的二分类问题而说的, y 的取值只能是0 或 1。所以两者相加的概率为 100% 。</p>
+</div>
+<p>以肿瘤诊断为例, <span class="arithmatex">\(h_\theta(x)=0.7\)</span> 表示病人有 <span class="arithmatex">\(70%\)</span> 的概率得了恶性肿瘤。</p>
 <h2 id="3">3、决策边界</h2>
 
               
