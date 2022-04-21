@@ -379,6 +379,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#5logistic-regression" class="md-nav__link">
+    5、Logistic regression
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -518,6 +525,13 @@
         <li class="md-nav__item">
   <a href="#4" class="md-nav__link">
     4、代价函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5logistic-regression" class="md-nav__link">
+    5、Logistic regression
   </a>
   
 </li>
@@ -679,6 +693,22 @@ J(\theta)=\frac{1}{2m} \sum_{i=1}^m{\big(h_\theta(x^{(i)})-y^{(i)}\big)^2}
 <p>如果此处的代价函数也是一个凸函数, 是否也有同样的性质, 从而最优化? 这类讨论凸函数最优值得问题, 被称为<strong>凸优化问题 (Convex optimization)</strong>。</p>
 <p>当然, 损失函数不止平方损失函数一种。</p>
 <p>对于逻辑回归, 更换平方损失函数为对数损失函数, 可由统计学中的<strong>最大似然估计方法推导出代价函数</strong> <span class="arithmatex">\(J(\theta)\)</span> <strong>(下一节英文版中给出具体的推导过程)</strong>:</p>
+<div class="arithmatex">\[
+J(\theta)=\frac{1}{m} \sum_{i=1}^m{Cost\big( h_\theta(x^{(i)}, y^{(i)}\big)}\\\\
+Cost\big( h_\theta(x^{(i)}, y^{(i)}\big)=-\log \big(h_\theta(x)\big) \ \ \ \ \   if\ y=1 \\\\
+Cost\big( h_\theta(x^{(i)}, y^{(i)}\big)=-\log \big(1-h_\theta(x)\big) \ \ \ \ if\ y=0 
+\]</div>
+<p>则关于 <span class="arithmatex">\(J(\theta)\)</span> 的图像如下:</p>
+<p><center>
+    <img src="../../assets/images/3_4_3_J_y_10.png">
+    <br>
+    <div>图 3.4.3 对数代价函数y=1&amp;y=0两种情况</div>
+</center></p>
+<p>如左上图, 当训练集的结果为 <span class="arithmatex">\(y=1\)</span> (正样本) 时, 随着假设函数趋向于1, 代价函数的值会趋向于0, 即意味着拟合程度很好。如果假设函数此时趋于0, 则会给出一个<strong>很高的代价</strong>, 拟合程度<strong>差</strong>, 算法会根据其迅速纠正 <span class="arithmatex">\(\theta\)</span> 值, 右图 <span class="arithmatex">\(y=0\)</span> 同理。</p>
+<p>区别于平方损失函数, 对数损失函数也是一个凸函数, 他没有局部最优值, 只有全局最优值。</p>
+<h2 id="5logistic-regression">5、Logistic regression</h2>
+<p>里面包含: 代价函数的推导。(英文版真的写得很好)</p>
+<p>Let's now talk about the classification problem. This is just like the regression problem, except that the values <span class="arithmatex">\(y\)</span> we now want to predict take on only a small number of discrete values. For now, we will focus on the <strong>binary classification</strong> problem in which <span class="arithmatex">\(y\)</span> can take on only two values, 0 and 1. (Most of what we say here will also generalize to the multiple-class case.) For instance, if we are trying to build a spam classifier for email, then <span class="arithmatex">\(x^{(i)}\)</span> may be some features of a piece of emial, and <span class="arithmatex">\(y\)</span> may be 1 if it is a piece of spam mail, and 0 otherwise. O is also called the <strong>negative class</strong>, and 1 the <strong>positive class</strong>, and they are sometimes also denoted by the symbols "-" and "+". Given <span class="arithmatex">\(x^{(i)}\)</span>, the corresponding <span class="arithmatex">\(y^{(i)}\)</span> is also called the <strong>label</strong> for the training example.</p>
 <div class="admonition info">
 <p>参考视频: 6 - 5 - Simplified Cost Function and Gradient Descent (10 min).mkv</p>
 </div>
