@@ -628,7 +628,7 @@ z \rightarrow -\infty, e^{+\infty} \rightarrow +\infty \Rightarrow g(z)=0 \\\\
 \]</div>
 <p>直观一点 举个栗子,</p>
 <p><span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2)\)</span> 是下图模型的假设函数:</p>
-<p><center>
+<div align="center">
     <img style="border-radius: 0.3125em;
     box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
     src="../../assets/images/3_3_1_descion_boundary.png">
@@ -637,7 +637,8 @@ z \rightarrow -\infty, e^{+\infty} \rightarrow +\infty \Rightarrow g(z)=0 \\\\
     display: inline-block;
     color: #999;
     padding: 2px;">图 3.1 决策边界</div>
-</center></p>
+</div>
+
 <p>根据上面的讨论, 要进行分类, 那么只要 <span class="arithmatex">\(\theta_0+\theta_1x+\theta_2x \geq 0\)</span> 时, 就预测 <span class="arithmatex">\(y=1\)</span>, 即预测为正向类。</p>
 <p>如果取 <span class="arithmatex">\(\theta = [-3 \ \ 1\ \ 1]^T\)</span> , 则有 <span class="arithmatex">\(z=-3+x_1+x_2\)</span>, </p>
 <p>当 <span class="arithmatex">\(z \geq 0\)</span>, 即 <span class="arithmatex">\(x_1+x_2 \geq 3\)</span>时, 易绘制出图中的品红色直线, 即<strong>决策边界</strong>, 为正向类 (以红叉标注的数据) 给出 <span class="arithmatex">\(y=1\)</span> 的分类预测结果。</p>
