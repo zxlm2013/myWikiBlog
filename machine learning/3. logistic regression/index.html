@@ -628,7 +628,35 @@ z \rightarrow -\infty, e^{+\infty} \rightarrow +\infty \Rightarrow g(z)=0 \\\\
 \]</div>
 <p>直观一点 举个栗子,</p>
 <p><span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2)\)</span> 是下图模型的假设函数:</p>
-<p><img alt="3_3_1_descion_boundary" src="../../assets/images/3_3_1_descion_boundary.png" /> </p>
+<p><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="./../assets/images/3_3_1_descion_boundary.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">图 3.1 决策边界</div>
+</center></p>
+<p>根据上面的讨论, 要进行分类, 那么只要 <span class="arithmatex">\(\theta_0+\theta_1x+\theta_2x \geq 0\)</span> 时, 就预测 <span class="arithmatex">\(y=1\)</span>, 即预测为正向类。</p>
+<p>如果取 <span class="arithmatex">\(\theta = [-3 \ \ 1\ \ 1]^T\)</span> , 则有 <span class="arithmatex">\(z=-3+x_1+x_2\)</span>, </p>
+<p>当 <span class="arithmatex">\(z \geq 0\)</span>, 即 <span class="arithmatex">\(x_1+x_2 \geq 3\)</span>时, 易绘制出图中的品红色直线, 即<strong>决策边界</strong>, 为正向类 (以红叉标注的数据) 给出 <span class="arithmatex">\(y=1\)</span> 的分类预测结果。</p>
+<p>上面讨论了逻辑回归模型中线性拟合的例子, 下面则是一个多项式拟合的例子, 和线性回归中的情况也是类似的。</p>
+<p>为了拟合下图数据, 建模多项式假设函数: </p>
+<div class="arithmatex">\[
+h_\theta(x) = g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_1^2+\theta_4x_2^2)
+\]</div>
+<p>这里取 <span class="arithmatex">\(\theta = [-1\ \ 0\ \ 0\ \ 1\ \ 1]^T\)</span>, 决策边界对应了一个在原点处的单位元 (<span class="arithmatex">\(x_1^2+x_2^2=1\)</span>), 如此便可给出分类结果, 如图中品红色曲线:</p>
+<p><center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);" 
+    src="这里输入图片地址">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">这里输入题注</div>
+</center></p>
 <h2 id="4">4、代价函数</h2>
 <div class="admonition info">
 <p>参考视频: 6 - 4 - Cost Function (11 min).mkv</p>
