@@ -407,6 +407,61 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+    <nav class="md-nav" aria-label="习题 &amp;&amp; 参考答案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    参考答案
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -575,6 +630,61 @@
   <a href="#8" class="md-nav__link">
     8、多类别分类: 一对多
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+    <nav class="md-nav" aria-label="习题 &amp;&amp; 参考答案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    参考答案
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -873,10 +983,143 @@ J(\theta)=\frac{1}{m}\big(-y^T\log (h)-(1-y)^T\log (1-h)\big)
 <div class="admonition info">
 <p>参考视频: 6 - 6 - Advanced Optimization (14 min).mkv</p>
 </div>
+<p>运行梯度下降算法，其能最小化代价函数 <span class="arithmatex">\(J(\theta)\)</span> 并得出 <span class="arithmatex">\(\theta\)</span> 的最优值，在使用梯度下降算法时，如果不需要观察代价函数的收敛情况，则直接计算  <span class="arithmatex">\(J(\theta)\)</span>  的导数项即可，而不需要计算  <span class="arithmatex">\(J(\theta)\)</span>  值。</p>
+<p>我们编写代码给代价函数及其偏导数然后传入梯度下降算法中, 接下来算法则会为我们最小化代价函数给出参数的最优解。这类算法被称为最优化算法<strong>(Optimization Algorithm)</strong>, 梯度下降算法不是唯一的最小化算法。</p>
+<p>一些最优化算法:</p>
+<ul>
+<li>
+<p>梯度下降法(Gradient Descent)</p>
+</li>
+<li>
+<p>共轭梯度算法(Conjugate gradient)</p>
+</li>
+<li>
+<p>牛顿法和拟牛顿法(Newton's method &amp; Quasi-Newton Methods)</p>
+<ul>
+<li>
+<p>DFP算法</p>
+</li>
+<li>
+<p>局部优化法(BFGS)</p>
+</li>
+<li>
+<p>有限内存局部优化法(L-BFGS)</p>
+</li>
+</ul>
+</li>
+<li>
+<p>拉格朗日数乘法(Lagrange multiplier)</p>
+</li>
+</ul>
+<p>比较梯度下降算法：一些最优化算法虽然会更为复杂，难以调试，自行实现又困难重重，开源库又效率也不一，哎，做个调包侠还得碰运气。不过这些算法通常效率更高，并无需选择学习速率 <span class="arithmatex">\(\alpha\)</span>（少一个参数少一份痛苦啊！）。</p>
 <h2 id="8">8、多类别分类: 一对多</h2>
 <div class="admonition info">
 <p>参考视频: 6 - 7 - Multiclass Classification_ One-vs-all (6 min).mkv</p>
 </div>
+<p>最后讨论一下多类别分类问题(比如天气预报)。</p>
+<p><center>
+    <img src="../../assets/images/3_8_1.png">
+    <br>
+    <div>图 3.8.1 处理多元分类问题的原理</div>
+</center></p>
+<p>原理是, <strong>转化多</strong>类别分类问题<strong>为多个二</strong>元分类问题, 这种方法被称为One-vs-all。</p>
+<p>定义: <span class="arithmatex">\(h_\theta^{(i)}(x)=p(y=i|x;\theta)\)</span> , <span class="arithmatex">\(i=(1,2,3,k)\)</span></p>
+<blockquote>
+<p><span class="arithmatex">\(h_\theta^{(i)}(x)\)</span> : 输出 <span class="arithmatex">\(y=i\)</span> (属于第 <span class="arithmatex">\(i\)</span> 个分类) 的可能性</p>
+<p>k: 类别总数, 如上图 <span class="arithmatex">\(k=3\)</span>。</p>
+</blockquote>
+<p>注意多类别分类问题中 <span class="arithmatex">\(h_\theta(x)\)</span> 的结果不再是一个实数而是一个向量, 如果类别总数为 <span class="arithmatex">\(k\)</span> , 则 <span class="arithmatex">\(h_\theta(x)\)</span> 就是一个 <span class="arithmatex">\(k\)</span> 维向量。</p>
+<p>对于某个样本实例, 需计算所有的 <span class="arithmatex">\(k\)</span> 种分类情况得到 <span class="arithmatex">\(h_\theta(x)\)</span>, 然后看分到哪个类别时预测输出的值最大, 就说它输出属于哪个类别, 即 <span class="arithmatex">\(y=\max \limits_i{h_\theta^{(i)}(x)}\)</span> 。</p>
+<h2 id="_1">习题 &amp;&amp; 参考答案</h2>
+<h3 id="_2">第一题</h3>
+<p>假设您已经训练了一个逻辑分类器，它在一个新示例 <span class="arithmatex">\(x\)</span> 上输出一个预测 <span class="arithmatex">\(h_\theta(x)=0,4\)</span> 。这意味着（选出所有正确项）：</p>
+<p>A. 我们对 <span class="arithmatex">\(P(y=0|x;\theta)\)</span> 的估计是0.4</p>
+<p>B. 我们对 <span class="arithmatex">\(P(y=1|x;\theta)\)</span> 的估计是0.6</p>
+<p>C. 我们对 <span class="arithmatex">\(P(y=0|x;\theta)\)</span> 的估计是0.6</p>
+<p>D. 我们对 <span class="arithmatex">\(P(y=1|x;\theta)\)</span> 的估计是0.4</p>
+<h3 id="_3">第二题</h3>
+<p>假设您有以下训练集，并拟合logistic回归分类器 </p>
+<p><span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2)\)</span></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x_1\)</span></th>
+<th><span class="arithmatex">\(x_2\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>0.5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1.5</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><center>
+    <img src="../../assets/images/3_9_1.png">
+    <br>
+</center></p>
+<p>以下哪项是正确的？选出所有正确项</p>
+<p>A. 添加多项式特征（例如, 使用 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_1^2+\theta_4x_1x_2+\theta_5x_2^2)\)</span> 可以增加我们拟合训练的程度</p>
+<p>B. 在 <span class="arithmatex">\(\theta\)</span> 的最佳值（例如，由fminunc找到）处, <span class="arithmatex">\(J(\theta)\geq 0\)</span></p>
+<p>C. 添加多项式特征, , 使用 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_1^2+\theta_4x_1x_2+\theta_5x_2^2)\)</span> 将增加 <span class="arithmatex">\(J(\theta)\)</span>, 因为我们现在正在对多项式求和。</p>
+<p>D. 如果我们训练梯度下降迭代足够多次，对于训练集中的一些例子 <span class="arithmatex">\(x^{(i)}\)</span>, 可能得到 <span class="arithmatex">\(h_\theta(x^{(i)})&gt;1\)</span></p>
+<h3 id="_4">第三题</h3>
+<p>对于逻辑回归, 梯度由 <span class="arithmatex">\(\frac{\partial }{\partial \theta_j}=\frac{1}{m}\sum_{i=1}^m\big(h_\theta(x^{(i)})-y^{(i)}\big)x_j^{(i)}\)</span> 给出。以下哪项是学习率为 <span class="arithmatex">\(\alpha\)</span> 的逻辑回归的正确梯度下降更新? 选出所有正确项</p>
+<p>A. <span class="arithmatex">\(\theta:=\theta-\alpha\frac{1}{m}\sum_{i=1}^m(\theta^Tx-y^{(i)})x^{(i)}\)</span></p>
+<p>B. <span class="arithmatex">\(\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m(\frac{1}{1+e^{-\theta^Tx^{(i)}}}-y^{(i)})x_j^{(i)}\)</span> 同时更新所有 <span class="arithmatex">\(j\)</span></p>
+<p>C. <span class="arithmatex">\(\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x^{(i)}\)</span> 同时更新所有 <span class="arithmatex">\(j\)</span></p>
+<p>D. <span class="arithmatex">\(\theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m(h_\theta(x^{(i)})-y^{(i)})x_j^{(i)}\)</span> 同时更新所有 <span class="arithmatex">\(j\)</span></p>
+<h3 id="_5">第四题</h3>
+<p>以下哪项陈述是正确的？选出所有正确项</p>
+<p>A. 对于逻辑回归，梯度下降有时会收敛到一个局部最小值（并且无法找到全局最小值）。这就是为什么我们更喜欢更先进的优化算法，如fminunc（共轭梯度/BFGS/L-BFGS/等等）</p>
+<p>B. sigmoid函数 <span class="arithmatex">\(g(z)=\frac{1}{1+e^{-z}}\)</span> 数值永远不会大于1</p>
+<p>C. 用 <span class="arithmatex">\(m \geq 1\)</span> 个例子训练的逻辑回归的代价函数 <span class="arithmatex">\(J(\theta)\)</span> 总是大于或等于零</p>
+<p>D. 使用线性回归+阈值的方法做分类预测，总是很有效的</p>
+<h3 id="_6">第五题</h3>
+<p>假设训练一个逻辑回归分类器 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2\)</span> 。假设 <span class="arithmatex">\(\theta_0=6, \theta_1=-1, \theta_2=0\)</span>, 下列哪个图表示分类器找到的决策边界？</p>
+<p>A. </p>
+<p><center>
+    <img src="../../assets/images/3_9_2A.png">
+    <br>
+</center></p>
+<p>B. </p>
+<p><center>
+    <img src="../../assets/images/3_9_2B.png">
+    <br>
+</center></p>
+<p>C. </p>
+<p><center>
+    <img src="../../assets/images/3_9_2C.png">
+    <br>
+</center></p>
+<p>D. </p>
+<p><center>
+    <img src="../../assets/images/3_9_2D.png">
+    <br>
+</center></p>
+<h3 id="_7">参考答案</h3>
+<p>第一题: CD</p>
+<p>第二题: AB</p>
+<p>第三题: BC</p>
+<p>第四题: BC</p>
+<p>第五题: A</p>
 
               
             </article>
