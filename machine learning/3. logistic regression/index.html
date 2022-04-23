@@ -1627,9 +1627,9 @@ J(\theta) = \frac{1}{m}\sum\limits_{i=1}^{m}{\Big[-{{y}^{(i)}}\log ( {h_\theta}(
 <a id="__codelineno-9-64" name="__codelineno-9-64"></a>    <span class="n">obey</span> <span class="nb">any</span> <span class="n">specified</span> <span class="err">`</span><span class="n">bounds</span><span class="err">`</span><span class="o">.</span>
 </code></pre></div>
 </td></tr></table>
-<p>需要注意的是fun关键词参数里面的函数，需要把优化的theta放在第一个位置，X,y，放到后面。并且，theta在传入的时候一定要是一个一维shape（n,）的数组，不然会出错。</p>
-<p>然后jac是梯度，这里的有两个地方要注意，第一个是传入的theta依然要是一个一维shape(n,)，第二个是返回的梯度也要是一个一维shape(n,)的数组。</p>
-<p>总之，关键在于传入的theta一定要是一个1D shape(n,)的，不然就不行。</p>
+<p>需要注意的是fun关键词参数里面的函数, 需要把优化的<strong>theta放在第一个位置</strong>, <strong><span class="arithmatex">\(X, y\)</span> 放到后面</strong>。并且, <strong>theta</strong> 在传入的时候一定<strong>要</strong>是一个<strong>一维</strong> shape(n, ) 的数组,  不然会出错。</p>
+<p>然后<strong>jac是梯度,</strong> 这里的有两个地方要注意, 第一个是<strong>传入的theta依然要</strong>是一个<strong>一维</strong> shape(n, ) , 第二个是<strong>返回的梯度</strong>也要<strong>是</strong>一个<strong>一维</strong> shape(n, ) 的数组。</p>
+<p>总之，关键在于传入的theta一定要是一个1D  shape(n, ) 的，不然就不行。</p>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用minimize函数来找到最优的theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span>
@@ -1710,8 +1710,8 @@ x_2=\frac{-\theta_0-\theta_1x_1}{\theta_2}
 <a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="hll"><span class="n">exam_1_scores</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 </span><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="c1"># 根据公式计算出exam2 scores</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="hll"><span class="n">exam_2_scores</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">exam_1_scores</span><span class="p">)</span><span class="o">/</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-</span><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="hll">
-</span><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="c1"># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分</span>
+</span><a id="__codelineno-12-8" name="__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="c1"># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="n">data1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Admitted&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="n">data0</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Admitted&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12"></a>
@@ -1726,9 +1726,9 @@ x_2=\frac{-\theta_0-\theta_1x_1}{\theta_2}
 <a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data0</span><span class="p">[</span><span class="s2">&quot;Exam1&quot;</span><span class="p">],</span><span class="n">data0</span><span class="p">[</span><span class="s2">&quot;Exam2&quot;</span><span class="p">],</span><span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Not admitted&quot;</span><span class="p">)</span>
 <a id="__codelineno-12-22" name="__codelineno-12-22"></a>
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="c1"># 画出决策边界</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">exam_1_scores</span><span class="p">,</span><span class="n">exam_2_scores</span><span class="p">)</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="hll">
-</span><a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="hll"><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">exam_1_scores</span><span class="p">,</span><span class="n">exam_2_scores</span><span class="p">)</span>
+</span><a id="__codelineno-12-25" name="__codelineno-12-25"></a>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="c1"># 2.1 添加描述信息</span>
 <a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Exam1 scores&quot;</span><span class="p">)</span>
 <a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Exam2 scores&quot;</span><span class="p">)</span>
 <a id="__codelineno-12-29" name="__codelineno-12-29"></a>
@@ -1749,6 +1749,7 @@ x_2=\frac{-\theta_0-\theta_1x_1}{\theta_2}
     <div>Figure 3.10.3: Training data with decision boundary
 </div>
 </center></p>
+<p>其中, 上图标黄的部分是画决策边界加入的代码。</p>
 <p>可以看到输出的图像和吴恩达老师练习给的参考图像一摸一样, 完美!!!</p>
 
               
