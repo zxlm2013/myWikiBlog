@@ -1498,7 +1498,7 @@ J(\theta) = \frac{1}{m}\sum\limits_{i=1}^{m}{\Big[-{{y}^{(i)}}\log ( {h_\theta}(
 <h4 id="23-learning-parameters-using-minimize">2.3 Learning parameters using minimize</h4>
 <p>吴恩达老师的课后练习中, 优化theta使用了matlab里面的fminunc函数, 不知道Python里面如何实现。搜索之后，发现stackflow上有人提到用scipy库里面的minimize函数来替代。</p>
 <p>首先使用 <code>np.info(op.minimize)</code> 查看函数的介绍, 传入的参数有:</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">scipy里的minimize函数参数介绍</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
@@ -1627,6 +1627,36 @@ J(\theta) = \frac{1}{m}\sum\limits_{i=1}^{m}{\Big[-{{y}^{(i)}}\log ( {h_\theta}(
 <a id="__codelineno-9-64" name="__codelineno-9-64"></a>    <span class="n">obey</span> <span class="nb">any</span> <span class="n">specified</span> <span class="err">`</span><span class="n">bounds</span><span class="err">`</span><span class="o">.</span>
 </code></pre></div>
 </td></tr></table>
+<p>需要注意的是fun关键词参数里面的函数，需要把优化的theta放在第一个位置，X,y，放到后面。并且，theta在传入的时候一定要是一个一维shape（n,）的数组，不然会出错。</p>
+<p>然后jac是梯度，这里的有两个地方要注意，第一个是传入的theta依然要是一个一维shape(n,)，第二个是返回的梯度也要是一个一维shape(n,)的数组。</p>
+<p>总之，关键在于传入的theta一定要是一个1D shape(n,)的，不然就不行。</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用minimize函数来找到最优的theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">op</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">cost</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;TNC&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradient</span><span class="p">)</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">result</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>fun: 0.20349770158947394
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>     jac: array([9.04290379e-09, 9.02615302e-08, 4.84927098e-07])
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a> message: &#39;Local minimum reached (|pg| ~= 0)&#39;
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    nfev: 36
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>     nit: 17
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  status: 0
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a> success: True
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>       x: array([-25.16131878,   0.20623159,   0.20147149])
+</code></pre></div>
+<p>由输出结果可知: 最优的theta为[-25.16131878,   0.20623159,   0.20147149], 最终的cost为0.20349770158947394。这符合吴恩达老师课后练习给的最红cost 0.203。看来找对包会调包还是有用的嘛。</p>
+<p class="annotate">Lorem ipsum dolor sit amet, (1) consectetur adipiscing elit.</p>
+<ol>
+<li><img alt="🙋‍♂️" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f64b-200d-2642-fe0f.svg" title=":man_raising_hand:" /> I'm an annotation! I can contain <code>code</code>, <strong>formatted
+    text</strong>, images, ... basically anything that can be expressed in Markdown.</li>
+</ol>
 
               
             </article>
