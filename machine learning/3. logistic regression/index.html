@@ -1704,14 +1704,14 @@ x_2=\frac{-\theta_0-\theta_1x_1}{\theta_2}
 <span class="normal"><a href="#__codelineno-12-35">35</a></span>
 <span class="normal"><a href="#__codelineno-12-36">36</a></span>
 <span class="normal"><a href="#__codelineno-12-37">37</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># 拿到最终的theta</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="n">final_theta</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="hll"><span class="n">final_theta</span><span class="o">=</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+</span><a id="__codelineno-12-3" name="__codelineno-12-3"></a>
 <a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="c1"># 生成一些(0,100)的Exam1 scores </span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="n">exam_1_scores</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="c1"># 根据公式计算出exam2 scores</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="n">exam_2_scores</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">exam_1_scores</span><span class="p">)</span><span class="o">/</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="c1"># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="hll"><span class="n">exam_1_scores</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">105</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</span><a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="c1"># 根据公式计算出exam2 scores</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="hll"><span class="n">exam_2_scores</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">exam_1_scores</span><span class="p">)</span><span class="o">/</span><span class="n">final_theta</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+</span><a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="hll">
+</span><a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="c1"># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="n">data1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Admitted&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="n">data0</span><span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Admitted&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12"></a>
@@ -1727,8 +1727,8 @@ x_2=\frac{-\theta_0-\theta_1x_1}{\theta_2}
 <a id="__codelineno-12-22" name="__codelineno-12-22"></a>
 <a id="__codelineno-12-23" name="__codelineno-12-23"></a><span class="c1"># 画出决策边界</span>
 <a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">exam_1_scores</span><span class="p">,</span><span class="n">exam_2_scores</span><span class="p">)</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25"></a>
-<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="hll">
+</span><a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="c1"># 2.1 添加描述信息</span>
 <a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Exam1 scores&quot;</span><span class="p">)</span>
 <a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Exam2 scores&quot;</span><span class="p">)</span>
 <a id="__codelineno-12-29" name="__codelineno-12-29"></a>
