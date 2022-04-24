@@ -658,6 +658,49 @@ center div{
 <p>参考视频:
 7 - 2 - Cost Function (10 min).mkv</p>
 </div>
+<p>很多时候由于特征数量过多, 过拟合时我们很难选出要保留的特征, 这时候应用正则化方法则是很好的选择。</p>
+<p>上文中, <span class="arithmatex">\(\theta_0+\theta_1x+\theta_2x^2+\theta_3x^3+\theta_4x^4\)</span> 这样一个复杂的多项式比较容易过拟合, 在不减少特征的情况下, <strong>如果能消除类似于</strong> <span class="arithmatex">\(\theta_3x^3, \theta_4x^4\)</span> <strong>等复杂部分, 那复杂函数就变得简单了。</strong></p>
+<p>为了保留各个参数的信息, 不修改假设函数, 改而修改代价函数:</p>
+<div class="arithmatex">\[
+\min_{\theta}\frac{1}{2m}\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2+1000\cdot \theta_3^2+1000\cdot \theta_4^2}
+\]</div>
+<p>上式中, 我们在代价函数中增加了 <span class="arithmatex">\(\theta_3, \theta_4\)</span> 的惩罚项(penalty term) <span class="arithmatex">\(1000\cdot \theta_3^2+1000\cdot \theta_4^2\)</span> , 如果要最小化代价函数, 那么势必需要极大地减小 <span class="arithmatex">\(\theta_3, \theta_4\)</span> , 从而使得假设函数中的 <span class="arithmatex">\(\theta_3x^3, \theta_4x^4\)</span> 这两项的参数非常小, 就相当于没有了, 假设函数也就"变得"简单了, 从而在保留各参数的情况下避免了过拟合问题。</p>
+<p><center>
+    <img src="../../assets/images/4_2_1.png">
+    <br>
+    <div>图4.2.1 正则化后的拟合情况</div>
+</center></p>
+<p>根据上面的讨论，有时也无法决定要减少哪个参数，故统一惩罚除了 <span class="arithmatex">\(\theta_0\)</span> 外的所有参数。(不惩罚 <span class="arithmatex">\(\theta_0\)</span> 是约定俗成的, 实际上惩罚和不惩罚的结果差不多)</p>
+<p>代价函数：</p>
+<div class="arithmatex">\[
+J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2+\lambda \sum_{j=1}^n \theta_j^2}\bigg]
+\]</div>
+<blockquote>
+<p><span class="arithmatex">\(\lambda\)</span>  正则化参数(Regularization Parameter), <span class="arithmatex">\(\lambda&gt;0\)</span></p>
+<p><span class="arithmatex">\(\sum_{j=1}^n\)</span> : 不惩罚基础参数 <span class="arithmatex">\(\theta_0\)</span></p>
+<p>$ \lambda \sum_{j=1}^n \theta_j^2$ : 正则化项</p>
+</blockquote>
+<p><span class="arithmatex">\(\lambda\)</span> 正则化参数类似于学习速率，也需要我们自行对其选择一个合适的值。</p>
+<ul>
+<li>
+<p>过大</p>
+<ul>
+<li>
+<p>导致模型欠拟合(假设可能会变成近乎 <span class="arithmatex">\(x=\theta_0\)</span> 的直线 )</p>
+</li>
+<li>
+<p>无法正常去过拟问题</p>
+</li>
+<li>梯度下降可能无法收敛</li>
+</ul>
+</li>
+<li>
+<p>过小</p>
+<ul>
+<li>无法避免过拟合（等于没有）</li>
+</ul>
+</li>
+</ul>
 <h2 id="3">3、线性回归正则化</h2>
 <div class="admonition info">
 <p>参考视频:
