@@ -678,7 +678,7 @@ J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2
 <blockquote>
 <p><span class="arithmatex">\(\lambda\)</span>  正则化参数(Regularization Parameter), <span class="arithmatex">\(\lambda&gt;0\)</span></p>
 <p><span class="arithmatex">\(\sum_{j=1}^n\)</span> : 不惩罚基础参数 <span class="arithmatex">\(\theta_0\)</span></p>
-<p>$ \lambda \sum_{j=1}^n \theta_j^2$ : 正则化项</p>
+<p><span class="arithmatex">\(\lambda \sum_{j=1}^n \theta_j^2\)</span> : 正则化项</p>
 </blockquote>
 <p><span class="arithmatex">\(\lambda\)</span> 正则化参数类似于学习速率，也需要我们自行对其选择一个合适的值。</p>
 <ul>
@@ -706,6 +706,117 @@ J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2
 <p>参考视频:
 7 - 3 - Regularized Linear Regression (11 min).mkv</p>
 </div>
+<p>Regularized linear regression</p>
+<div class="arithmatex">\[
+J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2+\lambda \sum_{j=1}^n \theta_j^2}\bigg]
+\]</div>
+<p>Goal:</p>
+<div class="arithmatex">\[\min_{\theta}J(\theta)\]</div>
+<p>首先是使用梯度下降法完成这个目标:</p>
+<p>Repeat  {</p>
+<div class="arithmatex">\[
+\theta_0:=\theta_0-\alpha \frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_0^{(i)}
+\]</div>
+<div class="arithmatex">\[
+\theta_j:=\theta_j-\alpha \bigg [\frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}+ \frac{\lambda}{m} \theta_j \bigg ]
+\]</div>
+<p>其中, <span class="arithmatex">\(j\in \{1,2,\cdots ,n\}\)</span></p>
+<p>}</p>
+<blockquote>
+<p>这里更新 <span class="arithmatex">\(\theta_j\)</span> 相比于没正则化只多了一项 <span class="arithmatex">\(\frac{\lambda}{m}\theta_j\)</span>, 大家仔细研究会发现就是 <span class="arithmatex">\(J(\theta)\)</span> 中一个平方项求导产生, 因为比较简单, 所以这里就不做推导了。</p>
+</blockquote>
+<p>上式的第二项也可以移项得到更新表达式的另一种形式</p>
+<div class="arithmatex">\[
+\theta_j:=\theta_j(1- \alpha \frac{\lambda}{m})- \alpha \frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)} 
+\]</div>
+<blockquote>
+<p>$\frac{\lambda}{m} \theta_j $ :正则化项</p>
+</blockquote>
+<p>应用正则化的正规方程法:</p>
+<div class="arithmatex">\[
+\theta = (X^TX+ \lambda \cdot L )^{-1}X^Ty
+\]</div>
+<p>其中, <span class="arithmatex">\(L=
+\begin{bmatrix}
+0 &amp;   &amp;  &amp;  &amp;   \\
+  &amp; 1 &amp;   &amp;  &amp; \\
+  &amp;   &amp; 1 &amp;   &amp;   \\
+  &amp;   &amp;   &amp; \ddots &amp;  \\
+  &amp;   &amp; &amp; &amp; 1 \\
+\end{bmatrix}\)</span></p>
+<blockquote>
+<p>$\lambda \cdot L $: 正则化项</p>
+<p><span class="arithmatex">\(L\)</span> : 第一行第一列为 0 的 <span class="arithmatex">\(n+1\)</span> 维单位矩阵</p>
+</blockquote>
+<p>前文提到正则化可以解决正规方程中不可逆问题, 即加入了 $\lambda \cdot L $ 正则化项后, 可以保证 $X^TX+\lambda \cdot L $ 可逆(invertible), 即便 X^TX不可逆(non-invertible)。</p>
+<p>下面对应用正则化的正规方程法结论进行推导</p>
+<p>Cost Function</p>
+<div class="arithmatex">\[
+J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2+\lambda \sum_{j=1}^n \theta_j^2}\bigg]
+\]</div>
+<p>我们先假设连 <span class="arithmatex">\(\theta_0\)</span> 一起惩罚 并将上式向量化</p>
+<div class="arithmatex">\[
+J(\theta)=\frac{1}{2m}\bigg[(X\theta-\vec{y})^T(X\theta-\vec{y})+\lambda \theta^T \theta \bigg]
+\]</div>
+<p>然后开始求 <span class="arithmatex">\(J(\theta)\)</span> 关于 <span class="arithmatex">\(\theta\)</span> 的梯度, 即</p>
+<div class="arithmatex">\[
+\nabla _\theta J(\theta)=\nabla _\theta \frac{1}{2m}\bigg[(X\theta-\vec{y})^T(X\theta-\vec{y})+\lambda \theta^T \theta \bigg]
+\]</div>
+<p>由之前的结论</p>
+<div class="arithmatex">\[
+\nabla _\theta \frac{1}{2}(X\theta-\vec{y})^T(X\theta-\vec{y})= X^TX \theta-X^T \vec{y}
+\]</div>
+<p>所以我们现在只要关注后一项, 即</p>
+<div class="arithmatex">\[
+\nabla _\theta \frac{1}{2m} \cdot \lambda \theta^T \theta
+\]</div>
+<p>利用之前的结论</p>
+<div class="arithmatex">\[ \nabla_A \operatorname{tr}(AB)=B^T\\\\ \]</div>
+<div class="arithmatex">\[ \nabla_{A^T}f(A) = \big(\nabla_Af(A)\big)^T \\\\\]</div>
+<div class="arithmatex">\[ \nabla_A \operatorname{tr}ABA^TC=CAB+C^TAB^T \\\\ \]</div>
+<p>我们撇开系数, 先推导 <span class="arithmatex">\(\nabla_\theta \theta^T \theta\)</span> </p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla_\theta \theta^T \theta &amp;= (\nabla_{\theta^T}  \theta^T \theta)^T\\\\
+&amp;= \big(\nabla_{\theta^T} \operatorname{tr}(\theta^T \theta) \big)^T\\\\
+\end{aligned}
+\]</div>
+<p>然后, 可以令 <span class="arithmatex">\(\theta^T=A, B=C=I\)</span> 即</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\nabla_\theta \theta^T \theta &amp;=  \big(\nabla_{\theta^T} \operatorname{tr}(\theta^T \theta) \big)^T\\\\
+&amp;= \big(\nabla_A \operatorname{tr}(ABA^TC)\big)^T\\\\
+&amp;= \big(CAB+C^TAB^T\big)^T\\\\
+&amp;= 2 A ^T \\\\
+&amp;= 2 \theta
+\end{aligned}
+\]</div>
+<p>所以</p>
+<div class="arithmatex">\[
+\nabla_\theta J(\theta)=\frac{1}{m}(X^TX \theta-X^T \vec{y}+\lambda \cdot \theta)
+\]</div>
+<p>为求 <span class="arithmatex">\(J(\theta)\)</span> 最小, 就是要令 <span class="arithmatex">\(\nabla_\theta J=0\)</span>, 所以</p>
+<div class="arithmatex">\[
+X^TX \theta-X^T \vec{y}+\lambda \cdot \theta=0
+\]</div>
+<p>解出 <span class="arithmatex">\(\theta\)</span> 为</p>
+<div class="arithmatex">\[
+\theta=(X^TX+\lambda \cdot E)^{-1}X^T \vec{y}
+\]</div>
+<p>其中, <span class="arithmatex">\(E\)</span> 为单位阵。</p>
+<p>下面就是只可意会的结论, 因为 <span class="arithmatex">\(\theta_0\)</span> 不参与正则, 我们仔细观察我们推导的结果与原来正规方程推导的结果, 就是多了一个 <span class="arithmatex">\(\lambda \cdot E\)</span> 这一项, 要让 <span class="arithmatex">\(\theta_0\)</span> 维持原来的结果, 我们只要让 <span class="arithmatex">\(E\)</span>的第一行第一列为0, 这样和 <span class="arithmatex">\(\lambda\)</span> 相乘为0, 那么 <span class="arithmatex">\(\theta_0\)</span> 就会保持不变。</p>
+<p>综上, 不惩罚 <span class="arithmatex">\(\theta_0\)</span> 的正规方程结论就是:</p>
+<div class="arithmatex">\[
+\theta = (X^TX+ \lambda \cdot L )^{-1}X^Ty
+\]</div>
+<p>其中, <span class="arithmatex">\(L=
+\begin{bmatrix}
+0 &amp;   &amp;  &amp;  &amp;   \\
+  &amp; 1 &amp;   &amp;  &amp; \\
+  &amp;   &amp; 1 &amp;   &amp;   \\
+  &amp;   &amp;   &amp; \ddots &amp;  \\
+  &amp;   &amp; &amp; &amp; 1 \\
+\end{bmatrix}\)</span></p>
 <h2 id="4">4、逻辑回归正则化</h2>
 <div class="admonition info">
 <p>参考视频:
