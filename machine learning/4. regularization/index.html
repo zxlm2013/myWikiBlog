@@ -730,7 +730,7 @@ J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2
 \theta_j:=\theta_j(1- \alpha \frac{\lambda}{m})- \alpha \frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)} 
 \]</div>
 <blockquote>
-<p>$\frac{\lambda}{m} \theta_j $ :正则化项</p>
+<p><span class="arithmatex">\(\frac{\lambda}{m} \theta_j\)</span> :正则化项</p>
 </blockquote>
 <p>应用正则化的正规方程法:</p>
 <div class="arithmatex">\[
@@ -745,10 +745,10 @@ J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2
   &amp;   &amp; &amp; &amp; 1 \\
 \end{bmatrix}\)</span></p>
 <blockquote>
-<p>$\lambda \cdot L $: 正则化项</p>
+<p><span class="arithmatex">\(\lambda \cdot L\)</span>: 正则化项</p>
 <p><span class="arithmatex">\(L\)</span> : 第一行第一列为 0 的 <span class="arithmatex">\(n+1\)</span> 维单位矩阵</p>
 </blockquote>
-<p>前文提到正则化可以解决正规方程中不可逆问题, 即加入了 $\lambda \cdot L $ 正则化项后, 可以保证 $X^TX+\lambda \cdot L $ 可逆(invertible), 即便 X^TX不可逆(non-invertible)。</p>
+<p>前文提到正则化可以解决正规方程中不可逆问题, 即加入了 <span class="arithmatex">\(\lambda \cdot L\)</span> 正则化项后, 可以保证 <span class="arithmatex">\(X^TX+\lambda \cdot L\)</span> 可逆(invertible), 即便 X^TX不可逆(non-invertible)。</p>
 <p>下面对应用正则化的正规方程法结论进行推导</p>
 <p>Cost Function</p>
 <div class="arithmatex">\[
@@ -804,7 +804,7 @@ X^TX \theta-X^T \vec{y}+\lambda \cdot \theta=0
 \theta=(X^TX+\lambda \cdot E)^{-1}X^T \vec{y}
 \]</div>
 <p>其中, <span class="arithmatex">\(E\)</span> 为单位阵。</p>
-<p>下面就是只可意会的结论, 因为 <span class="arithmatex">\(\theta_0\)</span> 不参与正则, 我们仔细观察我们推导的结果与原来正规方程推导的结果, 就是多了一个 <span class="arithmatex">\(\lambda \cdot E\)</span> 这一项, 要让 <span class="arithmatex">\(\theta_0\)</span> 维持原来的结果, 我们只要让 <span class="arithmatex">\(E\)</span>的第一行第一列为0, 这样和 <span class="arithmatex">\(\lambda\)</span> 相乘为0, 那么 <span class="arithmatex">\(\theta_0\)</span> 就会保持不变。</p>
+<p>因为 <span class="arithmatex">\(\theta_0\)</span> 不参与正则, 我们仔细观察我们推导的结果与原来正规方程推导的结果, 就是多了一个 <span class="arithmatex">\(\lambda \cdot E\)</span> 这一项, 要让 <span class="arithmatex">\(\theta_0\)</span> 维持原来的结果, 我们只要让 <span class="arithmatex">\(E\)</span>的第一行第一列为0, 这样和 <span class="arithmatex">\(\lambda\)</span> 相乘为0, 那么 <span class="arithmatex">\(\theta_0\)</span> 就会保持不变。</p>
 <p>综上, 不惩罚 <span class="arithmatex">\(\theta_0\)</span> 的正规方程结论就是:</p>
 <div class="arithmatex">\[
 \theta = (X^TX+ \lambda \cdot L )^{-1}X^Ty
