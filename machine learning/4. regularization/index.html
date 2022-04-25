@@ -393,6 +393,88 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    代码练习
+  </a>
+  
+    <nav class="md-nav" aria-label="代码练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1visualizing-the-dataset" class="md-nav__link">
+    1、Visualizing the dataset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    导入必要的库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    导入数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    path: 导入数据的路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pandasread_csv-pandastxt" class="md-nav__link">
+    pandas.read_csv : pandas读入文本文件txt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-headernone-names" class="md-nav__link">
+    path: 导入数据的路径 header=None : 源数据没有标题, names : 指定标题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    显示数据的后五行
+  </a>
+  
+    <nav class="md-nav" aria-label="显示数据的后五行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2feature-mapping" class="md-nav__link">
+    2、Feature mapping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -536,6 +618,88 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    代码练习
+  </a>
+  
+    <nav class="md-nav" aria-label="代码练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1visualizing-the-dataset" class="md-nav__link">
+    1、Visualizing the dataset
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    导入必要的库
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    导入数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path" class="md-nav__link">
+    path: 导入数据的路径
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pandasread_csv-pandastxt" class="md-nav__link">
+    pandas.read_csv : pandas读入文本文件txt
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#path-headernone-names" class="md-nav__link">
+    path: 导入数据的路径 header=None : 源数据没有标题, names : 指定标题
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    显示数据的后五行
+  </a>
+  
+    <nav class="md-nav" aria-label="显示数据的后五行">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2feature-mapping" class="md-nav__link">
+    2、Feature mapping
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -549,8 +713,6 @@
               
                 
 
-
-  <h1>四. 正则化</h1>
 
 <div class="admonition info">
 <p>参考链接:
@@ -749,6 +911,7 @@ J(\theta)=\frac{1}{2m}\bigg[\sum_{i=1}^m{\big( h_\theta(x^{(i)})-y^{(i)} \big)^2
 <p><span class="arithmatex">\(L\)</span> : 第一行第一列为 0 的 <span class="arithmatex">\(n+1\)</span> 维单位矩阵</p>
 </blockquote>
 <p>前文提到正则化可以解决正规方程中不可逆问题, 即加入了 <span class="arithmatex">\(\lambda \cdot L\)</span> 正则化项后, 可以保证 <span class="arithmatex">\(X^TX+\lambda \cdot L\)</span> 可逆(invertible), 即便 <span class="arithmatex">\(X^TX\)</span> 不可逆(non-invertible)。</p>
+<hr />
 <p>下面对应用正则化的正规方程法结论进行推导</p>
 <p>Cost Function</p>
 <div class="arithmatex">\[
@@ -822,6 +985,186 @@ X^TX \theta-X^T \vec{y}+\lambda \cdot \theta=0
 <p>参考视频:
 7 - 4 - Regularized Logistic Regression (9 min).mkv</p>
 </div>
+<p>为逻辑回归的代价函数添加正则化项：</p>
+<div class="arithmatex">\[
+J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+ (1-y^{(i)})\log \big(1-h_\theta(x^{(i)})\big) \Big]+ \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2
+\]</div>
+<p>前文已经证明过逻辑回归和线性回归的代价函数的求导结果是一样的, 此处通过给正则化项添加常数 1/2, 则其求导结果也就一样了。</p>
+<p>从而应用正则化的逻辑回归梯度下降算法:</p>
+<p>Repeat {</p>
+<div class="arithmatex">\[
+\theta_0:=\theta_0-\alpha \frac{1}{m} \sum_{i=1}^m{(h_\theta(x^{(i)})-y^{(i)})x_0^{(i)}}
+\]</div>
+<div class="arithmatex">\[
+\theta_j:=\theta_j-\alpha \bigg [\frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}+ \frac{\lambda}{m} \theta_j \bigg ]
+\]</div>
+<p>其中, <span class="arithmatex">\(j\in \{1,2,\cdots ,n\}\)</span></p>
+<p>}</p>
+<h2 id="_1">习题 &amp;&amp; 参考答案</h2>
+<p><strong>第 1 题</strong></p>
+<p>你正在训练一个分类逻辑回归模型。以下哪项陈述是正确的？选出所有正确项</p>
+<p>A. 将正则化引入到模型中，总是能在训练集上获得相同或更好的性能</p>
+<p>B. 在模型中添加许多新特性有助于防止训练集过度拟合</p>
+<p>C. 将正则化引入到模型中，对于训练集中没有的例子，总是可以获得相同或更好的性能</p>
+<p>D. 向模型中添加新特征总是会在训练集上获得相同或更好的性能</p>
+<p><strong>第 2 题</strong></p>
+<p>假设您进行了两次逻辑回归, 一次是 <span class="arithmatex">\(\lambda=0\)</span>, 一次是 <span class="arithmatex">\(\lambda=1\)</span>。其中一次, 得到参数 <span class="arithmatex">\(\theta=\begin{bmatrix} 81.47 \\  12.69  \\\end{bmatrix}\)</span> ,另一次, 得到 <span class="arithmatex">\(\theta=\begin{bmatrix} 13.01 \\  0.91  \\\end{bmatrix}\)</span> 。
+但是，您忘记了哪个 <span class="arithmatex">\(\lambda\)</span> 值对应于哪个 <span class="arithmatex">\(\theta\)</span> 值。你认为哪个对应于 <span class="arithmatex">\(\lambda=1\)</span> ？</p>
+<p>A. <span class="arithmatex">\(\theta=\begin{bmatrix} 13.01 \\  0.91  \\\end{bmatrix}\)</span></p>
+<p>B. <span class="arithmatex">\(\theta=\begin{bmatrix} 81.47 \\  12.69  \\\end{bmatrix}\)</span></p>
+<p><strong>第 3 题</strong></p>
+<p>以下关于正则化的陈述哪一个是正确的？选出所有正确项</p>
+<p>A. 使用太大的 <span class="arithmatex">\(\lambda\)</span> 值可能会导致您的假设与数据过拟合; 这可以通过减小 <span class="arithmatex">\(\lambda\)</span> 来避免</p>
+<p>B. 使用非常大的 <span class="arithmatex">\(\lambda\)</span> 值不会影响假设的性能；我们不将 <span class="arithmatex">\(\lambda\)</span> 设置为太大的唯一原因是避免数值问题</p>
+<p>C. 考虑一个分类问题。添加正则化可能会导致分类器错误地分类某些训练示例（当不使用正则化时, 即当 <span class="arithmatex">\(\lambda=0\)</span> 时，它正确地分类了这些示例）</p>
+<p>D. 由于逻辑回归的输出值 <span class="arithmatex">\(0 \leq h_\theta(x) \leq 1\)</span> , 其输出值的范围无论如何只能通过正则化来“缩小”一点, 因此正则化通常对其没有帮助</p>
+<p><strong>第 3 题</strong></p>
+<p>下列哪一个图片的假设与训练集过拟合？</p>
+<p>A.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1A.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>B.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1B.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>C.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1C.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>D.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1D.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p><strong>第 5 题</strong></p>
+<p>下列哪一个图片的假设与训练集欠拟合?</p>
+<p>A.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1D.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>B.</p>
+<p><center>
+    <img src="../../assets/images/4_5_2B.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>C.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1B.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>D.</p>
+<p><center>
+    <img src="../../assets/images/4_5_1C.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/></p>
+<p><strong>参考答案</strong></p>
+<p>第一题: D</p>
+<p>第二题: A</p>
+<p>第三题: C</p>
+<p>第四题: A</p>
+<p>第五题: A</p>
+<h2 id="_2">代码练习</h2>
+<p>In this part of exercise, you will implement regularized logistic regression to predict whether microchips from a fabrication plant passes quality assurance (QA). During QA, each microchips goes through various tests to ensure it is functioning correctly.</p>
+<p>&ensp; Suppose you are the product manager of the factory and you have the test results for some microchips on two different tests. From these two tests, you would like to determine whether the microchips should be accepted or rejected. To help you make the decision, you have a dataset of test results on past microchips, from which you can build a logistic regression model.</p>
+<h3 id="1visualizing-the-dataset">1、Visualizing the dataset</h3>
+<p>Similar to the previous parts of this exercise, we need to plot a figure like Figure 4.6.1 , where the axes are the two test scores, and positive ( <span class="arithmatex">\(y=1\)</span>, accepted) and negative ( <span class="arithmatex">\(y=0\)</span>, rejected) examples are shown with different markers.</p>
+<p>画图之前先瞅一眼数据</p>
+<p>``` py linenums="1" title="导入必要的库和数据" hl_lines=""</p>
+<h1 id="_3">导入必要的库</h1>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd</p>
+<h1 id="_4">导入数据</h1>
+<h1 id="path">path: 导入数据的路径</h1>
+<p>path = "ex2data2.txt"</p>
+<h1 id="pandasread_csv-pandastxt">pandas.read_csv : pandas读入文本文件txt</h1>
+<h1 id="path-headernone-names">path: 导入数据的路径 header=None : 源数据没有标题, names : 指定标题</h1>
+<p>data = pd.read_csv(path, header=None, names=["Test1", "Test2", "Accepted"])</p>
+<h1 id="_5">显示数据的后五行</h1>
+<p>data.tail()
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>输出
+</code></pre></div>
+    Test1   Test2   Accepted
+113     -0.720620   0.538740    0
+114     -0.593890   0.494880    0
+115     -0.484450   0.999270    0
+116     -0.006336   0.999270    0
+117     0.632650    -0.030612   0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>画出图像
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>``` py linenums=&quot;1&quot; title=&quot;画图&quot; hl_lines=&quot;&quot;
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>data1 = data[data[&quot;Accepted&quot;] == 1]
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>data0 = data[data[&quot;Accepted&quot;] == 0]
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a># 用matplotlib画图
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a># 1. 创建画布
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>plt.figure(figsize=(12, 8), dpi=300)
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a># 2. 绘制图像
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a># 绘制训练集数据
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a># 前两个参数 横纵坐标 s：标记大小 marker: 标记类型 color : 标记颜色
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>plt.scatter(data1[&quot;Test1&quot;], data1[&quot;Test2&quot;], s=50,
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>            marker=&#39;+&#39;, color=&#39;k&#39;, label=&quot;y = 1&quot;)
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>plt.scatter(data0[&quot;Test1&quot;], data0[&quot;Test2&quot;], s=50,
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>            marker=&#39;o&#39;, color=&#39;y&#39;, label=&quot;y = 0&quot;)
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a># 2.1 添加描述信息
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>plt.xlabel(&quot;Microchips Test1&quot;)
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>plt.ylabel(&quot;Microchips Test2&quot;)
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a># 2.2 添加网格显示
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>plt.grid(True, linestyle=&quot;--&quot;, alpha=1)
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a># 2.3 添加图例
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>plt.legend(loc=0)
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a># 2.4 显示图像
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>plt.show()
+</code></pre></div></p>
+<p><center>
+    <img src="../../assets/images/4_6_1.png">
+    <br>
+    <div>Fig 4.6.1 : Plot of training data</div>
+</center></p>
+<p>Figure 4.6.1 shows that our dataset cannot be separated into positive and negative examples by a straight-line through the plot. Therefore, a straight-foward application of logistic regression will not perform well on this dataset since logistic regression will only be able to find a linear decision boundary.</p>
+<h3 id="2feature-mapping">2、Feature mapping</h3>
+<p>One way to fit the data better is to create more features from each data point. We will map the features into all polynomial term of <span class="arithmatex">\(x_1\)</span> and <span class="arithmatex">\(x_2\)</span> up to the sixth power.</p>
+<div class="arithmatex">\[
+mapFeature(x)=\begin{bmatrix} 
+1\\
+x_1\\
+x_2\\
+x_1^2\\
+x_1x_2\\
+x_2^2\\
+x_1^3\\
+\vdots \\
+x_1x_2^5\\
+x_2^6
+\\\end{bmatrix}
+\]</div>
+<p>&ensp; As a result of this mapping, our vector of two features (the scores on two QA tests) has been transformed into a 28-dimensional vector. A logistic regression classifier trained on this higher-dimension feature vector will have a more complex decision boundary and will appear nonlinear when drawn in our 2-dimension plot.</p>
+<p>&ensp; While the feature mapping allows us to build a more expressive classifier, it also more susceptible to overfitting. In the next part of the exercise, you will implement regularized logistic regression to fit the data and also see for yourself how regularization can help combat the overfitting problem.</p>
 
               
             </article>
