@@ -422,6 +422,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#3cost-function-and-gradient" class="md-nav__link">
+    3、Cost function and gradient
+  </a>
+  
+    <nav class="md-nav" aria-label="3、Cost function and gradient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-learning-parameter-using-fminunc" class="md-nav__link">
+    3.1 Learning parameter using fminunc
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4plotting-the-decision-boundary" class="md-nav__link">
+    4、Plotting the decision boundary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5optional-exercises" class="md-nav__link">
+    5、Optional exercises
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -595,6 +629,40 @@
           <li class="md-nav__item">
   <a href="#2feature-mapping" class="md-nav__link">
     2、Feature mapping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3cost-function-and-gradient" class="md-nav__link">
+    3、Cost function and gradient
+  </a>
+  
+    <nav class="md-nav" aria-label="3、Cost function and gradient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-learning-parameter-using-fminunc" class="md-nav__link">
+    3.1 Learning parameter using fminunc
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4plotting-the-decision-boundary" class="md-nav__link">
+    4、Plotting the decision boundary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5optional-exercises" class="md-nav__link">
+    5、Optional exercises
   </a>
   
 </li>
@@ -1164,6 +1232,267 @@ x_2^6
 <a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="n">mappingX</span><span class="o">=</span><span class="n">featureMapping</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">X</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="mi">6</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
+<h3 id="3cost-function-and-gradient">3、Cost function and gradient</h3>
+<p>Now you will implement code to compute the cost function and gradient for regularized logistic regression. Complete the code to return the cost and the gradient.</p>
+<p>&ensp; Recall that the regularized cost function in logistic regression is</p>
+<div class="arithmatex">\[
+J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+ (1-y^{(i)})\log \big(1-h_\theta(x^{(i)})\big) \Big]+ \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2
+\]</div>
+<p>&ensp; Note that you should not regularize the parameter <span class="arithmatex">\(\theta_0\)</span>. The gradient of the cost function is a vector where the <span class="arithmatex">\(j^{th}\)</span> element is defined as follows:</p>
+<p>for <span class="arithmatex">\(j=0\)</span> :</p>
+<div class="arithmatex">\[
+\frac{\partial J(\theta)}{\partial \theta_0}= \frac{1}{m} \sum_{i=1}^m{(h_\theta(x^{(i)})-y^{(i)})x_0^{(i)}}
+\]</div>
+<p>for <span class="arithmatex">\(j \geq 1\)</span> :</p>
+<div class="arithmatex">\[
+\frac{\partial J(\theta)}{\partial \theta_j}= \bigg (\frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}\bigg )+ \frac{\lambda}{m} \theta_j
+\]</div>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义梯度计算函数以及cost函数, 并计算初始cost</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span>
+<span class="normal"><a href="#__codelineno-4-29">29</a></span>
+<span class="normal"><a href="#__codelineno-4-30">30</a></span>
+<span class="normal"><a href="#__codelineno-4-31">31</a></span>
+<span class="normal"><a href="#__codelineno-4-32">32</a></span>
+<span class="normal"><a href="#__codelineno-4-33">33</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 定义sigmoid函数</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1"># 定义梯度</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">def</span> <span class="nf">gradientReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="c1"># 生成一个和theta一样大小都是0的向量</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>            <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>        <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">+</span><span class="n">lambdada</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="k">return</span> <span class="n">grad</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a><span class="k">def</span> <span class="nf">costFunctionReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a>    <span class="c1"># 下面的A@B 相当于np.dot(A,B)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a>    <span class="n">first</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">))</span><span class="nd">@y</span><span class="o">.</span><span class="n">T</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>    <span class="n">second</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">))</span><span class="o">@</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>    <span class="c1"># 正则化项不惩罚x0, 所以这里将theta[0]=0, 让其不参与正则化计算</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="n">theta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>    <span class="n">reg</span> <span class="o">=</span> <span class="n">lambdada</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta</span><span class="o">.</span><span class="n">T</span><span class="nd">@theta</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">first</span><span class="o">+</span><span class="n">second</span><span class="p">)</span><span class="o">/</span><span class="n">m</span><span class="o">+</span><span class="n">reg</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="c1"># 初始化theta</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a><span class="n">n</span> <span class="o">=</span> <span class="n">mappingX</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-4-29" name="__codelineno-4-29"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-4-30" name="__codelineno-4-30"></a><span class="c1"># 初始化lambda</span>
+<a id="__codelineno-4-31" name="__codelineno-4-31"></a><span class="n">lambdada</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-4-32" name="__codelineno-4-32"></a><span class="c1"># 计算初始cost</span>
+<a id="__codelineno-4-33" name="__codelineno-4-33"></a><span class="n">costFunctionReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">mappingX</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>0.6931471805599454
+</code></pre></div>
+<p>&ensp; Once you are done, you should see that the cost is about 0.693 by using the initial value of <span class="arithmatex">\(\theta\)</span> (initialized to all zeros).</p>
+<p>可以看到我的输出结果为 <code>0.6931471805599454</code> 与吴恩达老师结果一致, 说明我的代价函数计算写得没问题。</p>
+<h4 id="31-learning-parameter-using-fminunc">3.1 Learning parameter using fminunc</h4>
+<p>Similar to be previous parts, you will use fminunc to learn the optimal parameters <span class="arithmatex">\(\theta\)</span>. If you have completed the cost and gradient for regularized logistic regression correctly, you should be able to step through the next part to learn the parameters <span class="arithmatex">\(\theta\)</span> using fminunc.</p>
+<p>和上一个练习一样, 笔者是用python写的代码, 所以用不了吴恩达老师提到的 fminunc函数。依旧使用 <code>scipy.optimize</code> 中的 <code>minimize</code> 函数。</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">用scipy库的最小化方法计算出最佳theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">op</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c1"># 初始化theta</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="n">n</span> <span class="o">=</span> <span class="n">mappingX</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="c1"># 初始化lambda</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">lambdada</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="c1"># 利用minimize方法计算最佳theta</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">costFunctionReg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">mappingX</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">),</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a>                     <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Newton-CG&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradientReg</span><span class="p">)</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="c1"># theta_final接收函数计算出的最佳theta</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="n">theta_final</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="c1"># 显示最小化的结果</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="n">result</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>    fun: 0.5296125764614318
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    jac: array([ 1.38401667e-04,  1.17628902e-04, -1.03817813e-04, -1.21318122e-05,
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    9.21842353e-05, -2.35445665e-05,  9.81995751e-05, -6.87897740e-05,
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    -4.73981188e-05,  1.66609202e-05,  3.28244899e-06, -5.54833116e-05,
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    -2.63705642e-05,  1.19848738e-05, -3.12746784e-05,  7.59400526e-05,
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    -5.32105636e-05, -4.18410567e-05, -2.82177412e-06, -1.94858732e-05,
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    -3.41982269e-05,  6.20073502e-06, -4.65078774e-05, -1.51522252e-05,
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    -3.32069805e-05, -7.24929349e-06, -2.04867140e-06, -7.28565483e-05])
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>message: &#39;Warning: Desired error not necessarily achieved due to precision loss.&#39;
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>nfev: 23
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>nhev: 0
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>nit: 3
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>njev: 39
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>status: 2
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>success: False
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>    x: array([ 1.14447434,  0.60265237,  1.16497505, -1.87495425, -0.90736979,
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>    -1.27023904,  0.13068005, -0.37329   , -0.3522902 , -0.16801636,
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>    -1.42502898, -0.05543182, -0.60846608, -0.26895465, -1.16389146,
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    -0.23899273, -0.21156258, -0.04877102, -0.27951764, -0.28976822,
+<a id="__codelineno-7-20" name="__codelineno-7-20" href="#__codelineno-7-20"></a>    -0.4703471 , -1.03701361,  0.02382586, -0.29401771,  0.01330488,
+<a id="__codelineno-7-21" name="__codelineno-7-21" href="#__codelineno-7-21"></a>    -0.32911521, -0.13880385, -0.93769115])
+</code></pre></div>
+<p>关于 <code>minimize</code> 的 <code>method</code> 参数, 应该是最小化方法, 看文档有很多种 如下：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>- &#39;Nelder-Mead&#39; :ref:`(see here) &lt;optimize.minimize-neldermead&gt;`
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>- &#39;Powell&#39;      :ref:`(see here) &lt;optimize.minimize-powell&gt;`
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>- &#39;CG&#39;          :ref:`(see here) &lt;optimize.minimize-cg&gt;`
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>- &#39;BFGS&#39;        :ref:`(see here) &lt;optimize.minimize-bfgs&gt;`
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>- &#39;Newton-CG&#39;   :ref:`(see here) &lt;optimize.minimize-newtoncg&gt;`
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>- &#39;L-BFGS-B&#39;    :ref:`(see here) &lt;optimize.minimize-lbfgsb&gt;`
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>- &#39;TNC&#39;         :ref:`(see here) &lt;optimize.minimize-tnc&gt;`
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>- &#39;COBYLA&#39;      :ref:`(see here) &lt;optimize.minimize-cobyla&gt;`
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>- &#39;SLSQP&#39;       :ref:`(see here) &lt;optimize.minimize-slsqp&gt;`
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>- &#39;trust-constr&#39;:ref:`(see here) &lt;optimize.minimize-trustconstr&gt;`
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>- &#39;dogleg&#39;      :ref:`(see here) &lt;optimize.minimize-dogleg&gt;`
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>- &#39;trust-ncg&#39;   :ref:`(see here) &lt;optimize.minimize-trustncg&gt;`
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>- &#39;trust-exact&#39; :ref:`(see here) &lt;optimize.minimize-trustexact&gt;`
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>- &#39;trust-krylov&#39; :ref:`(see here) &lt;optimize.minimize-trustkrylov&gt;`
+</code></pre></div>
+<p>提前剧透, 笔者是都试了一下, 挑了决策边界图像显示和吴恩达老师最像的那个方法, 即 <code>Newton-CG</code> 。</p>
+<p>关于这个最小化方法更多信息, 用使用 <code>np.info(op.minimize)</code> 可以查看函数的介绍。</p>
+<h3 id="4plotting-the-decision-boundary">4、Plotting the decision boundary</h3>
+<p>To help you visualize the model learned by this classifier, we plot the non-linear decision boundary by computing the classifier's predictions on an evenly spaced grid and then drew a contour plot of where the predictions change from <span class="arithmatex">\(y=0\)</span> and <span class="arithmatex">\(y=1\)</span>.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">画决策边界</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span>
+<span class="normal"><a href="#__codelineno-9-33">33</a></span>
+<span class="normal"><a href="#__codelineno-9-34">34</a></span>
+<span class="normal"><a href="#__codelineno-9-35">35</a></span>
+<span class="normal"><a href="#__codelineno-9-36">36</a></span>
+<span class="normal"><a href="#__codelineno-9-37">37</a></span>
+<span class="normal"><a href="#__codelineno-9-38">38</a></span>
+<span class="normal"><a href="#__codelineno-9-39">39</a></span>
+<span class="normal"><a href="#__codelineno-9-40">40</a></span>
+<span class="normal"><a href="#__codelineno-9-41">41</a></span>
+<span class="normal"><a href="#__codelineno-9-42">42</a></span>
+<span class="normal"><a href="#__codelineno-9-43">43</a></span>
+<span class="normal"><a href="#__codelineno-9-44">44</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1"># 为了画图, 将数据分为Admitted = 0 和Admitted = 1 两部分</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">data1</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Accepted&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="n">data0</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Accepted&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="c1"># 用matplotlib画图</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="c1"># 1. 创建画布</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="c1"># 2. 绘制图像</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="c1"># 绘制训练集数据</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="c1"># 前两个参数 横纵坐标 s：标记大小 marker: 标记类型 color : 标记颜色</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data1</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">],</span> <span class="n">data1</span><span class="p">[</span><span class="s2">&quot;x2&quot;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 1&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data0</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">],</span> <span class="n">data0</span><span class="p">[</span><span class="s2">&quot;x2&quot;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;y = 0&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Microchips Test1&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Microchips Test2&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="c1"># 2.2 添加网格显示</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="c1"># 2.3 添加图例</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="c1"># 通过绘制等高线图来绘制决策边界</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="c1"># 创建一个从-1到1.5的等间距的数</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="hll"><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+</span><a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="c1"># 形成一个250*250的网格，xx和yy分别对应x值和y值</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="hll"><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+</span><a id="__codelineno-9-33" name="__codelineno-9-33"></a><span class="c1"># 利用ravel()函数将xx和yy变成一个向量，也就是62500*1的向量</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a><span class="hll"><span class="n">answerMapping</span> <span class="o">=</span> <span class="n">featureMapping</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">yy</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">6</span><span class="p">)</span>  <span class="c1"># 进行特征映射</span>
+</span><a id="__codelineno-9-35" name="__codelineno-9-35"></a><span class="c1"># 代入映射后的数据进行计算预测值</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a><span class="hll"><span class="n">answer</span> <span class="o">=</span> <span class="n">answerMapping</span><span class="nd">@theta_final</span>
+</span><a id="__codelineno-9-37" name="__codelineno-9-37"></a><span class="c1"># 将answer换成一样格式</span>
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a><span class="hll"><span class="n">answer</span> <span class="o">=</span> <span class="n">answer</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">xx</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</span><a id="__codelineno-9-39" name="__codelineno-9-39"></a><span class="c1"># 绘制等高线图，0代表绘制第一条等高线</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40"></a><span class="hll"><span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">yy</span><span class="p">,</span> <span class="n">answer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;#97FF78&#39;</span><span class="p">)</span>
+</span><a id="__codelineno-9-41" name="__codelineno-9-41"></a>
+<a id="__codelineno-9-42" name="__codelineno-9-42"></a>
+<a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="c1"># 2.4 显示图像</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>&ensp; After learning the parameters <span class="arithmatex">\(\theta\)</span>, we will plot a decision boundary similar to Figure.</p>
+<h3 id="5optional-exercises">5、Optional exercises</h3>
+<p>In this part of the exercise, you will get to try out different regularization parameters for the dataset to understand how regularization prevents overfitting.</p>
+<p>&ensp; Notice the changes in the decision boundary as you vary <span class="arithmatex">\(\lambda\)</span>. With a small <span class="arithmatex">\(\lambda\)</span>, you should find that the classifier get almost every training example correct, but draws a very complicated boundary, thus overfitting the data (Figrure ). This is not a good decision boundary: For example, it predicts that a point at <span class="arithmatex">\(x=(-0.25,1.5)\)</span> is accepted <span class="arithmatex">\((y=1)\)</span>, which seems to be an incorrect decision given the training set.</p>
+<p>&ensp; With a larger <span class="arithmatex">\(\lambda\)</span>, you should see a plot that shows an simple decision boundary which still separates the positives and negatives fairly well. However, if <span class="arithmatex">\(\lambda\)</span> is set to too high a value, you will not get a good fit and the decision boundary will not follow the data so well, thus underfitting the data (Figure ).</p>
+<p><center>
+    <img src="../../assets/images/4_6_2.png">
+    <br>
+    <div>Figure 4.6.2 Training data with decision boundary(<span class="arithmatex">\(\lambda=1\)</span>) </div>
+</center></p>
 
               
             </article>
