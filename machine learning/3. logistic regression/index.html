@@ -539,6 +539,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20Neural%20Networks-R/" class="md-nav__link">
+        五. 神经网络-表达
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1510,7 +1524,7 @@ J(\theta) = \frac{1}{m}\sum\limits_{i=1}^{m}{\Big[-{{y}^{(i)}}\log ( {h_\theta}(
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>array([ -0.1, -12.00921659, -11.26284221])
 </code></pre></div>
 <h4 id="23-learning-parameters-using-minimize">2.3 Learning parameters using minimize</h4>
-<p>吴恩达老师的课后练习中, 优化theta使用了matlab里面的fminunc函数, 不知道Python里面如何实现。搜索之后，发现stackflow上有人提到用scipy库里面的minimize函数来替代。</p>
+<p>吴恩达老师的课后练习中, 优化theta使用了matlab里面的fminunc函数, 不知道Python里面如何实现。搜索之后，发现stackflow上有人提到用 <code>scipy</code> 库里面的 <code>minimize</code> 函数来替代。</p>
 <p>首先使用 <code>np.info(op.minimize)</code> 查看函数的介绍, 传入的参数有:</p>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">scipy里的minimize函数参数介绍</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
