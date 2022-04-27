@@ -393,6 +393,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3、模型表示1
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -522,6 +529,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3、模型表示1
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -596,9 +610,46 @@ center div{
 </div>
 </center></p>
 <p>触觉皮带：在朝北时蜂鸣器会发出声响，可使人拥有方向感（声音信号转换为方向信号）。</p>
+<h2 id="31">3、模型表示1</h2>
 <div class="admonition info">
 <p>参考视频: 8 - 3 - Model Representation I (12 min).mkv</p>
 </div>
+<p>既然神经网络模仿的是大脑神经元，那就先看一下大脑的神经元长什么样吧：</p>
+<p><center>
+    <img src="../../assets/images/5_3_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>想象一下印刷厂中流水线的工人（机器人也算哦），每个工人都有特定的任务，比如装订，塑封，贴防伪标识等等，工人们看到书本并处理完自己的任务后，就回放回传送带，紧接着传送带就传给下一个环节的工人，如此不断重复从而完成一个又一个环节，直到一本书印制完成。</p>
+<p>那么类比一下，把上图中的<strong>细胞核(nucleus)</strong>类比成工人，<strong>轴突(axon)</strong>类比传送带，<strong>树突(dendrite)</strong>则比类比成工人的双眼。一个又一个细胞体，从树突接收需要处理的信息，对其进行处理后，再经由轴突通过电信号把处理完的信息传递出去，直到理解信息的内容。当然啦，我们大脑的实际上还要更为复杂，而且一个人的神经元数目就比地球上所有流水线的工人之和还要多呢~</p>
+<p>人工神经网络中，树突对应<strong>输入(input)</strong>，细胞核对应<strong>激活单元(activation unit)</strong>，轴突对应<strong>输出(output)</strong>。</p>
+<p><center>
+    <img src="../../assets/images/5_3_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>In a neural network, or rather in an artificial neural network, that we implement in a computer, we are going to use a very simple model of what a neuron does. We are going to model a neuron as just a logistic unit.</p>
+<p>上图<strong>黄色圆圈</strong>是类似与<strong>神经元</strong>细胞体的东西, 然后我们通过<strong>输入通道</strong> (树突) 给神经元细胞体<strong>传递信息</strong>, 然后神经元<strong>做一些运算</strong>, 并通过它的<strong>输出通道 (轴突) 输出计算结果</strong>。当我们画出这个图表的时候就表示 </p>
+<div class="arithmatex">\[
+h_\theta(x)=\frac{1}{1+e^{-\theta^Tx}}
+\]</div>
+<p>其中, <span class="arithmatex">\(x=\begin{bmatrix} x_0 \\ x_1 \\ x_2 \\ x_3 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(\theta=\begin{bmatrix} \theta_0 \\ \theta_1 \\ \theta_2 \\ \theta_3 \\\end{bmatrix}\)</span> , 是我们的参数向量。</p>
+<p>这是一个过于简单的模拟神经元的模型。</p>
+<p>当我绘制一个神经网络的时候, 通常我只绘制输入节点 <span class="arithmatex">\(x_1, x_2, x_3\)</span>, 有必要的时候我会增加一个额外的节点 <span class="arithmatex">\(x_0\)</span>, 这个 <span class="arithmatex">\(x_0\)</span> 节点 有时候也被称作<strong>偏置单元 (the bias unit)</strong> 或<strong>偏置神经元 (the bias neuron)</strong> 。因为 <span class="arithmatex">\(x_0\)</span> 总等于1 , 所以有时候画它, 有时候不画它。这要看具体情况, 加上 <span class="arithmatex">\(x_0\)</span> 是否表示起来更方便。</p>
+<p>&ensp; Finally, one last bit of terminology (术语) when we talk about neural networks, sometimes we'll say that this is an artificial neuron (人工神经元) with a sigmoid or a logistic activation function. So this activation function in the neuron network terminology is just another term for that function for that non-linearity g of z. <span class="arithmatex">\(g(z)=\frac{1}{1+e^{-z}}\)</span> .</p>
+<div class="admonition note">
+<p>模型的权重 (weights) = 模型的参数 (parameters)
+这两个是一回事, 只是叫法不一样。</p>
+</div>
+<p><center>
+    <img src="../../assets/images/5_3_3.png">
+    <br>
+    <div></div>
+</center></p>
+<p>&ensp; What a neural network is just a group of 
+these different neurons strung (连接) together. Concretely, here we have input units <span class="arithmatex">\(x_1, x_2, x_3\)</span> . 再说一次, 有时候我们会画上额外的节点 <span class="arithmatex">\(x_0\)</span>, 这里我们画上了。And here we have three neurons, which I have written, <span class="arithmatex">\(a_1^{(2)}, a_2^{(2)},a_3^{(2)}\)</span>. 再次说明, 我们可以在 <span class="arithmatex">\(a_1^{(2)}\)</span> 的上方添加一个 <span class="arithmatex">\(a_0^{(2)}\)</span> (额外的偏置单元 它的值永远是 1 )。最终, 我们在最后一层有第三个节点, 它正是前面三个节点的输出, 假设函数 <span class="arithmatex">\(h(x)\)</span> 计算的结果。</p>
+<p>&ensp; To introduce a bit more terminology in a neural network, the first layer, this is also called the input layer, because this is where we input our features, <span class="arithmatex">\(x_1, x_2, x_3\)</span>. The final layer is also called the output layer, because that layer has the neuron that outputs the final value computed by a hypotheses. And then layer two in between, </p>
+<p>我们一般把神经网络划分为三部分（注意，不是只有三层！），即输入层(input layer)，隐藏层(hidden layer)和输出层(output layer)。</p>
 <div class="admonition info">
 <p>参考视频: 8 - 4 - Model Representation II (12 min).mkv</p>
 </div>
