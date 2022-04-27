@@ -648,8 +648,55 @@ h_\theta(x)=\frac{1}{1+e^{-\theta^Tx}}
 </center></p>
 <p>&ensp; What a neural network is just a group of 
 these different neurons strung (连接) together. Concretely, here we have input units <span class="arithmatex">\(x_1, x_2, x_3\)</span> . 再说一次, 有时候我们会画上额外的节点 <span class="arithmatex">\(x_0\)</span>, 这里我们画上了。And here we have three neurons, which I have written, <span class="arithmatex">\(a_1^{(2)}, a_2^{(2)},a_3^{(2)}\)</span>. 再次说明, 我们可以在 <span class="arithmatex">\(a_1^{(2)}\)</span> 的上方添加一个 <span class="arithmatex">\(a_0^{(2)}\)</span> (额外的偏置单元 它的值永远是 1 )。最终, 我们在最后一层有第三个节点, 它正是前面三个节点的输出, 假设函数 <span class="arithmatex">\(h(x)\)</span> 计算的结果。</p>
-<p>&ensp; To introduce a bit more terminology in a neural network, the first layer, this is also called the input layer, because this is where we input our features, <span class="arithmatex">\(x_1, x_2, x_3\)</span>. The final layer is also called the output layer, because that layer has the neuron that outputs the final value computed by a hypotheses. And then layer two in between, </p>
-<p>我们一般把神经网络划分为三部分（注意，不是只有三层！），即输入层(input layer)，隐藏层(hidden layer)和输出层(output layer)。</p>
+<p>&ensp; To introduce a bit more terminology in a neural network, the first layer, this is also called the input layer, because this is where we input our features, <span class="arithmatex">\(x_1, x_2, x_3\)</span>. The final layer is also called the output layer, because that layer has the neuron that outputs the final value computed by a hypotheses. And then layer two in between, this is called the hidden layer. The term hidden layer isn't a great terminology, but the intuition is that, in supervised learning where you get to see the inputs, and you get to see the correct outputs. Whereas the hidden layer are values you don't get to observe in training set. It's not x and It's not y and so we call those hidden. Later on, we'll see neural networks with more than one hidden layer. But in this example, we have one input layer, layer 1; one hidden layer, layer 2; and one output layer, layer 3. But basically anything that isn't an input layer and isn't a output layer is called a hidden layer.</p>
+<p>To explain the specific computations represented by a neural network, here's a little bit more notation. </p>
+<p><span class="arithmatex">\(x_0\)</span> : 偏置单元 (bias unit), <span class="arithmatex">\(x_0=1\)</span></p>
+<p><span class="arithmatex">\(\Theta\)</span> : 权重(weight), 即参数。</p>
+<p>激活函数 : <span class="arithmatex">\(g\)</span>, 即逻辑函数等。</p>
+<p>输入层: 对应于训练集中的特征 <span class="arithmatex">\(x\)</span>。</p>
+<p>输出层: 对应于训练集中的结果 <span class="arithmatex">\(y\)</span>。</p>
+<blockquote>
+<p><span class="arithmatex">\(a_i^{(j)}\)</span> : "activation" of unit <span class="arithmatex">\(i\)</span> in layer <span class="arithmatex">\(j\)</span> (第 <span class="arithmatex">\(j\)</span> 层 的第 <span class="arithmatex">\(i\)</span> 个激活单元)</p>
+<p><span class="arithmatex">\(\Theta^{(j)}\)</span> : matrix of weights controlling function mapping from layer <span class="arithmatex">\(j\)</span> to layer <span class="arithmatex">\(j+1\)</span> (第 <span class="arithmatex">\(j\)</span> 层 映射到第 <span class="arithmatex">\(j+1\)</span> 层时的权重/参数矩阵)</p>
+<p><span class="arithmatex">\(\Theta_{v, u}^{(j)}\)</span> : 第 <span class="arithmatex">\(j\)</span> 层 的第 <span class="arithmatex">\(u\)</span> 个单元映射到第 <span class="arithmatex">\(j+1\)</span> 层的第 <span class="arithmatex">\(v\)</span> 个单元的参数/权重</p>
+<p><span class="arithmatex">\(s_j\)</span> : 第 <span class="arithmatex">\(j\)</span> 层的激活单元数目 (不包含偏置单元)</p>
+</blockquote>
+<p>I'm going to use <span class="arithmatex">\(a\)</span> superscript <span class="arithmatex">\(j\)</span> subscript <span class="arithmatex">\(i\)</span> to denote the activation (激活项) of neuron <span class="arithmatex">\(i\)</span> or of unit <span class="arithmatex">\(i\)</span> in layer j. In addition, our neural network is parametrized by these matrices <span class="arithmatex">\(\Theta\)</span> superscript <span class="arithmatex">\(j\)</span> where <span class="arithmatex">\(\Theta^{(j)}\)</span> is going to be a matrix of weights controlling function mapping from layer <span class="arithmatex">\(j\)</span> to layer <span class="arithmatex">\(j+1\)</span>.</p>
+<p>这图下面的算式代表了左上角的图解。</p>
+<p><center>
+    <img src="../../assets/images/5_3_4.png">
+    <br>
+    <div></div>
+</center></p>
+<ul>
+<li>
+<p><strong>每个单元会作用于下一层的所有单元</strong>（矩阵乘法运算）。</p>
+</li>
+<li>
+<p>如果第 <span class="arithmatex">\(j\)</span> 层有 <span class="arithmatex">\(s_j\)</span> 个单元, 第 <span class="arithmatex">\(j+1\)</span> 层有 <span class="arithmatex">\(s_{j+1}\)</span> 个单元, <span class="arithmatex">\(\Theta^{(j)}\)</span> 是一个 <span class="arithmatex">\(s_{j+1}\times (s_j+1)\)</span> 维的权重矩阵。</p>
+</li>
+<li>
+<p>其中, <span class="arithmatex">\(+1\)</span> 来自偏置单元, 这样意味着输出层不包含偏置单元, 输入层和隐藏层需要增加偏置单元。</p>
+</li>
+</ul>
+<p>依据本节所给模型，有：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+Size(\Theta ^{(1)}) &amp;= s_{j+1} \times (s_j+1) \\\\
+&amp;=s_2\times (s_1+1)\\\\
+&amp;=3\times 4
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\begin{aligned}
+Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
+&amp;=s_3\times (s_2+1)\\\\
+&amp;=1\times 4
+\end{aligned}
+\]</div>
+<div class="admonition note">
+<p>激活项是指 由一个具体神经元计算并输出的值。</p>
+</div>
 <div class="admonition info">
 <p>参考视频: 8 - 4 - Model Representation II (12 min).mkv</p>
 </div>
