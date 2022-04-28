@@ -729,7 +729,8 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 <p>上面的计算过程被称为<strong>前向传播(Forward propagation)</strong>, 即从输入层开始, 一层一层地向下计算并传递结果。</p>
 <p>向量化实现</p>
 <p>定义 <span class="arithmatex">\(a^{(1)}=x=\begin{bmatrix}  x_0 \\  x_1  \\ x_2\\x_3  \\\end{bmatrix}\)</span>, </p>
-<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} \Theta_{10}^{(1)} &amp; \Theta_{11}^{(1)} &amp; \Theta_{12}^{(1)} &amp; \Theta_{13}^{(1)} \\ \Theta_{20}^{(1)} &amp; \Theta_{21}^{(1)} &amp; \Theta_{22}^{(1)} &amp; \Theta_{23}^{(1)} \\ \Theta_{30}^{(1)} &amp;  \Theta_{31}^{(1)}&amp; \Theta_{32}^{(1)} &amp; \Theta_{33}^{(1)} \end{bmatrix}\)</span></p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} \Theta_{10}^{(1)} &amp; \Theta_{11}^{(1)} &amp; \Theta_{12}^{(1)} &amp; \Theta_{13}^{(1)} \\ \Theta_{20}^{(1)} &amp; \Theta_{21}^{(1)} &amp; \Theta_{22}^{(1)} &amp; \Theta_{23}^{(1)} \\ \Theta_{30}^{(1)} &amp;  \Theta_{31}^{(1)}&amp; \Theta_{32}^{(1)} &amp; \Theta_{33}^{(1)} \end{bmatrix}\)</span>,</p>
+<p><span class="arithmatex">\(\begin{matrix} a_1^{(2)}=g(z_1^{(2)})\\  a_2^{(2)}=g(z_2^{(2)}) \\ a_3^{(2)}=g(z_3^{(2)}) \end{matrix}\)</span>, <span class="arithmatex">\(z^{(2)}=\begin{bmatrix}  z_1^{(2)} \\ z_2^{(2)} \\  z_3^{(2)}  \\\end{bmatrix}\)</span></p>
 <div class="admonition info">
 <p>参考视频: 8 - 5 - Examples and Intuitions I (7 min).mkv</p>
 </div>
