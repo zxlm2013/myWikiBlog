@@ -400,6 +400,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4、模型表示2
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -536,6 +543,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4、模型表示2
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -588,7 +602,7 @@ center div{
     <br>
     <div></div>
 </center></p>
-<p>如上图，如果选取一小块 <span class="arithmatex">\(50\times 50\)</span> 像素的灰度图片（一个像素只有亮度一个值），选择每个像素点作为特征，则特征总量 <span class="arithmatex">\(n=2500\)</span>（换成 RGB（一个像素有三个值），则 <span class="arithmatex">\(n=7500\)</span> ），如果将其两两组合作为新特征，则特征数量将为 $C_{2500}^2 \approx 3 million $ 。</p>
+<p>如上图，如果选取一小块 <span class="arithmatex">\(50\times 50\)</span> 像素的灰度图片（一个像素只有亮度一个值），选择每个像素点作为特征，则特征总量 <span class="arithmatex">\(n=2500\)</span>（换成 RGB（一个像素有三个值），则 <span class="arithmatex">\(n=7500\)</span> ），如果将其两两组合作为新特征，则特征数量将为 <span class="arithmatex">\(C_{2500}^2 \approx 3\ million\)</span> 。</p>
 <h2 id="2">2、神经元和大脑</h2>
 <div class="admonition info">
 <p>参考视频: 8 - 2 - Neurons and the Brain (8 min).mkv</p>
@@ -697,9 +711,25 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 &amp;=1\times 4
 \end{aligned}
 \]</div>
+<h2 id="42">4、模型表示2</h2>
 <div class="admonition info">
 <p>参考视频: 8 - 4 - Model Representation II (12 min).mkv</p>
 </div>
+<p><center>
+    <img src="../../assets/images/5_4_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>对输入层(Layer 1)的所有激活单元应用激活函数,从而得到隐藏层(Layer 2)中激活单元的值：</p>
+<p><span class="arithmatex">\(a_{1}^{(2)}=g(\Theta _{10}^{(1)}{{x}_{0}}+\Theta _{11}^{(1)}{{x}_{1}}+\Theta _{12}^{(1)}{{x}_{2}}+\Theta _{13}^{(1)}{{x}_{3}})\)</span></p>
+<p><span class="arithmatex">\(a_{2}^{(2)}=g(\Theta _{20}^{(1)}{{x}_{0}}+\Theta _{21}^{(1)}{{x}_{1}}+\Theta _{22}^{(1)}{{x}_{2}}+\Theta _{23}^{(1)}{{x}_{3}})\)</span></p>
+<p><span class="arithmatex">\(a_{3}^{(2)}=g(\Theta _{30}^{(1)}{{x}_{0}}+\Theta _{31}^{(1)}{{x}_{1}}+\Theta _{32}^{(1)}{{x}_{2}}+\Theta _{33}^{(1)}{{x}_{3}})\)</span></p>
+<p>对 Layer 2 中的所有激活单元应用激活函数, 从而得到输出:</p>
+<p><span class="arithmatex">\({{h}_{\Theta }}(x)=g(\Theta _{10}^{(2)}a_{0}^{(2)}+\Theta _{11}^{(2)}a_{1}^{(2)}+\Theta _{12}^{(2)}a_{2}^{(2)}+\Theta _{13}^{(2)}a_{3}^{(2)})\)</span></p>
+<p>上面的计算过程被称为<strong>前向传播(Forward propagation)</strong>, 即从输入层开始, 一层一层地向下计算并传递结果。</p>
+<p>向量化实现</p>
+<p>定义 <span class="arithmatex">\(a^{(1)}=x=\begin{bmatrix}  x_0 \\  x_1  \\ x_2\\x_3  \\\end{bmatrix}\)</span>, </p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} \Theta_{10}^{(1)} &amp; \Theta_{11}^{(1)} &amp; \Theta_{12}^{(1)} &amp; \Theta_{13}^{(1)} \\\\ \Theta_{20}^{(1)} &amp; \Theta_{21}^{(1)} &amp; \Theta_{22}^{(1)} &amp; \Theta_{23}^{(1)} \\\\ \Theta_{30}^{(1)} &amp;  \Theta_{31}^{(1)}&amp; \Theta_{32}^{(1)} &amp; \Theta_{33}^{(1)} \end{bmatrix}\)</span></p>
 <div class="admonition info">
 <p>参考视频: 8 - 5 - Examples and Intuitions I (7 min).mkv</p>
 </div>
