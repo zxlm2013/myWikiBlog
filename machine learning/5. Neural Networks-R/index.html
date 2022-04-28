@@ -407,6 +407,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6、例子和直观理解2
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -546,6 +553,13 @@
         <li class="md-nav__item">
   <a href="#42" class="md-nav__link">
     4、模型表示2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6、例子和直观理解2
   </a>
   
 </li>
@@ -749,12 +763,51 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 <blockquote>
 <p>我们习惯于将输入层称为神经网络的第 0 层，如上图的神经网络被称为三层网络。</p>
 </blockquote>
+<p>5、例子和直观理解1</p>
 <div class="admonition info">
 <p>参考视频: 8 - 5 - Examples and Intuitions I (7 min).mkv</p>
 </div>
+<p>为了更好的理解神经网络, 举例单层神经网络进行逻辑运算的例子。</p>
+<p>下面的例子中, <span class="arithmatex">\(x_1, x_2\)</span>为<strong>二进制数</strong>。</p>
+<p>逻辑与(AND)运算（都为真值则结果才为真）神经网络: </p>
+<p><center>
+    <img src="../../assets/images/5_5_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} -30 &amp; 20 &amp; 20 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(h_\Theta(x)=g(-30+20x_1+20x_2)\)</span>。</p>
+<p>回归 sigmoid 函数图像, 根据输入则有上图中右边的表格, 即 <span class="arithmatex">\(h_\Theta(x) \approx x_1\)</span> AND <span class="arithmatex">\(x_2\)</span> 。这样就实现了一个能够进行与运算的神经网络。</p>
+<p><center>
+    <img src="../../assets/images/5_5_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>再举一例, 逻辑或(OR)运算 (有一个真值则结果就为真)神经网络:</p>
+<p><center>
+    <img src="../../assets/images/5_5_3.png">
+    <br>
+    <div></div>
+</center></p>
+<h2 id="62">6、例子和直观理解2</h2>
 <div class="admonition info">
 <p>参考视频: 8 - 6 - Examples and Intuitions II (10 min).mkv</p>
 </div>
+<p>下面逐步构建复杂一点的神经网络</p>
+<p><center>
+    <img src="../../assets/images/5_6_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>如上图, 我们分别构建了三个单层神经网络, 将这三个网络组合起来, 可得到一个新的神经网络, 其可完成逻辑运算中的异或(XNOR)操作:</p>
+<p><center>
+    <img src="../../assets/images/5_6_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>这里的组合即为 XNOR = (<span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>) OR ((NOT <span class="arithmatex">\(x_1\)</span>) AND (NOT <span class="arithmatex">\(x_2\)</span>))</p>
+<p><span class="arithmatex">\(\Theta^{(1)}= \begin{bmatrix} -30 &amp; 20 &amp; 20 \\ 10 &amp; -20 &amp; -20 \\ \end{bmatrix}\)</span>, <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} -10&amp;20&amp;20 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(\begin{matrix} a^{(2)}=g(\Theta^{(1)}\cdot x)\\ a^{(3)}=g(\Theta^{(2)}\cdot a^{(2)}) \\ h_\Theta(x)=a^{(3)} \end{matrix}\)</span></p>
+<p>可见, 特征值能不断升级, 并抽取出更多信息, 直到计算出结果。而如此不断组合, 我们就可以逐渐构造出越来越复杂、强大的神经网络, 比如用于手写识别的神经网络。</p>
+<p>7、多类别分类</p>
 <div class="admonition info">
 <p>参考视频: 8 - 7 - Multiclass Classification (4 min).mkv</p>
 </div>
