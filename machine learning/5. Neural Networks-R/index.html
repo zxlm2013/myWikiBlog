@@ -734,12 +734,21 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 <p>则有 <span class="arithmatex">\(a^{(2)}=g(\Theta^{(1)}a^{(1)})=g(z^{(2)})\)</span></p>
 <p>添加 <span class="arithmatex">\(a_0^{(2)}=1\)</span></p>
 <p>预测结果即 <span class="arithmatex">\(h_\Theta(x)=a^{(3)}=g(\Theta^{(2)}a^{(2)})=g(z^{(3)})\)</span></p>
-<p>&ensp; This forward propagation view also helps us understand what neural networks might be doing, and why they might help us to learn interesting non-linear hypotheses. Consider the following nerual network, and let's say I cover up the left part of this picture for now. If you look at what's left in this picture, this looks a lot like logistic regression. 我们就是用最右侧黄色圈圈那个节点 (logistic regression unit)来预测 <span class="arithmatex">\(h(x)\)</span> 的值。如果只看最右侧黄色圈圈下面公式的蓝色部分, 这和标准的逻辑回归模型中的预测函数 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_3)\)</span> 除了符号, 其他完全一样。And what this is doing is just logistic regression. But where the features fed into logistic regression are these values computed by the hidden layer. Just to say that again, what this netural network is doing is just like logistic regression, expect that rather than using the original features <span class="arithmatex">\(x_1, x_2, x_3\)</span> is using these new features <span class="arithmatex">\(a_1, a_2, a_3\)</span>. And the cool thing about this is that the features <span class="arithmatex">\(a_1, a_2, a_3\)</span>, they themselves are learned as functions of the input. Concretely, the function mapping from layer 1 to layer 2, that is determined by some other set of parameters, <span class="arithmatex">\(\Theta_1\)</span>.</p>
 <p><center>
     <img src="../../assets/images/5_4_2.png">
     <br>
     <div></div>
 </center></p>
+<p>&ensp; This forward propagation view also helps us understand what neural networks might be doing, and why they might help us to learn interesting non-linear hypotheses. Consider the following nerual network, and let's say I cover up the left part of this picture for now. If you look at what's left in this picture, this looks a lot like logistic regression. 我们就是用最右侧黄色圈圈那个节点 (logistic regression unit)来预测 <span class="arithmatex">\(h(x)\)</span> 的值。如果只看最右侧黄色圈圈下面公式的蓝色部分, 这和标准的逻辑回归模型中的预测函数 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_3)\)</span> 除了符号, 其他完全一样。And what this is doing is just logistic regression. But where the features fed into logistic regression are these values computed by the hidden layer. Just to say that again, <strong>what this netural network is doing is just like logistic regression</strong>, expect that rather than using the original features <span class="arithmatex">\(x_1, x_2, x_3\)</span> is <strong>using these new features</strong> <span class="arithmatex">\(a_1, a_2, a_3\)</span>. And the cool thing about this is that the features <span class="arithmatex">\(a_1, a_2, a_3\)</span>, they themselves are learned as functions of the input. Concretely, the function mapping from layer 1 to layer 2, that is determined by some other set of parameters, <span class="arithmatex">\(\Theta_1\)</span>. So that's it, the neural network, instead of being constrained to feed the features <span class="arithmatex">\(x_1, x_2, x_3\)</span> to logistic regression, it gets to learn its own features, <span class="arithmatex">\(a_1, a_2, a_3\)</span>, to feed into the logistic regression. And as you can imagine, depending on what parameters it chooses for <span class="arithmatex">\(\Theta_1\)</span>, you can learn <strong>some pretty instresting and complex features</strong>, and therefore you can end up with <strong>a better hypotheses</strong>, than if you were constrained to use the raw features <span class="arithmatex">\(x_1, x_2, x_3\)</span>, or if you will constrain to choose the polynomial term(多项式项), <span class="arithmatex">\(x_1x_2, x_2x_3\)</span> and so on. But instead, this algorithm has the flexibility to try to learn whatever features at once, using these <span class="arithmatex">\(a_1, a_2, a_3\)</span> in order to feed into this last unit. That's essentially a logistic regression here. </p>
+<p>当然，神经网络可有多层，每层的激活单元数量也并不固定。Other network architectures (其他神经网络架构):</p>
+<p><center>
+    <img src="../../assets/images/5_4_3.png">
+    <br>
+    <div></div>
+</center></p>
+<blockquote>
+<p>我们习惯于将输入层称为神经网络的第 0 层，如上图的神经网络被称为三层网络。</p>
+</blockquote>
 <div class="admonition info">
 <p>参考视频: 8 - 5 - Examples and Intuitions I (7 min).mkv</p>
 </div>
