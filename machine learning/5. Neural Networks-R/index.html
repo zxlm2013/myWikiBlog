@@ -421,6 +421,20 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7、多类别分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -574,6 +588,20 @@
         <li class="md-nav__item">
   <a href="#62" class="md-nav__link">
     6、例子和直观理解2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7、多类别分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
   </a>
   
 </li>
@@ -821,10 +849,100 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 <p>这里的组合即为 XNOR = (<span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>) OR ((NOT <span class="arithmatex">\(x_1\)</span>) AND (NOT <span class="arithmatex">\(x_2\)</span>))</p>
 <p><span class="arithmatex">\(\Theta^{(1)}= \begin{bmatrix} -30 &amp; 20 &amp; 20 \\ 10 &amp; -20 &amp; -20 \\ \end{bmatrix}\)</span>, <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} -10&amp;20&amp;20 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(\begin{matrix} a^{(2)}=g(\Theta^{(1)}\cdot x)\\ a^{(3)}=g(\Theta^{(2)}\cdot a^{(2)}) \\ h_\Theta(x)=a^{(3)} \end{matrix}\)</span></p>
 <p>可见, 特征值能不断升级, 并抽取出更多信息, 直到计算出结果。而如此不断组合, 我们就可以逐渐构造出越来越复杂、强大的神经网络, 比如用于手写识别的神经网络。</p>
-<p>7、多类别分类</p>
+<h2 id="7">7、多类别分类</h2>
 <div class="admonition info">
 <p>参考视频: 8 - 7 - Multiclass Classification (4 min).mkv</p>
 </div>
+<p>之前讨论的都是预测结果为单值情况下的神经网络，要实现多类别分类，其实只要修改一下输出层，让输出层包含多个输出单元即可。</p>
+<p>举一个 4 分类问题的实例：</p>
+<p><center>
+    <img src="../../assets/images/5_7_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>有四种分类情况，那么就让输出层包含 4 个输出单元即可，则 <span class="arithmatex">\(h_\Theta\)</span> 为 4 维向量。 </p>
+<p>神经网络中的多分类算法算是对 one-vs-all 思想的扩展, 定义预测结果一共有 4 种情况：</p>
+<p><center>
+    <img src="../../assets/images/5_7_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>如果预测结果 <span class="arithmatex">\(h_\Theta(x)=\begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\\end{bmatrix}\)</span>, 那么表示 <span class="arithmatex">\(h_\Theta(x)_3\)</span>, 即分为第 3 类，对应于图中的摩托车(Motorcycle)。</p>
+<p>总结一下</p>
+<p>多分类问题, 要分为 <span class="arithmatex">\(K\)</span> 类, 就在输出层放置 <span class="arithmatex">\(K\)</span> 个输出单元, 对于单个样本实例, 预测向量 <span class="arithmatex">\(h_\Theta(x)\)</span> 为 <span class="arithmatex">\(K\)</span> 维向量, 我们则依据这个预测向量, 得出该实例属于哪个类 <span class="arithmatex">\(y^{(i)}\)</span> 。注意, 神经网络中的预测和结果都是 <span class="arithmatex">\(K\)</span> 维向量，而不再只是一个实数了。</p>
+<h2 id="_1">习题 &amp;&amp; 参考答案</h2>
+<p><strong>第一题</strong></p>
+<p>以下哪项陈述是正确的？选择所有正确项</p>
+<p>A. 神经网络中隐藏单元的激活值, 在应用了sigmoid函数之后, 总是在（0，1）范围内</p>
+<p>B. 在二进制值（0或1）上的逻辑函数可以（近似）用一些神经网络来表示</p>
+<p>C. 两层（一个输入层, 一个输出层, 没有隐藏层）神经网络可以表示异或函数</p>
+<p>D. 假设有一个三个类的多类分类问题, 使用三层网络进行训练。设 <span class="arithmatex">\(a_1^{(3)}=(h_\Theta(x))_1\)</span>为第一输出单元的激活, 并且类似的, 有 <span class="arithmatex">\(a_2^{(3)}=(h_\Theta(x))_2\)</span> 和 <span class="arithmatex">\(a_3^{(3)}=(h_\Theta(x))_3\)</span>。那么对于任何输入 <span class="arithmatex">\(x\)</span>, 必须 <span class="arithmatex">\(a_1^{(3)}+a_2^{(3)}+a_3^{(3)}=1\)</span></p>
+<p><strong>第二题</strong></p>
+<p>考虑以下两个二值输入 <span class="arithmatex">\(x_1,x_2 \in \{0, \ 1 \}\)</span> 和输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的神经网络。它（近似）计算了下列哪一个逻辑函数？</p>
+<p><center>
+    <img src="../../assets/images/5_8_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>A. OR</p>
+<p>B. AND</p>
+<p>C. NAND (与非)</p>
+<p>D. XOR (异或)</p>
+<p><strong>第三题</strong></p>
+<p>考虑下面给出的神经网络。下列哪个方程正确地计算了 <span class="arithmatex">\(a_1^{(3)}\)</span> 的激活？注：<span class="arithmatex">\(g(z)\)</span> 是sigmoid激活函数</p>
+<p><center>
+    <img src="../../assets/images/5_8_2.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>A. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(2)}a_0^{(2)}+\Theta_{1,1}^{(2)}a_1^{(2)}+\Theta_{1,2}^{(2)}a_2^{(2)})\)</span></p>
+<p>B. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(1)}a_0^{(1)}+\Theta_{1,1}^{(1)}a_1^{(1)}+\Theta_{1,2}^{(1)}a_2^{(1)})\)</span></p>
+<p>C. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(1)}a_0^{(2)}+\Theta_{1,1}^{(1)}a_1^{(2)}+\Theta_{1,2}^{(1)}a_2^{(2)})\)</span></p>
+<p>D. 此网络中不存在激活 <span class="arithmatex">\(a_1^{(3)}\)</span></p>
+<p><strong>第四题</strong></p>
+<p>你有以下神经网络</p>
+<p><center>
+    <img src="../../assets/images/5_8_2.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>你想计算隐藏层 <span class="arithmatex">\(a^{(2)} \in \mathbb{R}^3\)</span> 的激活, 一种方法是使用以下Octave代码:</p>
+<p><center>
+    <img src="../../assets/images/5_8_3.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>您需要一个矢量化的实现（即, 一个不用循环的实现）。下列哪个实现正确计算 <span class="arithmatex">\(a^{(2)}\)</span> ？选出所有正确项</p>
+<p>A. z = Theta1 * x; a2 = sigmoid (z)
+B. a2 = sigmoid (x * Theta1)
+C. a2 = sigmoid (Theta2 * x)
+D. z = sigmoid(x); a2 = sigmoid (Theta1 * z)</p>
+<p><strong>第四题</strong></p>
+<p>您正在使用下图所示的神经网络，并已学习参数</p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1 &amp; 2.4 \\ 1 &amp; 1.7 &amp; 3.2 \\ \end{bmatrix}\)</span> (用于计算 <span class="arithmatex">\(a^{(2)}\)</span>) 和 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; 0.3 &amp; -1.2 \\\end{bmatrix}\)</span> (用于作用在 <span class="arithmatex">\(a^{(2)}\)</span> 的函数, 计算 <span class="arithmatex">\(a^{(3)}\)</span> 的值)。假设您交换第一个隐藏层的2个单元的参数 <span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1.7 &amp; 3.2 \\ 1 &amp; 1 &amp; 2.4 \\ \end{bmatrix}\)</span>, 并且还交换输出层 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; -1.2 &amp; 0.3 \\\end{bmatrix}\)</span> 。浙江如何改变输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的值?</p>
+<p><center>
+    <img src="../../assets/images/5_8_4.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>A. 不变</p>
+<p>B. 变大</p>
+<p>C. 变小</p>
+<p>D. 信息不全，可能变大也可能变小</p>
+<p><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/></p>
+<p><strong>参考答案</strong></p>
+<p>第一题: AB</p>
+<p>第二题: A</p>
+<p>第三题: A</p>
+<p>第四题: A</p>
+<p>第五题: A</p>
+<p>提示: 假定输出是 <span class="arithmatex">\(\begin{bmatrix} x_1 &amp; x_2 &amp; x_3 \\\end{bmatrix}^T\)</span> 代入到定义中计算即可, 交换的结果都为:</p>
+<p><span class="arithmatex">\(g(1+0.3g(1+x_1+2.4x_2)-1.2g(1+1.7x_1+3.2x_2))\)</span> , 其中 <span class="arithmatex">\(g\)</span> 为sigmoid函数。</p>
 
               
             </article>
