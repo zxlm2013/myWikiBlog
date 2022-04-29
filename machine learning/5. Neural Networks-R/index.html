@@ -913,13 +913,13 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
     <div></div>
 </center></p>
 <p>您需要一个矢量化的实现（即, 一个不用循环的实现）。下列哪个实现正确计算 <span class="arithmatex">\(a^{(2)}\)</span> ？选出所有正确项</p>
-<p>A. z = Theta1 * x; a2 = sigmoid (z)
-B. a2 = sigmoid (x * Theta1)
-C. a2 = sigmoid (Theta2 * x)
-D. z = sigmoid(x); a2 = sigmoid (Theta1 * z)</p>
+<p>A. z = Theta1 * x; a2 = sigmoid (z)</p>
+<p>B. a2 = sigmoid (x * Theta1)</p>
+<p>C. a2 = sigmoid (Theta2 * x)</p>
+<p>D. z = sigmoid(x); a2 = sigmoid (Theta1 * z)</p>
 <p><strong>第四题</strong></p>
 <p>您正在使用下图所示的神经网络，并已学习参数</p>
-<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1 &amp; 2.4 \\ 1 &amp; 1.7 &amp; 3.2 \\ \end{bmatrix}\)</span> (用于计算 <span class="arithmatex">\(a^{(2)}\)</span>) 和 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; 0.3 &amp; -1.2 \\\end{bmatrix}\)</span> (用于作用在 <span class="arithmatex">\(a^{(2)}\)</span> 的函数, 计算 <span class="arithmatex">\(a^{(3)}\)</span> 的值)。假设您交换第一个隐藏层的2个单元的参数 <span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1.7 &amp; 3.2 \\ 1 &amp; 1 &amp; 2.4 \\ \end{bmatrix}\)</span>, 并且还交换输出层 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; -1.2 &amp; 0.3 \\\end{bmatrix}\)</span> 。浙江如何改变输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的值?</p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1 &amp; 2.4 \\ 1 &amp; 1.7 &amp; 3.2 \\ \end{bmatrix}\)</span> (用于计算 <span class="arithmatex">\(a^{(2)}\)</span>) 和 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; 0.3 &amp; -1.2 \\\end{bmatrix}\)</span> (用于作用在 <span class="arithmatex">\(a^{(2)}\)</span> 的函数, 计算 <span class="arithmatex">\(a^{(3)}\)</span> 的值)。假设您交换第一个隐藏层的2个单元的参数 <span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1.7 &amp; 3.2 \\ 1 &amp; 1 &amp; 2.4 \\ \end{bmatrix}\)</span>, 并且还交换输出层 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; -1.2 &amp; 0.3 \\\end{bmatrix}\)</span> 。这将如何改变输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的值?</p>
 <p><center>
     <img src="../../assets/images/5_8_4.jpg">
     <br>
