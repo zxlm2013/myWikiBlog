@@ -1074,15 +1074,7 @@ X = \begin{bmatrix} —— &amp; (x^{(1)})^T &amp; —— \\ —— &amp; (x^{(2
 \]</div>
 <p>&ensp; The second part of the training set is a 5000-dimensional vector <span class="arithmatex">\(y\)</span> that contains labels for the training set. To make things more compatible with Octave/Matlab indexing, where there is no zero index, we have mapped the digit zero to the value ten. Therefore, a "0" digit is labeled as "10", while the digits "1" to "9" are labeled as "1" to "9" in their natural order. </p>
 <h4 id="12-visualizing-the-data">1.2 Visualizing the data</h4>
-<p>You will begin by visualizing a subset of the training set. In Part 1, the code randomly selects 100 rows from X and passes those rows to the <strong>display</strong> function. This function maps each row to a 20 pixel by 20 pixel grayscale image and displays the images together. We have provided the displayData function, and you are encouraged to examine the code to see how it works. After you run this step, you should see an image like Figure .</p>
-<p><center>
-    <img src="../../assets/images/5_9_1.png">
-    <br>
-    <div>Figure 5.9.1: Examples from the dataset</div>
-</center></p>
-<div class="admonition danger">
-<p>注意: displayData的参数要传入已经挑选好随机100个样本的X或者最好是能开平方的一个数</p>
-</div>
+<p>You will begin by visualizing a subset of the training set. In Part 1, the code randomly selects 100 rows from X and passes those rows to the <strong>display</strong> function. This function maps each row to a 20 pixel by 20 pixel grayscale image and displays the images together. We have provided the displayData function, and you are encouraged to examine the code to see how it works. After you run this step, you should see an image like Figure <strong>5.9.1</strong>.</p>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义显示100个数据生成的图像</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -1180,6 +1172,9 @@ X = \begin{bmatrix} —— &amp; (x^{(1)})^T &amp; —— \\ —— &amp; (x^{(2
 <a id="__codelineno-2-48" name="__codelineno-2-48"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 </td></tr></table>
+<div class="admonition danger">
+<p>注意: displayData的参数要传入已经挑选好随机100个样本的X或者最好是能开平方的一个数</p>
+</div>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">显示图像</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
@@ -1201,6 +1196,11 @@ X = \begin{bmatrix} —— &amp; (x^{(1)})^T &amp; —— \\ —— &amp; (x^{(2
 <a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="n">displayData</span><span class="p">(</span><span class="n">sample_images</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
+<p><center>
+    <img src="../../assets/images/5_9_1.png">
+    <br>
+    <div>Figure 5.9.1: Examples from the dataset</div>
+</center></p>
 
               
             </article>
