@@ -565,6 +565,20 @@
 
             
           
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Neural%20Networks-L/" class="md-nav__link">
+        六. 神经网络-学习
+      </a>
+    </li>
+  
+
+            
+          
         </ul>
       </nav>
     </li>
@@ -1486,7 +1500,7 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
 <p>&ensp; Note that the <span class="arithmatex">\(y\)</span> argument to this function is a vector of labels from 1 to 10, where we have mapped the digit "0" to the label 10 (to avoid confusions with indexing).</p>
 <p>&ensp; When training the classifier for class <span class="arithmatex">\(k \in \{1,\cdots ,K\}\)</span>, you will want a m-dimensional vector of label <span class="arithmatex">\(y\)</span>, where <span class="arithmatex">\(y_i\in 0,1\)</span> indicates whether the <span class="arithmatex">\(j\)</span>th training instance belongs to class <span class="arithmatex">\(k\)</span> (<span class="arithmatex">\(y_j=1\)</span>), or if it belongs to a different class (<span class="arithmatex">\(y_j=0\)</span>). You may find logical arrays helpful for this task. </p>
 <p>&ensp; you will be using <strong>fmincg</strong> for this exercise (instead of <strong>fminunc</strong>). <strong>fmincg</strong> works similarly to <strong>fminunc</strong>, but is more more efficient for dealing with a large number of parameters.</p>
-<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算能预测所有分类的 $\theta$</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算能预测所有分类的 theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
@@ -1500,23 +1514,21 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
 <span class="normal"><a href="#__codelineno-5-12">12</a></span>
 <span class="normal"><a href="#__codelineno-5-13">13</a></span>
 <span class="normal"><a href="#__codelineno-5-14">14</a></span>
-<span class="normal"><a href="#__codelineno-5-15">15</a></span>
-<span class="normal"><a href="#__codelineno-5-16">16</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># 定义计算 能预测所有分类的 theta</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="k">def</span> <span class="nf">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">all_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_labels</span><span class="p">):</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="n">init_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="c1"># 最经典的地方 利用双等号将标签分为两类</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="n">y_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">costFunctionReg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">init_theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a>            <span class="n">X</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;TNC&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradient</span><span class="p">)</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a>        <span class="n">all_theta</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
-<a id="__codelineno-5-15" name="__codelineno-5-15"></a>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a>    <span class="k">return</span> <span class="n">all_theta</span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">def</span> <span class="nf">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="n">all_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_labels</span><span class="p">):</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>        <span class="n">init_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="c1"># 最经典的地方 利用双等号将标签分为两类</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="n">y_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">costFunctionReg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">init_theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>            <span class="n">X</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;TNC&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradient</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>        <span class="n">all_theta</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="k">return</span> <span class="n">all_theta</span>
 </code></pre></div>
 </td></tr></table>
 <h5 id="141-one-vs-all-prediction">1.4.1  One-vs-all Prediction</h5>
@@ -1609,7 +1621,7 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
 <p>The matrix <span class="arithmatex">\(X\)</span> contains the examples in rows. When you complete the code in predict.m, you will need to add the column 1's to the matrix. The matrices Theta1 and Theta2 contain the parameters for each unit in rows. Specifically, the first row of Theta1 corresponds to the first hidden unit in the second layer. In Octave, when you compute <span class="arithmatex">\(z^{(2)}=\Theta^{(1)}a^{(1)}\)</span>, be sure that you index (and if necessary, transpose) <span class="arithmatex">\(X\)</span> correctly so that you get <span class="arithmatex">\(a^{(1)}\)</span> as a column vector.</p>
 </div>
 <p>Once you are done, ex3_nn.m will call your predict function using loaded set of parameters for Theta1 and Theta2. You should see that the accuracy is about <span class="arithmatex">\(97.5\%\)</span>. After that, an interacitve sequence will launch displaying images from the training set on at a time, while the console prints out the predicted label for the display image. To stop the image sequence, press Ctrl-C.</p>
-<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用神经网络实现数字识别（ $\Theta$ 已提供）</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用神经网络实现数字识别(Theta 已提供)</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
@@ -1678,6 +1690,9 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
 <a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
 </code></pre></div>
 </td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>0.9752
+</code></pre></div>
 
               
             </article>
@@ -1712,13 +1727,13 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
       
       
         
-        <a href="../../math%20in%20ML/" class="md-footer__link md-footer__link--next" aria-label="下一页: 前言和目录" rel="next">
+        <a href="../6.%20Neural%20Networks-L/" class="md-footer__link md-footer__link--next" aria-label="下一页: 六. 神经网络-学习" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 下一页
               </span>
-              前言和目录
+              六. 神经网络-学习
             </div>
           </div>
           <div class="md-footer__button md-icon">
