@@ -444,11 +444,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1multi-class-classification" class="md-nav__link">
-    1、Multi-class Classification
+  <a href="#1-multi-class-classification" class="md-nav__link">
+    1 Multi-class Classification
   </a>
   
-    <nav class="md-nav" aria-label="1、Multi-class Classification">
+    <nav class="md-nav" aria-label="1 Multi-class Classification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -499,15 +499,55 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#14-one-vs-all-classification" class="md-nav__link">
+    1.4 One-vs-all Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 One-vs-all Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-one-vs-all-prediction" class="md-nav__link">
+    1.4.1  One-vs-all Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-one-vs-all-classification" class="md-nav__link">
-    1.4 One-vs-all Classification
+  <a href="#2-neural-networks" class="md-nav__link">
+    2 Neural networks
   </a>
+  
+    <nav class="md-nav" aria-label="2 Neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-model-representation" class="md-nav__link">
+    2.1 Model Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-feedforward-propagation-and-prediction" class="md-nav__link">
+    2.2 Feedforward Propagation and Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -696,11 +736,11 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1multi-class-classification" class="md-nav__link">
-    1、Multi-class Classification
+  <a href="#1-multi-class-classification" class="md-nav__link">
+    1 Multi-class Classification
   </a>
   
-    <nav class="md-nav" aria-label="1、Multi-class Classification">
+    <nav class="md-nav" aria-label="1 Multi-class Classification">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -751,15 +791,55 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#14-one-vs-all-classification" class="md-nav__link">
+    1.4 One-vs-all Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 One-vs-all Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-one-vs-all-prediction" class="md-nav__link">
+    1.4.1  One-vs-all Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#14-one-vs-all-classification" class="md-nav__link">
-    1.4 One-vs-all Classification
+  <a href="#2-neural-networks" class="md-nav__link">
+    2 Neural networks
   </a>
+  
+    <nav class="md-nav" aria-label="2 Neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-model-representation" class="md-nav__link">
+    2.1 Model Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-feedforward-propagation-and-prediction" class="md-nav__link">
+    2.2 Feedforward Propagation and Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1107,7 +1187,7 @@ Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
 <p><span class="arithmatex">\(g(1+0.3g(1+x_1+2.4x_2)-1.2g(1+1.7x_1+3.2x_2))\)</span> , 其中 <span class="arithmatex">\(g\)</span> 为sigmoid函数。</p>
 <h2 id="_2">代码练习</h2>
 <p>In this exercise, you will implement one-vs-all logistic regression and neural networks to recognize hand-written digits.</p>
-<h3 id="1multi-class-classification">1、Multi-class Classification</h3>
+<h3 id="1-multi-class-classification">1 Multi-class Classification</h3>
 <p>For this exeercise, you will use logistic regression and neural networks to recognize handwritten digits (from 0 to 9). Automated handwritten digits recognition is widely used today - from recognizing zip codes (postal codes) on mail envelopes to recognizing amounts written on bank checks. This exercise will show you how the methods you've learned can be used for this classification task.</p>
 <p>&ensp; In the fist part of the exercise, you will extend your previous implemention of logistic regression and apply it to one-vs-all classification.</p>
 <h4 id="11-dataset">1.1 Dataset</h4>
@@ -1343,12 +1423,261 @@ J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+
 \frac{\partial J(\theta)}{\partial \theta_j}= \bigg (\frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}\bigg )+ \frac{\lambda}{m} \theta_j
 \]</div>
 <p>&ensp; Now modify your code to account for regularization. Once again, you should not put any loops into your code.</p>
-<h3 id="14-one-vs-all-classification">1.4 One-vs-all Classification</h3>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义sigmoid函数, 代价函数计算(带正则), 梯度计算 (带正则)</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 定义sigmoid函数</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">return</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1"># 定义代价函数计算(带正则)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">def</span> <span class="nf">costFunctionReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="c1"># 下面的A@B 相当于np.dot(A,B)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>    <span class="n">first</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>    <span class="n">second</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>    <span class="c1"># 正则化项不惩罚x0, 所以这里将theta2 跳过了theta_0</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="n">reg</span> <span class="o">=</span> <span class="n">lambdada</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta2</span><span class="o">.</span><span class="n">T</span><span class="nd">@theta2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="n">first</span><span class="o">-</span><span class="n">second</span><span class="p">)</span><span class="o">/</span><span class="n">m</span><span class="o">+</span><span class="n">reg</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="c1"># 定义梯度(带正则)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="k">def</span> <span class="nf">gradientReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>    <span class="c1"># 生成一个和theta一样大小都是0的向量</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>        <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> \
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>            <span class="n">lambdada</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="k">return</span> <span class="n">grad</span>
+</code></pre></div>
+</td></tr></table>
+<h4 id="14-one-vs-all-classification">1.4 One-vs-all Classification</h4>
 <p>In this part of the exercise, you will implement one-vs all classification by training multiple regularized regression classifiers, one for each of the <span class="arithmatex">\(K\)</span> classes in our dataset (Figure <font color="#ff0000">5.9.1</font> ). In the handwritten digits dataset, <span class="arithmatex">\(K=10\)</span>, but your code should work for any value of <span class="arithmatex">\(K\)</span>.</p>
 <p>&ensp; You should now complete the code to train one classifier for each class. In particular, your code should return all the classifier parameters in a matrix <span class="arithmatex">\(\Theta \in \mathbb{R}^{K\times (N+1)}\)</span>, where each row of <span class="arithmatex">\(\Theta\)</span> correspons to the learned logistic regression parameters for one class. You can do this with a "for" - loop from 1 to <span class="arithmatex">\(K\)</span>, training each classifier independently.</p>
 <p>&ensp; Note that the <span class="arithmatex">\(y\)</span> argument to this function is a vector of labels from 1 to 10, where we have mapped the digit "0" to the label 10 (to avoid confusions with indexing).</p>
 <p>&ensp; When training the classifier for class <span class="arithmatex">\(k \in \{1,\cdots ,K\}\)</span>, you will want a m-dimensional vector of label <span class="arithmatex">\(y\)</span>, where <span class="arithmatex">\(y_i\in 0,1\)</span> indicates whether the <span class="arithmatex">\(j\)</span>th training instance belongs to class <span class="arithmatex">\(k\)</span> (<span class="arithmatex">\(y_j=1\)</span>), or if it belongs to a different class (<span class="arithmatex">\(y_j=0\)</span>). You may find logical arrays helpful for this task. </p>
 <p>&ensp; you will be using <strong>fmincg</strong> for this exercise (instead of <strong>fminunc</strong>). <strong>fmincg</strong> works similarly to <strong>fminunc</strong>, but is more more efficient for dealing with a large number of parameters.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算能预测所有分类的 $\theta$</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1"># 定义计算 能预测所有分类的 theta</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="k">def</span> <span class="nf">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">all_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_labels</span><span class="p">):</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="n">init_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="c1"># 最经典的地方 利用双等号将标签分为两类</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="n">y_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">costFunctionReg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">init_theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>            <span class="n">X</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;TNC&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradient</span><span class="p">)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>        <span class="n">all_theta</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a>    <span class="k">return</span> <span class="n">all_theta</span>
+</code></pre></div>
+</td></tr></table>
+<h5 id="141-one-vs-all-prediction">1.4.1  One-vs-all Prediction</h5>
+<p>After training your one-vs-all classifier, you can now use it to predict the digit contained in a given image. For each input, you should compute the "probability" that it belongs to each class using the trained logistic regression classifiers. Your one-vs-all prediction function will pick the class for which the corresponding logistic regression classifier outputs the highest probability and return the class label (1, 2,..., or <span class="arithmatex">\(K\)</span>) as the prediction for the input example.</p>
+<p>&ensp; You should now complete the code to use the one-vs-all classifier to make predictions.</p>
+<p>&ensp; Once you are done, ex3.m will call your  function using the learned value of <span class="arithmatex">\(\Theta\)</span>. You should see that the training set accuracy is about
+94.9% (i.e., it classifies 94.9% of the examples in the training set correctly).</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算准确率</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># 取到data中的 X, y值</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c1"># 因为数据集是考虑了matlab从1开始，把0的结果保存为了10，这里进行取余，将10变回0</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">%</span> <span class="mi">10</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="n">num_labels</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="c1"># 初始化</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="n">lambdada</span> <span class="o">=</span> <span class="mf">0.1</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="c1"># 计算出所有分类的预测参数 all_theta 的维度 (10,401)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="n">all_theta</span> <span class="o">=</span> <span class="n">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="c1"># X 插入x_0</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="c1"># 计算所有的预测结果 h_hat的维度 (5000, 10)</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="n">h_hat</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@all_theta</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="c1"># h_hat计算出了5000个样本对于10个标签的可能性</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="c1"># 所以按行取出最大值对应的索引即为预测的标签</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="n">y_hat</span> <span class="o">=</span> <span class="n">h_hat</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="c1"># 将 y 变成向量</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="c1"># y_hat,y</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="c1"># 利用均值计算出正确率，巧妙</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_hat</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>0.9646
+</code></pre></div>
+<h3 id="2-neural-networks">2 Neural networks</h3>
+<p>In the previous part of this exercise, you implemented multi-class logistic regression to recognize handwritten digits. However, logistic regression cannot form more complex hypotheses as it is only a linear classifier.</p>
+<p>&ensp; In this part of the exercise, you will implement a neural network to recognize handwritten digits using the same training set as before. The neural network will be able to represent complex models that form non-linear hypotheses. For this week, you will be using parameters form a neural network that we have already trained. Your goal is to implement the feedforward propagation algorithm to use our weights for prediction. In next week's exercise, you will write the backpropagation algorithm for the learning neural network parameters.</p>
+<h4 id="21-model-representation">2.1 Model Representation</h4>
+<p>Our neural network is shown in Figure . It has 3 layers - an input layer, a hidden layer and an output layer. Recall that our inputs are pixel values of digits images. Since the images are of size <span class="arithmatex">\(20\times 20\)</span>, this gives us 400 input layer units (excluding the extra bias unit which always outputs <span class="arithmatex">\(+1\)</span> ). As before, the training data will be loaded into the variables <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(y\)</span> . </p>
+<p><center>
+    <img src="../../assets/images/5_9_2.png">
+    <br>
+    <div>Figure 5.9.2: Neural network model.</div>
+</center></p>
+<p>&ensp; You have been provided with a set of network parameters (<span class="arithmatex">\(\Theta^{(1)}\)</span>, <span class="arithmatex">\(\Theta^{(2)}\)</span>) already trained by us. These are stored in <strong>ex3weights.mat</strong> and will be loaded by <strong>ex3_nn.m</strong> into <strong>Theta1</strong> and <strong>Theta2</strong>. The parameters have dimensions that are sized for a neural netowrk with 25 units in the second layer and 10 output units (corresponding to the 10 digit classes).</p>
+<h4 id="22-feedforward-propagation-and-prediction">2.2 Feedforward Propagation and Prediction</h4>
+<p>Now you will implement feedforward propagation for the neural network. You will need to complete teh code <strong>predict.m</strong> to return the neural network's prediction. </p>
+<p>&ensp; You should implement the feedforward computation that computes <span class="arithmatex">\(h_\theta(x^{(i)}\)</span> for every example <span class="arithmatex">\(i\)</span> and return the associated predictions. Simliar to the one-vs-all classification strategy, the prediction from the neural network will be label that has the largest output <span class="arithmatex">\(\big(h_\theta(x)\big)_k\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Implementation Note</p>
+<p>The matrix <span class="arithmatex">\(X\)</span> contains the examples in rows. When you complete the code in predict.m, you will need to add the column 1's to the matrix. The matrices Theta1 and Theta2 contain the parameters for each unit in rows. Specifically, the first row of Theta1 corresponds to the first hidden unit in the second layer. In Octave, when you compute <span class="arithmatex">\(z^{(2)}=\Theta^{(1)}a^{(1)}\)</span>, be sure that you index (and if necessary, transpose) <span class="arithmatex">\(X\)</span> correctly so that you get <span class="arithmatex">\(a^{(1)}\)</span> as a column vector.</p>
+</div>
+<p>Once you are done, ex3_nn.m will call your predict function using loaded set of parameters for Theta1 and Theta2. You should see that the accuracy is about <span class="arithmatex">\(97.5\%\)</span>. After that, an interacitve sequence will launch displaying images from the training set on at a time, while the console prints out the predicted label for the display image. To stop the image sequence, press Ctrl-C.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用神经网络实现数字识别（ $\Theta$ 已提供）</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">scio</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">op</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="n">data</span> <span class="o">=</span> <span class="n">scio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;ex3data1.mat&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">scio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;ex3weights.mat&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">theta1</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="s1">&#39;Theta1&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="s1">&#39;Theta2&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="c1"># 插入偏置项</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="c1"># X.shape,theta1.shape, theta2.shape</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="c1"># ((5000, 401), (25, 401), (10, 26))</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="c1"># 第二层计算</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="n">a2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="c1"># 第三层计算</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="n">a3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a2</span><span class="nd">@theta2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="c1"># y的值为1-10，所以此处0-9要加1</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="n">p</span> <span class="o">=</span> <span class="n">a3</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="c1"># 利用均值计算准确率</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+</code></pre></div>
+</td></tr></table>
 
               
             </article>
