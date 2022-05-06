@@ -640,9 +640,17 @@ center div{
 </center></p>
 <h2 id="2">2、信息向前传播</h2>
 <p>显然, 图 1 所示的神经网络的第 2 层神经元的状态及激活值可以通过下面的计算得到:</p>
-<div class="arithmatex">\[z_1^{(2)}=w_{11}^{(2)}x_1+w_{12}^{(2)}x_2+w_{13}^{(2)}x_3+b_1^{(2)}\]</div>
-<div class="arithmatex">\[z_2^{(2)}=w_{21}^{(2)}x_1+w_{22}^{(2)}x_2+w_{23}^{(2)}x_3+b_2^{(2)}\]</div>
-<div class="arithmatex">\[z_3^{(2)}=w_{31}^{(2)}x_1+w_{32}^{(2)}x_2+w_{33}^{(2)}x_3+b_2^{(3)}\]</div>
+<div class="arithmatex">\[z_1^{(2)}=w_{11}^{(2)}x_1+w_{12}^{(2)}x_2+w_{13}^{(2)}x_3+b_1^{(2)}\hspace{100cm}\]</div>
+<div class="arithmatex">\[z_2^{(2)}=w_{21}^{(2)}x_1+w_{22}^{(2)}x_2+w_{23}^{(2)}x_3+b_2^{(2)} \hspace{100cm}\]</div>
+<div class="arithmatex">\[z_3^{(2)}=w_{31}^{(2)}x_1+w_{32}^{(2)}x_2+w_{33}^{(2)}x_3+b_2^{(3)} \hspace{100cm}\]</div>
+<div class="arithmatex">\[a_1^{(2)}=f(z_1^{(2)}) \hspace{100cm} \]</div>
+<div class="arithmatex">\[a_2^{(2)}=f(z_2^{(2)}) \hspace{100cm}\]</div>
+<div class="arithmatex">\[a_3^{(2)}=f(z_3^{(2)}) \hspace{100cm}\]</div>
+<p>类似地, 第 3 层神经元地状态及激活值可以通过下面计算得到:</p>
+<div class="arithmatex">\[z_1^{(3)}=w_{11}^{(3)}a_1^{(2)}+w_{12}^{(3)}a_2^{(2)}+w_{13}^{(3)}a_3^{(2)}+b_1^{(3)}\hspace{100cm}\]</div>
+<div class="arithmatex">\[z_2^{(3)}=w_{21}^{(3)}a_1^{(2)}+w_{22}^{(3)}a_2^{(2)}+w_{23}^{(3)}a_3^{(2)}+b_2^{(3)}\hspace{100cm}\]</div>
+<div class="arithmatex">\[a_1^{(3)}=f(z_1^{(3)})\hspace{100cm}\]</div>
+<div class="arithmatex">\[a_2^{(3)}=f(z_2^{(3)})\hspace{100cm}\]</div>
 
               
             </article>
