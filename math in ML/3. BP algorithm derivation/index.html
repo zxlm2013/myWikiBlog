@@ -512,6 +512,41 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 隐藏层的权重参数更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 输出层和隐藏层的偏置参数更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-bp" class="md-nav__link">
+    3.4 BP算法的四个核心公式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    3.5 计算代价函数的偏导数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-bp" class="md-nav__link">
+    3.6 BP算法总结
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -581,6 +616,41 @@
           <li class="md-nav__item">
   <a href="#31" class="md-nav__link">
     3.1 输出层的权重参数更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 隐藏层的权重参数更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 输出层和隐藏层的偏置参数更新
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-bp" class="md-nav__link">
+    3.4 BP算法的四个核心公式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    3.5 计算代价函数的偏导数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#36-bp" class="md-nav__link">
+    3.6 BP算法总结
   </a>
   
 </li>
@@ -674,7 +744,7 @@ center div{
 <p>下面以三层感知器 (即只含有一个隐藏层的多层感知器) 为例介绍反向传播算法 (BP) 算法。</p>
 <p>三层感知器如图 1 所示。例子中, 输入数据 <span class="arithmatex">\(x=(x_1,x_2,x_3)^T\)</span> 是三维的 (对于第一层, 可以认为 <span class="arithmatex">\(a_i^{(1)}=x_i\)</span>), 唯一的隐藏层有三个节点, 输出数据是 2 维的。</p>
 <p><center>
-    <img src="../../assets/images/2018050922060950.png">
+    <img src="../../assets/images/201805092206.png">
     <br>
     <div>Figure 1: 三层感知器实例</div>
 </center></p>
@@ -720,11 +790,17 @@ E_{(i)}&amp;=\frac{1}{2}||y^{(i)}-o^{(i)}|| \\\\
 &amp;=\frac{1}{2}\sum_{k=1}^{n_L}(y^{(i)}-o^{(i)})^2
 \end{aligned}
 \]</div>
-<blockquote>
+<ul>
+<li>
 <p><span class="arithmatex">\(y^{(i)}\)</span> 为期望的输出 (是训练数据给出的已知值), <span class="arithmatex">\(o^{(i)}\)</span> 为神经网络对输入 <span class="arithmatex">\(x^{(i)}\)</span> 产生的实际输出。</p>
+</li>
+<li>
 <p>代价函数中的系数 <span class="arithmatex">\(\frac{1}{2}\)</span> 不是必要的, 它的存在仅仅是为了后续计算时更方便。</p>
+</li>
+<li>
 <p>以图 1 所示的神经网络为例, <span class="arithmatex">\(n_L=2\)</span>, <span class="arithmatex">\(y^{(i)}=(y_1^{(i)},y_2^{(i)})^T\)</span>, 从而有 <span class="arithmatex">\(E_{(i)}=\frac{1}{2}(y_1^{(i)}-a_1^{(3)})^2+\frac{1}{2}(y_2^{(i)}-a_2^{(3)})^2\)</span>, 如果展开到隐藏层, 则有, <span class="arithmatex">\(E_{(i)}=\frac{1}{2}\big(y_1^{(i)}-f(w_{11}^{(3)}a_1^{(2)}+w_{12}^{(3)}a_2^{(2)}+w_{13}^{(3)}a_3^{(2)}+b_1^{(3)})\big)^2+\frac{1}{2}\big(y_2^{(i)}-f(w_{21}^{(3)}a_1^{(2)}+w_{22}^{(3)}a_2^{(2)}+w_{23}^{(3)}a_3^{(2)}+b_2^{(3)})\big)^2\)</span>, 还可以进一步展开到输入层 (替换掉 <span class="arithmatex">\(a_1^{(2)}\)</span>, <span class="arithmatex">\(a_2^{(2)}\)</span>, <span class="arithmatex">\(a_3^{(2)}\)</span> 即可), 最后可得: <strong>代价函数 <span class="arithmatex">\(E_{(i)}\)</span> 仅和权重矩阵 <span class="arithmatex">\(W^{(i)}\)</span> 和偏置向量 <span class="arithmatex">\(b^{(l)}\)</span> 相关, 调整权重和偏置可以减少或增大代价(误差)</strong>。</p>
-</blockquote>
+</li>
+</ul>
 <p>显然, 所有训练数据的总体 (平均) 代价可写为:</p>
 <div class="arithmatex">\[
 E_{total}=\frac{1}{N}\sum_{i=1}^N{E_{(i)}}
@@ -830,6 +906,150 @@ a_{31}b_{31} &amp; a_{32}b_{32}\\
 \end{array}
 \right)
 \]</div>
+<p>向量式子 <span class="arithmatex">\(\delta^{(L)} =-(y-a^{(L)})⊙f'(z^{(L)})\)</span> 在前面的例子中, 表达的就是下面这两个式子</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta_1^{(3)}&amp;=-\big(y_1-a_1^{(3)}f'(z_1^{(3)})\big) \\\\
+\delta_2^{(3)}&amp;=-\big(y_2-a_2^{(3)}f'(z_2^{(3)})\big) 
+\end{aligned}
+\]</div>
+<h3 id="32">3.2 隐藏层的权重参数更新</h3>
+<p>对 "隐藏层神经元的权重参数" 求偏导, 利用 <span class="arithmatex">\(\delta_i^{(l)}\)</span> 的定义, 有:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial w_{ij}^{(l)}}&amp;=\frac{\partial E}{\partial z_i^{(l)}}\frac{\partial z_i^{(l)}}{\partial w_{ij}^{(l)}} \\\\
+&amp;=\delta_i^{(l)}\frac{\partial z_i^{(l)}}{\partial w_{ij}^{(l)}}\\\\
+&amp;=\delta_i^{(l)}a_j^{(l-1)}
+\end{aligned}
+\]</div>
+<p>其中 <span class="arithmatex">\(\delta_i^{(l)}\)</span>, <span class="arithmatex">\(2 \leq l \leq L-1\)</span> 的推导如下:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta_i^{(l)}&amp;=\frac{\partial E}{\partial z_i^{(l)}} \\\\
+&amp;=\sum_{j=1}^{n_{l+1}}\frac{\partial E}{\partial z_j^{(l+1)}}\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}}\\\\
+&amp;=\sum_{j=1}\delta_j^{(l+1)}\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}}
+\end{aligned}
+\]</div>
+<p><strong>全文最最关键的要来了</strong></p>
+<p>上面的式子中为什么有 <span class="arithmatex">\(\frac{\partial E}{\partial z_i^{(l)}}=\sum_{j=1}^{n_{l+1}}\frac{\partial E}{\partial z_j^{(l+1)}}\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}}\)</span> 呢? 其实利用的仅仅是 "函数之和的求导法则" 及 "求导的链式法则"。如果把 <span class="arithmatex">\(E\)</span> 从后往前展开, 当展开到 <span class="arithmatex">\(l+1\)</span> 层时, <span class="arithmatex">\(E\)</span> 可看作是 <span class="arithmatex">\(z^{(l+1)}\)</span> 的函数; 如果再往前展开到一层到 <span class="arithmatex">\(l\)</span> 层, <span class="arithmatex">\(E\)</span> 可看作是 <span class="arithmatex">\(z^{(l)}\)</span> 的函数。<span class="arithmatex">\(E\)</span> 对 <span class="arithmatex">\(l\)</span> 层的某个 <span class="arithmatex">\(z_i^{(l)}\)</span> 求导时, 由于 <span class="arithmatex">\(l+1\)</span> 层的每个神经元都和 <span class="arithmatex">\(z_i^{(l)}\)</span> 所在神经元有连接, 所以再函数 <span class="arithmatex">\(E\)</span> 中, 自变量 <span class="arithmatex">\(z_i^{(l)}\)</span> 出现了 <span class="arithmatex">\(n_{l+1}\)</span> 次, 出现的每一次对应一个 <span class="arithmatex">\(z_j^{(l+1)}\)</span>, <span class="arithmatex">\(1 \leq j \leq n_{l+1}\)</span>, 从而由 "函数之和的求导法则" 及 "求导的链式法则" 可得</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial z_i^{(l)}} &amp;= \frac{\partial E}{\partial z_1^{(l+1)}}\frac{\partial z_1^{(l+1)}}{\partial z_i^{(l)}}+\frac{\partial E}{\partial z_2^{(l+1)}}\frac{\partial z_2^{(l+1)}}{\partial z_i^{(l)}}+\cdots +\frac{\partial E}{\partial z_{n_{l+1}}^{(l+1)}}\frac{\partial z_{n_{l+1}}^{(l+1)}}{\partial z_i^{(l)}}\\\\
+&amp;=\sum_{j=1}^{n_{l+1}}\frac{\partial E}{\partial z_j^{(l+1)}}\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}}
+\end{aligned}
+\]</div>
+<p>上面的推导过程可以从图 2 中更清楚地展示出来。</p>
+<p><center>
+    <img src="../../assets/images/201805092218.png">
+    <br>
+    <div>Figure 2: 由delta(l+1)求delta(l)</div>
+</center></p>
+<p>看一个简单地特例, 如图 1 所示的神经网络中, 有 <span class="arithmatex">\(\frac{\partial E}{\partial z_1^{2}}=\sum_{j=1}^{2}\frac{\partial E}{\partial z_j^{(3)}}\frac{\partial z_j^{(3)}}{\partial z_1^{(2)}}\)</span></p>
+<p>由于 <span class="arithmatex">\(z_j^{(l+1)}=\sum_{i=1}^{n_l}w_{ji}^{(l+1)}a_i^{(l)}+b_j^{(l+1)}=\sum_{i=1}^{n_l}w_{ji}^{(l+1)}f(z_i^{(l)})+b_j^{(l+1)}\)</span>, 所以有 <span class="arithmatex">\(\frac{\partial z_j^{(l+1)}}{\partial z_i^{(l)}}=\frac{\partial z_j^{(l+1)}}{\partial a_i^{(l)}}\frac{\partial a_i^{(l)}}{\partial z_i^{(l)}}=w_{ji}^{(l+1)}f'(z_i^{(l)})\)</span> , 代入到前面计算的 <span class="arithmatex">\(\delta_i^{(l)}\)</span> 式中, 从而有:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta_i^{(l)}&amp;= \sum_{j=1}^{n_{l+1}}\delta_j^{(l+1)}w_{ji}^{(l+1)}f'(z_i^{(l)}) \\\\
+&amp;=\Big(\sum_{j=1}^{n_{l+1}}\delta_j^{(l+1)}w_{ji}^{(l+1)}\Big)f'(z_i^{(l)})
+\end{aligned}
+\]</div>
+<p>上式是 BP 算法最核心的公式。它利用 <span class="arithmatex">\(l+1\)</span> 层的 <span class="arithmatex">\(\delta^{(l+1)}\)</span> 来计算 <span class="arithmatex">\(l\)</span> 层的 <span class="arithmatex">\(\delta^{(l)}\)</span>, 这就是 "误差反向传播算法" 名字的由来。如果把它表达为矩阵 (向量) 形式, 则为</p>
+<div class="arithmatex">\[
+\delta^{(l)}=\big((W^{(l+1)})^T\delta^{(l+1)}\big) ⊙ f'(z^{(l)})
+\]</div>
+<h3 id="33">3.3 输出层和隐藏层的偏置参数更新</h3>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial b_i^{(l)}} &amp;= \frac{\partial E}{\partial z_i^{(l)}}\frac{\partial z_i^{(l)}}{\partial b_i^{(l)}} \\\\
+&amp;=\delta_i^{(l)}
+\end{aligned}
+\]</div>
+<p>对应的矩阵 (向量) 形式为:</p>
+<div class="arithmatex">\[
+\nabla _{b^{(l)}}E=\delta^{l}
+\]</div>
+<h3 id="34-bp">3.4 BP算法的四个核心公式</h3>
+<p>前面已经完整地介绍了误差反向传播算法, 可总结为下面四个公式:</p>
+<div class="arithmatex">\[
+\delta_i^{(L)} = -(y_i-a_i^{(L)})f'(z_i^{(L)}) \tag{BP-1}
+\]</div>
+<div class="arithmatex">\[
+\delta_i^{(l)} =\Big(\sum_{j=1}^{n_{l+1}}\delta_j^{(l+1)}w_{ji}^{(l+1)}\Big)f'(z_i^{(l)}) \tag{BP-2} 
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial E}{\partial w_{ij}^{(l)}}=\delta_i^{(l)}a_j^{(l-1)} \tag{BP-3}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial E}{\partial b_i^{(l)}}=\delta_i^{(l)} \tag{BP-4}
+\]</div>
+<p>这四个公式可以写成对应的矩阵 (向量) 形式:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta^{(L)} &amp;= -(y-a^{(L)})⊙f'(z^{(L)}) \\\\
+\delta^{(l)} &amp;=\big((W^{(l+1)})^T\delta^{(l+1)}\big) ⊙ f'(z^{(l)})\\\\
+\frac{\partial E}{\partial w^{(l)}}&amp;=\delta^{(l)}(a^{(l-1)})^T\\\\
+\frac{\partial E}{\partial b^{(l)}}&amp;=\delta^{(l)}
+\end{aligned}
+\]</div>
+<p>或者表示为:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta^{(L)} &amp;= -(y-a^{(L)})⊙f'(z^{(L)}) \\\\
+\delta^{(l)} &amp;=\big((W^{(l+1)})^T\delta^{(l+1)}\big) ⊙ f'(z^{(l)})\\\\
+\nabla _{W^{(l)}}E&amp;=\delta^{(l)}(a^{(l-1)})^T\\\\
+\nabla _{b^{(l)}}E &amp;=\delta^{(l)}
+\end{aligned}
+\]</div>
+<h3 id="35">3.5 计算代价函数的偏导数</h3>
+<p>BP算法四个核心公式就是求某个训练数据的代价函数对参数的偏导数, 它的具体应用步骤总结如下:</p>
+<ul>
+<li>第一步, 初始化参数 <span class="arithmatex">\(W,\ b\)</span></li>
+</ul>
+<p>一般地, 把 <span class="arithmatex">\(w_{ij}^{(l)}, b_i^{(l)}, 2 \leq l \leq L\)</span> 初始化为一个很小的, 接近于0的随机值。</p>
+<p>注意:  不要把 <span class="arithmatex">\(w_{ij}^{(l)}, b_i^{(l)}, 2 \leq l \leq L\)</span> 全部初始化为0或者相同的其他值, 这回导致对于所有的 <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(w_{ij}^{(l)}\)</span> 都会取相同的值。</p>
+<ul>
+<li>第二步, 利用下面的 "前向传播" 公式计算每层的状态和激活值:</li>
+</ul>
+<div class="arithmatex">\[
+\begin{aligned}
+z^{(l)}&amp;=W^{(l)}a^{(l-1)}+b^{(l)} \\\\
+a^{(l)}&amp;=f(z^{(l)})
+\end{aligned}
+\]</div>
+<ul>
+<li>第三步, 计算 <span class="arithmatex">\(\delta^{(l)}\)</span></li>
+</ul>
+<p>首先利用下面公式计算输出层的 <span class="arithmatex">\(\delta^{(L)}\)</span></p>
+<div class="arithmatex">\[
+\delta_i^{(L)} = -(y_i-a_i^{(L)})f'(z_i^{(L)}),\ \ (1\leq i \leq n_L)
+\]</div>
+<p>其中, <span class="arithmatex">\(y_i\)</span> 是期望的输出 (这是训练数据给出的已知值), <span class="arithmatex">\(a_i^{(L)}\)</span> 是神经网路对训练数据产生的实际输出。然后, 利用下面公式从 <span class="arithmatex">\(L-1\)</span> 层到第 2 层依次计算隐藏层的 <span class="arithmatex">\(\delta^{(l)}\)</span>, <span class="arithmatex">\(l=(L-1, L-2, L-3,\cdots , 2)\)</span></p>
+<div class="arithmatex">\[
+\delta_i^{(l)} =\Big(\sum_{j=1}^{n_{l+1}}\delta_j^{(l+1)}w_{ji}^{(l+1)}\Big)f'(z_i^{(l)}),\ \ (1 \leq i \leq n_l)
+\]</div>
+<p>第四步, 按下面公式求这个训练护具的代价函数对参数的偏导数:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial w_{ij}^{(l)}}&amp;=\delta_i^{(l)}a_j^{(l-1)}\\\\
+\frac{\partial E}{\partial b_i^{(l)}}&amp;=\delta_i^{(l)}  \\\\
+\end{aligned}
+\]</div>
+<p>工程实现中注意事项:</p>
+<p>在前面传播的过程中, 我们已经计算出了所有的 <span class="arithmatex">\(a_i^{(l)}\)</span>, 反向传播过程中的 <span class="arithmatex">\(f'(z_i^{(l)})\)</span> 可以直接用 <span class="arithmatex">\(a_i^{(l)}\)</span> 来计算。</p>
+<p>假设使用的激活函数为 <span class="arithmatex">\(f(x)=\frac{1}{1+ep^{-x}}\)</span>, 则 <span class="arithmatex">\(f'(x)=- \frac{1}{(1+e^{-x})^2}\times e^{-x} \times (-1)=\frac{e^{-x}}{(1+e^{-x})^2}\)</span>, 容易验证 它又等于 <span class="arithmatex">\(f(x)\big(1-f(x)\big)\)</span>, 因此: <span class="arithmatex">\(f'(z_i^{(l)})=a_i^{(l)}(1-a_i^{(l)})\)</span></p>
+<h3 id="36-bp">3.6 BP算法总结</h3>
+<p>"批量梯度下降" 算法更新参数的总结如下:</p>
+<p>(1) 用BP算法四个核心公式求得每一个训练数据的代价函数对参数的偏导数</p>
+<p>(2) 按下面公式更新参数:</p>
+<div class="arithmatex">\[
+W^{(l)} =W^{(l)}- \frac{\mu}{N}\sum_{i=1}^N \frac{\partial E_{(i)}}{\partial W^{(l)}}
+\]</div>
+<div class="arithmatex">\[
+b^{(l)} =b^{(l)}- \frac{\mu}{N}\sum_{i=1}^N \frac{\partial E_{(i)}}{\partial b^{(l)}}
+\]</div>
+<p>(3) 迭代执行第 (1), (2) 步, 直到满足停止准则。(比如相邻两次迭代误差的差别很小, 或者直接限制迭代的次数)。</p>
+<blockquote>
+<p>说明: 每对参数进行一次更新都要便利整个训练集数据集, 当训练数据不大时这不是问题, 当训练数据集非常巨大时, 可以采用随机梯度下降法 (每次仅使用一个训练数据来更新参数)。</p>
+</blockquote>
 
               
             </article>
