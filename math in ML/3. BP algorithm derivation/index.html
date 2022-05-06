@@ -58,6 +58,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#1bp" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -456,9 +461,45 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          三. 神经网络BP算法原理和推导
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         三. 神经网络BP算法原理和推导
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1bp" class="md-nav__link">
+    1、反向传播算法和BP网络简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、信息向前传播
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -478,6 +519,44 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1bp" class="md-nav__link">
+    1、反向传播算法和BP网络简介
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、信息向前传播
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
@@ -491,6 +570,79 @@
 <p>参考链接:</p>
 <p><a href="https://blog.csdn.net/qq_32865355/article/details/80260212">神经网络BP反向传播算法原理和详细推导流程</a></p>
 </div>
+<!--
+下面这个css用于控制p标签的两端对齐
+-->
+<style type="text/css">
+p {
+    text-align: justify;  /*文本两端对齐*/
+}
+center img{
+    border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);
+}
+center div{
+    color:orange; 
+    border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;
+}
+</style>
+
+<h2 id="1bp">1、反向传播算法和BP网络简介</h2>
+<p>误差反向传播算法简称反向传播算法（即BP算法）。使用反向传播算法的多层感知器又称为BP神经网络。BP算法是一个迭代算法, 它的基本思想为：</p>
+<ul>
+<li>
+<p>先计算每一层的状态和激活值，直到最后一层 (即信号是前向传播的);</p>
+</li>
+<li>
+<p>计算每一层的误差, 误差的计算过程是从最后一层向前推进的 (这就是反向传播算法名字的由来);</p>
+</li>
+<li>
+<p>更新参数 (目标是误差变小)。迭代前面两个步骤, 直到满足停止准则 (比如相邻两次迭代的误差的差别很小)。</p>
+</li>
+</ul>
+<p>本文的记号说明:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(n_l\)</span> 表示第 <span class="arithmatex">\(l\)</span> 层神经元的个数;</p>
+</li>
+<li>
+<p><span class="arithmatex">\(f(\cdot)\)</span> 表示神经元的激活函数</p>
+</li>
+<li>
+<p><span class="arithmatex">\(W^{(l)} \in \mathbb{R}^{(n_l\times n_{l-1})}\)</span> 表示 <span class="arithmatex">\(l-1\)</span> 层到第 <span class="arithmatex">\(l\)</span> 层的权重矩阵;</p>
+</li>
+<li>
+<p><span class="arithmatex">\(w_{ij}^{(l)}\)</span> 是权重矩阵 <span class="arithmatex">\(W^{(l)}\)</span> 中的元素, 表示第 <span class="arithmatex">\(l-1\)</span> 层第 <span class="arithmatex">\(j\)</span> 个神经元到第 <span class="arithmatex">\(l\)</span> 层第 <span class="arithmatex">\(i\)</span> 个神经元的权重 (注意标号的顺序);</p>
+</li>
+<li>
+<p><span class="arithmatex">\(b^{(l)}=(b_1^{(l)},b_2^{(l)},\cdots ,b_{n_l}^{(l)})^T \in \mathbb{R}^{n_l}\)</span> 表示 <span class="arithmatex">\(l-1\)</span> 层到第 <span class="arithmatex">\(l\)</span> 层的偏置;</p>
+</li>
+<li>
+<p><span class="arithmatex">\(z^{(l)}=(z_1^{(l)},z_2^{(l)},\cdots ,z_{n_l}^{(l)})^T \in \mathbb{R}^{n_l}\)</span> 表示 <span class="arithmatex">\(l\)</span> 层神经元的状态;</p>
+</li>
+<li>
+<p><span class="arithmatex">\(a^{(l)}=(a_1^{(l)},a_2^{(l)},\cdots ,a_{n_l}^{(l)})^T \in \mathbb{R}^{n_l}\)</span> 表示 <span class="arithmatex">\(l\)</span> 层神经元的激活值 (即输出值);</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">关于记号的特别注意</p>
+<p>不同文献所采用的记号可能不同, 这将导致不同文献的公式结论可能不同。如 Andrew Ng 的教程中用 <span class="arithmatex">\(W^{(l)}\)</span> 表示的是第 <span class="arithmatex">\(l\)</span> 层到第 <span class="arithmatex">\(l+1\)</span> 层的权重矩阵。又如, 本文用 "下标" 来标记一个向量的不同分量, 而有一些资料却用 "上标" 来标记向量的不同分量。</p>
+</div>
+<p>下面以三层感知器 (即只含有一个隐藏层的多层感知器) 为例介绍反向传播算法 (BP) 算法。</p>
+<p>三层感知器如图 1 所示。例子中, 输入数据 <span class="arithmatex">\(x=(x_1,x_2,x_3)^T\)</span> 是三维的 (对于第一层, 可以认为 <span class="arithmatex">\(a_i^{(1)}=x_i\)</span>), 唯一的隐藏层有三个节点, 输出数据是 2 维的。</p>
+<p><center>
+    <img src="../../assets/images/2018050922060950.png">
+    <br>
+    <div>Figure 1: 三层感知器实例</div>
+</center></p>
+<h2 id="2">2、信息向前传播</h2>
+<p>显然, 图 1 所示的神经网络的第 2 层神经元的状态及激活值可以通过下面的计算得到:</p>
+<div class="arithmatex">\[z_1^{(2)}=w_{11}^{(2)}x_1+w_{12}^{(2)}x_2+w_{13}^{(2)}x_3+b_1^{(2)}\]</div>
+<div class="arithmatex">\[z_2^{(2)}=w_{21}^{(2)}x_1+w_{22}^{(2)}x_2+w_{23}^{(2)}x_3+b_2^{(2)}\]</div>
+<div class="arithmatex">\[z_3^{(2)}=w_{31}^{(2)}x_1+w_{32}^{(2)}x_2+w_{33}^{(2)}x_3+b_2^{(3)}\]</div>
 
               
             </article>
