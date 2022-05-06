@@ -497,6 +497,26 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、误差反向传播
+  </a>
+  
+    <nav class="md-nav" aria-label="3、误差反向传播">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 输出层的权重参数更新
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -547,6 +567,26 @@
   <a href="#2" class="md-nav__link">
     2、信息向前传播
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、误差反向传播
+  </a>
+  
+    <nav class="md-nav" aria-label="3、误差反向传播">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 输出层的权重参数更新
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -659,6 +699,94 @@ a_1^{(3)}&amp;=f(z_1^{(3)})\\\\
 a_2^{(3)}&amp;=f(z_2^{(3)})
 \end{aligned}
 \]</div>
+<p>可总结出, 第 <span class="arithmatex">\(l(2\leq l \leq L)\)</span> 层神经元的状态及激活值为 (下面式子是向量表示形式):</p>
+<div class="arithmatex">\[
+\begin{aligned}
+z^{(l)}&amp;=W^{(l)}a^{(l-1)}+b^{(l)} \\\\
+a^{(l)}&amp;=f(z^{(l)})
+\end{aligned}
+\]</div>
+<p>对于 <span class="arithmatex">\(L\)</span> 层感知器, 网络的最终输出为 <span class="arithmatex">\(a^{(L)}\)</span>。前馈神经网络中信息的前向传递过程如下:</p>
+<div class="arithmatex">\[
+x = a^{(1)} \rightarrow z^{(2)} \rightarrow \cdots a^{(L-1)} \rightarrow  z^{(L)} \rightarrow a^{(L)}=y
+\]</div>
+<h2 id="3">3、误差反向传播</h2>
+<p>"信息前向传播"讲的是已知各个神经元的参数后, 如何得到神经网络的输出。但怎么得到各个神经元的参数呢？"误差反向传播" 算法解决的就是这个问题。</p>
+<p>假设训练数据为 <span class="arithmatex">\(\{(x^{(1)},y^{(1)}),(x^{(2)},y^{(2)}),\cdots ,(x^{(i)},y^{(i)}),\cdots ,(x^{(N)},y^{(N)})\}\)</span>, 即共有 <span class="arithmatex">\(N\)</span> 个。又假设输出数据 <span class="arithmatex">\(n_L\)</span> 维的, 即 <span class="arithmatex">\(y^{(i)}=(y_1^{(i)},\cdots ,y_{n_L}^{(i)})^T\)</span>。</p>
+<p>对于某一个训练数据 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span> 来说, 其代价函数可写为 :</p>
+<div class="arithmatex">\[
+\begin{aligned}
+E_{(i)}&amp;=\frac{1}{2}||y^{(i)}-o^{(i)}|| \\\\
+&amp;=\frac{1}{2}\sum_{k=1}^{n_L}(y^{(i)}-o^{(i)})^2
+\end{aligned}
+\]</div>
+<blockquote>
+<p><span class="arithmatex">\(y^{(i)}\)</span> 为期望的输出 (是训练数据给出的已知值), <span class="arithmatex">\(o^{(i)}\)</span> 为神经网络对输入 <span class="arithmatex">\(x^{(i)}\)</span> 产生的实际输出。</p>
+<p>代价函数中的系数 <span class="arithmatex">\(\frac{1}{2}\)</span> 不是必要的, 它的存在仅仅是为了后续计算时更方便。</p>
+<p>以图 1 所示的神经网络为例, <span class="arithmatex">\(n_L=2\)</span>, <span class="arithmatex">\(y^{(i)}=(y_1^{(i)},y_2^{(i)})^T\)</span>, 从而有 <span class="arithmatex">\(E_{(i)}=\frac{1}{2}(y_1^{(i)}-a_1^{(3)})^2+\frac{1}{2}(y_2^{(i)}-a_2^{(3)})^2\)</span>, 如果展开到隐藏层, 则有, <span class="arithmatex">\(E_{(i)}=\frac{1}{2}\big(y_1^{(i)}-f(w_{11}^{(3)}a_1^{(2)}+w_{12}^{(3)}a_2^{(2)}+w_{13}^{(3)}a_3^{(2)}+b_1^{(3)})\big)^2+\frac{1}{2}\big(y_2^{(i)}-f(w_{21}^{(3)}a_1^{(2)}+w_{22}^{(3)}a_2^{(2)}+w_{23}^{(3)}a_3^{(2)}+b_2^{(3)})\big)^2\)</span>, 还可以进一步展开到输入层 (替换掉 <span class="arithmatex">\(a_1^{(2)}\)</span>, <span class="arithmatex">\(a_2^{(2)}\)</span>, <span class="arithmatex">\(a_3^{(2)}\)</span> 即可), 最后可得: <strong>代价函数 <span class="arithmatex">\(E_{(i)}\)</span> 仅和权重矩阵 <span class="arithmatex">\(W^{(i)}\)</span> 和偏置向量 <span class="arithmatex">\(b^{(l)}\)</span> 相关, 调整权重和偏置可以减少或增大代价(误差)</strong>。</p>
+</blockquote>
+<p>显然, 所有训练数据的总体 (平均) 代价可写为:</p>
+<div class="arithmatex">\[
+E_{total}=\frac{1}{N}\sum_{i=1}^N{E_{(i)}}
+\]</div>
+<p>如果采用梯度下降法 (文献里一般叫批量梯度下降法), 可以用下面公式更新参数 <span class="arithmatex">\(w_{ij}^{(l)}\)</span>, <span class="arithmatex">\(b_i{(l)}\)</span>, <span class="arithmatex">\(2 \leq l \leq L\)</span></p>
+<div class="arithmatex">\[
+\begin{aligned}
+W^{(l)} &amp;= W^{(l)}- \mu \frac{\partial E_{total}}{\partial W^{(l)}} \\\\
+&amp;=W^{(l)}- \frac{\mu}{N}\sum_{i=1}^N \frac{\partial E_{(i)}}{\partial W^{(l)}}
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\begin{aligned}
+b^{(l)} &amp;= b^{(l)}- \mu \frac{\partial E_{total}}{\partial b^{(l)}} \\\\
+&amp;=b^{(l)}- \frac{\mu}{N}\sum_{i=1}^N \frac{\partial E_{(i)}}{\partial b^{(l)}}
+\end{aligned}
+\]</div>
+<p>由上面公式可知, 只需求得每一个训练数据得代价函数 <span class="arithmatex">\(E_{(i)}\)</span> 对参数的偏导数 <span class="arithmatex">\(\frac{\partial E_{(i)}}{\partial W^{(l)}}\)</span>, <span class="arithmatex">\(\frac{\partial E_(i)}{\partial b^{(l)}}\)</span> 即可得到参数的迭代更新公式。</p>
+<p>为简单起见, 在下文的推到中, 我们去掉 <span class="arithmatex">\(E_{(i)}\)</span> 的下标, 直接记为 <span class="arithmatex">\(E\)</span> <strong>(假设训练数据有且只有一个数据)</strong></p>
+<p>下面将介绍用"反向传播算法"求解单个训练数据误差对参数的偏导 <span class="arithmatex">\(\frac{\partial E}{\partial W^{(l)}}\)</span> 和 <span class="arithmatex">\(\frac{\partial E}{\partial b^{(l)}}\)</span> 的过程。我们求解一个简单的情况: 图 1 所示神经网络, 最后再归纳出通用公式。</p>
+<h3 id="31">3.1 输出层的权重参数更新</h3>
+<p>把 <span class="arithmatex">\(E\)</span> 展开到隐藏层, 有:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+E &amp;= \frac{1}{2}||y-o|| \\\\
+&amp;= \frac{1}{2}||y-a^{(3)}||\\\\
+&amp;=\frac{1}{2} \big((y_1-a_1^{(3)})^{2}+(y_2-a_2^{(3)})^{2}\big)\\\\
+&amp;=\frac{1}{2} \Big(\big(y_1-f(z_1^{(3)})\big)^{2}+\big(y_2-f(z_2^{(3)})\big)^{2}\Big)\\\\
+&amp;= \frac{1}{2} \Big(\big(y_1-f(w_{11}^{(3)}a_1^{(2)}+w_{12}^{(3)}a_2^{(2)}+w_{13}^{(3)}a_3^{(2)}+b_1^{(3)})\big)^{2}+\big(y_2-f(w_{21}^{(3)}a_1^{(2)}+w_{22}^{(3)}a_2^{(2)}+w_{23}^{(3)}a_3^{(2)}+b_2^{(3)})\big)^{2}\Big)\\\\
+\end{aligned}
+\]</div>
+<p>由求导的链式法则, 对 "输出层神经元的权重参数"求偏导, 有:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial w_{11}^{(3)}}&amp;= \frac{1}{2}\cdot 2 (y_1-a_1^{(3)})(-\frac{\partial a_1^{(3)}}{\partial w_{11}^{(3)}})\\\\
+&amp;=-(y_1-a_1^{(3)})f'(z_1^{(3)})\frac{\partial z_1^{(3)}}{\partial w_{11}^{(3)}}\\\\
+&amp;=-(y_1-a_1^{(3)})f'(z_1^{(3)})a_1^{(2)}
+\end{aligned}
+\]</div>
+<p>如果我们把 <span class="arithmatex">\(\frac{\partial E}{\partial z_i^{(l)}}\)</span> 记为 <span class="arithmatex">\(\delta_i^{(l)}\)</span>, 即做下面的定义:</p>
+<div class="arithmatex">\[
+\frac{\partial E}{\partial z_i^{(l)}}=\delta_i^{(l)} 
+\]</div>
+<p>则 <span class="arithmatex">\(\frac{\partial E}{\partial w_{11}^{(3)}}\)</span> 显然可以写为:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial w_{11}^{(3)}}&amp;= \frac{\partial E}{\partial z_1^{(3)}}\frac{\partial z_1^{(3)}}{\partial w_{11}^{(3)}}\\\\
+&amp;=\delta_1^{(3)}a_1^{(2)}
+\end{aligned}
+\]</div>
+<p>其中: <span class="arithmatex">\(\delta_2^{(3)}=-\big(y_2-a_2^{(3)}f'(z_2^{(3)})\big)\)</span></p>
+<blockquote>
+<p>之所以要引入记号 <span class="arithmatex">\(\delta_i^{(l)}\)</span>, 除了它能简化 <span class="arithmatex">\(\frac{\partial E}{\partial w_{ij}^{(l)}}\)</span> 和 <span class="arithmatex">\(\frac{\partial E}{\partial b_i^{(l)}}\)</span> 的表达形式外; 更重要的是我们可以通过 <span class="arithmatex">\(\delta_i^{(l+1)}\)</span> 来求解 <span class="arithmatex">\(\delta_i^{(l)}\)</span> (后文将说明), 这样可以充分利用之前计算过的结果来加快整个计算过程。</p>
+</blockquote>
+<p>推广到一般情况, 假设神经网络共 <span class="arithmatex">\(L\)</span> 层, 则:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\delta_i^{(l)} =-(y_i-a_i^{(L)})f'(z_i^{(L)})\ \  &amp;(1 \leq i \leq n_L) \\\\
+\frac{\partial E}{\partial w_{ij}^{(L)}}=\delta_i^{(L)}a_j^{(L-1)}\ \ \ \ \ \ \ \ \  \ \  &amp;(1 \leq i \leq n_L, 1 \leq j \leq n_{L-1})
+\end{aligned}
+\]</div>
+<p>如果</p>
 
               
             </article>
