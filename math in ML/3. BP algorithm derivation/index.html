@@ -775,6 +775,17 @@ E &amp;= \frac{1}{2}||y-o|| \\\\
 &amp;=\delta_1^{(3)}a_1^{(2)}
 \end{aligned}
 \]</div>
+<p>其中: <span class="arithmatex">\(\delta_1^{(3)}=\frac{\partial E}{\partial z_1^{(3)}}=\frac{\partial E}{\partial a_1^{(3)}}\frac{\partial a_1^{(3)}}{\partial z_1^{(3)}}=-(y_1-a_1^{(3)})f'(z_1^{(3)})\)</span></p>
+<p>对于输出层神经元的其他权重参数, 同样可求得:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\frac{\partial E}{\partial w_{12}^{(3)}}&amp;=\delta_1^{(3)}a_2^{(2)} \\\\
+\frac{\partial E}{\partial w_{13}^{(3)}}&amp;=\delta_1^{(3)}a_3^{(2)} \\\\
+\frac{\partial E}{\partial w_{21}^{(3)}}&amp;=\delta_2^{(3)}a_1^{(2)} \\\\
+\frac{\partial E}{\partial w_{22}^{(3)}}&amp;=\delta_2^{(3)}a_2^{(2)} \\\\
+\frac{\partial E}{\partial w_{23}^{(3)}}&amp;=\delta_2^{(3)}a_3^{(2)} \\\\
+\end{aligned}
+\]</div>
 <p>其中: <span class="arithmatex">\(\delta_2^{(3)}=-\big(y_2-a_2^{(3)}f'(z_2^{(3)})\big)\)</span></p>
 <blockquote>
 <p>之所以要引入记号 <span class="arithmatex">\(\delta_i^{(l)}\)</span>, 除了它能简化 <span class="arithmatex">\(\frac{\partial E}{\partial w_{ij}^{(l)}}\)</span> 和 <span class="arithmatex">\(\frac{\partial E}{\partial b_i^{(l)}}\)</span> 的表达形式外; 更重要的是我们可以通过 <span class="arithmatex">\(\delta_i^{(l+1)}\)</span> 来求解 <span class="arithmatex">\(\delta_i^{(l)}\)</span> (后文将说明), 这样可以充分利用之前计算过的结果来加快整个计算过程。</p>
@@ -786,7 +797,39 @@ E &amp;= \frac{1}{2}||y-o|| \\\\
 \frac{\partial E}{\partial w_{ij}^{(L)}}=\delta_i^{(L)}a_j^{(L-1)}\ \ \ \ \ \ \ \ \  \ \  &amp;(1 \leq i \leq n_L, 1 \leq j \leq n_{L-1})
 \end{aligned}
 \]</div>
-<p>如果</p>
+<p>如果把上面两式表达为矩阵 (向量), 则为:</p>
+<div class="arithmatex">\[
+\delta^{(L)} =-(y-a^{(L)})⊙f'(z^{(L)})
+\]</div>
+<div class="arithmatex">\[
+\nabla _{W^{(L)}}E=\delta^{(L)}(a^{(L-1)})^T
+\]</div>
+<blockquote>
+<p>符号 ⊙ 表示 Element-wise Product Operator, 又被称作 Hadamard product. 规则简单, 把对应位置的元素分别相乘即可。如:</p>
+</blockquote>
+<div class="arithmatex">\[
+\left(
+\begin{array}{cc}
+a_{11} &amp; a_{12}\\
+a_{21} &amp; a_{22}\\
+a_{31} &amp; a_{32}\\    
+\end{array}
+\right) ⊙ 
+\left(
+\begin{array}{cc}
+b_{11} &amp; b_{12}\\
+b_{21} &amp; b_{22}\\
+b_{31} &amp; b_{32}\\    
+\end{array}
+\right)=
+\left(
+\begin{array}{cc}
+a_{11}b_{11} &amp; a_{12}b_{12}\\
+a_{21}b_{21} &amp; a_{22}b_{22}\\
+a_{31}b_{31} &amp; a_{32}b_{32}\\    
+\end{array}
+\right)
+\]</div>
 
               
             </article>
