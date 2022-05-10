@@ -799,25 +799,37 @@
 <li>
 <p>分层架构</p>
 <ul>
-<li>批处理层</li>
-<li>数据不可变, 可进行任何计算, 可水平扩展</li>
+<li>
+<p>批处理层</p>
+</li>
+<li>
+<p>数据不可变, 可进行任何计算, 可水平扩展</p>
+</li>
 <li>高延迟  几分钟~几小时(计算量和数据量不同)</li>
 <li>日志收集 Flume</li>
 <li>分布式存储 Hadoop hdfs</li>
 <li>分布式计算 Hadoop MapReduce &amp; spark</li>
-<li>视图存储数据库<ul>
+<li>
+<p>视图存储数据库</p>
+<ul>
 <li>nosql(HBase/Cassandra)</li>
 <li>Redis/memcache</li>
 <li>MySQL</li>
 </ul>
 </li>
-<li>实时处理层</li>
+<li>
+<p>实时处理层</p>
+</li>
 <li>流式处理, 持续计算</li>
 <li>存储和分析某个窗口期内的数据</li>
 <li>最终正确性(Eventual accuracy)</li>
 <li>实时数据收集 flume &amp; kafka</li>
-<li>实时数据分析  spark streaming/storm/flink</li>
-<li>服务层</li>
+<li>
+<p>实时数据分析  spark streaming/storm/flink</p>
+</li>
+<li>
+<p>服务层</p>
+</li>
 <li>支持随机读</li>
 <li>需要在非常短的时间内返回结果</li>
 <li>读取批处理层和实时处理层结果并对其归并</li>
@@ -837,19 +849,27 @@
 <li>
 <p>召回阶段(海选)</p>
 <ul>
-<li>召回决定了最终推荐结果的天花板</li>
-<li>常用算法:</li>
+<li>
+<p>召回决定了最终推荐结果的天花板</p>
+</li>
+<li>
+<p>常用算法:</p>
+</li>
 <li>协同过滤(基于用户 基于物品的)</li>
 <li>基于内容 (根据用户行为总结出自己的偏好 根据偏好 通过文本挖掘技术找到内容上相似的商品)</li>
 <li>基于隐语义</li>
 </ul>
 </li>
-<li>排序阶段<ul>
+<li>
+<p>排序阶段</p>
+<ul>
 <li>召回决定了最终推荐结果的天花板, 排序逼近这个极限, 决定了最终的推荐效果</li>
 <li>CTR预估 (点击率预估 使用LR算法)  估计用户是否会点击某个商品 需要用户的点击数据</li>
 </ul>
 </li>
-<li>策略调整</li>
+<li>
+<p>策略调整</p>
+</li>
 </ul>
 <p><center>
     <img src="../../assets/images/recommend7.jpeg">
