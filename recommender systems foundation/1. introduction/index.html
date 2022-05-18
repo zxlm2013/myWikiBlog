@@ -887,21 +887,21 @@
   </center></p>
 <p>## 3、推荐算法</p>
 <h3 id="31">3.1 推荐模型构建流程</h3>
-<p>Data(数据) <span class="arithmatex">\(\rightarrow\)</span> Features(特征) <span class="arithmatex">\(\rightarrow\)</span> ML Algorithm(机器学习算法) <span class="arithmatex">\(\rightarrow\)</span> Prediction Output(预测输出)</p>
+<p>Data(数据) -&gt; Features(特征) -&gt; ML Algorithm(机器学习算法) -&gt; Prediction Output(预测输出)</p>
 <p><center>
   <img src="../../assets/images/algorithm1.png">
   <br>
 <br />
 <div></div></p>
 <p></center></p>
-<ul>
-<li>
 <p>数据收集/处理</p>
 <ul>
-<li>显性数据</li>
+<li>显性数据<ul>
 <li>Rating 打分</li>
 <li>Comments 评论/评价</li>
-<li>隐形数据</li>
+</ul>
+</li>
+<li>隐形数据<ul>
 <li>Order history 历史订单</li>
 <li>Cart events    加购物车</li>
 <li>Page views    页面浏览</li>
@@ -909,18 +909,20 @@
 <li>Search log     搜索记录</li>
 </ul>
 </li>
-<li>
+</ul>
 <p>特征工程</p>
 <ul>
 <li>协同过滤: 用户-物品 评分矩阵</li>
 <li>基于内容: 分词 tf-idf word2Vec</li>
 </ul>
-</li>
+<p>训练模型</p>
+<ul>
 <li>
-<p>训练模型
-    -协同过滤
-        - KNN
-        - 矩阵分解</p>
+<p>协同过滤</p>
+<ul>
+<li>KNN</li>
+<li>矩阵分解</li>
+</ul>
 </li>
 <li>
 <p>推荐算法概述</p>
