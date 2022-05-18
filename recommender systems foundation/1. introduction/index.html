@@ -793,24 +793,26 @@
 <p>Lambda系统架构提供了一个结合实时数据和Hadoop预先计算的数据环境和混合平台, 提供一个实时的数据视图</p>
 <p>分层架构</p>
 <ul>
-<li>批处理层</li>
+<li>批处理层<ul>
 <li>数据不可变, 可进行任何计算, 可水平扩展</li>
 <li>高延迟  几分钟~几小时(计算量和数据量不同)</li>
 <li>日志收集 Flume</li>
 <li>分布式存储 Hadoop hdfs</li>
 <li>分布式计算 Hadoop MapReduce &amp; spark</li>
-<li>视图存储数据库<ul>
+<li>视图存储数据库</li>
 <li>nosql(HBase/Cassandra)</li>
 <li>Redis/memcache</li>
 <li>MySQL</li>
 </ul>
 </li>
-<li>实时处理层</li>
+<li>实时处理层<ul>
 <li>流式处理, 持续计算</li>
 <li>存储和分析某个窗口期内的数据</li>
 <li>最终正确性(Eventual accuracy)</li>
 <li>实时数据收集 flume &amp; kafka</li>
 <li>实时数据分析  spark streaming/storm/flink</li>
+</ul>
+</li>
 <li>服务层</li>
 <li>支持随机读</li>
 <li>需要在非常短的时间内返回结果</li>
