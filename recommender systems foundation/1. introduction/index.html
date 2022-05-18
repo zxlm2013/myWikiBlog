@@ -799,9 +799,9 @@
     - 分布式存储 Hadoop hdfs
     - 分布式计算 Hadoop MapReduce &amp; spark
     - 视图存储数据库
-        - nosql(HBase/Cassandra)
-        - Redis/memcache
-        - MySQL<br />
+      - nosql(HBase/Cassandra)
+      - Redis/memcache
+      - MySQL<br />
   - 实时处理层
     - 流式处理, 持续计算
     - 存储和分析某个窗口期内的数据
@@ -828,18 +828,24 @@
 <li>
 <p>召回决定了最终推荐结果的天花板</p>
 </li>
-<li>常用算法:<ul>
+<li>
+<p>常用算法:</p>
+<ul>
 <li>协同过滤(基于用户 基于物品的)</li>
 <li>基于内容 (根据用户行为总结出自己的偏好 根据偏好 通过文本挖掘技术找到内容上相似的商品)</li>
 <li>基于隐语义</li>
 </ul>
 </li>
-<li>排序阶段<ul>
-<li>召回决定了最终推荐结果的天花板, 排序逼近这个极限, 决定了最终的推荐效果</li>
-<li>CTR预估 (点击率预估 使用LR算法)  估计用户是否会点击某个商品 需要用户的点击数据</li>
-</ul>
+<li>
+<p>排序阶段</p>
 </li>
-<li>策略调整</li>
+<li>召回决定了最终推荐结果的天花板, 排序逼近这个极限, 决定了最终的推荐效果</li>
+<li>
+<p>CTR预估 (点击率预估 使用LR算法)  估计用户是否会点击某个商品 需要用户的点击数据</p>
+</li>
+<li>
+<p>策略调整</p>
+</li>
 </ul>
 <p><center>
     <img src="../../assets/images/recommend7.jpeg">
