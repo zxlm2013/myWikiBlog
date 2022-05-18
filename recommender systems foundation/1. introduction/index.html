@@ -792,26 +792,26 @@
 <p>由Twitter工程师Nathan Marz(storm项目发起人)提出</p>
 <p>Lambda系统架构提供了一个结合实时数据和Hadoop预先计算的数据环境和混合平台, 提供一个实时的数据视图</p>
 <p>分层架构
-  - 批处理层
-    - 数据不可变, 可进行任何计算, 可水平扩展
-    - 高延迟  几分钟~几小时(计算量和数据量不同)
-    - 日志收集 Flume
-    - 分布式存储 Hadoop hdfs
-    - 分布式计算 Hadoop MapReduce &amp; spark
-    - 视图存储数据库
-      - nosql(HBase/Cassandra)
-      - Redis/memcache
-      - MySQL<br />
-  - 实时处理层
-    - 流式处理, 持续计算
-    - 存储和分析某个窗口期内的数据
-    - 最终正确性(Eventual accuracy)
-    - 实时数据收集 flume &amp; kafka
-    - 实时数据分析  spark streaming/storm/flink
-  - 服务层
-    - 支持随机读
-    - 需要在非常短的时间内返回结果
-    - 读取批处理层和实时处理层结果并对其归并</p>
+- 批处理层
+  - 数据不可变, 可进行任何计算, 可水平扩展
+  - 高延迟  几分钟~几小时(计算量和数据量不同)
+  - 日志收集 Flume
+  - 分布式存储 Hadoop hdfs
+  - 分布式计算 Hadoop MapReduce &amp; spark
+  - 视图存储数据库
+    - nosql(HBase/Cassandra)
+    - Redis/memcache
+    - MySQL<br />
+- 实时处理层
+  - 流式处理, 持续计算
+  - 存储和分析某个窗口期内的数据
+  - 最终正确性(Eventual accuracy)
+  - 实时数据收集 flume &amp; kafka
+  - 实时数据分析  spark streaming/storm/flink
+- 服务层
+  - 支持随机读
+  - 需要在非常短的时间内返回结果
+  - 读取批处理层和实时处理层结果并对其归并</p>
 <ul>
 <li>Lambda架构图</li>
 </ul>
