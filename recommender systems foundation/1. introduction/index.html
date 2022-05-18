@@ -1097,42 +1097,103 @@ E(a,b)=\sqrt {\sum_{i=1}^n{(a_i-b_i)^2}}
 </ul>
 <p>余弦相似度适合用户评分数据(实数值), 杰卡德相似度适用于隐式反馈数据(0, 1布尔值)(是否收藏, 是否点击, 是否加购物车)</p>
 <p>举例说明 杰卡德 余弦 皮尔逊相关系数计算</p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>user1</th>
-<th>user2</th>
-<th>user3</th>
-<th>user4</th>
-<th>user5</th>
-<th>user6</th>
-<th>user7</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>item2</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td>1</td>
-<td></td>
-<td></td>
-<td>0.5</td>
-</tr>
-<tr>
-<td>item4</td>
-<td></td>
-<td>1</td>
-<td>1</td>
-<td></td>
-<td>0.5</td>
-<td></td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
+<p><center>
+  <img src="../../assets/images/similarity_calc2.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<p>皮尔逊相关系数</p>
+<div class="arithmatex">\[
+r=\frac{\sum_{i=1}^n{(x_i-\overline{x})(y_i-\overline{y})}}{\sqrt{\sum_{i=1}^n(x_i-\overline{x})^2}\sqrt{\sum_{i=1}^n(y_i-\overline{y})^2}}
+\]</div>
+<p>基于用户的协同过滤推荐大致流程:</p>
+<ul>
+<li>用公式计算出各用户之间的皮尔逊相关系数</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc4.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>以用户1举例, 列出用户1和其他用户相似度</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc6.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>按照相似度大小排序, K近邻, 如K取4:</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc7.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>取出近邻用户的购物清单</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc8.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>去除用户1已经购买过的商品</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc9.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>在剩余的物品中根据评分排序</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc10.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<blockquote>
+<p>因为余弦相似度对绝对值大小不敏感, 例如用户A对两部电影评分分别是1分和2分, 用户B对同样这两部电影进行评分是4分和5分 用余弦相似度计算, 两个用户的相似度达到0.98</p>
+<p>因此, 非布尔向量计算相似度还是要用皮尔逊相似度。</p>
+</blockquote>
+<p>基于物品的协同过滤推荐大致流程:</p>
+<ul>
+<li>用公式计算出各物品之间的皮尔逊相关系数</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc12.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>以物品1举例</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc13.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>找到与物品1最近似的物品</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/similarity_calc14.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
 <h3 id="34">3.4 协同过滤代码实现</h3>
 
               
