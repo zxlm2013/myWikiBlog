@@ -631,6 +631,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    3.5 使用协同过滤推荐算法对用户进行评分预测
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -741,6 +748,13 @@
           <li class="md-nav__item">
   <a href="#34" class="md-nav__link">
     3.4 协同过滤代码实现
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35" class="md-nav__link">
+    3.5 使用协同过滤推荐算法对用户进行评分预测
   </a>
   
 </li>
@@ -1235,9 +1249,7 @@ r=\frac{\sum_{i=1}^n{(x_i-\overline{x})(y_i-\overline{y})}}{\sqrt{\sum_{i=1}^n(x
 <span class="normal"><a href="#__codelineno-1-12">12</a></span>
 <span class="normal"><a href="#__codelineno-1-13">13</a></span>
 <span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># 用户购买记录数据集</span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1"># 用户购买记录数据集</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span>
@@ -1251,18 +1263,16 @@ r=\frac{\sum_{i=1}^n{(x_i-\overline{x})(y_i-\overline{y})}}{\sqrt{\sum_{i=1}^n(x
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14"></a>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="c1"># print(df)</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="n">df</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="n">pprint</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </code></pre></div>
 </td></tr></table>
 <p>输出</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>    Item A  Item B  Item C  Item D  Item E
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>User1   True    False   True    True    False
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>User2   True    False   False   True    True
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>User3   True    False   True    False   False
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>User4   False   True    False   True    True
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>User5   True    True    True    False   True
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>       Item A  Item B  Item C  Item D  Item E
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>User1    True   False    True    True   False
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>User2    True   False   False    True    True
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>User3    True   False    True   False   False
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>User4   False    True   False    True    True
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>User5    True    True    True   False    True
 </code></pre></div>
 <table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">直接计算某两项的杰卡德相似系数</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -1304,21 +1314,349 @@ r=\frac{\sum_{i=1}^n{(x_i-\overline{x})(y_i-\overline{y})}}{\sqrt{\sum_{i=1}^n(x
 </code></pre></div>
 </td></tr></table>
 <p>输出</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>    User1   User2   User3   User4   User5
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>User1   1.000000    0.50    0.666667    0.2     0.4
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>User2   0.500000    1.00    0.250000    0.5     0.4
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>User3   0.666667    0.25    1.000000    0.0     0.5
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>User4   0.200000    0.50    0.000000    1.0     0.4
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>User5   0.400000    0.40    0.500000    0.4     1.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>          User1  User2     User3  User4  User5
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>User1  1.000000   0.50  0.666667    0.2    0.4
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>User2  0.500000   1.00  0.250000    0.5    0.4
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>User3  0.666667   0.25  1.000000    0.0    0.5
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>User4  0.200000   0.50  0.000000    1.0    0.4
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>User5  0.400000   0.40  0.500000    0.4    1.0
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    Item A  Item B  Item C  Item D  Item E
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>Item A  1.00    0.200000    0.75    0.40    0.400000
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>Item B  0.20    1.000000    0.25    0.25    0.666667
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>Item C  0.75    0.250000    1.00    0.20    0.200000
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>Item D  0.40    0.250000    0.20    1.00    0.500000
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>Item E  0.40    0.666667    0.20    0.50    1.000000
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        Item A    Item B  Item C  Item D    Item E
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>Item A    1.00  0.200000    0.75    0.40  0.400000
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>Item B    0.20  1.000000    0.25    0.25  0.666667
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>Item C    0.75  0.250000    1.00    0.20  0.200000
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>Item D    0.40  0.250000    0.20    1.00  0.500000
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>Item E    0.40  0.666667    0.20    0.50  1.000000
 </code></pre></div>
+<p>有了两两的相似度，接下来就可以筛选TOP-N相似结果，并进行推荐了</p>
+<ul>
+<li>基于用户的协同过滤</li>
+</ul>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">User-Based CF</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="c1"># 新建一个空字典用于存放每个用户的最近似的用户</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="n">topN_users</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="c1"># 遍历每一行数据</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">user_similar</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a>    <span class="c1"># 取出每一列数据，并删除自身，然后排序数据</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>    <span class="n">_df</span> <span class="o">=</span> <span class="n">user_similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a>    <span class="n">_df_sorted</span> <span class="o">=</span> <span class="n">_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a>    <span class="n">top2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_df_sorted</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>    <span class="n">topN_users</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">top2</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top2相似用户：&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="n">pprint</span><span class="p">(</span><span class="n">topN_users</span><span class="p">)</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="n">rs_results</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="c1"># 构建推荐结果</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="k">for</span> <span class="n">user</span><span class="p">,</span> <span class="n">sim_users</span> <span class="ow">in</span> <span class="n">topN_users</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a>    <span class="n">rs_result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>  <span class="c1"># 存储推荐结果</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>    <span class="k">for</span> <span class="n">sim_user</span> <span class="ow">in</span> <span class="n">sim_users</span><span class="p">:</span>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a>        <span class="c1"># 构建初始的推荐结果</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a>        <span class="n">rs_result</span> <span class="o">=</span> <span class="n">rs_result</span><span class="o">.</span><span class="n">union</span><span class="p">(</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a>            <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">sim_user</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a>    <span class="c1"># 过滤掉已经购买过的物品</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a>    <span class="n">rs_result</span> <span class="o">-=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">user</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a>    <span class="n">rs_results</span><span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs_result</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最终推荐结果：&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="n">pprint</span><span class="p">(</span><span class="n">rs_results</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Top2相似用户：
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>{&#39;User1&#39;: [&#39;User3&#39;, &#39;User2&#39;],
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a> &#39;User2&#39;: [&#39;User4&#39;, &#39;User1&#39;],
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a> &#39;User3&#39;: [&#39;User1&#39;, &#39;User5&#39;],
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a> &#39;User4&#39;: [&#39;User2&#39;, &#39;User5&#39;],
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a> &#39;User5&#39;: [&#39;User3&#39;, &#39;User4&#39;]}
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>最终推荐结果：
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>{&#39;User1&#39;: {&#39;Item E&#39;},
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a> &#39;User2&#39;: {&#39;Item C&#39;, &#39;Item B&#39;},
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a> &#39;User3&#39;: {&#39;Item B&#39;, &#39;Item D&#39;, &#39;Item E&#39;},
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a> &#39;User4&#39;: {&#39;Item C&#39;, &#39;Item A&#39;},
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a> &#39;User5&#39;: {&#39;Item D&#39;}}
+</code></pre></div>
+<ul>
+<li>基于用户的协同过滤</li>
+</ul>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">Item-Based CF</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span>
+<span class="normal"><a href="#__codelineno-9-23">23</a></span>
+<span class="normal"><a href="#__codelineno-9-24">24</a></span>
+<span class="normal"><a href="#__codelineno-9-25">25</a></span>
+<span class="normal"><a href="#__codelineno-9-26">26</a></span>
+<span class="normal"><a href="#__codelineno-9-27">27</a></span>
+<span class="normal"><a href="#__codelineno-9-28">28</a></span>
+<span class="normal"><a href="#__codelineno-9-29">29</a></span>
+<span class="normal"><a href="#__codelineno-9-30">30</a></span>
+<span class="normal"><a href="#__codelineno-9-31">31</a></span>
+<span class="normal"><a href="#__codelineno-9-32">32</a></span>
+<span class="normal"><a href="#__codelineno-9-33">33</a></span>
+<span class="normal"><a href="#__codelineno-9-34">34</a></span>
+<span class="normal"><a href="#__codelineno-9-35">35</a></span>
+<span class="normal"><a href="#__codelineno-9-36">36</a></span>
+<span class="normal"><a href="#__codelineno-9-37">37</a></span>
+<span class="normal"><a href="#__codelineno-9-38">38</a></span>
+<span class="normal"><a href="#__codelineno-9-39">39</a></span>
+<span class="normal"><a href="#__codelineno-9-40">40</a></span>
+<span class="normal"><a href="#__codelineno-9-41">41</a></span>
+<span class="normal"><a href="#__codelineno-9-42">42</a></span>
+<span class="normal"><a href="#__codelineno-9-43">43</a></span>
+<span class="normal"><a href="#__codelineno-9-44">44</a></span>
+<span class="normal"><a href="#__codelineno-9-45">45</a></span>
+<span class="normal"><a href="#__codelineno-9-46">46</a></span>
+<span class="normal"><a href="#__codelineno-9-47">47</a></span>
+<span class="normal"><a href="#__codelineno-9-48">48</a></span>
+<span class="normal"><a href="#__codelineno-9-49">49</a></span>
+<span class="normal"><a href="#__codelineno-9-50">50</a></span>
+<span class="normal"><a href="#__codelineno-9-51">51</a></span>
+<span class="normal"><a href="#__codelineno-9-52">52</a></span>
+<span class="normal"><a href="#__codelineno-9-53">53</a></span>
+<span class="normal"><a href="#__codelineno-9-54">54</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">users</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;User1&quot;</span><span class="p">,</span> <span class="s2">&quot;User2&quot;</span><span class="p">,</span> <span class="s2">&quot;User3&quot;</span><span class="p">,</span> <span class="s2">&quot;User4&quot;</span><span class="p">,</span> <span class="s2">&quot;User5&quot;</span><span class="p">]</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="n">items</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Item A&quot;</span><span class="p">,</span> <span class="s2">&quot;Item B&quot;</span><span class="p">,</span> <span class="s2">&quot;Item C&quot;</span><span class="p">,</span> <span class="s2">&quot;Item D&quot;</span><span class="p">,</span> <span class="s2">&quot;Item E&quot;</span><span class="p">]</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1"># 用户购买记录数据集</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">datasets</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a>    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a>    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">],</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a>    <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a>    <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="p">]</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>                  <span class="n">columns</span><span class="o">=</span><span class="n">items</span><span class="p">,</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>                  <span class="n">index</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="c1"># 计算所有的数据两两的杰卡德相似系数</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">pairwise_distances</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="c1"># 计算物品间相似度</span>
+<a id="__codelineno-9-23" name="__codelineno-9-23"></a><span class="n">item_similar</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-24" name="__codelineno-9-24"></a><span class="n">item_similar</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">item_similar</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">items</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">items</span><span class="p">)</span>
+<a id="__codelineno-9-25" name="__codelineno-9-25"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;物品之间的两两相似度：&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-26" name="__codelineno-9-26"></a><span class="nb">print</span><span class="p">(</span><span class="n">item_similar</span><span class="p">)</span>
+<a id="__codelineno-9-27" name="__codelineno-9-27"></a>
+<a id="__codelineno-9-28" name="__codelineno-9-28"></a><span class="n">topN_items</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-9-29" name="__codelineno-9-29"></a><span class="c1"># 遍历每一行数据</span>
+<a id="__codelineno-9-30" name="__codelineno-9-30"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">item_similar</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>
+<a id="__codelineno-9-31" name="__codelineno-9-31"></a>    <span class="c1"># 取出每一列数据，并删除自身，然后排序数据</span>
+<a id="__codelineno-9-32" name="__codelineno-9-32"></a>    <span class="n">_df</span> <span class="o">=</span> <span class="n">item_similar</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-9-33" name="__codelineno-9-33"></a>    <span class="n">_df_sorted</span> <span class="o">=</span> <span class="n">_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<a id="__codelineno-9-34" name="__codelineno-9-34"></a>
+<a id="__codelineno-9-35" name="__codelineno-9-35"></a>    <span class="n">top2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">_df_sorted</span><span class="o">.</span><span class="n">index</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<a id="__codelineno-9-36" name="__codelineno-9-36"></a>    <span class="n">topN_items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">top2</span>
+<a id="__codelineno-9-37" name="__codelineno-9-37"></a>
+<a id="__codelineno-9-38" name="__codelineno-9-38"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top2相似物品：&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-39" name="__codelineno-9-39"></a><span class="n">pprint</span><span class="p">(</span><span class="n">topN_items</span><span class="p">)</span>
+<a id="__codelineno-9-40" name="__codelineno-9-40"></a>
+<a id="__codelineno-9-41" name="__codelineno-9-41"></a><span class="n">rs_results</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-9-42" name="__codelineno-9-42"></a><span class="c1"># 构建推荐结果</span>
+<a id="__codelineno-9-43" name="__codelineno-9-43"></a><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>    <span class="c1"># 遍历所有用户</span>
+<a id="__codelineno-9-44" name="__codelineno-9-44"></a>    <span class="n">rs_result</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+<a id="__codelineno-9-45" name="__codelineno-9-45"></a>    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">user</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">:</span>   <span class="c1"># 取出每个用户当前已购物品列表</span>
+<a id="__codelineno-9-46" name="__codelineno-9-46"></a>        <span class="c1"># 根据每个物品找出最相似的TOP-N物品，构建初始推荐结果</span>
+<a id="__codelineno-9-47" name="__codelineno-9-47"></a>        <span class="n">rs_result</span> <span class="o">=</span> <span class="n">rs_result</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">topN_items</span><span class="p">[</span><span class="n">item</span><span class="p">])</span>
+<a id="__codelineno-9-48" name="__codelineno-9-48"></a>    <span class="c1"># 过滤掉用户已购的物品</span>
+<a id="__codelineno-9-49" name="__codelineno-9-49"></a>    <span class="n">rs_result</span> <span class="o">-=</span> <span class="nb">set</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">user</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="kc">False</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<a id="__codelineno-9-50" name="__codelineno-9-50"></a>    <span class="c1"># 添加到结果中</span>
+<a id="__codelineno-9-51" name="__codelineno-9-51"></a>    <span class="n">rs_results</span><span class="p">[</span><span class="n">user</span><span class="p">]</span> <span class="o">=</span> <span class="n">rs_result</span>
+<a id="__codelineno-9-52" name="__codelineno-9-52"></a>
+<a id="__codelineno-9-53" name="__codelineno-9-53"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;最终推荐结果：&quot;</span><span class="p">)</span>
+<a id="__codelineno-9-54" name="__codelineno-9-54"></a><span class="n">pprint</span><span class="p">(</span><span class="n">rs_results</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>物品之间的两两相似度：
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        Item A    Item B  Item C  Item D    Item E
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>Item A    1.00  0.200000    0.75    0.40  0.400000
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>Item B    0.20  1.000000    0.25    0.25  0.666667
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>Item C    0.75  0.250000    1.00    0.20  0.200000
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>Item D    0.40  0.250000    0.20    1.00  0.500000
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>Item E    0.40  0.666667    0.20    0.50  1.000000
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>Top2相似物品：
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>{&#39;Item A&#39;: [&#39;Item C&#39;, &#39;Item E&#39;],
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a> &#39;Item B&#39;: [&#39;Item E&#39;, &#39;Item D&#39;],
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a> &#39;Item C&#39;: [&#39;Item A&#39;, &#39;Item B&#39;],
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a> &#39;Item D&#39;: [&#39;Item E&#39;, &#39;Item A&#39;],
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a> &#39;Item E&#39;: [&#39;Item B&#39;, &#39;Item D&#39;]}
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>最终推荐结果：
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>{&#39;User1&#39;: {&#39;Item B&#39;, &#39;Item E&#39;},
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a> &#39;User2&#39;: {&#39;Item C&#39;, &#39;Item B&#39;},
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a> &#39;User3&#39;: {&#39;Item B&#39;, &#39;Item E&#39;},
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a> &#39;User4&#39;: {&#39;Item A&#39;},
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a> &#39;User5&#39;: {&#39;Item D&#39;}}
+</code></pre></div>
+<h3 id="35">3.5 使用协同过滤推荐算法对用户进行评分预测</h3>
+<p>在前面的demo中, 我们只是使用用户对物品的一个购买记录, 类似也可以是比如浏览点击记录、收听记录等等。这样数据我们预测的结果其实相当于是在预测用户是否对某物品感兴趣, 对于喜好程度不能很好的预测。</p>
+<p>因此在协同过滤推荐算法中其实会更多的利用用户对物品的"评分"数据来进行预测, 通过评分数据集, 我们可以预测用户对于他没有评分过的物品的评分。其实现原理和思想和都是一样的, 只是使用的数据集是用户-物品的评分数据。</p>
+<p><strong>关于用户-物品评分矩阵</strong></p>
+<p>用户-物品的评分矩阵，根据评分矩阵的稀疏程度会有不同的解决方案。</p>
+<ul>
+<li>稠密评分矩阵</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/稠密评分数据集.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<ul>
+<li>稀疏评分矩阵</li>
+</ul>
+<p><center>
+  <img src="../../assets/images/稀疏评分数据集.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<p>这里先介绍稠密评分矩阵的处理，稀疏矩阵的处理相对会复杂一些，我们到后面再来介绍。</p>
+<p><strong>开始</strong>使用协同过滤推荐算法对用户进行评分预测</p>
+<p><strong>数据集:</strong></p>
+<p><center>
+  <img src="../../assets/images/稠密评分数据集.png">
+  <br>
+<br />
+<div></div></p>
+<p></center></p>
+<p><strong>目的:</strong> 预测用户1对物品E的评分</p>
+<p><strong>构建数据集:</strong>注意这里构建评分数据时, 对于缺失的部分我们<strong>需要保留为None</strong>, 如果设置为0那么会被当作评分值为0去对待。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>users = [&quot;User1&quot;, &quot;User2&quot;, &quot;User3&quot;, &quot;User4&quot;, &quot;User5&quot;]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>items = [&quot;Item A&quot;, &quot;Item B&quot;, &quot;Item C&quot;, &quot;Item D&quot;, &quot;Item E&quot;]
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a># 用户购买记录数据集
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>datasets = [
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    [5,3,4,4,None],
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    [3,1,2,3,3],
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    [4,3,4,3,5],
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    [3,3,1,5,4],
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    [1,5,5,2,1],
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>]
+</code></pre></div>
+<p>计算相似度: 对于评分数据这里我们采用皮尔逊相关系数[-1,1]来计算, -1表示强负相关, +1表示强正相关, 0 表示不相关。</p>
+<blockquote>
+<p>pandas中corr方法可直接用于计算皮尔逊相关系数</p>
+</blockquote>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">分别计算用户与用户 物品与物品间的相似度</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a>                  <span class="n">columns</span><span class="o">=</span><span class="n">items</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a>                  <span class="n">index</span><span class="o">=</span><span class="n">users</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;用户之间的两两相似度：&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="c1"># 直接计算皮尔逊相关系数</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="c1"># 默认是按列进行计算，因此如果计算用户间的相似度，当前需要进行转置</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="n">user_similar</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">user_similar</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;物品之间的两两相似度：&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="n">item_similar</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">item_similar</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a># 运行结果：
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>用户之间的两两相似度：
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        User1   User2   User3   User4   User5
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>User1  1.0000  0.8528  0.7071  0.0000 -0.7921
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>User2  0.8528  1.0000  0.4677  0.4900 -0.9001
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>User3  0.7071  0.4677  1.0000 -0.1612 -0.4666
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>User4  0.0000  0.4900 -0.1612  1.0000 -0.6415
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>User5 -0.7921 -0.9001 -0.4666 -0.6415  1.0000
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>物品之间的两两相似度：
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        Item A  Item B  Item C  Item D  Item E
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>Item A  1.0000 -0.4767 -0.1231  0.5322  0.9695
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>Item B -0.4767  1.0000  0.6455 -0.3101 -0.4781
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>Item C -0.1231  0.6455  1.0000 -0.7206 -0.4276
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>Item D  0.5322 -0.3101 -0.7206  1.0000  0.5817
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>Item E  0.9695 -0.4781 -0.4276  0.5817  1.0000
+</code></pre></div>
+<p>可以看到与用户1最相似的是用户2和用户3；与物品A最相似的物品分别是物品E和物品D。</p>
+<p><strong>注意：</strong>我们在预测评分时，往往是通过与其有正相关的用户或物品进行预测，如果不存在正相关的情况，那么将无法做出预测。这一点尤其是在稀疏评分矩阵中尤为常见，因为稀疏评分矩阵中很难得出正相关系数。</p>
+<p><strong>评分预测:</strong></p>
+<p><strong>User-Based CF 评分预测：使用用户间的相似度进行预测</strong></p>
+<p>关于评分预测的方法也有比较多的方案，下面介绍一种效果比较好的方案，该方案考虑了用户本身的评分评分以及近邻用户的加权平均相似度打分来进行预测:</p>
+<div class="arithmatex">\[
+pred(u,i)=\frac{\sum_{v \in U_{rated}}{sim(u,v)*r_{vi}}}{\sum_{v \in U_{rated}}{|sim(u,v)|}}
+\]</div>
+<p>我们要预测用户1对物品E的评分，那么可以根据与用户1最近邻的用户2和用户3进行预测，计算如下：</p>
+<div class="arithmatex">\[
+pred(u_1,i_5)=\frac{0.85*3+0.71*5}{0.85+0.71}=3.91
+\]</div>
+<p>最终预测出用户1对物品5的评分为3.91</p>
+<p><strong>Item-Based CF 评分预测：使用物品间的相似度进行预测</strong></p>
+<p>这里利用物品相似度预测的计算同上，同样考虑了用户自身的平均打分因素，结合预测物品与相似物品的加权平均相似度打分进行来进行预测</p>
+<div class="arithmatex">\[
+pred(u,i)=\frac{\sum_{j \in I_{rated}}{sim(i,j)*r_{uj}}}{\sum_{j \in I_{rated}}{|sim(i,j)|}}
+\]</div>
+<p>我们要预测用户1对物品E的评分，那么可以根据与物品E最近邻的物品A和物品D进行预测，计算如下：</p>
+<div class="arithmatex">\[
+pred(u_1,i_5)=\frac{0.97*5+0.58*4}{0.97+0.58}=4.63
+\]</div>
+<p>对比可见，User-Based CF预测评分和Item-Based CF的评分结果也是存在差异的，因为严格意义上他们其实应当属于两种不同的推荐算法，各自在不同的领域不同场景下，都会比另一种的效果更佳，但具体哪一种更佳，必须经过合理的效果评估，因此在实现推荐系统时这两种算法往往都是需要去实现的，然后对产生的推荐效果进行评估分析选出更优方案。</p>
 
               
             </article>
