@@ -1,0 +1,1871 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+    
+    
+      
+        <title>五. 神经网络-表达 - 大白的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="大白的知识库" class="md-header__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            大白的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              五. 神经网络-表达
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../math%20in%20ML/" class="md-tabs__link">
+        机器学习补充
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-tabs__link">
+        推荐系统基础
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="大白的知识库" class="md-nav__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    大白的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          机器学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20linear%20regression-1%20v/" class="md-nav__link">
+        一. 单变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20linear%20regression-m%20v/" class="md-nav__link">
+        二. 多变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20logistic%20regression/" class="md-nav__link">
+        三. 逻辑回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20regularization/" class="md-nav__link">
+        四. 正则化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          五. 神经网络-表达
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        五. 神经网络-表达
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、非线性假设
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、神经元和大脑
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3、模型表示1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4、模型表示2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5、例子和直观理解1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6、例子和直观理解2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7、多类别分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    代码练习
+  </a>
+  
+    <nav class="md-nav" aria-label="代码练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multi-class-classification" class="md-nav__link">
+    1 Multi-class Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Multi-class Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-dataset" class="md-nav__link">
+    1.1 Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-visualizing-the-data" class="md-nav__link">
+    1.2 Visualizing the data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vectorizing-logistic-regression" class="md-nav__link">
+    1.3 Vectorizing Logistic regression
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Vectorizing Logistic regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-vectorizing-the-cost-function" class="md-nav__link">
+    1.3.1 Vectorizing the cost function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-vectorizing-the-gradient" class="md-nav__link">
+    1.3.2 Vectorizing the gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-vectorizing-regularized-logistic-regression" class="md-nav__link">
+    1.3.3 Vectorizing regularized logistic regression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-one-vs-all-classification" class="md-nav__link">
+    1.4 One-vs-all Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 One-vs-all Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-one-vs-all-prediction" class="md-nav__link">
+    1.4.1  One-vs-all Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-neural-networks" class="md-nav__link">
+    2 Neural networks
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-model-representation" class="md-nav__link">
+    2.1 Model Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-feedforward-propagation-and-prediction" class="md-nav__link">
+    2.2 Feedforward Propagation and Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Neural%20Networks-L/" class="md-nav__link">
+        六. 神经网络-学习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          机器学习补充
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习补充" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习补充
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/1.%20M%20derivation%20essence/" class="md-nav__link">
+        一. 矩阵求导本质
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/2.%20M%20derivation/" class="md-nav__link">
+        二. 矩阵求导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/3.%20BP%20algorithm%20derivation/" class="md-nav__link">
+        三. 神经网络BP算法原理和推导
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          推荐系统基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="推荐系统基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          推荐系统基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/1.%20introduction/" class="md-nav__link">
+        一. 简介
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、非线性假设
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、神经元和大脑
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3、模型表示1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#42" class="md-nav__link">
+    4、模型表示2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    5、例子和直观理解1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    6、例子和直观理解2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7、多类别分类
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    代码练习
+  </a>
+  
+    <nav class="md-nav" aria-label="代码练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-multi-class-classification" class="md-nav__link">
+    1 Multi-class Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1 Multi-class Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-dataset" class="md-nav__link">
+    1.1 Dataset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-visualizing-the-data" class="md-nav__link">
+    1.2 Visualizing the data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-vectorizing-logistic-regression" class="md-nav__link">
+    1.3 Vectorizing Logistic regression
+  </a>
+  
+    <nav class="md-nav" aria-label="1.3 Vectorizing Logistic regression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#131-vectorizing-the-cost-function" class="md-nav__link">
+    1.3.1 Vectorizing the cost function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#132-vectorizing-the-gradient" class="md-nav__link">
+    1.3.2 Vectorizing the gradient
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#133-vectorizing-regularized-logistic-regression" class="md-nav__link">
+    1.3.3 Vectorizing regularized logistic regression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#14-one-vs-all-classification" class="md-nav__link">
+    1.4 One-vs-all Classification
+  </a>
+  
+    <nav class="md-nav" aria-label="1.4 One-vs-all Classification">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#141-one-vs-all-prediction" class="md-nav__link">
+    1.4.1  One-vs-all Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-neural-networks" class="md-nav__link">
+    2 Neural networks
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Neural networks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-model-representation" class="md-nav__link">
+    2.1 Model Representation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-feedforward-propagation-and-prediction" class="md-nav__link">
+    2.2 Feedforward Propagation and Prediction
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>五. 神经网络-表达</h1>
+
+<div class="admonition info">
+<p>参考链接:
+https://scruel.gitee.io/ml-andrewng-notes/week3.html</p>
+</div>
+<!--
+下面这个css用于控制p标签的两端对齐
+-->
+<style type="text/css">
+p {
+    text-align: justify;  /*文本两端对齐*/
+}
+center img{
+    border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);
+}
+center div{
+    color:orange; 
+    border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;
+}
+</style>
+
+<h2 id="1">1、非线性假设</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 1 - Non-linear Hypotheses (10 min).mkv</p>
+</div>
+<p>理论上我们可以用多项式函数去近似任意函数（泰勒极数(Taylor series)），从而可得到任意问题的拟合曲线。</p>
+<p>在实际处理时，特征量通常会很多，如果再构造高阶多项式等，特征数量将会急剧增加，这使得回归模型的复杂度太高，可见并不合适。神经网络无需构造高阶多项式，在特征量很大时也可以处理的很好。</p>
+<p>那特征能有多大呢？下面是一个计算机视觉中的例子：</p>
+<p><center>
+    <img src="../../assets/images/5_1_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>如上图，如果选取一小块 <span class="arithmatex">\(50\times 50\)</span> 像素的灰度图片（一个像素只有亮度一个值），选择每个像素点作为特征，则特征总量 <span class="arithmatex">\(n=2500\)</span>（换成 RGB（一个像素有三个值），则 <span class="arithmatex">\(n=7500\)</span> ），如果将其两两组合作为新特征，则特征数量将为 <span class="arithmatex">\(C_{2500}^2 \approx 3\ million\)</span> 。</p>
+<h2 id="2">2、神经元和大脑</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 2 - Neurons and the Brain (8 min).mkv</p>
+</div>
+<p>脑科学家通过对动物实验，发现大脑中专用于处理听觉信号的脑皮层也能处理其他诸如视觉等信号，即如果切断其与耳朵的联系，将其与眼睛相连，则这块负责听觉的脑皮层区域也能接受并处理视觉信号，从而学会“看”。脑科学家通过这类换源实验，就推论假设大脑的学习算法只有一种(“one learning algorithm” hypothesis)。那么如果能找出这种学习算法并应用于计算机中，那梦想中和人一样的人工智能就成真了。</p>
+<p>神经网络就源于<strong>模拟人类大脑</strong>，但其需要的计算量很大。随着计算机硬件性能的提高，神经网络逐渐从衰落变为流行，如今已广泛地被应用在各行各业中。</p>
+<p>下图是根据研究做的一些应用（有兴趣可回顾视频）：</p>
+<p><center>
+    <img src="../../assets/images/5_2_1.png">
+    <br>
+    <div>Seeing with your tongue
+</div>
+</center></p>
+<p>BrainPort  系统：帮助失明人士通过摄像头以及舌尖感官“看”东西</p>
+<p><center>
+    <img src="../../assets/images/5_2_2.png">
+    <br>
+    <div>Haptic belt: Direction sense
+</div>
+</center></p>
+<p>触觉皮带：在朝北时蜂鸣器会发出声响，可使人拥有方向感（声音信号转换为方向信号）。</p>
+<h2 id="31">3、模型表示1</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 3 - Model Representation I (12 min).mkv</p>
+</div>
+<p>既然神经网络模仿的是大脑神经元，那就先看一下大脑的神经元长什么样吧：</p>
+<p><center>
+    <img src="../../assets/images/5_3_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>想象一下印刷厂中流水线的工人（机器人也算哦），每个工人都有特定的任务，比如装订，塑封，贴防伪标识等等，工人们看到书本并处理完自己的任务后，就回放回传送带，紧接着传送带就传给下一个环节的工人，如此不断重复从而完成一个又一个环节，直到一本书印制完成。</p>
+<p>那么类比一下，把上图中的<strong>细胞核(nucleus)</strong>类比成工人，<strong>轴突(axon)</strong>类比传送带，<strong>树突(dendrite)</strong>则比类比成工人的双眼。一个又一个细胞体，从树突接收需要处理的信息，对其进行处理后，再经由轴突通过电信号把处理完的信息传递出去，直到理解信息的内容。当然啦，我们大脑的实际上还要更为复杂，而且一个人的神经元数目就比地球上所有流水线的工人之和还要多呢~</p>
+<p>人工神经网络中，树突对应<strong>输入(input)</strong>，细胞核对应<strong>激活单元(activation unit)</strong>，轴突对应<strong>输出(output)</strong>。</p>
+<p><center>
+    <img src="../../assets/images/5_3_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>In a neural network, or rather in an artificial neural network, that we implement in a computer, we are going to use a very simple model of what a neuron does. We are going to model a neuron as just a logistic unit.</p>
+<p>上图<strong>黄色圆圈</strong>是类似与<strong>神经元</strong>细胞体的东西, 然后我们通过<strong>输入通道</strong> (树突) 给神经元细胞体<strong>传递信息</strong>, 然后神经元<strong>做一些运算</strong>, 并通过它的<strong>输出通道 (轴突) 输出计算结果</strong>。当我们画出这个图表的时候就表示 </p>
+<div class="arithmatex">\[
+h_\theta(x)=\frac{1}{1+e^{-\theta^Tx}}
+\]</div>
+<p>其中, <span class="arithmatex">\(x=\begin{bmatrix} x_0 \\ x_1 \\ x_2 \\ x_3 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(\theta=\begin{bmatrix} \theta_0 \\ \theta_1 \\ \theta_2 \\ \theta_3 \\\end{bmatrix}\)</span> , 是我们的参数向量。</p>
+<p>这是一个过于简单的模拟神经元的模型。</p>
+<p>当我绘制一个神经网络的时候, 通常我只绘制输入节点 <span class="arithmatex">\(x_1, x_2, x_3\)</span>, 有必要的时候我会增加一个额外的节点 <span class="arithmatex">\(x_0\)</span>, 这个 <span class="arithmatex">\(x_0\)</span> 节点 有时候也被称作<strong>偏置单元 (the bias unit)</strong> 或<strong>偏置神经元 (the bias neuron)</strong> 。因为 <span class="arithmatex">\(x_0\)</span> 总等于1 , 所以有时候画它, 有时候不画它。这要看具体情况, 加上 <span class="arithmatex">\(x_0\)</span> 是否表示起来更方便。</p>
+<p>&ensp; Finally, one last bit of terminology (术语) when we talk about neural networks, sometimes we'll say that this is an artificial neuron (人工神经元) with a sigmoid or a logistic activation function. So this activation function in the neuron network terminology is just another term for that function for that non-linearity g of z. <span class="arithmatex">\(g(z)=\frac{1}{1+e^{-z}}\)</span> .</p>
+<div class="admonition note">
+<p>模型的权重 (weights) = 模型的参数 (parameters)
+这两个是一回事, 只是叫法不一样。</p>
+</div>
+<p><center>
+    <img src="../../assets/images/5_3_3.png">
+    <br>
+    <div></div>
+</center></p>
+<p>&ensp; What a neural network is just a group of 
+these different neurons strung (连接) together. Concretely, here we have input units <span class="arithmatex">\(x_1, x_2, x_3\)</span> . 再说一次, 有时候我们会画上额外的节点 <span class="arithmatex">\(x_0\)</span>, 这里我们画上了。And here we have three neurons, which I have written, <span class="arithmatex">\(a_1^{(2)}, a_2^{(2)},a_3^{(2)}\)</span>. 再次说明, 我们可以在 <span class="arithmatex">\(a_1^{(2)}\)</span> 的上方添加一个 <span class="arithmatex">\(a_0^{(2)}\)</span> (额外的偏置单元 它的值永远是 1 )。最终, 我们在最后一层有第三个节点, 它正是前面三个节点的输出, 假设函数 <span class="arithmatex">\(h(x)\)</span> 计算的结果。</p>
+<p>&ensp; To introduce a bit more terminology in a neural network, the first layer, this is also called the input layer, because this is where we input our features, <span class="arithmatex">\(x_1, x_2, x_3\)</span>. The final layer is also called the output layer, because that layer has the neuron that outputs the final value computed by a hypotheses. And then layer two in between, this is called the hidden layer. The term hidden layer isn't a great terminology, but the intuition is that, in supervised learning where you get to see the inputs, and you get to see the correct outputs. Whereas the hidden layer are values you don't get to observe in training set. It's not x and It's not y and so we call those hidden. Later on, we'll see neural networks with more than one hidden layer. But in this example, we have one input layer, layer 1; one hidden layer, layer 2; and one output layer, layer 3. But basically anything that isn't an input layer and isn't a output layer is called a hidden layer.</p>
+<p>To explain the specific computations represented by a neural network, here's a little bit more notation. </p>
+<p><span class="arithmatex">\(x_0\)</span> : 偏置单元 (bias unit), <span class="arithmatex">\(x_0=1\)</span></p>
+<p><span class="arithmatex">\(\Theta\)</span> : 权重(weight), 即参数。</p>
+<p>激活函数 : <span class="arithmatex">\(g\)</span>, 即逻辑函数等。</p>
+<p>输入层: 对应于训练集中的特征 <span class="arithmatex">\(x\)</span>。</p>
+<p>输出层: 对应于训练集中的结果 <span class="arithmatex">\(y\)</span>。</p>
+<blockquote>
+<p><span class="arithmatex">\(a_i^{(j)}\)</span> : "activation" of unit <span class="arithmatex">\(i\)</span> in layer <span class="arithmatex">\(j\)</span> (第 <span class="arithmatex">\(j\)</span> 层 的第 <span class="arithmatex">\(i\)</span> 个激活单元)</p>
+<p><span class="arithmatex">\(\Theta^{(j)}\)</span> : matrix of weights controlling function mapping from layer <span class="arithmatex">\(j\)</span> to layer <span class="arithmatex">\(j+1\)</span> (第 <span class="arithmatex">\(j\)</span> 层 映射到第 <span class="arithmatex">\(j+1\)</span> 层时的权重/参数矩阵)</p>
+<p><span class="arithmatex">\(\Theta_{v, u}^{(j)}\)</span> : 第 <span class="arithmatex">\(j\)</span> 层 的第 <span class="arithmatex">\(u\)</span> 个单元映射到第 <span class="arithmatex">\(j+1\)</span> 层的第 <span class="arithmatex">\(v\)</span> 个单元的参数/权重</p>
+<p><span class="arithmatex">\(s_j\)</span> : 第 <span class="arithmatex">\(j\)</span> 层的激活单元数目 (不包含偏置单元)</p>
+</blockquote>
+<p>I'm going to use <span class="arithmatex">\(a\)</span> superscript <span class="arithmatex">\(j\)</span> subscript <span class="arithmatex">\(i\)</span> to denote the activation (激活项) of neuron <span class="arithmatex">\(i\)</span> or of unit <span class="arithmatex">\(i\)</span> in layer j. In addition, our neural network is parametrized by these matrices <span class="arithmatex">\(\Theta\)</span> superscript <span class="arithmatex">\(j\)</span> where <span class="arithmatex">\(\Theta^{(j)}\)</span> is going to be a matrix of weights controlling function mapping from layer <span class="arithmatex">\(j\)</span> to layer <span class="arithmatex">\(j+1\)</span>.</p>
+<div class="admonition note">
+<p>激活项是指 由一个具体神经元计算并输出的值。</p>
+</div>
+<p>这图下面的算式代表了左上角的图解。</p>
+<p><center>
+    <img src="../../assets/images/5_3_4.png">
+    <br>
+    <div></div>
+</center></p>
+<ul>
+<li>
+<p><strong>每个单元会作用于下一层的所有单元</strong>（矩阵乘法运算）。</p>
+</li>
+<li>
+<p>如果第 <span class="arithmatex">\(j\)</span> 层有 <span class="arithmatex">\(s_j\)</span> 个单元, 第 <span class="arithmatex">\(j+1\)</span> 层有 <span class="arithmatex">\(s_{j+1}\)</span> 个单元, <span class="arithmatex">\(\Theta^{(j)}\)</span> 是一个 <span class="arithmatex">\(s_{j+1}\times (s_j+1)\)</span> 维的权重矩阵。</p>
+</li>
+<li>
+<p>其中, <span class="arithmatex">\(+1\)</span> 来自偏置单元, 这样意味着输出层不包含偏置单元, 输入层和隐藏层需要增加偏置单元。</p>
+</li>
+</ul>
+<p>依据本节所给模型，有：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+Size(\Theta ^{(1)}) &amp;= s_{j+1} \times (s_j+1) \\\\
+&amp;=s_2\times (s_1+1)\\\\
+&amp;=3\times 4
+\end{aligned}
+\]</div>
+<div class="arithmatex">\[
+\begin{aligned}
+Size(\Theta ^{(2)}) &amp;= s_{j+1} \times (s_j+1) \\\\
+&amp;=s_3\times (s_2+1)\\\\
+&amp;=1\times 4
+\end{aligned}
+\]</div>
+<h2 id="42">4、模型表示2</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 4 - Model Representation II (12 min).mkv</p>
+</div>
+<p><center>
+    <img src="../../assets/images/5_4_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>对输入层(Layer 1)的所有激活单元应用激活函数,从而得到隐藏层(Layer 2)中激活单元的值：</p>
+<p><span class="arithmatex">\(a_{1}^{(2)}=g(\Theta _{10}^{(1)}{{x}_{0}}+\Theta _{11}^{(1)}{{x}_{1}}+\Theta _{12}^{(1)}{{x}_{2}}+\Theta _{13}^{(1)}{{x}_{3}})\)</span></p>
+<p><span class="arithmatex">\(a_{2}^{(2)}=g(\Theta _{20}^{(1)}{{x}_{0}}+\Theta _{21}^{(1)}{{x}_{1}}+\Theta _{22}^{(1)}{{x}_{2}}+\Theta _{23}^{(1)}{{x}_{3}})\)</span></p>
+<p><span class="arithmatex">\(a_{3}^{(2)}=g(\Theta _{30}^{(1)}{{x}_{0}}+\Theta _{31}^{(1)}{{x}_{1}}+\Theta _{32}^{(1)}{{x}_{2}}+\Theta _{33}^{(1)}{{x}_{3}})\)</span></p>
+<p>对 Layer 2 中的所有激活单元应用激活函数, 从而得到输出:</p>
+<p><span class="arithmatex">\({{h}_{\Theta }}(x)=g(\Theta _{10}^{(2)}a_{0}^{(2)}+\Theta _{11}^{(2)}a_{1}^{(2)}+\Theta _{12}^{(2)}a_{2}^{(2)}+\Theta _{13}^{(2)}a_{3}^{(2)})\)</span></p>
+<p>上面的计算过程被称为<strong>前向传播(Forward propagation)</strong>, 即从输入层开始, 一层一层地向下计算并传递结果。</p>
+<p>向量化实现</p>
+<p>定义 <span class="arithmatex">\(a^{(1)}=x=\begin{bmatrix}  x_0 \\  x_1  \\ x_2\\x_3  \\\end{bmatrix}\)</span>, </p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} \Theta_{10}^{(1)} &amp; \Theta_{11}^{(1)} &amp; \Theta_{12}^{(1)} &amp; \Theta_{13}^{(1)} \\ \Theta_{20}^{(1)} &amp; \Theta_{21}^{(1)} &amp; \Theta_{22}^{(1)} &amp; \Theta_{23}^{(1)} \\ \Theta_{30}^{(1)} &amp;  \Theta_{31}^{(1)}&amp; \Theta_{32}^{(1)} &amp; \Theta_{33}^{(1)} \end{bmatrix}\)</span>,</p>
+<p><span class="arithmatex">\(\begin{matrix} a_1^{(2)}=g(z_1^{(2)})\\  a_2^{(2)}=g(z_2^{(2)}) \\ a_3^{(2)}=g(z_3^{(2)}) \end{matrix}\)</span>, <span class="arithmatex">\(z^{(2)}=\begin{bmatrix}  z_1^{(2)} \\ z_2^{(2)} \\  z_3^{(2)}  \\\end{bmatrix}\)</span></p>
+<p>则有 <span class="arithmatex">\(a^{(2)}=g(\Theta^{(1)}a^{(1)})=g(z^{(2)})\)</span></p>
+<p>添加 <span class="arithmatex">\(a_0^{(2)}=1\)</span></p>
+<p>预测结果即 <span class="arithmatex">\(h_\Theta(x)=a^{(3)}=g(\Theta^{(2)}a^{(2)})=g(z^{(3)})\)</span></p>
+<p><center>
+    <img src="../../assets/images/5_4_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>&ensp; This forward propagation view also helps us understand what neural networks might be doing, and why they might help us to learn interesting non-linear hypotheses. Consider the following nerual network, and let's say I cover up the left part of this picture for now. If you look at what's left in this picture, this looks a lot like logistic regression. 我们就是用最右侧黄色圈圈那个节点 (logistic regression unit)来预测 <span class="arithmatex">\(h(x)\)</span> 的值。如果只看最右侧黄色圈圈下面公式的蓝色部分, 这和标准的逻辑回归模型中的预测函数 <span class="arithmatex">\(h_\theta(x)=g(\theta_0+\theta_1x_1+\theta_2x_2+\theta_3x_3)\)</span> 除了符号, 其他完全一样。And what this is doing is just logistic regression. But where the features fed into logistic regression are these values computed by the hidden layer. Just to say that again, <strong>what this netural network is doing is just like logistic regression</strong>, expect that rather than using the original features <span class="arithmatex">\(x_1, x_2, x_3\)</span> is <strong>using these new features</strong> <span class="arithmatex">\(a_1, a_2, a_3\)</span>. And the cool thing about this is that the features <span class="arithmatex">\(a_1, a_2, a_3\)</span>, they themselves are learned as functions of the input. Concretely, the function mapping from layer 1 to layer 2, that is determined by some other set of parameters, <span class="arithmatex">\(\Theta_1\)</span>. So that's it, the neural network, instead of being constrained to feed the features <span class="arithmatex">\(x_1, x_2, x_3\)</span> to logistic regression, it gets to learn its own features, <span class="arithmatex">\(a_1, a_2, a_3\)</span>, to feed into the logistic regression. And as you can imagine, depending on what parameters it chooses for <span class="arithmatex">\(\Theta_1\)</span>, you can learn <strong>some pretty instresting and complex features</strong>, and therefore you can end up with <strong>a better hypotheses</strong>, than if you were constrained to use the raw features <span class="arithmatex">\(x_1, x_2, x_3\)</span>, or if you will constrain to choose the polynomial term(多项式项), <span class="arithmatex">\(x_1x_2, x_2x_3\)</span> and so on. But instead, this algorithm has the flexibility to try to learn whatever features at once, using these <span class="arithmatex">\(a_1, a_2, a_3\)</span> in order to feed into this last unit. That's essentially a logistic regression here. </p>
+<p>当然，神经网络可有多层，每层的激活单元数量也并不固定。Other network architectures (其他神经网络架构):</p>
+<p><center>
+    <img src="../../assets/images/5_4_3.png">
+    <br>
+    <div></div>
+</center></p>
+<blockquote>
+<p>我们习惯于将输入层称为神经网络的第 0 层，如上图的神经网络被称为三层网络。</p>
+</blockquote>
+<h2 id="51">5、例子和直观理解1</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 5 - Examples and Intuitions I (7 min).mkv</p>
+</div>
+<p>为了更好的理解神经网络, 举例单层神经网络进行逻辑运算的例子。</p>
+<p>下面的例子中, <span class="arithmatex">\(x_1, x_2\)</span>为<strong>二进制数</strong>。</p>
+<p>逻辑与(AND)运算（都为真值则结果才为真）神经网络: </p>
+<p><center>
+    <img src="../../assets/images/5_5_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} -30 &amp; 20 &amp; 20 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(h_\Theta(x)=g(-30+20x_1+20x_2)\)</span>。</p>
+<p>回归 sigmoid 函数图像, 根据输入则有上图中右边的表格, 即 <span class="arithmatex">\(h_\Theta(x) \approx x_1\)</span> AND <span class="arithmatex">\(x_2\)</span> 。这样就实现了一个能够进行与运算的神经网络。</p>
+<p><center>
+    <img src="../../assets/images/5_5_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>再举一例, 逻辑或(OR)运算 (有一个真值则结果就为真)神经网络:</p>
+<p><center>
+    <img src="../../assets/images/5_5_3.png">
+    <br>
+    <div></div>
+</center></p>
+<h2 id="62">6、例子和直观理解2</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 6 - Examples and Intuitions II (10 min).mkv</p>
+</div>
+<p>下面逐步构建复杂一点的神经网络</p>
+<p><center>
+    <img src="../../assets/images/5_6_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>如上图, 我们分别构建了三个单层神经网络, 将这三个网络组合起来, 可得到一个新的神经网络, 其可完成逻辑运算中的异或(XNOR)操作:</p>
+<p><center>
+    <img src="../../assets/images/5_6_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>这里的组合即为 XNOR = (<span class="arithmatex">\(x_1\)</span> AND <span class="arithmatex">\(x_2\)</span>) OR ((NOT <span class="arithmatex">\(x_1\)</span>) AND (NOT <span class="arithmatex">\(x_2\)</span>))</p>
+<p><span class="arithmatex">\(\Theta^{(1)}= \begin{bmatrix} -30 &amp; 20 &amp; 20 \\ 10 &amp; -20 &amp; -20 \\ \end{bmatrix}\)</span>, <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} -10&amp;20&amp;20 \\\end{bmatrix}\)</span>, <span class="arithmatex">\(\begin{matrix} a^{(2)}=g(\Theta^{(1)}\cdot x)\\ a^{(3)}=g(\Theta^{(2)}\cdot a^{(2)}) \\ h_\Theta(x)=a^{(3)} \end{matrix}\)</span></p>
+<p>可见, 特征值能不断升级, 并抽取出更多信息, 直到计算出结果。而如此不断组合, 我们就可以逐渐构造出越来越复杂、强大的神经网络, 比如用于手写识别的神经网络。</p>
+<h2 id="7">7、多类别分类</h2>
+<div class="admonition info">
+<p>参考视频: 8 - 7 - Multiclass Classification (4 min).mkv</p>
+</div>
+<p>之前讨论的都是预测结果为单值情况下的神经网络，要实现多类别分类，其实只要修改一下输出层，让输出层包含多个输出单元即可。</p>
+<p>举一个 4 分类问题的实例：</p>
+<p><center>
+    <img src="../../assets/images/5_7_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>有四种分类情况，那么就让输出层包含 4 个输出单元即可，则 <span class="arithmatex">\(h_\Theta\)</span> 为 4 维向量。 </p>
+<p>神经网络中的多分类算法算是对 one-vs-all 思想的扩展, 定义预测结果一共有 4 种情况：</p>
+<p><center>
+    <img src="../../assets/images/5_7_2.png">
+    <br>
+    <div></div>
+</center></p>
+<p>如果预测结果 <span class="arithmatex">\(h_\Theta(x)=\begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\\end{bmatrix}\)</span>, 那么表示 <span class="arithmatex">\(h_\Theta(x)_3\)</span>, 即分为第 3 类，对应于图中的摩托车(Motorcycle)。</p>
+<p>总结一下</p>
+<p>多分类问题, 要分为 <span class="arithmatex">\(K\)</span> 类, 就在输出层放置 <span class="arithmatex">\(K\)</span> 个输出单元, 对于单个样本实例, 预测向量 <span class="arithmatex">\(h_\Theta(x)\)</span> 为 <span class="arithmatex">\(K\)</span> 维向量, 我们则依据这个预测向量, 得出该实例属于哪个类 <span class="arithmatex">\(y^{(i)}\)</span> 。注意, 神经网络中的预测和结果都是 <span class="arithmatex">\(K\)</span> 维向量，而不再只是一个实数了。</p>
+<h2 id="_1">习题 &amp;&amp; 参考答案</h2>
+<p><strong>第一题</strong></p>
+<p>以下哪项陈述是正确的？选择所有正确项</p>
+<p>A. 神经网络中隐藏单元的激活值, 在应用了sigmoid函数之后, 总是在（0，1）范围内</p>
+<p>B. 在二进制值（0或1）上的逻辑函数可以（近似）用一些神经网络来表示</p>
+<p>C. 两层（一个输入层, 一个输出层, 没有隐藏层）神经网络可以表示异或函数</p>
+<p>D. 假设有一个三个类的多类分类问题, 使用三层网络进行训练。设 <span class="arithmatex">\(a_1^{(3)}=(h_\Theta(x))_1\)</span>为第一输出单元的激活, 并且类似的, 有 <span class="arithmatex">\(a_2^{(3)}=(h_\Theta(x))_2\)</span> 和 <span class="arithmatex">\(a_3^{(3)}=(h_\Theta(x))_3\)</span>。那么对于任何输入 <span class="arithmatex">\(x\)</span>, 必须 <span class="arithmatex">\(a_1^{(3)}+a_2^{(3)}+a_3^{(3)}=1\)</span></p>
+<p><strong>第二题</strong></p>
+<p>考虑以下两个二值输入 <span class="arithmatex">\(x_1,x_2 \in \{0, \ 1 \}\)</span> 和输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的神经网络。它（近似）计算了下列哪一个逻辑函数？</p>
+<p><center>
+    <img src="../../assets/images/5_8_1.png">
+    <br>
+    <div></div>
+</center></p>
+<p>A. OR</p>
+<p>B. AND</p>
+<p>C. NAND (与非)</p>
+<p>D. XOR (异或)</p>
+<p><strong>第三题</strong></p>
+<p>考虑下面给出的神经网络。下列哪个方程正确地计算了 <span class="arithmatex">\(a_1^{(3)}\)</span> 的激活？注：<span class="arithmatex">\(g(z)\)</span> 是sigmoid激活函数</p>
+<p><center>
+    <img src="../../assets/images/5_8_2.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>A. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(2)}a_0^{(2)}+\Theta_{1,1}^{(2)}a_1^{(2)}+\Theta_{1,2}^{(2)}a_2^{(2)})\)</span></p>
+<p>B. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(1)}a_0^{(1)}+\Theta_{1,1}^{(1)}a_1^{(1)}+\Theta_{1,2}^{(1)}a_2^{(1)})\)</span></p>
+<p>C. <span class="arithmatex">\(a_1^{(3)}=g(\Theta_{1,0}^{(1)}a_0^{(2)}+\Theta_{1,1}^{(1)}a_1^{(2)}+\Theta_{1,2}^{(1)}a_2^{(2)})\)</span></p>
+<p>D. 此网络中不存在激活 <span class="arithmatex">\(a_1^{(3)}\)</span></p>
+<p><strong>第四题</strong></p>
+<p>你有以下神经网络</p>
+<p><center>
+    <img src="../../assets/images/5_8_2.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>你想计算隐藏层 <span class="arithmatex">\(a^{(2)} \in \mathbb{R}^3\)</span> 的激活, 一种方法是使用以下Octave代码:</p>
+<p><center>
+    <img src="../../assets/images/5_8_3.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>您需要一个矢量化的实现（即, 一个不用循环的实现）。下列哪个实现正确计算 <span class="arithmatex">\(a^{(2)}\)</span> ？选出所有正确项</p>
+<p>A. z = Theta1 * x; a2 = sigmoid (z)</p>
+<p>B. a2 = sigmoid (x * Theta1)</p>
+<p>C. a2 = sigmoid (Theta2 * x)</p>
+<p>D. z = sigmoid(x); a2 = sigmoid (Theta1 * z)</p>
+<p><strong>第四题</strong></p>
+<p>您正在使用下图所示的神经网络，并已学习参数</p>
+<p><span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1 &amp; 2.4 \\ 1 &amp; 1.7 &amp; 3.2 \\ \end{bmatrix}\)</span> (用于计算 <span class="arithmatex">\(a^{(2)}\)</span>) 和 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; 0.3 &amp; -1.2 \\\end{bmatrix}\)</span> (用于作用在 <span class="arithmatex">\(a^{(2)}\)</span> 的函数, 计算 <span class="arithmatex">\(a^{(3)}\)</span> 的值)。假设您交换第一个隐藏层的2个单元的参数 <span class="arithmatex">\(\Theta^{(1)}=\begin{bmatrix} 1 &amp; 1.7 &amp; 3.2 \\ 1 &amp; 1 &amp; 2.4 \\ \end{bmatrix}\)</span>, 并且还交换输出层 <span class="arithmatex">\(\Theta^{(2)}=\begin{bmatrix} 1 &amp; -1.2 &amp; 0.3 \\\end{bmatrix}\)</span> 。这将如何改变输出 <span class="arithmatex">\(h_\Theta(x)\)</span> 的值?</p>
+<p><center>
+    <img src="../../assets/images/5_8_4.jpg">
+    <br>
+    <div></div>
+</center></p>
+<p>A. 不变</p>
+<p>B. 变大</p>
+<p>C. 变小</p>
+<p>D. 信息不全，可能变大也可能变小</p>
+<p><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/></p>
+<p><strong>参考答案</strong></p>
+<p>第一题: AB</p>
+<p>第二题: A</p>
+<p>第三题: A</p>
+<p>第四题: A</p>
+<p>第五题: A</p>
+<p>提示: 假定输出是 <span class="arithmatex">\(\begin{bmatrix} x_1 &amp; x_2 &amp; x_3 \\\end{bmatrix}^T\)</span> 代入到定义中计算即可, 交换的结果都为:</p>
+<p><span class="arithmatex">\(g(1+0.3g(1+x_1+2.4x_2)-1.2g(1+1.7x_1+3.2x_2))\)</span> , 其中 <span class="arithmatex">\(g\)</span> 为sigmoid函数。</p>
+<h2 id="_2">代码练习</h2>
+<p>In this exercise, you will implement one-vs-all logistic regression and neural networks to recognize hand-written digits.</p>
+<h3 id="1-multi-class-classification">1 Multi-class Classification</h3>
+<p>For this exeercise, you will use logistic regression and neural networks to recognize handwritten digits (from 0 to 9). Automated handwritten digits recognition is widely used today - from recognizing zip codes (postal codes) on mail envelopes to recognizing amounts written on bank checks. This exercise will show you how the methods you've learned can be used for this classification task.</p>
+<p>&ensp; In the fist part of the exercise, you will extend your previous implemention of logistic regression and apply it to one-vs-all classification.</p>
+<h4 id="11-dataset">1.1 Dataset</h4>
+<p>You are given a data set in <strong>ex3data1.mat</strong> that contains 5000 training examples of handwritten digits. The .mat format means that the data has been saved in a native Octave/Matlab matrix format, instead of a text (ASCII) format like csv-file. These matrices can be read directly into your program by using load command. After loading, matrices of the correct dimensions and values will appear in your program's memory. That matrix will be already be named, so you do not need to assign names to them.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">导入数据和必要的库</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span>
+<span class="normal"><a href="#__codelineno-0-4">4</a></span>
+<span class="normal"><a href="#__codelineno-0-5">5</a></span>
+<span class="normal"><a href="#__codelineno-0-6">6</a></span>
+<span class="normal"><a href="#__codelineno-0-7">7</a></span>
+<span class="normal"><a href="#__codelineno-0-8">8</a></span>
+<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">scio</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="c1"># 加载数据文件</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">data</span> <span class="o">=</span> <span class="n">scio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;ex3data1.mat&#39;</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="n">data</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>{&#39;__header__&#39;: b&#39;MATLAB 5.0 MAT-file, Platform: GLNXA64, Created on: Sun Oct 16 13:09:09 2011&#39;,
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a> &#39;__version__&#39;: &#39;1.0&#39;,
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a> &#39;__globals__&#39;: [],
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a> &#39;X&#39;: array([[0., 0., 0., ..., 0., 0., 0.],
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>        [0., 0., 0., ..., 0., 0., 0.],
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        [0., 0., 0., ..., 0., 0., 0.],
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>        ...,
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        [0., 0., 0., ..., 0., 0., 0.],
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>        [0., 0., 0., ..., 0., 0., 0.],
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        [0., 0., 0., ..., 0., 0., 0.]]),
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a> &#39;y&#39;: array([[10],
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        [10],
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        [10],
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>        ...,
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        [ 9],
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>        [ 9],
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        [ 9]], dtype=uint8)}
+</code></pre></div>
+<p>&ensp; There are 5000 training examples in <strong>ex3data1.mat</strong>, where each training examples is a 20 pixel by 20 pixel grayscale image of the digit. Each pixel is represented by a floating point number indicating the grayscale intensity at that location. The 20 by 20 grid of pixel is "unrolled" into a 400-dimensional vector. Each of these training examples becomes a single row in our data matrix X. This gives us a 5000 by 400 matrix X where every row is training example for a handwirtten digit image.</p>
+<div class="arithmatex">\[
+X = \begin{bmatrix} —— &amp; (x^{(1)})^T &amp; —— \\ —— &amp; (x^{(2)})^T &amp; ——  \\  &amp; \vdots &amp;  \\  —— &amp; (x^{(m)})^T &amp; ——  \end{bmatrix}
+\]</div>
+<p>&ensp; The second part of the training set is a 5000-dimensional vector <span class="arithmatex">\(y\)</span> that contains labels for the training set. To make things more compatible with Octave/Matlab indexing, where there is no zero index, we have mapped the digit zero to the value ten. Therefore, a "0" digit is labeled as "10", while the digits "1" to "9" are labeled as "1" to "9" in their natural order. </p>
+<h4 id="12-visualizing-the-data">1.2 Visualizing the data</h4>
+<p>You will begin by visualizing a subset of the training set. In Part 1, the code randomly selects 100 rows from X and passes those rows to the <strong>display</strong> function. This function maps each row to a 20 pixel by 20 pixel grayscale image and displays the images together. We have provided the displayData function, and you are encouraged to examine the code to see how it works. After you run this step, you should see an image like Figure <font color="#ff0000">5.9.1</font>.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义显示100个数据生成图像的函数</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span>
+<span class="normal"><a href="#__codelineno-2-20">20</a></span>
+<span class="normal"><a href="#__codelineno-2-21">21</a></span>
+<span class="normal"><a href="#__codelineno-2-22">22</a></span>
+<span class="normal"><a href="#__codelineno-2-23">23</a></span>
+<span class="normal"><a href="#__codelineno-2-24">24</a></span>
+<span class="normal"><a href="#__codelineno-2-25">25</a></span>
+<span class="normal"><a href="#__codelineno-2-26">26</a></span>
+<span class="normal"><a href="#__codelineno-2-27">27</a></span>
+<span class="normal"><a href="#__codelineno-2-28">28</a></span>
+<span class="normal"><a href="#__codelineno-2-29">29</a></span>
+<span class="normal"><a href="#__codelineno-2-30">30</a></span>
+<span class="normal"><a href="#__codelineno-2-31">31</a></span>
+<span class="normal"><a href="#__codelineno-2-32">32</a></span>
+<span class="normal"><a href="#__codelineno-2-33">33</a></span>
+<span class="normal"><a href="#__codelineno-2-34">34</a></span>
+<span class="normal"><a href="#__codelineno-2-35">35</a></span>
+<span class="normal"><a href="#__codelineno-2-36">36</a></span>
+<span class="normal"><a href="#__codelineno-2-37">37</a></span>
+<span class="normal"><a href="#__codelineno-2-38">38</a></span>
+<span class="normal"><a href="#__codelineno-2-39">39</a></span>
+<span class="normal"><a href="#__codelineno-2-40">40</a></span>
+<span class="normal"><a href="#__codelineno-2-41">41</a></span>
+<span class="normal"><a href="#__codelineno-2-42">42</a></span>
+<span class="normal"><a href="#__codelineno-2-43">43</a></span>
+<span class="normal"><a href="#__codelineno-2-44">44</a></span>
+<span class="normal"><a href="#__codelineno-2-45">45</a></span>
+<span class="normal"><a href="#__codelineno-2-46">46</a></span>
+<span class="normal"><a href="#__codelineno-2-47">47</a></span>
+<span class="normal"><a href="#__codelineno-2-48">48</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">def</span> <span class="nf">displayData</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a>    <span class="c1"># m : 样本数量</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a>    <span class="c1"># n : 单个样本的大小</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>    <span class="c1"># m, n # (100, 400)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a>    <span class="c1"># 单张图片的宽度</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a>    <span class="n">example_width</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>    <span class="c1"># 单张图片的高度</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a>    <span class="n">example_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="n">example_width</span><span class="p">))</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a>    <span class="c1"># example_width,example_height # (20, 20)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="c1"># 显示图中，一行多少张图</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a>    <span class="n">display_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">m</span><span class="p">)))</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>    <span class="c1"># 显示图中，一列多少张图片</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a>    <span class="n">display_cols</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">m</span> <span class="o">/</span> <span class="n">display_rows</span><span class="p">))</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a>    <span class="c1"># 图片间的间隔</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a>    <span class="n">pad</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a>    <span class="c1"># display_rows,display_cols # (10, 10)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22"></a>    <span class="c1"># 初始化图片矩阵</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23"></a>    <span class="c1"># 这里用- np.ones初始化是为了和吴老师给的参考图底色相同</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24"></a>    <span class="n">display_array</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">pad</span> <span class="o">+</span> <span class="n">display_rows</span> <span class="o">*</span> <span class="p">(</span><span class="n">example_height</span> <span class="o">+</span> <span class="n">pad</span><span class="p">),</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25"></a>                               <span class="n">pad</span> <span class="o">+</span> <span class="n">display_cols</span> <span class="o">*</span> <span class="p">(</span><span class="n">example_width</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)))</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26"></a>
+<a id="__codelineno-2-27" name="__codelineno-2-27"></a>    <span class="n">curr_ex</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 当前的图片计数</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28"></a>    <span class="c1"># 将每张小图插入图片数组中</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">display_rows</span><span class="p">):</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30"></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">display_cols</span><span class="p">):</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31"></a>            <span class="k">if</span> <span class="n">curr_ex</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32"></a>                <span class="k">break</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33"></a>            <span class="c1"># 获取每行样本最大的值并取绝对值</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34"></a>            <span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">curr_ex</span><span class="p">,</span> <span class="p">:]))</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35"></a>            <span class="c1"># 拿到起始横轴和纵轴坐标</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36"></a>            <span class="n">jstart</span> <span class="o">=</span> <span class="n">pad</span> <span class="o">+</span> <span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">example_height</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37"></a>            <span class="n">istart</span> <span class="o">=</span> <span class="n">pad</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="p">(</span><span class="n">example_width</span> <span class="o">+</span> <span class="n">pad</span><span class="p">)</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38"></a>            <span class="c1"># 这一步个人感觉是归一化的味，每个图像的所有点强度除以他们中的最大值</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39"></a>            <span class="n">display_array</span><span class="p">[</span><span class="n">jstart</span><span class="p">:</span> <span class="p">(</span><span class="n">jstart</span> <span class="o">+</span> <span class="n">example_height</span><span class="p">),</span> <span class="n">istart</span><span class="p">:</span> <span class="p">(</span><span class="n">istart</span> <span class="o">+</span> <span class="n">example_width</span><span class="p">)</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40"></a>                          <span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">curr_ex</span><span class="p">,</span> <span class="p">:])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">example_height</span><span class="p">,</span> <span class="n">example_width</span><span class="p">)</span> <span class="o">/</span> <span class="n">max_val</span>
+<a id="__codelineno-2-41" name="__codelineno-2-41"></a>            <span class="n">curr_ex</span> <span class="o">=</span> <span class="n">curr_ex</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-2-42" name="__codelineno-2-42"></a>        <span class="k">if</span> <span class="n">curr_ex</span> <span class="o">&gt;=</span> <span class="n">m</span><span class="p">:</span>
+<a id="__codelineno-2-43" name="__codelineno-2-43"></a>            <span class="k">break</span>
+<a id="__codelineno-2-44" name="__codelineno-2-44"></a>    <span class="n">display_array</span> <span class="o">=</span> <span class="n">display_array</span><span class="o">.</span><span class="n">T</span>
+<a id="__codelineno-2-45" name="__codelineno-2-45"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<a id="__codelineno-2-46" name="__codelineno-2-46"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">display_array</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">gray</span><span class="p">)</span>
+<a id="__codelineno-2-47" name="__codelineno-2-47"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<a id="__codelineno-2-48" name="__codelineno-2-48"></a>    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<div class="admonition danger">
+<p>注意: displayData的参数要传入已经挑选好随机100个样本的X或者最好是能开平方的一个数</p>
+</div>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">显示图像</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 取到data中的 X, y值</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># X.shape, y.shape  # ((5000, 400), (5000, 1))</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="c1"># 从 5000个样本中随机挑100个</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="n">sample_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># 随机选100个样本</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">sample_images</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">sample_idx</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># (100,400)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="n">displayData</span><span class="p">(</span><span class="n">sample_images</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p><center>
+    <img src="../../assets/images/5_9_1.png">
+    <br>
+    <div>Figure 5.9.1: Examples from the dataset</div>
+</center></p>
+<h4 id="13-vectorizing-logistic-regression">1.3 Vectorizing Logistic regression</h4>
+<p>You will be using multiple one-vs-all logistic regression models to build a muli-class classifier. Since there are 10 classes, you will need to train 10 separate logistic regression classifiers. To make this training effcient, it is imporant to ensure that your code is well vectorized. In this section, you will implement a vectorized version of logistic regression that does not employ any for any loops.</p>
+<h5 id="131-vectorizing-the-cost-function">1.3.1 Vectorizing the cost function</h5>
+<p>We will begin by writing a vectorized version of the cost function. Recall that in (unregularized) logistic regression, the cost function is </p>
+<p><span class="arithmatex">\(J(\theta) = \frac{1}{m}\sum\limits_{i=1}^{m}{\Big[-{{y}^{(i)}}\log ( {h_\theta}( {{x}^{(i)}} ) )-( 1-{{y}^{(i)}} )\log \big( 1-{h_\theta}( {{x}^{(i)}}) \big)\Big]}\)</span> .</p>
+<p>&ensp; To compute each element in the summation, we have to compute <span class="arithmatex">\(h_\theta(x^{(i)})\)</span> for every example <span class="arithmatex">\(i\)</span>, where <span class="arithmatex">\(h_\theta(x^{(i)})=g(\theta^Tx^{(i)})\)</span> and <span class="arithmatex">\(g(z)=\frac{1}{1+e^{-z}}\)</span> is the sigmoid function. It turns out that we can compute this quickly for all our examples by using matrix multiplication. Let us define <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(\theta\)</span> as </p>
+<p><span class="arithmatex">\(X = \begin{bmatrix} —— &amp; (x^{(1)})^T &amp; —— \\ —— &amp; (x^{(2)})^T &amp; ——  \\  &amp; \vdots &amp;  \\  —— &amp; (x^{(m)})^T &amp; ——  \end{bmatrix}\)</span> &ensp; and &ensp; <span class="arithmatex">\(\theta=\begin{bmatrix} \theta_0\\ \theta_1 \\ \vdots \\ \theta_n \\\end{bmatrix}\)</span></p>
+<p>Then, by computing the matrix product <span class="arithmatex">\(X \theta\)</span>, we have</p>
+<div class="arithmatex">\[
+X\theta= \begin{bmatrix} —— &amp; (x^{(1)})^T \theta &amp; —— \\ —— &amp; (x^{(2)})^T \theta &amp; ——  \\  &amp; \vdots &amp;  \\  —— &amp; (x^{(m)})^T \theta &amp; ——  \end{bmatrix} = 
+\begin{bmatrix} —— &amp; \theta^T (x^{(1)})  &amp; —— \\ —— &amp; \theta^T (x^{(2)}) &amp; ——  \\  &amp; \vdots &amp;  \\  —— &amp; \theta^T (x^{(m)}) &amp; ——  \end{bmatrix}
+\]</div>
+<blockquote>
+<p>补充一下, X 的每一行元素代表了每一个样本。所以 <span class="arithmatex">\(X\)</span> 应该是 <span class="arithmatex">\(n+1\)</span> 列 (其中还包含了 <span class="arithmatex">\(x_0=1\)</span> 恒等于1的这一列)。所以 <span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(\theta\)</span> 才可以进行矩阵乘法。</p>
+</blockquote>
+<p>In the last equality, we used the fact that <span class="arithmatex">\(a^Tb=ab^T\)</span> if a and b are vectors. This allows us to compute the products <span class="arithmatex">\(\theta^Tx^{(i)}\)</span> for all our examples <span class="arithmatex">\(i\)</span> in one line of code.</p>
+<p>&ensp; Our job is to write the unregularized cost function. Our implementation should use the strategy we presented above to calculate <span class="arithmatex">\(\theta^Tx^{(i)}\)</span>. We should also use a vectorized approach for the rest of the cost function. A fully vectorized version should not contain any loops.</p>
+<h5 id="132-vectorizing-the-gradient">1.3.2 Vectorizing the gradient</h5>
+<p>Recall that the gradient of the (unregularized) logistic regression cost is a vector where the <span class="arithmatex">\(j^{th}\)</span> element is defined as </p>
+<div class="arithmatex">\[
+\frac{\partial J(\theta)}{\partial \theta_j}= \frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}
+\]</div>
+<p>&ensp; To vectorize this operation over the dataset, we start by writing out all the partial derivatives explicitly for all <span class="arithmatex">\(\theta_j\)</span>.</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\begin{bmatrix} \frac{\partial J}{\partial \theta_0}\\ \frac{\partial J}{\partial \theta_1} \\ \frac{\partial J}{\partial \theta_2} \\ \vdots\\ \frac{\partial J}{\partial \theta_n} \\\end{bmatrix} &amp;= \frac{1}{m} \begin{bmatrix} \sum_{i=1}^m \Big(\big(h_\theta(x^{(i)})-y^{(i)}\big)x_0^{(i)}\Big) \\ \sum_{i=1}^m \Big(\big(h_\theta(x^{(i)})-y^{(i)}\big)x_1^{(i)}\Big) \\ \sum_{i=1}^m \Big(\big(h_\theta(x^{(i)})-y^{(i)}\big)x_2^{(i)}\Big)\\ \vdots \sum_{i=1}^m \Big(\big(h_\theta(x^{(i)})-y^{(i)}\big)x_n^{(i)}\Big) \\\end{bmatrix} \\\\
+&amp;= \frac{1}{m} \sum_{i=1}^m \Big(\big(h_\theta(x^{(i)})-y^{(i)}\big)x^{(i)}\Big) \\\\
+&amp;=\frac{1}{m}X^T\big(h_\theta(x)-y\big)
+\end{aligned}   \tag{1}
+\]</div>
+<p>where </p>
+<div class="arithmatex">\[
+h_\theta(x)-y=\begin{bmatrix} h_\theta(x^{(1)})-y^{(1)}\\  h_\theta(x^{(2)})-y^{(2)} \\ \vdots \\  h_\theta(x^{(m)})-y^{(m)} \\\end{bmatrix}
+\]</div>
+<p>&ensp; Note that <span class="arithmatex">\(x^{(i)}\)</span> is a vector, while <span class="arithmatex">\(\big(h_\theta(x^{(i)})-y^{(i)}\big)\)</span> is a scalar (single number). To understand the last step of the derivation, let <span class="arithmatex">\(\beta_i=\big(h_\theta(x^{(i)})-y^{(i)}\big)\)</span> and observe that:</p>
+<div class="arithmatex">\[
+\sum_{i}\beta_ix^{(i)}=\begin{bmatrix} | &amp; | &amp;  &amp; | \\ x^{(1)} &amp; x^{(2)} &amp; \cdots  &amp; x^{(m)} \\ | &amp; | &amp;  &amp; | \ \\\end{bmatrix} \begin{bmatrix} \beta_1\\ \beta_2 \\ \vdots \\ \beta_m \\\end{bmatrix}=X^T \beta
+\]</div>
+<p>where the values <span class="arithmatex">\(\beta_i=\big(h_\theta(x^{(i)})-y^{(i)}\big)\)</span> .</p>
+<p>&ensp; The expression above allows us to compute all the parital derivatives without any loops. If you are comfotable with linear algebra, we encourage you to work through the matrix multiplications above to convince yourself that the vectorized version does the same computations. You should now implement Equation <font color='#ff0000'>1</font> to compute the correct vectorized gradient. Once you are done, complete the function by implementing the gradient.</p>
+<div class="admonition tip">
+<p class="admonition-title">Debugging Tip</p>
+<p>Vectorizing code can sometimes be tricky. One common strategy for debugging is to print out the sizes of the matirces you are working with using the size function (numpy里用 <strong>.shape</strong>). For example, given a data matrix <span class="arithmatex">\(X\)</span> of size <span class="arithmatex">\(100\times 20\)</span> (100 examples, 20 featrues) and <span class="arithmatex">\(\theta\)</span>, a vector with dimensions <span class="arithmatex">\(20\times 1\)</span>, you can observe that <span class="arithmatex">\(X \theta\)</span> is a valid multiplication operation, while <span class="arithmatex">\(\theta X\)</span> is not. Furthermore, if you have a non-vectorized version of your code, you can compare the output of your vectorized code and non-vectorized code to make sure that they produce the same outputs.</p>
+</div>
+<h5 id="133-vectorizing-regularized-logistic-regression">1.3.3 Vectorizing regularized logistic regression</h5>
+<p>After you implement vectorization for logistic regression, you will now add regularization to the cost function. Recall that for regularized logistic regression, the cost function is defined as</p>
+<div class="arithmatex">\[
+J(\theta)=-\frac{1}{m} \sum_{i=1}^m\Big[y^{(i)}\log \big(h_\theta(x^{(i)})\big)+ (1-y^{(i)})\log \big(1-h_\theta(x^{(i)})\big) \Big]+ \frac{\lambda}{2m}\sum_{j=1}^n \theta_j^2
+\]</div>
+<p>&ensp; Note that you should not be regularizing <span class="arithmatex">\(\theta_0\)</span> which is used for the bias term.</p>
+<p>&ensp; Correspondingly, the partial derivative of regularized logistic regression cost for <span class="arithmatex">\(\theta_j\)</span> is defined as </p>
+<p>for <span class="arithmatex">\(j=0\)</span> :</p>
+<div class="arithmatex">\[
+\frac{\partial J(\theta)}{\partial \theta_0}= \frac{1}{m} \sum_{i=1}^m{(h_\theta(x^{(i)})-y^{(i)})x_0^{(i)}}
+\]</div>
+<p>for <span class="arithmatex">\(j \geq 1\)</span> :</p>
+<div class="arithmatex">\[
+\frac{\partial J(\theta)}{\partial \theta_j}= \bigg (\frac{1}{m} \sum_{i=1}^m \big(h_\theta(x^{(i)})-y^{(i)} \big) x_j^{(i)}\bigg )+ \frac{\lambda}{m} \theta_j
+\]</div>
+<p>&ensp; Now modify your code to account for regularization. Once again, you should not put any loops into your code.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义sigmoid函数, 代价函数计算(带正则), 梯度计算 (带正则)</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span>
+<span class="normal"><a href="#__codelineno-4-28">28</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># 定义sigmoid函数</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a>    <span class="k">return</span> <span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">))</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="c1"># 定义代价函数计算(带正则)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="k">def</span> <span class="nf">costFunctionReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="c1"># 下面的A@B 相当于np.dot(A,B)</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a>    <span class="n">h</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a>    <span class="n">first</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a>    <span class="n">second</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="nd">@np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">h</span><span class="p">)</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a>    <span class="c1"># 正则化项不惩罚x0, 所以这里将theta2 跳过了theta_0</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a>    <span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a>    <span class="n">reg</span> <span class="o">=</span> <span class="n">lambdada</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">theta2</span><span class="o">.</span><span class="n">T</span><span class="nd">@theta2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="o">-</span><span class="n">first</span><span class="o">-</span><span class="n">second</span><span class="p">)</span><span class="o">/</span><span class="n">m</span><span class="o">+</span><span class="n">reg</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="c1"># 定义梯度(带正则)</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="k">def</span> <span class="nf">gradientReg</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>    <span class="c1"># 生成一个和theta一样大小都是0的向量</span>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a>    <span class="n">grad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a>    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a>        <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a>            <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a>        <span class="n">grad</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="o">@</span><span class="p">(</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">m</span><span class="p">)</span> <span class="o">+</span> \
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a>            <span class="n">lambdada</span><span class="o">*</span><span class="p">(</span><span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="n">m</span>
+<a id="__codelineno-4-28" name="__codelineno-4-28"></a>    <span class="k">return</span> <span class="n">grad</span>
+</code></pre></div>
+</td></tr></table>
+<h4 id="14-one-vs-all-classification">1.4 One-vs-all Classification</h4>
+<p>In this part of the exercise, you will implement one-vs all classification by training multiple regularized regression classifiers, one for each of the <span class="arithmatex">\(K\)</span> classes in our dataset (Figure <font color="#ff0000">5.9.1</font> ). In the handwritten digits dataset, <span class="arithmatex">\(K=10\)</span>, but your code should work for any value of <span class="arithmatex">\(K\)</span>.</p>
+<p>&ensp; You should now complete the code to train one classifier for each class. In particular, your code should return all the classifier parameters in a matrix <span class="arithmatex">\(\Theta \in \mathbb{R}^{K\times (N+1)}\)</span>, where each row of <span class="arithmatex">\(\Theta\)</span> correspons to the learned logistic regression parameters for one class. You can do this with a "for" - loop from 1 to <span class="arithmatex">\(K\)</span>, training each classifier independently.</p>
+<p>&ensp; Note that the <span class="arithmatex">\(y\)</span> argument to this function is a vector of labels from 1 to 10, where we have mapped the digit "0" to the label 10 (to avoid confusions with indexing).</p>
+<p>&ensp; When training the classifier for class <span class="arithmatex">\(k \in \{1,\cdots ,K\}\)</span>, you will want a m-dimensional vector of label <span class="arithmatex">\(y\)</span>, where <span class="arithmatex">\(y_i\in 0,1\)</span> indicates whether the <span class="arithmatex">\(j\)</span>th training instance belongs to class <span class="arithmatex">\(k\)</span> (<span class="arithmatex">\(y_j=1\)</span>), or if it belongs to a different class (<span class="arithmatex">\(y_j=0\)</span>). You may find logical arrays helpful for this task. </p>
+<p>&ensp; you will be using <strong>fmincg</strong> for this exercise (instead of <strong>fminunc</strong>). <strong>fmincg</strong> works similarly to <strong>fminunc</strong>, but is more more efficient for dealing with a large number of parameters.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算能预测所有分类的 theta</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">def</span> <span class="nf">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a>    <span class="n">all_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_labels</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a>    <span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a>    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_labels</span><span class="p">):</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>        <span class="n">init_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a>        <span class="c1"># 最经典的地方 利用双等号将标签分为两类</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a>        <span class="n">y_t</span> <span class="o">=</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">op</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">fun</span><span class="o">=</span><span class="n">costFunctionReg</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">init_theta</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>            <span class="n">X</span><span class="p">,</span> <span class="n">y_t</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">),</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;TNC&#39;</span><span class="p">,</span> <span class="n">jac</span><span class="o">=</span><span class="n">gradient</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a>        <span class="n">all_theta</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>    <span class="k">return</span> <span class="n">all_theta</span>
+</code></pre></div>
+</td></tr></table>
+<h5 id="141-one-vs-all-prediction">1.4.1  One-vs-all Prediction</h5>
+<p>After training your one-vs-all classifier, you can now use it to predict the digit contained in a given image. For each input, you should compute the "probability" that it belongs to each class using the trained logistic regression classifiers. Your one-vs-all prediction function will pick the class for which the corresponding logistic regression classifier outputs the highest probability and return the class label (1, 2,..., or <span class="arithmatex">\(K\)</span>) as the prediction for the input example.</p>
+<p>&ensp; You should now complete the code to use the one-vs-all classifier to make predictions.</p>
+<p>&ensp; Once you are done, ex3.m will call your  function using the learned value of <span class="arithmatex">\(\Theta\)</span>. You should see that the training set accuracy is about
+94.9% (i.e., it classifies 94.9% of the examples in the training set correctly).</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">计算准确率</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-6-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-6-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-6-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-6-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-6-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-6-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-6-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-6-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-6-10">10</a></span>
+<span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span>
+<span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span>
+<span class="normal"><a href="#__codelineno-6-19">19</a></span>
+<span class="normal"><a href="#__codelineno-6-20">20</a></span>
+<span class="normal"><a href="#__codelineno-6-21">21</a></span>
+<span class="normal"><a href="#__codelineno-6-22">22</a></span>
+<span class="normal"><a href="#__codelineno-6-23">23</a></span>
+<span class="normal"><a href="#__codelineno-6-24">24</a></span>
+<span class="normal"><a href="#__codelineno-6-25">25</a></span>
+<span class="normal"><a href="#__codelineno-6-26">26</a></span>
+<span class="normal"><a href="#__codelineno-6-27">27</a></span>
+<span class="normal"><a href="#__codelineno-6-28">28</a></span>
+<span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c1"># 取到data中的 X, y值</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c1"># 因为数据集是考虑了matlab从1开始，把0的结果保存为了10，这里进行取余，将10变回0</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">%</span> <span class="mi">10</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="n">num_labels</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="c1"># 初始化</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="n">lambdada</span> <span class="o">=</span> <span class="mf">0.1</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="c1"># 计算出所有分类的预测参数 all_theta 的维度 (10,401)</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="n">all_theta</span> <span class="o">=</span> <span class="n">oneVsAll</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">num_labels</span><span class="p">,</span> <span class="n">lambdada</span><span class="p">)</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a>
+<a id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="c1"># X 插入x_0</span>
+<a id="__codelineno-6-20" name="__codelineno-6-20"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="c1"># 计算所有的预测结果 h_hat的维度 (5000, 10)</span>
+<a id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="n">h_hat</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@all_theta</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-6-23" name="__codelineno-6-23"></a><span class="c1"># h_hat计算出了5000个样本对于10个标签的可能性</span>
+<a id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="c1"># 所以按行取出最大值对应的索引即为预测的标签</span>
+<a id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="n">y_hat</span> <span class="o">=</span> <span class="n">h_hat</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="c1"># 将 y 变成向量</span>
+<a id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,)</span>
+<a id="__codelineno-6-28" name="__codelineno-6-28"></a>
+<a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="c1"># y_hat,y</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="c1"># 利用均值计算出正确率，巧妙</span>
+<a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y_hat</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>0.9646
+</code></pre></div>
+<h3 id="2-neural-networks">2 Neural networks</h3>
+<p>In the previous part of this exercise, you implemented multi-class logistic regression to recognize handwritten digits. However, logistic regression cannot form more complex hypotheses as it is only a linear classifier.</p>
+<p>&ensp; In this part of the exercise, you will implement a neural network to recognize handwritten digits using the same training set as before. The neural network will be able to represent complex models that form non-linear hypotheses. For this week, you will be using parameters form a neural network that we have already trained. Your goal is to implement the feedforward propagation algorithm to use our weights for prediction. In next week's exercise, you will write the backpropagation algorithm for the learning neural network parameters.</p>
+<h4 id="21-model-representation">2.1 Model Representation</h4>
+<p>Our neural network is shown in Figure . It has 3 layers - an input layer, a hidden layer and an output layer. Recall that our inputs are pixel values of digits images. Since the images are of size <span class="arithmatex">\(20\times 20\)</span>, this gives us 400 input layer units (excluding the extra bias unit which always outputs <span class="arithmatex">\(+1\)</span> ). As before, the training data will be loaded into the variables <span class="arithmatex">\(X\)</span> and <span class="arithmatex">\(y\)</span> . </p>
+<p><center>
+    <img src="../../assets/images/5_9_2.png">
+    <br>
+    <div>Figure 5.9.2: Neural network model.</div>
+</center></p>
+<p>&ensp; You have been provided with a set of network parameters (<span class="arithmatex">\(\Theta^{(1)}\)</span>, <span class="arithmatex">\(\Theta^{(2)}\)</span>) already trained by us. These are stored in <strong>ex3weights.mat</strong> and will be loaded by <strong>ex3_nn.m</strong> into <strong>Theta1</strong> and <strong>Theta2</strong>. The parameters have dimensions that are sized for a neural netowrk with 25 units in the second layer and 10 output units (corresponding to the 10 digit classes).</p>
+<h4 id="22-feedforward-propagation-and-prediction">2.2 Feedforward Propagation and Prediction</h4>
+<p>Now you will implement feedforward propagation for the neural network. You will need to complete teh code <strong>predict.m</strong> to return the neural network's prediction. </p>
+<p>&ensp; You should implement the feedforward computation that computes <span class="arithmatex">\(h_\theta(x^{(i)}\)</span> for every example <span class="arithmatex">\(i\)</span> and return the associated predictions. Simliar to the one-vs-all classification strategy, the prediction from the neural network will be label that has the largest output <span class="arithmatex">\(\big(h_\theta(x)\big)_k\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Implementation Note</p>
+<p>The matrix <span class="arithmatex">\(X\)</span> contains the examples in rows. When you complete the code in predict.m, you will need to add the column 1's to the matrix. The matrices Theta1 and Theta2 contain the parameters for each unit in rows. Specifically, the first row of Theta1 corresponds to the first hidden unit in the second layer. In Octave, when you compute <span class="arithmatex">\(z^{(2)}=\Theta^{(1)}a^{(1)}\)</span>, be sure that you index (and if necessary, transpose) <span class="arithmatex">\(X\)</span> correctly so that you get <span class="arithmatex">\(a^{(1)}\)</span> as a column vector.</p>
+</div>
+<p>Once you are done, ex3_nn.m will call your predict function using loaded set of parameters for Theta1 and Theta2. You should see that the accuracy is about <span class="arithmatex">\(97.5\%\)</span>. After that, an interacitve sequence will launch displaying images from the training set on at a time, while the console prints out the predicted label for the display image. To stop the image sequence, press Ctrl-C.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">使用神经网络实现数字识别(Theta 已提供)</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span>
+<span class="normal"><a href="#__codelineno-8-22">22</a></span>
+<span class="normal"><a href="#__codelineno-8-23">23</a></span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="kn">import</span> <span class="nn">scipy.io</span> <span class="k">as</span> <span class="nn">scio</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="kn">import</span> <span class="nn">scipy.optimize</span> <span class="k">as</span> <span class="nn">op</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="n">data</span> <span class="o">=</span> <span class="n">scio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;ex3data1.mat&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">scio</span><span class="o">.</span><span class="n">loadmat</span><span class="p">(</span><span class="s1">&#39;ex3weights.mat&#39;</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">theta1</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="s1">&#39;Theta1&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">theta2</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="s1">&#39;Theta2&#39;</span><span class="p">]</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="c1"># 插入偏置项</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="n">one</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="c1"># X.shape,theta1.shape, theta2.shape</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="c1"># ((5000, 401), (25, 401), (10, 26))</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="c1"># 第二层计算</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="n">a2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">X</span><span class="nd">@theta1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="c1"># 第三层计算</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="n">one</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="n">a3</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">a2</span><span class="nd">@theta2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<a id="__codelineno-8-29" name="__codelineno-8-29"></a>
+<a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="c1"># y的值为1-10，所以此处0-9要加1</span>
+<a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="n">p</span> <span class="o">=</span> <span class="n">a3</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+<a id="__codelineno-8-32" name="__codelineno-8-32"></a>
+<a id="__codelineno-8-33" name="__codelineno-8-33"></a><span class="c1"># 利用均值计算准确率</span>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>0.9752
+</code></pre></div>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../4.%20regularization/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 四. 正则化" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              四. 正则化
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../6.%20Neural%20Networks-L/" class="md-footer__link md-footer__link--next" aria-label="下一页: 六. 神经网络-学习" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              六. 神经网络-学习
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

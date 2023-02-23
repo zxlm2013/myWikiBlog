@@ -1,0 +1,1844 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+    
+    
+      
+        <title>一. 单变量线性回归 - 大白的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="大白的知识库" class="md-header__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            大白的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一. 单变量线性回归
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../math%20in%20ML/" class="md-tabs__link">
+        机器学习补充
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-tabs__link">
+        推荐系统基础
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="大白的知识库" class="md-nav__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    大白的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          机器学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          一. 单变量线性回归
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        一. 单变量线性回归
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 模型描述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 代价函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    3 代价函数直观理解1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ii" class="md-nav__link">
+    4. 代价函数的直观理解II
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 梯度下降
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 梯度下降的直观理解
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7. 梯度下降应用至线性回归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+    <nav class="md-nav" aria-label="习题 &amp;&amp; 参考答案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    参考答案
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    上机练习
+  </a>
+  
+    <nav class="md-nav" aria-label="上机练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1plotting-the-data" class="md-nav__link">
+    1、Plotting the Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2gradient-descent" class="md-nav__link">
+    2、Gradient Descent
+  </a>
+  
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-update-equations" class="md-nav__link">
+    2.1 Update Equations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-implementation" class="md-nav__link">
+    2.2 Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-computing-the-jtheta" class="md-nav__link">
+    2.3 Computing the \(J(\theta)\)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gradient-descent" class="md-nav__link">
+    2.4 Gradient descent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20linear%20regression-m%20v/" class="md-nav__link">
+        二. 多变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20logistic%20regression/" class="md-nav__link">
+        三. 逻辑回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.%20regularization/" class="md-nav__link">
+        四. 正则化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.%20Neural%20Networks-R/" class="md-nav__link">
+        五. 神经网络-表达
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6.%20Neural%20Networks-L/" class="md-nav__link">
+        六. 神经网络-学习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          机器学习补充
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习补充" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习补充
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/1.%20M%20derivation%20essence/" class="md-nav__link">
+        一. 矩阵求导本质
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/2.%20M%20derivation/" class="md-nav__link">
+        二. 矩阵求导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../math%20in%20ML/3.%20BP%20algorithm%20derivation/" class="md-nav__link">
+        三. 神经网络BP算法原理和推导
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          推荐系统基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="推荐系统基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          推荐系统基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/1.%20introduction/" class="md-nav__link">
+        一. 简介
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1. 模型描述
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2. 代价函数
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-1" class="md-nav__link">
+    3 代价函数直观理解1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-ii" class="md-nav__link">
+    4. 代价函数的直观理解II
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    5. 梯度下降
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    6. 梯度下降的直观理解
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    7. 梯度下降应用至线性回归
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    习题 &amp;&amp; 参考答案
+  </a>
+  
+    <nav class="md-nav" aria-label="习题 &amp;&amp; 参考答案">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    第一题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    第二题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    第三题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    第四题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    第五题
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    参考答案
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    上机练习
+  </a>
+  
+    <nav class="md-nav" aria-label="上机练习">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1plotting-the-data" class="md-nav__link">
+    1、Plotting the Data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2gradient-descent" class="md-nav__link">
+    2、Gradient Descent
+  </a>
+  
+    <nav class="md-nav" aria-label="2、Gradient Descent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-update-equations" class="md-nav__link">
+    2.1 Update Equations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-implementation" class="md-nav__link">
+    2.2 Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-computing-the-jtheta" class="md-nav__link">
+    2.3 Computing the \(J(\theta)\)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24-gradient-descent" class="md-nav__link">
+    2.4 Gradient descent
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>一. 单变量线性回归</h1>
+
+<h2 id="1">1. 模型描述</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 1 - Model Representation (8 min).mkv</p>
+</div>
+<p>我们这里有一个俄勒冈州波特兰市的<strong>住房价格数据集</strong>，数据集包含：房屋<strong>尺寸</strong>，房屋<strong>出售价格</strong>......然后，你有一个朋友。他有一套1250平的房子，他需要你告诉他这房子能卖多少钱。我们该怎么做？</p>
+<p>部分数据集如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>Size   in <span class="arithmatex">\(feet^2 (x)\)</span></th>
+<th>Price ($) in <span class="arithmatex">\(1000's (y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2104</td>
+<td>460</td>
+</tr>
+<tr>
+<td>1416</td>
+<td>232</td>
+</tr>
+<tr>
+<td>1534</td>
+<td>315</td>
+</tr>
+<tr>
+<td>852</td>
+<td>178</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>上述数据集，我们通常称为<strong>训练集</strong>（<strong>training set</strong>）。</p>
+<p>为了<strong>方便描述</strong>和后面<strong>公式推导</strong>将这个问题进行如下<strong>标记（Notion）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(m\)</span></td>
+<td><strong>样本数量（number of training examples ）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(x\)</span></td>
+<td><strong>输入变量/特征（input of variable/features）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(y\)</span></td>
+<td><strong>目标变量/输出变量（output variable / target variable）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((x, y)\)</span></td>
+<td><strong>一个样本（one training example）</strong></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\((x^{(i)}, y^{(i)})\)</span></td>
+<td><strong>第<span class="arithmatex">\(i\)</span>个样本</strong></td>
+</tr>
+</tbody>
+</table>
+<p>好了，下面先来<strong>明确一下</strong>我们<strong>已知条件</strong>和<strong>要做的事</strong>：</p>
+<p>我们已知了训练集（m组数据：<span class="arithmatex">\((x^{(1)}, y^{(1)}), (x^{(2)}, y^{(2)}), ...(x^{(m)}, y^{(m)}), 其中(x^{(i)}, y^{(i)})\)</span>代表了第 i 组的（房屋尺寸，房屋价格）），根据这个训练集，我们要训练出我们的模型（函数），通常表示为h，即<strong>hypothesis(假设)</strong>。而这个函数h的输入是房屋尺寸，输出就是房屋价格。因此，h 是一个从x 到 y 的函数映射。</p>
+<p><img alt="1_1_1_training_flow" src="../../assets/images/1_1_1_training_flow.png" /></p>
+<p>那么，对于我们这个问题，我们应该如何描述<span class="arithmatex">\(h\)</span>？</p>
+<p>一种可能的表达方式为：
+$$
+h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\tag{1.2.1}
+$$
+因为只含有一个特征/输入变量，因此这样的问题叫作单变量线性回归问题。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>线性回归中<ins class="critic">线性</ins>的含义： 因变量<ins class="critic">y</ins>对于<ins class="critic">未知的回归系数</ins>（<span class="arithmatex">\(\theta_0\)</span>，<span class="arithmatex">\(\theta_1\)</span>，.... <span class="arithmatex">\(\theta_n\)</span>） 是<ins class="critic">线性</ins>的。</p>
+</div>
+<h2 id="2">2. 代价函数</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 2 - Cost Function (8 min).mkv</p>
+</div>
+<p>Training Set</p>
+<table>
+<thead>
+<tr>
+<th>Size   in <span class="arithmatex">\(feet^2 (x)\)</span></th>
+<th>Price ($) in <span class="arithmatex">\(1000's (y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2104</td>
+<td>460</td>
+</tr>
+<tr>
+<td>1416</td>
+<td>232</td>
+</tr>
+<tr>
+<td>1534</td>
+<td>315</td>
+</tr>
+<tr>
+<td>852</td>
+<td>178</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>Hypothesis:    <span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0}+\theta_{1}x\)</span></p>
+<p>Parameters: <span class="arithmatex">\(\theta_{0}\)</span> ， <span class="arithmatex">\(\theta_{1}\)</span></p>
+<p>通过上一节，我们知道了，我们要完成朋友的<strong>需求（根据他房子的大小预测房价</strong>），要知道假设函数    <span class="arithmatex">\(h\)</span>，我们对    <span class="arithmatex">\(h\)</span>     做出这样一种假设：<span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0}+\theta_{1}x\)</span>。通过观察这个函数，我们可以把这个问题转化为求<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>，从而当你朋友把房子大小告诉你，你将其代入公式即可得到预测的房价。那么，我们如何选择呢<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>？</p>
+<p>首先，我们先直观理解<span class="arithmatex">\(h_\theta \left( x \right)\)</span> ---下图是<span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span>取不同值时，<span class="arithmatex">\(h\)</span>的整体图像。</p>
+<p><img alt="1_2_1_figure_of_h" src="../../assets/images/1_2_1_figure_of_h.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上面图像为了方便省略了<span class="arithmatex">\(\theta\)</span>下标，即 <span class="arithmatex">\(h_\theta(x) = h(x)\)</span>，后面也可能会这样做。</p>
+</div>
+<p><strong>结合图像描述我们的任务</strong></p>
+<ul>
+<li>把训练集数据绘制在下图中（并非上面的房价训练集，仅举例示意）</li>
+</ul>
+<p><img alt="1_2_2_datasets_in_figrue" src="../../assets/images/1_2_2_datasets_in_figrue.png" /></p>
+<ul>
+<li>我们要做的就是绘制一条直线（下图蓝色的线）尽量地与上面那些点有和好的拟合，这条直线就是<span class="arithmatex">\(h_\theta(x)\)</span>。如何确定这条直线也就是确定<span class="arithmatex">\(\theta_0\)</span>和<span class="arithmatex">\(\theta_1\)</span>。</li>
+</ul>
+<p><img alt="1_2_3_line_fit" src="../../assets/images/1_2_3_line_fit.png" /></p>
+<ul>
+<li>我们的idea：</li>
+</ul>
+<p>Choose <span class="arithmatex">\(\theta_0, \theta_1\)</span></p>
+<p>so that <span class="arithmatex">\(h_\theta(x)\)</span>  is close to  <span class="arithmatex">\(y\)</span>  for our training examples  <span class="arithmatex">\((x, y)\)</span></p>
+<p>将我们的任务以公式化标记，即：</p>
+<div class="arithmatex">\[
+\mathop{minimize} \limits_{\theta_0,\ \theta_1}\   \frac {1} {2m}\cdot\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2\tag{2.1.1}
+\]</div>
+<p>线性回归实际上就是解决一个关于<span class="arithmatex">\(\theta_0, \theta_1\)</span>的最小化问题(minimize)。我们希望我们的直线与那些点有很好的拟合，那我们把每一个点预测得到的值<span class="arithmatex">\(\Big(\)</span>将x代入假设函数可得到，即<span class="arithmatex">\(h_\theta(x)\Big)\)</span>与真实值y求一个差的平方。再把这些平方累加。即:</p>
+<div class="arithmatex">\[
+\sum\limits_{i=1}^{m}\Big(h_\theta(x^{(i)})-y^{(i)}\Big)^2\tag{2.1.2}
+\]</div>
+<p>我们只要让这个平方和最小即可。</p>
+<p>注意, </p>
+<p>关于式(2.1.1)前面<span class="arithmatex">\(\frac{1}{2m}\)</span></p>
+<ul>
+<li><span class="arithmatex">\(\frac{1}{m}\)</span>是因为求和项有m个，这里除以m，是求平均值。</li>
+<li><span class="arithmatex">\(\frac{1}{2}\)</span>为了后面求导消去</li>
+<li>其实这个<span class="arithmatex">\(\frac{1}{2m}\)</span>对我们求最小值没有任何影响，只是为了计算方便这么写。</li>
+</ul>
+<p>关于式(2.1.2)的几何意义</p>
+<ul>
+<li>所有数据点与拟合直线在y轴方向的截距的平方和</li>
+</ul>
+<p>在本例子中，</p>
+<ul>
+<li><span class="arithmatex">\(h_\theta \left( x \right)=\theta_{0} + \theta_{1}x\)</span></li>
+</ul>
+<p>通常，为了方便起见，我们定义一个函数，也就是代价函数(cost function)，如下：</p>
+<div class="arithmatex">\[
+J(\theta_0,\theta_1)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2\tag{2.1.3}
+\]</div>
+<p>我们的最终目标就转化为：</p>
+<div class="arithmatex">\[
+\mathop{minimize} \limits_{\theta_0,\ \theta_1}J(\theta_0,\theta_1)
+\]</div>
+<p>这里我们定义的式(2.1.3)损失函数, 也被称为平方误差函数(squared error function)。然而，损失函数不止这一种形式，但是在回归问题中，平方误差函数都是比较合理和比较常用的选择。</p>
+<h2 id="3-1">3 代价函数直观理解1</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 3 - Cost Function - Intuition I (11 min).mkv</p>
+</div>
+<p>在上一个小节，我们得到了代价函数的定义。在这一小节中，我们通过一个例子来获取一些直观的感受，看看代价函数到底是在干什么。</p>
+<p>Hypothesis: <span class="arithmatex">\(h_\theta(x)=\theta_0+\theta_1x\)</span></p>
+<p>Parameters: <span class="arithmatex">\(\theta_0,\ \theta_1\)</span></p>
+<p>Cost Function: <span class="arithmatex">\(J(\theta_0,\theta_1)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2\)</span></p>
+<p>Goal: <span class="arithmatex">\(\mathop{minimize} \limits_{\theta_0,\ \theta_1}J(\theta_0,\theta_1)\)</span></p>
+<p>为了让代价函数 <span class="arithmatex">\(J\)</span> 有更好的，可视化效果，我们简化假设函数为<span class="arithmatex">\(h_\theta(x)=\theta_1x\)</span>，即假设<span class="arithmatex">\(\theta_0=0\)</span>。简化后：</p>
+<p><span class="arithmatex">\(h_\theta(x)=\theta_1x\)</span></p>
+<p><span class="arithmatex">\(J(\theta_1)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2\)</span></p>
+<p>Goal: <span class="arithmatex">\(\mathop{minimize} \limits_{\theta_1}J(\theta_1)\)</span></p>
+<p>在确定好不同的 <span class="arithmatex">\(\theta_1\)</span> ,之后画出假设函数 <span class="arithmatex">\(h\)</span> 和代价函数 <span class="arithmatex">\(J\)</span>。本例中，假定训练集为<span class="arithmatex">\((1,1), (2,2), (3,3)\)</span>。</p>
+<ul>
+<li>当 <span class="arithmatex">\(\theta_1=1\)</span> 时，</li>
+</ul>
+<p><img alt="1_3_1_h&amp;J_theta1=1" src="../../assets/images/1_3_1_h%26J_theta1%3D1.png" /></p>
+<p>注意到，因为<span class="arithmatex">\(\theta_1=1\)</span>，此时 <span class="arithmatex">\(h_\theta=y\)</span> ,所以 <span class="arithmatex">\(J=0\)</span> 。并在右边图上画出第一个点(1,0)。</p>
+<ul>
+<li>当 <span class="arithmatex">\(\theta_1=0.5\)</span> 时，</li>
+</ul>
+<p><img alt="1_3_2_h&amp;J_theta=0.5" src="../../assets/images/1_3_2_h%26J_theta%3D0.5.png" /></p>
+<p><span class="arithmatex">\((x,y)\)</span>依次取(1, 0.5), (2, 1), (3, 1.5) 计算 <span class="arithmatex">\(J \approx 0.58\)</span> 。并在右边图上画出第二个点(0.5,0.58)。</p>
+<ul>
+<li>当 <span class="arithmatex">\(\theta_1=0\)</span> 时，</li>
+</ul>
+<p><img alt="1_3_3_h&amp;J_theta=0" src="../../assets/images/1_3_3_h%26J_theta%3D0.png" /></p>
+<p>同理，当 <span class="arithmatex">\(\theta_1\)</span> 取不同值时，我们可以计算出 <span class="arithmatex">\(J\)</span> ，并在右侧画出 <span class="arithmatex">\(J\)</span> 的大致图像。</p>
+<p><img alt="1_3_4_h&amp;J_all_theta" src="../../assets/images/1_3_4_h%26J_all_theta.png" /></p>
+<p>总结：
+我们通过取不同的 <span class="arithmatex">\(\theta_1\)</span> ，绘制出了 <span class="arithmatex">\(J\)</span> 。</p>
+<p><img alt="1_3_5_h&amp;J_all_theta" src="../../assets/images/1_3_5_h%26J_dif_theta.png" /></p>
+<p>So for each value of <span class="arithmatex">\(\theta_1\)</span> , we wound up with a diffent value of <span class="arithmatex">\(J(\theta_1)\)</span> . And we colud then use this to trace out this plot on the right. 
+Now you remember the optimization objective for our learning algorithm is we want to choose the value of <span class="arithmatex">\(\theta_1\)</span> that minimize <span class="arithmatex">\(J(\theta_1)\)</span>. This was our objective function for the linear regression. </p>
+<p>现在，我们观察右侧那条曲线，会发现，当 <span class="arithmatex">\(\theta_1=1\)</span> 时，<span class="arithmatex">\(J(\theta_1)\)</span>最小。再观察左边的拟合情况会发现，这确实是最好的情况。对于这个特殊的训练集，我们确实完美地拟合了它。</p>
+<p>And that's why minimizing <span class="arithmatex">\(J(\theta_1)\)</span> corresponds to finding a straight line that fits the data well. </p>
+<h2 id="4-ii">4. 代价函数的直观理解II</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 4 - Cost Function - Intuition II (9 min).mkv</p>
+</div>
+<p><img alt="1_4_1_J_3D" src="../../assets/images/1_4_1_J_3D.png" /></p>
+<p>代价函数的样子，则可以看出在三维空间中存在一个使得<span class="arithmatex">\(J(\theta_{0}, \theta_{1})\)</span>最小的点。</p>
+<p><img alt="1_4_2_h&amp;Jdenggaoxian" src="../../assets/images/1_4_2_h%26Jdenggaoxian.png" /></p>
+<p>通过这些图形，我希望你能更好地理解这些代价函数 <span class="arithmatex">\(J\)</span> 所表达的值是什么样的，它们对应的假设函数是什么样的，以及什么样的假设对应的点，更接近于代价函数 <span class="arithmatex">\(J\)</span> 的最小值。</p>
+<p>当然，我们真正需要的是一种有效的算法，能够自动地找出这些使代价函数 <span class="arithmatex">\(J\)</span> 取最小值的参数 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 来。</p>
+<p>我们也不希望编个程序把这些点画出来，然后人工的方法来读出这些点的数值，这很明显不是一个好办法。我们会遇到更复杂、更高维度、更多参数的情况，而这些情况是很难画出图的，因此更无法将其可视化，因此我们真正需要的是编写程序来找出这些最小化代价函数的 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 的值，在下一节视频中，我们将介绍一种算法，能够自动地找出能使代价函数 <span class="arithmatex">\(J\)</span> 最小化的参数 <span class="arithmatex">\(\theta_{0}\)</span> 和 <span class="arithmatex">\(\theta_{1}\)</span> 的值。</p>
+<h2 id="5">5. 梯度下降</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 5 - Gradient Descent (11 min).mkv</p>
+</div>
+<p>梯度下降是一个用来求函数最小值的算法，我们将使用梯度下降算法来求出代价函数<span class="arithmatex">\(J(\theta_{0}, \theta_{1})\)</span> 的最小值。</p>
+<p>梯度下降背后的思想是：开始时我们随机选择一个参数的组合<span class="arithmatex">\(\left( {\theta_{0}},{\theta_{1}},......,{\theta_{n}} \right)\)</span>，计算代价函数，然后我们寻找下一个能让代价函数值下降最多的参数组合。我们持续这么做直到找到一个局部最小值（<strong>local minimum</strong>），因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是全局最小值（<strong>global minimum</strong>），选择不同的初始参数组合，可能会找到不同的局部最小值。</p>
+<p><img alt="1_5_1_J_dif_start" src="../../assets/images/1_5_1_J_dif_start.png" /></p>
+<p>想象一下你正站立在山的这一点上，站立在你想象的公园这座红色山上，在梯度下降算法中，我们要做的就是旋转360度，看看我们的周围，并问自己要在某个方向上，用小碎步尽快下山。这些小碎步需要朝什么方向？如果我们站在山坡上的这一点，你看一下周围，你会发现最佳的下山方向，你再看看周围，然后再一次想想，我应该从什么方向迈着小碎步下山？然后你按照自己的判断又迈出一步，重复上面的步骤，从这个新的点，你环顾四周，并决定从什么方向将会最快下山，然后又迈进了一小步，并依此类推，直到你接近局部最低点的位置。</p>
+<p>批量梯度下降（<strong>batch gradient descent</strong>）算法的公式为：</p>
+<p>repeat until convergence {
+$$
+\theta_j := \theta_j - \alpha\frac{\partial}{\partial\theta_j}J(\theta_0, \theta_1)
+$$
+}</p>
+<p>其中 <span class="arithmatex">\(\alpha\)</span> 是学习率（<strong>learning rate</strong>），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大，在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。</p>
+<p>在梯度下降算法中，还有一个更微妙的问题，梯度下降中，我们要更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span> ，当 <span class="arithmatex">\(j=0\)</span> 和<span class="arithmatex">\(j=1\)</span>时，会产生更新，所以你将更新<span class="arithmatex">\(J\left( {\theta_{0}} \right)\)</span>和<span class="arithmatex">\(J\left( {\theta_{1}} \right)\)</span>。实现梯度下降算法的微妙之处是，在这个表达式中，如果你要更新这个等式，你需要同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>，我的意思是在这个等式中，我们要这样更新：<span class="arithmatex">\({\theta_{0}} := {\theta_{0}}\)</span> ，并更新<span class="arithmatex">\({\theta_{1}}:= {\theta_{1}}\)</span>。</p>
+<p>实现方法是：你应该计算公式右边的部分，通过那一部分计算出<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>的值，然后同时更新<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>。</p>
+<p>让我进一步阐述这个过程：</p>
+<p><img alt="1_5_2_gradient_descent" src="../../assets/images/1_5_2_gradient_descent.png" /></p>
+<p>在梯度下降算法中，这是正确实现同时更新的方法。我不打算解释为什么你需要同时更新，同时更新是梯度下降中的一种常用方法。我们之后会讲到，同步更新是更自然的实现方法。当人们谈到梯度下降时，他们的意思就是同步更新。注意上面图左下方和右下方的区别。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>
+<p>梯度下降法，是需要同时更新<span class="arithmatex">\({\theta_{0}}\)</span>, <span class="arithmatex">\({\theta_{1}}\)</span>,...,  <span class="arithmatex">\({\theta_{n}}\)</span>的。本例中，只有<span class="arithmatex">\({\theta_{0}}\)</span>和<span class="arithmatex">\({\theta_{1}}\)</span>。</p>
+</li>
+<li>
+<p>上面图中用了 <code>:=</code>更新 <span class="arithmatex">\(\theta\)</span> , 这里  <code>:=</code> 等同于计算机语言中的赋值操作。</p>
+</li>
+</ul>
+<p>在接下来的视频中，我们要进入这个微分项的细节之中。我已经写了出来但没有真正定义，如果你已经修过微积分课程，如果你熟悉偏导数和导数，这其实就是这个微分项：</p>
+<p><span class="arithmatex">\(\alpha \frac{\partial }{\partial {{\theta }_{0}}}J({{\theta }_{0}},{{\theta }_{1}})\)</span>，<span class="arithmatex">\(\alpha \frac{\partial }{\partial {{\theta }_{1}}}J({{\theta }_{0}},{{\theta }_{1}})\)</span>。</p>
+<h2 id="6">6. 梯度下降的直观理解</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 6 - Gradient Descent Intuition (12 min).mkv</p>
+</div>
+<p>在之前的视频中，我们给出了一个数学上关于梯度下降的定义，本次视频我们更深入研究一下，更直观地感受一下这个算法是做什么的，以及梯度下降算法的更新过程有什么意义。梯度下降算法如下：</p>
+<p><span class="arithmatex">\({\theta_{j}}:={\theta_{j}}-\alpha \frac{\partial }{\partial {\theta_{j}}}J\left(\theta \right)\)</span></p>
+<p>描述：对 <span class="arithmatex">\(\theta\)</span> 赋值，使得<span class="arithmatex">\(J\left( \theta  \right)\)</span>按梯度下降最快方向进行，一直迭代下去，最终得到局部最小值。其中<span class="arithmatex">\(\alpha\)</span>是学习率（<strong>learning rate</strong>），它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大。</p>
+<p><img alt="1_6_1_derivative" src="../../assets/images/1_6_1_derivative.png" /></p>
+<p>从上图，我们发现，无论 <span class="arithmatex">\(\theta\)</span> 起始点从正的还是负的开始出发，他们都会向着 <span class="arithmatex">\(J(\theta)\)</span>变小的方向出发。</p>
+<p>让我们来看看如果 <span class="arithmatex">\(\alpha\)</span> 太小或 <span class="arithmatex">\(\alpha\)</span> 太大会出现什么情况：</p>
+<p>如果 <span class="arithmatex">\(\alpha\)</span> 太小了，即我的学习速率太小，结果就是只能这样像小宝宝一样一点点地挪动，去努力接近最低点，这样就需要很多步才能到达最低点，所以如果 <span class="arithmatex">\(\alpha\)</span> 太小的话，可能会很慢，因为它会一点点挪动，它会需要很多步才能到达全局最低点。</p>
+<p>如果 <span class="arithmatex">\(\alpha\)</span> 太大，那么梯度下降法可能会越过最低点，甚至可能无法收敛，下一次迭代又移动了一大步，越过一次，又越过一次，一次次越过最低点，直到你发现实际上离最低点越来越远，所以，如果 <span class="arithmatex">\(\alpha\)</span> 太大，它会导致无法收敛，甚至发散。</p>
+<p><img alt="1_6_2_J_dif_alpha" src="../../assets/images/1_6_2_J_dif_alpha.png" /></p>
+<p>假设你将 <span class="arithmatex">\({\theta_{1}}\)</span> 初始化在局部最低点。结果是局部最优点的导数将等于零，因为它是那条切线的斜率。这意味着你已经在局部最优点，它使得 <span class="arithmatex">\({\theta_{1}}\)</span> 不再改变，也就是新的<span class="arithmatex">\({\theta_{1}}\)</span>等于原来的 <span class="arithmatex">\({\theta_{1}}\)</span> ，因此，如果你的参数已经处于局部最低点，那么梯度下降法更新其实什么都没做，它不会改变参数的值。</p>
+<p>我们来看一个例子，这是代价函数<span class="arithmatex">\(J\left( \theta  \right)\)</span>。</p>
+<p><img alt="1_6_3_J_update_theta" src="../../assets/images/1_6_3_J_update_theta.png" /></p>
+<p>我想找到它的最小值，首先初始化我的梯度下降算法，在那个品红色的点初始化，如果我更新一步梯度下降，也许它会带我到这个点，因为这个点的导数是相当陡的。现在，在这个绿色的点，如果我再更新一步，你会发现我的导数，也即斜率，是没那么陡的。随着我接近最低点，我的导数越来越接近零，所以，梯度下降一步后，新的导数会变小一点点。然后我想再梯度下降一步，在这个绿点，我自然会用一个稍微跟刚才在那个品红点时比，再小一点的一步，到了新的红色点，更接近全局最低点了，因此这点的导数会比在绿点时更小。所以，我再进行一步梯度下降时，我的导数项是更小的，<span class="arithmatex">\({\theta_{1}}\)</span> 更新的幅度就会更小。所以<strong>随着梯度下降法的运行，你移动的幅度会自动变得越来越小，直到最终移动幅度非常小，你会发现已经收敛到局部极小值</strong>。</p>
+<p>回顾一下，在梯度下降法中，当我们接近局部最低点时，梯度下降法会自动采取更小的幅度，这是因为当我们接近局部最低点时，很显然在局部最低时导数等于零，所以当我们接近局部最低时，导数值会自动变得越来越小，所以梯度下降将自动采取较小的幅度，这就是梯度下降的做法。所以实际上没有必要再另外减小<span class="arithmatex">\(a\)</span>。</p>
+<p>这就是梯度下降算法，你可以用它来最小化任何代价函数<span class="arithmatex">\(J\)</span>，不只是线性回归中的代价函数<span class="arithmatex">\(J\)</span>。</p>
+<h2 id="7">7. 梯度下降应用至线性回归</h2>
+<div class="admonition info">
+<p>参考视频:
+2 - 7 - GradientDescentForLinearRegression (6 min).mkv</p>
+</div>
+<p>这是我们之前学到的知识，现在尝试将梯度下降法应用到线性回归模型。
+<img alt="1_7_1_GDA&amp;LRM" src="../../assets/images/1_7_1_GDA%26LRM.png" /></p>
+<p>我们的Goal：<span class="arithmatex">\(\mathop{minimize} \limits_{\theta_0,\ \theta_1}J(\theta_0,\theta_1)\)</span></p>
+<p>仔细观察，我们会发现解决这个目标的关键就是这个导数项 <span class="arithmatex">\(\frac{\partial}{\partial\theta_j}J(\theta_0,\theta_1)\)</span>。</p>
+<p><span class="arithmatex">\(\frac{\partial }{\partial {{\theta }_{j}}}J({{\theta }_{0}},{{\theta }_{1}})=\frac{\partial }{\partial {{\theta }_{j}}}\frac{1}{2m}{{\sum\limits_{i=1}^{m}{\left( {{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)}}^{2}}\)</span></p>
+<blockquote>
+<p>怎么从上式变到下面两个式子，请看下一章节，有具体推导。</p>
+</blockquote>
+<p><span class="arithmatex">\(j=0\)</span>  时：<span class="arithmatex">\(\frac{\partial }{\partial {{\theta }_{0}}}J({{\theta }_{0}},{{\theta }_{1}})=\frac{1}{m}{{\sum\limits_{i=1}^{m}{\left( {{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)}}}\)</span></p>
+<p><span class="arithmatex">\(j=1\)</span>  时：<span class="arithmatex">\(\frac{\partial }{\partial {{\theta }_{1}}}J({{\theta }_{0}},{{\theta }_{1}})=\frac{1}{m}\sum\limits_{i=1}^{m}{\left( \left( {{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)\cdot {{x}^{(i)}} \right)}\)</span></p>
+<p>则算法改写成：</p>
+<p><strong>Repeat {</strong></p>
+<p>​                <span class="arithmatex">\({\theta_{0}}:={\theta_{0}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{ \left({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)}\)</span></p>
+<p>​                <span class="arithmatex">\({\theta_{1}}:={\theta_{1}}-a\frac{1}{m}\sum\limits_{i=1}^{m}{\left( \left({{h}_{\theta }}({{x}^{(i)}})-{{y}^{(i)}} \right)\cdot {{x}^{(i)}} \right)}\)</span></p>
+<p>​               <strong>}</strong></p>
+<p>重要结论：线性回归模型里的代价函数 <span class="arithmatex">\(J\)</span> 总是弓状函数，又称凸函数(<strong>convex function</strong>)。如下图：
+<img alt="1_7_2_J_in_linear" src="../../assets/images/1_7_2_J_in_linear.png" /></p>
+<p>这个函数没有局部最优(local optima)，只有全局最优(global optimum)。当我们用梯度下降去计算的时候，他总能够收敛到全局最优。</p>
+<p>我们刚刚使用的算法，有时也称为批量梯度下降。实际上，在机器学习中，通常不太会给算法起名字，但这个名字”<strong>批量梯度下降</strong>”，指的是在梯度下降的每一步中，我们都用到了所有的训练样本。在应用梯度下降，并计算偏导数时，我们都需要计算<span class="arithmatex">\(\sum\limits_{i=1}^{m}\Big(h_\theta(x)-y\Big)\)</span>。因此，批量梯度下降法这个名字说明了我们需要考虑<strong>所有</strong>这一"批"训练样本，而事实上，有时也有其他类型的梯度下降法，不是这种"批量"型的，不考虑整个的训练集，而是每次只关注训练集中的一些小的子集。在后面的课程中，我们也将介绍这些方法。</p>
+<p>如果你之前学过线性代数，有些同学之前可能已经学过高等线性代数，你应该知道有一种计算代价函数 <span class="arithmatex">\(J\)</span> 最小值的数值解法，不需要梯度下降这种迭代算法。在后面的课程中，我们也会谈到这个方法，它可以在不需要多步梯度下降的情况下，也能解出代价函数 <span class="arithmatex">\(J\)</span> 的最小值，这是另一种称为正规方程(<strong>normal equations</strong>)的方法。实际上在数据量较大的情况下，梯度下降法比正规方程要更适用一些。</p>
+<p>现在我们已经掌握了梯度下降，我们可以在不同的环境中使用梯度下降法，我们还将在不同的机器学习问题中大量地使用它。所以，祝贺自己<img alt="😂" class="twemoji" src="https://twemoji.maxcdn.com/v/latest/svg/1f602.svg" title=":joy:" />成功学会了第一个机器学习算法。</p>
+<p>先写到这里，后面打算附上习题和实操python代码。</p>
+<h2 id="_1">习题 &amp;&amp; 参考答案</h2>
+<h3 id="_2">第一题</h3>
+<p>基于一个学生在大学一年级的表现，预测他在大学二年级表现。
+令x等于学生在大学第一年得到的“A”的个数（包括A-，A和A+成绩）学生在大学第一年得到的成绩。预测y的值：第二年获得的“A”级的数量
+这里每一行是一个训练数据。在线性回归中，我们的假设 <span class="arithmatex">\(h_\theta(x)=\theta_0+\theta_1x\)</span>，并且我们使用 m 来表示训练示例的数量。</p>
+<table>
+<thead>
+<tr>
+<th>x</th>
+<th>y</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>4</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>对于上面给出的训练集</strong>（注意，此训练集也可以在本测验的其他问题中引用），<strong>m 的值是多少</strong>？</p>
+<h3 id="_3">第二题</h3>
+<p>假设我们使用第一题中的训练集。并且，我们代价函数的定义是 
+<span class="arithmatex">\(J(\theta_0,\theta_1)=\frac{1}{2m}\sum\limits_{i=1}^{m}\big(h_\theta(x^{(i)})-y^{(i)}\big)^2\)</span>
+求 <span class="arithmatex">\(J(0, 1)\)</span>?</p>
+<h3 id="_4">第三题</h3>
+<p>令问题1中，线性回归假设的 <span class="arithmatex">\(\theta_0=-1, \theta_1=2\)</span>, 求 <span class="arithmatex">\(h_\theta(6)\)</span>?</p>
+<h3 id="_5">第四题</h3>
+<p>代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 与 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的关系如下图所示。图中中给出了相同代价函数的等高线图。根据图示，选择正确的选项（选出所有正确项）
+<img alt="1_8_4" src="../../assets/images/1_8_4.png" />   </p>
+<p style="margin-top:10px"></p>
+
+<p>A. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最小值</p>
+<p style="margin-top:10px"></p>
+
+<p>B. 点P（图2的全局最小值）对应于图1的点C</p>
+<p style="margin-top:10px"></p>
+
+<p>C. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近C点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在C点有最小值</p>
+<p style="margin-top:10px"></p>
+
+<p>D. 从B点开始，学习率合适的梯度下降算法会最终帮助我们到达或者接近A点，即代价函数 <span class="arithmatex">\(J(\theta_0, \theta_1)\)</span> 在A点有最大值</p>
+<p style="margin-top:10px"></p>
+
+<p>E. 点P（图2的全局最小值）对应于图1的点A</p>
+<h3 id="_6">第五题</h3>
+<p>假设对于某个线性回归问题（比如预测房价），我们有一些训练集，对于我们的训练集，我们能够找到一些 <span class="arithmatex">\(\theta_0, \theta_1\)</span> ，使得  <span class="arithmatex">\(J(\theta_0, \theta_1)=0\)</span>  。以下哪项陈述是正确的？（选出所有正确项）</p>
+<p style="margin-top:20px"></p>
+
+<p>A. 为了实现这一点，我们必须有 <span class="arithmatex">\(\theta_0=0, \theta_1=0\)</span> ，这样才能使 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
+<p style="margin-top:10px"></p>
+
+<p>B. 对于满足 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 的值，其对于每个训练例子 <span class="arithmatex">\((x^{(i)},y^{(i)})\)</span>，都有 <span class="arithmatex">\(h_\theta(x^{(i)})=y^{(i)}\)</span></p>
+<p style="margin-top:10px"></p>
+
+<p>C. 这是不可能的：通过 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span> 的定义，不可能存在 <span class="arithmatex">\(\theta_0, \theta_1\)</span> 使得 <span class="arithmatex">\(J(\theta_0, \theta_1) = 0\)</span></p>
+<p style="margin-top:10px"></p>
+
+<p>D. 即使对于我们还没有看到的新例子，我们也可以完美地预测y的值（例如，我们可以完美地预测我们尚未见过的新房的价格）</p>
+<p><br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/></p>
+<h3 id="_7">参考答案</h3>
+<p>第一题：4
+<br/>
+<br/>
+第二题：0.5</p>
+<p>由已知求 <span class="arithmatex">\(J(0, 1)\)</span>, 可得：<span class="arithmatex">\(\theta_0=0, \theta_0=1\)</span></p>
+<p>所以 <span class="arithmatex">\(h_\theta(x)=0+1\cdot x=x\)</span></p>
+<p>最后, 将上述结果和训练集数据代入可得：</p>
+<div class="arithmatex">\[
+\begin{split}
+J(0, 1)=\frac{1}{2*4}[ &amp; (3-2)^2 + 
+(1-2)^2+ \\\\
+&amp; (0-1)^2+(4-3)^2]=0.5
+\end{split}
+\]</div>
+<p><br/>
+第三题：11
+<br/></p>
+<p>已知, <span class="arithmatex">\(h_\theta(x)=\theta_0+\theta_1x\)</span>, <span class="arithmatex">\(\theta_0=-1, \theta_1=2\)</span></p>
+<p>所以将 <span class="arithmatex">\(\theta_0, \theta_1\)</span>代入可得 <span class="arithmatex">\(h_\theta(x)=-1+2x\)</span></p>
+<p>让我们求 <span class="arithmatex">\(h_\theta(6)\)</span></p>
+<p>最后, <span class="arithmatex">\(h_\theta(6)=-1+2*6=11\)</span></p>
+<p><br/>
+第四题：AE
+<br/>
+<br/>
+第五题：B</p>
+<h2 id="_8">上机练习</h2>
+<!--
+下面这个css用于控制p标签的两端对齐
+-->
+<style type="text/css">
+p {
+    text-align: justify;  /*文本两端对齐*/
+}
+</style>
+
+<p>In this part of exercise, you will implement linear regression with one variable to predict profits for a food truck. Suppose you are the CEO of a restaurant franchise and are considering different cities for opening a new outlet. The chain already has trucks in various cities and you have data for profits and popularations from the cities.</p>
+<p>&ensp; you would like to use this data to help you select which city to expand to next.</p>
+<p>&ensp; The file ex1data.txt contains the dataset for our linear regression problem. The first column is the popularations of a city and the second column is the profits of a food truck in that city. A negative value for profits indicates a loss.</p>
+<h3 id="1plotting-the-data">1、Plotting the Data</h3>
+<p>Before starting on any task, it is often useful to understand the data by visualizing it. For this dataset, you can use a scatter plot to visualize the data, since it has only properties to plot (profit and popularation). (Many other problems that you will encounter in real life are multi-dimensional and can't be plotted on 2-d plot).</p>
+<div class="admonition note">
+<p>代码是在jupyter notebook上执行！！！
+请将每个代码块按顺序拷贝到cell中执行。</p>
+</div>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块1 导入必要的库和数据</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># 0. 导入需要的库</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="c1"># 1. 导入数据</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;ex1data1.txt&#39;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="c1"># 1.1 使用pandas中的read_csv 接收数据</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="sd">注意: </span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="sd">header=None: 是指我们读取的原始文件数据没有列索引</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a><span class="sd">names: 指定新列名</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Population&#39;</span><span class="p">,</span> <span class="s1">&#39;Profit&#39;</span><span class="p">])</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="c1"># 1.2 展示前五行数据</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>返回结果:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>   <span class="n">Population</span>   <span class="n">Profit</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="mi">0</span>      <span class="mf">6.1101</span>  <span class="mf">17.5920</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="mi">1</span>      <span class="mf">5.5277</span>   <span class="mf">9.1302</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="mi">2</span>      <span class="mf">8.5186</span>  <span class="mf">13.6620</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="mi">3</span>      <span class="mf">7.0032</span>  <span class="mf">11.8540</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="mi">4</span>      <span class="mf">5.8598</span>   <span class="mf">6.8233</span>
+</code></pre></div>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">用matplotlib画图</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="c1"># 1. 创建画布</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">),</span><span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="c1"># 2. 绘制散点图</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Population&quot;</span><span class="p">],</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Profit&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training data&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Population of City in 10,000s&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Profit in $10,000s&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="c1"># 2.2 添加网格显示</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="c1"># 2.3 添加图例</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="c1"># 3.显示图像</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出图像：</p>
+<p><img alt="Figure 1: Scatter plot of training data" src="../../assets/images/Fig1_training_data.png" /></p>
+<h3 id="2gradient-descent">2、Gradient Descent</h3>
+<p>In this part you will fit linear regression parameters <span class="arithmatex">\(\theta\)</span> to our dataset using gradient descent.</p>
+<h4 id="21-update-equations">2.1 Update Equations</h4>
+<p>The objective of linear regression is to minimize the cost function</p>
+<div class="arithmatex">\[
+J(\theta)=\sum_{i=1}^m{h_ \theta(x^{(i)}-y^{(i)})}^2
+\]</div>
+<p>where the hypothesis <span class="arithmatex">\(h_\theta(x)\)</span> is given by the linear model </p>
+<div class="arithmatex">\[
+h_\theta(x) = \theta^Tx=\theta_0+\theta_1x_1
+\]</div>
+<p>&ensp; Recall that the parameters of your model are the <span class="arithmatex">\(\theta_j\)</span> values. These are the values you will adjust to minimize cost <span class="arithmatex">\(J(\theta)\)</span>. One way to do this is to use the batch descent algorithm. In batch gradient descent, each iteration performs the update</p>
+<div class="arithmatex">\[
+\theta_j := \theta_j - \alpha \frac{1}{m} \sum_{i=1}^m{h_ \theta(x^{(i)}-y^{(i)})x_j^{(i)}} \\\\
+(simultaneously\  update\  \theta_j\  for\  all\ j )
+\]</div>
+<p>&ensp; With each step of gradient descent, your parameters <span class="arithmatex">\(\theta_j\)</span> come closer to the optomal values that will achieve that the lowest cost <span class="arithmatex">\(J(\theta)\)</span></p>
+<div class="admonition note">
+<p class="admonition-title">Implementation Note</p>
+<p>To take into accout the intercept term <span class="arithmatex">\((\theta_0)\)</span> , we add an additional first column to X and set it to all ones. This allows us to treat <span class="arithmatex">\(\theta_0\)</span> as simply another 'feature'.</p>
+</div>
+<h4 id="22-implementation">2.2 Implementation</h4>
+<p>In 代码块1, we have already set up the data for linear regression. In the following lines, we add another dimension to our data to accommodate the <span class="arithmatex">\(\theta_0\)</span> intercept term. We also initialize the initial parameters to 0 and the learning rate alpha to 0.01.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块2.1 设置X和y</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="c1"># 这一步相当于设置所有 x_0=1</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">data</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Ones&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="c1"># 可以先看一下目前data.shape</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="c1"># data.shape</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="c1">## 先获取data总列数</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="n">cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="c1"># 从data中取到X和y</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="c1"># X : training data</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="c1"># y : target variable</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># X取所有行, 去最后一列</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="n">cols</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># y取所有行, 最后一列</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="c1"># 注意这里的X, y仍然包含行索引和列索引值</span>
+</code></pre></div>
+</td></tr></table>
+<p><strong>输出并观察下 X (训练集) and y (目标变量)是否正确。</strong></p>
+<p>输入 [1]：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">X</span><span class="o">.</span> <span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<p>输出 [1]：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>    <span class="n">Ones</span>    <span class="n">Population</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="mi">0</span>   <span class="mi">1</span>   <span class="mf">6.1101</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="mi">1</span>   <span class="mi">1</span>   <span class="mf">5.5277</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="mi">2</span>   <span class="mi">1</span>   <span class="mf">8.5186</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="mi">3</span>   <span class="mi">1</span>   <span class="mf">7.0032</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="mi">4</span>   <span class="mi">1</span>   <span class="mf">5.8598</span>
+</code></pre></div></p>
+<p>输入 [2]：</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">y</span><span class="o">.</span> <span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<p>输出 [2]：
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="mi">0</span>    <span class="mf">17.5920</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="mi">1</span>     <span class="mf">9.1302</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="mi">2</span>    <span class="mf">13.6620</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="mi">3</span>    <span class="mf">11.8540</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="mi">4</span>     <span class="mf">6.8233</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">Name</span><span class="p">:</span> <span class="n">Profit</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="n">float64</span>
+</code></pre></div></p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块2.2 将X和y转成ndarray 并设置学习率和迭代次数</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-8-10">10</a></span>
+<span class="normal"><a href="#__codelineno-8-11">11</a></span>
+<span class="normal"><a href="#__codelineno-8-12">12</a></span>
+<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span>
+<span class="normal"><a href="#__codelineno-8-17">17</a></span>
+<span class="normal"><a href="#__codelineno-8-18">18</a></span>
+<span class="normal"><a href="#__codelineno-8-19">19</a></span>
+<span class="normal"><a href="#__codelineno-8-20">20</a></span>
+<span class="normal"><a href="#__codelineno-8-21">21</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># 从dataframe 取出value</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">value</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">value</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1"># 可以检验一下 X和y的shape</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="c1"># X = X.shape</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="c1"># Y = y.shape</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="c1"># 将X和y转化成numpy array 加快计算速度</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="c1"># reshape的作用是将y转成不管行, 列数为1的矩阵</span>
+<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="c1"># 设置迭代次数</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="n">iterations</span> <span class="o">=</span> <span class="mi">1500</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="c1"># 设置学习率</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.01</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="c1"># 初始化theta </span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="p">])</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="c1"># 设置完成后，看下X y theta的维度</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">theta</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">((</span><span class="mi">97</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">97</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">重重重要提示!!!</p>
+<p>笔者在这里踩了一个大坑, 上面一个代码块2.2 的第 19 行非常重要。因为theta 是一个向量, 所以维度只能设置为[2,], 而不是[2,1]。numpy里[2,]和[2,1] 不是一回事。</p>
+</div>
+<h4 id="23-computing-the-jtheta">2.3 Computing the <span class="arithmatex">\(J(\theta)\)</span></h4>
+<p>As you perform gradient descent to learn minimize the cost function <span class="arithmatex">\(J(\theta)\)</span>, it is helpful to monitor the convergence by computing the cost. In this section, you will implement a function to calculate <span class="arithmatex">\(J(\theta)\)</span> so you can check the convergence of your gradient descent implementation.</p>
+<p>&ensp; As you are doing this, remember that the variables X and y are not scalar values, but matrices whose rows represent the examples from the training set.</p>
+<p>&ensp; Once you have completed the function, you should expect to see a cost of <strong>32.07</strong> (<span class="arithmatex">\(\theta\)</span> initialized to zeros).</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">代码块2.3 定义代价函数并计算初始值</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># 定义代价函数</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="k">def</span> <span class="nf">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">):</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a>    <span class="c1"># print((np.dot(X,theta)-y).shape)</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a>    <span class="n">inner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">))</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">inner</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="n">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="c1"># 计算不迭代之前J的初始值</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="n">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">theta</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="mf">32.072733877455676</span>
+</code></pre></div>
+<h4 id="24-gradient-descent">2.4 Gradient descent</h4>
+<p>&ensp; As you program, make sure you understand what you are trying to optimize and what is being updated. Keep in mind that the <span class="arithmatex">\(J(\theta)\)</span> is parameterized by the vector <span class="arithmatex">\(\theta\)</span> not X and y. That is, we minimize the value of <span class="arithmatex">\(J(\theta)\)</span> by changing the values of the vector <span class="arithmatex">\(\theta\)</span>, not by changing X or y. Refer to the equations in this handout and to the video lectures if you are uncertain.</p>
+<p>&ensp; A good way to verify that gradient descent is working correctly is to look at the value of <span class="arithmatex">\(J(\theta)\)</span> and check that it is decreasing with each step. Assuming you have implemented gradient descent and <strong>computeCost</strong> correctly, your value of <span class="arithmatex">\(J(\theta)\)</span> should never increase, you should converge to a steady value by the end of the algorithm.</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">定义 运行梯度下降算法 画图</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-12-10">10</a></span>
+<span class="normal"><a href="#__codelineno-12-11">11</a></span>
+<span class="normal"><a href="#__codelineno-12-12">12</a></span>
+<span class="normal"><a href="#__codelineno-12-13">13</a></span>
+<span class="normal"><a href="#__codelineno-12-14">14</a></span>
+<span class="normal"><a href="#__codelineno-12-15">15</a></span>
+<span class="normal"><a href="#__codelineno-12-16">16</a></span>
+<span class="normal"><a href="#__codelineno-12-17">17</a></span>
+<span class="normal"><a href="#__codelineno-12-18">18</a></span>
+<span class="normal"><a href="#__codelineno-12-19">19</a></span>
+<span class="normal"><a href="#__codelineno-12-20">20</a></span>
+<span class="normal"><a href="#__codelineno-12-21">21</a></span>
+<span class="normal"><a href="#__codelineno-12-22">22</a></span>
+<span class="normal"><a href="#__codelineno-12-23">23</a></span>
+<span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span>
+<span class="normal"><a href="#__codelineno-12-34">34</a></span>
+<span class="normal"><a href="#__codelineno-12-35">35</a></span>
+<span class="normal"><a href="#__codelineno-12-36">36</a></span>
+<span class="normal"><a href="#__codelineno-12-37">37</a></span>
+<span class="normal"><a href="#__codelineno-12-38">38</a></span>
+<span class="normal"><a href="#__codelineno-12-39">39</a></span>
+<span class="normal"><a href="#__codelineno-12-40">40</a></span>
+<span class="normal"><a href="#__codelineno-12-41">41</a></span>
+<span class="normal"><a href="#__codelineno-12-42">42</a></span>
+<span class="normal"><a href="#__codelineno-12-43">43</a></span>
+<span class="normal"><a href="#__codelineno-12-44">44</a></span>
+<span class="normal"><a href="#__codelineno-12-45">45</a></span>
+<span class="normal"><a href="#__codelineno-12-46">46</a></span>
+<span class="normal"><a href="#__codelineno-12-47">47</a></span>
+<span class="normal"><a href="#__codelineno-12-48">48</a></span>
+<span class="normal"><a href="#__codelineno-12-49">49</a></span>
+<span class="normal"><a href="#__codelineno-12-50">50</a></span>
+<span class="normal"><a href="#__codelineno-12-51">51</a></span>
+<span class="normal"><a href="#__codelineno-12-52">52</a></span>
+<span class="normal"><a href="#__codelineno-12-53">53</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="c1"># 梯度下降</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="c1"># 定义梯度下降算法</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="k">def</span> <span class="nf">gradientDescent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">iterations</span><span class="p">):</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># m: 样本的总个数</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>  <span class="c1"># n: theta的总个数</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6"></a>    <span class="c1"># 用一个向量来记录迭代过程中所有的cost值</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7"></a>    <span class="n">cost</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">iterations</span><span class="p">)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">iterations</span><span class="p">):</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9"></a>        <span class="n">cost</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">computeCost</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10"></a>        <span class="c1"># theta是几个就要更新几个</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12"></a>            <span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">theta</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="o">-</span><span class="n">alpha</span> <span class="o">*</span> \
+<a id="__codelineno-12-13" name="__codelineno-12-13"></a>                <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">m</span><span class="p">)</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span><span class="o">-</span><span class="n">y</span><span class="p">)</span><span class="o">*</span><span class="n">X</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14"></a>
+<a id="__codelineno-12-15" name="__codelineno-12-15"></a>    <span class="k">return</span> <span class="n">theta</span><span class="p">,</span> <span class="n">cost</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17"></a>
+<a id="__codelineno-12-18" name="__codelineno-12-18"></a><span class="c1"># 保证运行梯度下降，theta不受前面影响，故重新初始化theta。</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19"></a><span class="n">theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="p">])</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20"></a>
+<a id="__codelineno-12-21" name="__codelineno-12-21"></a><span class="c1"># 运行梯度下降，分别接收更新后的theta值和每一步迭代的cost值</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22"></a><span class="n">theta_hat</span><span class="p">,</span> <span class="n">costs</span> <span class="o">=</span> <span class="n">gradientDescent</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">theta</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">iterations</span><span class="p">)</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23"></a>
+<a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="c1"># 打印梯度处理后的预测函数的参数theta</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">theta_hat</span><span class="p">)</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a><span class="c1"># 用matplotlib画图</span>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="c1"># 1. 创建画布</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="c1"># 2. 绘制图像</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="c1"># 绘制训练集数据</span>
+<a id="__codelineno-12-34" name="__codelineno-12-34"></a><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;Population&quot;</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;Profit&quot;</span><span class="p">],</span>
+<a id="__codelineno-12-35" name="__codelineno-12-35"></a>            <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Training data&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-36" name="__codelineno-12-36"></a><span class="c1"># 绘制拟合后的数据</span>
+<a id="__codelineno-12-37" name="__codelineno-12-37"></a><span class="n">x_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">Population</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">Population</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-12-38" name="__codelineno-12-38"></a><span class="n">y_hat</span> <span class="o">=</span> <span class="n">theta_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">theta_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x_hat</span>
+<a id="__codelineno-12-39" name="__codelineno-12-39"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_hat</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Linear regression&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-40" name="__codelineno-12-40"></a>
+<a id="__codelineno-12-41" name="__codelineno-12-41"></a>
+<a id="__codelineno-12-42" name="__codelineno-12-42"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-12-43" name="__codelineno-12-43"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Population of City in 10,000s&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-44" name="__codelineno-12-44"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Profit in $10,000s&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-45" name="__codelineno-12-45"></a>
+<a id="__codelineno-12-46" name="__codelineno-12-46"></a><span class="c1"># 2.2 添加网格显示</span>
+<a id="__codelineno-12-47" name="__codelineno-12-47"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-12-48" name="__codelineno-12-48"></a>
+<a id="__codelineno-12-49" name="__codelineno-12-49"></a><span class="c1"># 2.3 添加图例</span>
+<a id="__codelineno-12-50" name="__codelineno-12-50"></a><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-12-51" name="__codelineno-12-51"></a>
+<a id="__codelineno-12-52" name="__codelineno-12-52"></a><span class="c1"># 3.显示图像</span>
+<a id="__codelineno-12-53" name="__codelineno-12-53"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p>输出结果</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">3.63606348</span><span class="p">,</span>  <span class="mf">1.16698916</span><span class="p">])</span>
+</code></pre></div>
+<p><img alt="Figure 2: Training data with linear regression fit" src="../../assets/images/Fig2_linear_regression_fit.png" /></p>
+<p>原练习中，需要画( <span class="arithmatex">\(\theta\)</span>, J ) 的三维图 以及 等高线图, 他们是用matlab/octave 实现的。笔者python太菜了，就不弄了费时间。最后画一个迭代次数和cost的折线图收尾本章节。</p>
+<table class="highlighttable"><tr><th colspan="2" class="filename"><div class="highlight"><span class="filename">画出cost关于迭代次数的图像</span></div></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span>
+<span class="normal"><a href="#__codelineno-14-13">13</a></span>
+<span class="normal"><a href="#__codelineno-14-14">14</a></span>
+<span class="normal"><a href="#__codelineno-14-15">15</a></span>
+<span class="normal"><a href="#__codelineno-14-16">16</a></span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="c1"># 1. 创建画布</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="c1"># 2. 绘制折线图</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">iterations</span><span class="p">),</span> <span class="n">costs</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="c1"># 2.1 添加描述信息</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Iters&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cost&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="c1"># 2.2 添加网格显示</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15"></a><span class="c1"># 3.显示图像</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+</td></tr></table>
+<p><img alt="Figure 3: cost" src="../../assets/images/Fig3_cost.png" /></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 前言和目录" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              前言和目录
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2.%20linear%20regression-m%20v/" class="md-footer__link md-footer__link--next" aria-label="下一页: 二. 多变量线性回归" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              二. 多变量线性回归
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,48 +1,30 @@
-# Welcome to MkDocs
+# 欢迎来到大白的知识库
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+## 缘由
+自己在机器学习的时候, 发现大部分都是教你如何调包还有参数都是什么意思, 对底层算法讲解不够具体和清楚。
 
-## Commands
+## 亮点
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+本笔记更侧重公式推导, 底层代码实现(python)。(换言之, 其他都是 ~~抄~~ 参考 的, 哈哈哈哈哈)
 
-## Project layout
+## 插曲
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+- 原来只想用gitbook做个电子书，后来发现gitbook太麻烦了。一不小心整了一个个人知识库。
+- 期间还尝试使用vuepress搭博客，结果发现公式不支持各种报错，崩溃...
+- 这个mkdocs+materials国内并没有完整可靠的教程，完全靠自己看官方文档摸索搞出来的。
+- 有一些炫酷的功能我怎么也搞不出来，还以为是自己的问题。结果是这个主题竟然还有部分功能只有捐赠者才能用...
+- 在电脑上写公式, 真的很痛苦。
 
-Hypothesis:         $h_\theta(x)=\theta^Tx=\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n$
+## 展望
 
-Parameters:         $\theta_0,\theta_1,...,\theta_n$
+学成之后, 希望能把推荐系统模型应用到本职工作。
 
-Cost function:   
-$$
-J(\theta_0,\theta_1,...,\theta_n)=\frac {1} {2m}\sum\limits_{i=1}^{m}(h_\theta(x^{(i)})-y^{(i)})^2
-$$
-Gradient descent:
-Repeat{
-$$
-\theta_j :=\theta_j-\alpha\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)
-$$
-​	     }（simultaneously update for every j=0, 1, 2, ..., n)）
+<br>
+<hr>
 
-推导一： $\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)=?$
+<p align="right">大白</p>
 
-Let's first work it for the case if we have only one training example $(x,y)$, so that we can neglect the sum in the definition $J$. We have:
-$$
-\begin{aligned} 
-\frac{\partial}{\partial \theta_j}J(\theta_0,\theta_1,...,\theta_n)&=
-\frac {1} {2}\frac{\partial}{\partial \theta_j}(h_\theta(x)-y)^2\\
-&=2\cdot\frac{1}{2}\cdot(h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(h_\theta(x)-y)\\
-&=(h_\theta(x)-y)\cdot\frac{\partial}{\partial \theta_j}(\theta_0x_0+\theta_1x_1+\theta_2x_2+...+\theta_nx_n)\\
-&=(h_\theta(x)-y)\cdot x_j
-\end{aligned}
-$$
+<p align="right">2022/04/09 15:57:21 于上海电力大学教师公寓</p>
 
 
 

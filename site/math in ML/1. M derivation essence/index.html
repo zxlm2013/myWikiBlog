@@ -1,0 +1,1437 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+    
+    
+      
+        <title>一. 矩阵求导本质 - 大白的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="大白的知识库" class="md-header__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            大白的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              一. 矩阵求导本质
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../machine%20learning/" class="md-tabs__link">
+        机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        机器学习补充
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-tabs__link">
+        推荐系统基础
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="大白的知识库" class="md-nav__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    大白的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          机器学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/1.%20linear%20regression-1%20v/" class="md-nav__link">
+        一. 单变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/2.%20linear%20regression-m%20v/" class="md-nav__link">
+        二. 多变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/3.%20logistic%20regression/" class="md-nav__link">
+        三. 逻辑回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/4.%20regularization/" class="md-nav__link">
+        四. 正则化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/5.%20Neural%20Networks-R/" class="md-nav__link">
+        五. 神经网络-表达
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/6.%20Neural%20Networks-L/" class="md-nav__link">
+        六. 神经网络-学习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          机器学习补充
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习补充" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习补充
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          一. 矩阵求导本质
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        一. 矩阵求导本质
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一. 函数与标量、向量、矩阵
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 函数与标量、向量、矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1function" class="md-nav__link">
+    1、function 是一个标量
+  </a>
+  
+    <nav class="md-nav" aria-label="1、function 是一个标量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-input" class="md-nav__link">
+    1.1 input 是一个标量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-input" class="md-nav__link">
+    1.2 input 是一个向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-input" class="md-nav__link">
+    1.3 input 是一个矩阵
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2function" class="md-nav__link">
+    2、function 是一个向量
+  </a>
+  
+    <nav class="md-nav" aria-label="2、function 是一个向量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 向量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 矩阵变元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3function" class="md-nav__link">
+    3、function 是一个矩阵
+  </a>
+  
+    <nav class="md-nav" aria-label="3、function 是一个矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 标量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 向量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 矩阵变元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4、总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 矩阵求导的本质
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵求导结果的布局
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵求导结果的布局">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、向量变元的实值函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1、向量变元的实值函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 行向量偏导形式(行偏导向量)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 梯度向量形式(列向量偏导 列偏导向量)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、矩阵变元的实值标量函数
+  </a>
+  
+    <nav class="md-nav" aria-label="2、矩阵变元的实值标量函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 行向量偏导形式(行偏导向量)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-jacobian" class="md-nav__link">
+    2.2 Jacobian矩阵形式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_1" class="md-nav__link">
+    2.3 梯度向量形式(列偏导向量, 列向量偏导)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 梯度矩阵形式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 一些发现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 一些发现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251" class="md-nav__link">
+    2.5.1 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252" class="md-nav__link">
+    2.5.2 相等
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    四. 分子布局、分母布局的本质
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.%20M%20derivation/" class="md-nav__link">
+        二. 矩阵求导
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20BP%20algorithm%20derivation/" class="md-nav__link">
+        三. 神经网络BP算法原理和推导
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          推荐系统基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="推荐系统基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          推荐系统基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/1.%20introduction/" class="md-nav__link">
+        一. 简介
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一. 函数与标量、向量、矩阵
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 函数与标量、向量、矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1function" class="md-nav__link">
+    1、function 是一个标量
+  </a>
+  
+    <nav class="md-nav" aria-label="1、function 是一个标量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-input" class="md-nav__link">
+    1.1 input 是一个标量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-input" class="md-nav__link">
+    1.2 input 是一个向量
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-input" class="md-nav__link">
+    1.3 input 是一个矩阵
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2function" class="md-nav__link">
+    2、function 是一个向量
+  </a>
+  
+    <nav class="md-nav" aria-label="2、function 是一个向量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 向量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 矩阵变元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3function" class="md-nav__link">
+    3、function 是一个矩阵
+  </a>
+  
+    <nav class="md-nav" aria-label="3、function 是一个矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 标量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 向量变元
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 矩阵变元
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    4、总结
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 矩阵求导的本质
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵求导结果的布局
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵求导结果的布局">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、向量变元的实值函数
+  </a>
+  
+    <nav class="md-nav" aria-label="1、向量变元的实值函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 行向量偏导形式(行偏导向量)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 梯度向量形式(列向量偏导 列偏导向量)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、矩阵变元的实值标量函数
+  </a>
+  
+    <nav class="md-nav" aria-label="2、矩阵变元的实值标量函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 行向量偏导形式(行偏导向量)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-jacobian" class="md-nav__link">
+    2.2 Jacobian矩阵形式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23_1" class="md-nav__link">
+    2.3 梯度向量形式(列偏导向量, 列向量偏导)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 梯度矩阵形式
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 一些发现
+  </a>
+  
+    <nav class="md-nav" aria-label="2.5 一些发现">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#251" class="md-nav__link">
+    2.5.1 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#252" class="md-nav__link">
+    2.5.2 相等
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    四. 分子布局、分母布局的本质
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>一. 矩阵求导本质</h1>
+
+<div class="admonition info">
+<p>参考链接:</p>
+<p><a href="https://zhuanlan.zhihu.com/p/263777564">矩阵求导的本质与分子布局、分母布局的本质（矩阵求导——本质篇）</a></p>
+</div>
+<h2 id="_1">一. 函数与标量、向量、矩阵</h2>
+<p>考虑一个函数</p>
+<div class="arithmatex">\[
+\text{function(input)}
+\]</div>
+<p>针对 <span class="arithmatex">\(\text function\)</span> 的类型、<span class="arithmatex">\(\text input\)</span>的类型, 我们可以将这个函数 <span class="arithmatex">\(\text function\)</span> 分为不同的种类。</p>
+<h3 id="1function">1、function 是一个标量</h3>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 是以一个<strong>实值标量的函数</strong>。用细体小写字母 <span class="arithmatex">\(f\)</span> 表示。</p>
+<h4 id="11-input">1.1 input 是一个标量</h4>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 的<strong>变元</strong>是<strong>标量</strong>。用细体小写字母 <span class="arithmatex">\(x\)</span> 表示。</p>
+<p><strong>例1:</strong></p>
+<div class="arithmatex">\[
+f(x)=x+2\\\\ \tag{e.g.1}
+\]</div>
+<h4 id="12-input">1.2 input 是一个向量</h4>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 的<strong>变元</strong>是<strong>向量</strong>。用粗体小写字母 <span class="arithmatex">\(\pmb{x}\)</span> 表示。</p>
+<p><strong>例2:</strong> 设 <span class="arithmatex">\(\pmb{x}=[x_1,x_2,x_3]^T\)</span> </p>
+<div class="arithmatex">\[
+f(\pmb{x}) = a_1x_1^2+a_2x_2^2+a_3x_3^2+a_4x_1x_2\\\\ \tag{e.g.2}
+\]</div>
+<h4 id="13-input">1.3 input 是一个矩阵</h4>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 的<strong>变元</strong>是<strong>矩阵</strong>。用粗体大写字母 <span class="arithmatex">\(\pmb{X}\)</span> 表示。</p>
+<p><strong>例3:</strong> 设 <span class="arithmatex">\(\pmb{X}_{3 \times 2}=(x_{ij})_{i=1,j=1}^{3,2}\)</span> </p>
+<div class="arithmatex">\[
+f(\pmb{X})=a_1x_{11}^2+a_2x_{12}^2+a_3x_{21}^2+a_4x_{22}^2+a_5x_{31}^2+a_6x_{32}^2\\\\ \tag{e.g.3}
+\]</div>
+<h3 id="2function">2、function 是一个向量</h3>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 是一个<strong>实向量函数</strong>。用<strong>粗体</strong>小写字母 <span class="arithmatex">\(\pmb{f}\)</span> 表示。</p>
+<p><strong>含义:</strong> <span class="arithmatex">\(\pmb{f}\)</span> 是由若干个 <span class="arithmatex">\(f\)</span> 组成的<strong>向量</strong>。</p>
+<p>同样地, 变元分为三种: <strong>标量、向量、矩阵</strong>。这里的符号仍和上面的相同。</p>
+<h4 id="21">2.1 标量变元</h4>
+<p><strong>例四:</strong></p>
+<div class="arithmatex">\[
+\pmb{f}_{3 \times 1}(x)= 
+\begin{bmatrix}
+f_1(x) \\\\
+f_2(x) \\\\
+f_3(x) 
+\end{bmatrix}=
+\begin{bmatrix}
+x+1 \\\\
+2x+1 \\\\
+3x^2+1 
+\end{bmatrix}
+\\\\ \tag{e.g.4}
+\]</div>
+<h4 id="22">2.2 向量变元</h4>
+<p><strong>例5:</strong> 设 <span class="arithmatex">\(\pmb{x}=[x_1,x_2,x_3]^T\)</span></p>
+<div class="arithmatex">\[
+f_{3 \times 1}(\pmb{x})=
+\begin{bmatrix}
+f_1(\pmb{x})\\\\
+f_2(\pmb{x})\\\\
+f_3(\pmb{x})
+\end{bmatrix}=
+\begin{bmatrix}
+x_1+x_2+x_3\\\\
+x_1^2+2x_2+2x_3\\\\
+x_1x_2+x_2+x_3
+\end{bmatrix}\\\\ \tag{e.g.5}
+\]</div>
+<h4 id="23">2.3 矩阵变元</h4>
+<p><strong>例6：</strong> 设 <span class="arithmatex">\(\pmb{X}_{3 \times 2}=(x_{ij})_{i=1,j=1}^{3,2}\)</span></p>
+<div class="arithmatex">\[
+\pmb{f}_{3\times1}(\pmb{X})=
+\begin{bmatrix}
+f_1(\pmb{X})\\\\
+f_2(\pmb{X})\\\\
+f_3(\pmb{X})
+\end{bmatrix} 
+= \begin{bmatrix} 
+x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\\\
+x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}+x_{11}x_{12}\\\\ 2x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}+x_{11}x_{12}
+\end{bmatrix} \\\\ \tag{e.g.6}
+\]</div>
+<h3 id="3function">3、function 是一个矩阵</h3>
+<p>我们称 <span class="arithmatex">\(\text function\)</span> 是一个<strong>实矩阵函数</strong>。用<strong>粗体</strong>大写字母 <span class="arithmatex">\(\pmb{F}\)</span> 表示。</p>
+<p><strong>含义:</strong>  <span class="arithmatex">\(\pmb{F}\)</span> 是由若干个 <span class="arithmatex">\(f\)</span> 组成的一个<strong>矩阵</strong>。</p>
+<p>同样地, 变元分三中: <strong>标量、向量、矩阵</strong>。这里的符号仍与上面的相同。</p>
+<h4 id="31">3.1 标量变元</h4>
+<p><strong>例7:</strong></p>
+<div class="arithmatex">\[
+\pmb{F}_{3 \times 2}(x)=
+\begin{bmatrix}
+f_{11}(x) &amp; f_{12}(x)\\\\
+f_{21}(x) &amp; f_{22}(x)\\\\
+f_{31}(x) &amp; f_{32}(x)
+\end{bmatrix}=
+\begin{bmatrix}
+x+1 &amp; 2x+2\\\\
+x^2+1 &amp; 2x^2+1\\\\
+x^3+1 &amp; 2x^3+1
+\end{bmatrix}\\\\ \tag{e.g.7}
+\]</div>
+<h4 id="32">3.2 向量变元</h4>
+<p><strong>例8:</strong> 设 <span class="arithmatex">\(\pmb{x}=[x_1,x_2,x_3]^T\)</span></p>
+<div class="arithmatex">\[
+\pmb{F}_{3\times2}(\pmb{x})= \left[ \matrix{ f_{11}(\pmb{x}) &amp; f_{12}(\pmb{x})\\ f_{21}(\pmb{x}) &amp; f_{22}(\pmb{x})\\ f_{31}(\pmb{x}) &amp; f_{32}(\pmb{x})\\ } \right] = \left[  \matrix{ 2x_{1}+x_{2}+x_{3} &amp; 2x_{1}+2x_{2}+x_{3} \\ 2x_{1}+2x_{2}+x_{3} &amp; x_{1}+2x_{2}+x_{3} &amp; \\ 2x_{1}+x_{2}+2x_{3} &amp; x_{1}+2x_{2}+2x_{3} &amp; } \right] \\\\ \tag{e.g.8}
+\]</div>
+<h4 id="33">3.3 矩阵变元</h4>
+<p><strong>例9：</strong> 设 <span class="arithmatex">\(\pmb{X}_{3 \times 2}=(x_{ij})_{i=1,j=1}^{3,2}\)</span></p>
+<div class="arithmatex">\[
+\begin{align*} \pmb{F}_{3\times2}(\pmb{X})&amp;= \left[ \matrix{ f_{11}(\pmb{X}) &amp; f_{12}(\pmb{X})\\ f_{21}(\pmb{X}) &amp; f_{22}(\pmb{X})\\ f_{31}(\pmb{X}) &amp; f_{32}(\pmb{X})\\ } \right]\\\\ &amp;= \left[  \matrix{ x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32} &amp; 2x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\ 3x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32} &amp; 4x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32}\\ 5x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32} &amp; 6x_{11}+x_{12}+x_{21}+x_{22}+x_{31}+x_{32} } \right] \end{align*} \\\\ \tag{e.g.9}
+\]</div>
+<h3 id="4">4、总结</h3>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(funtion/input\)</span></th>
+<th>标量变元</th>
+<th>向量变元</th>
+<th>矩阵变元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>实值标量函数</td>
+<td><span class="arithmatex">\(f(x)\)</span></td>
+<td><span class="arithmatex">\(f(\pmb{x})\)</span></td>
+<td><span class="arithmatex">\(f(\pmb{X})\)</span></td>
+</tr>
+<tr>
+<td>实向量函数</td>
+<td><span class="arithmatex">\(\pmb{f}(x)\)</span></td>
+<td><span class="arithmatex">\(\pmb{f(x)}\)</span></td>
+<td><span class="arithmatex">\(\pmb{f(X)}\)</span></td>
+</tr>
+<tr>
+<td>实矩阵函数</td>
+<td><span class="arithmatex">\(\pmb{F}(x)\)</span></td>
+<td><span class="arithmatex">\(\pmb{F(x)}\)</span></td>
+<td><span class="arithmatex">\(\pmb{F(X)}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">二. 矩阵求导的本质</h2>
+<p>我们在高等数学中学过, 对于一个多元函数</p>
+<p><strong>例10:</strong></p>
+<div class="arithmatex">\[
+f(x_1,x_2,x_3)=x_1^2+x_1x_2+x_2x_3\\\\ \tag{e.g.10}
+\]</div>
+<p>我们可以将 <span class="arithmatex">\(\pmb{f}\)</span> 对 <span class="arithmatex">\(x_1,x_2,x_3\)</span>的<strong>偏导</strong>分别求出来, <strong>即:</strong></p>
+<div class="arithmatex">\[
+\left\{ \begin{align*} \frac{\partial f}{\partial x_1} &amp; = 2x_1+x_2 \\\\ \frac{\partial f}{\partial x_2} &amp; = x_1+x_3 \\\\ \frac{\partial f}{\partial x_3} &amp; = x_2 \end{align*} \right. \\\\
+\]</div>
+<p>矩阵求导也是一样，<strong>本质就是 <span class="arithmatex">\(function\)</span> 中的每个 <span class="arithmatex">\(f\)</span> 分别对变元中的每个元素逐个求偏导, 只不过写成了向量、矩阵形式而已。</strong></p>
+<p>对于 <span class="arithmatex">\((e.g.10)\)</span> , 我们把得出的三个结果写成列向量形式:</p>
+<div class="arithmatex">\[
+\frac{\partial f(\pmb{x})}{\partial \pmb{x}_{3 \times 1}}=
+\begin{bmatrix} \frac{\partial f}{\partial x_1}\\\\
+\frac{\partial f}{\partial x_2}\\\\
+\frac{\partial f}{\partial x_3}\\\end{bmatrix}=
+\begin{bmatrix} 2x_1+x_2\\\\
+x_1+x_3\\\\
+x_2 \\\end{bmatrix}\\\\ \tag{1}
+\]</div>
+<p>一个矩阵求导<strong>以列向量形式展开</strong>的雏形就出现了。</p>
+<p>当然我们也可以<strong>以行向量形式展开:</strong></p>
+<div class="arithmatex">\[
+\frac{\partial f(\pmb{x})}{\partial \pmb{x}_{3 \times 1}^T}=\Big[\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2}, \frac{\partial f}{\partial x_3}\Big]=[2x_1+x_2, x_1+x_3,x_2]\\\\ \tag{2}
+\]</div>
+<p>所以, 如果 <span class="arithmatex">\(function\)</span> 中有 <span class="arithmatex">\(m\)</span> 个 <span class="arithmatex">\(f\)</span> , 变元中有 <span class="arithmatex">\(n\)</span> 个元素, 那么每个 <span class="arithmatex">\(f\)</span> 对变元中的每个元素逐个求偏导后，我们就会产生 <span class="arithmatex">\(m \times n\)</span> 个结果。</p>
+<p><strong>这就是矩阵求导的本质。</strong></p>
+<p>至于这 <span class="arithmatex">\(m \times n\)</span>个结果的布局, 是写成行向量, 还是列向量, 还是写成矩阵, 就是我们接下来要讨论的事情。</p>
+<h2 id="_3">三. 矩阵求导结果的布局</h2>
+<p><strong>不严谨</strong>地说，从<strong>直观</strong>上看: </p>
+<p><strong>分子布局</strong>, 就是分子是<strong>列向量</strong>形式, 分母是<strong>行向量</strong>形式, 如 <span class="arithmatex">\((2)\)</span> 式。如果这里的 <span class="arithmatex">\(function\)</span> 是实向量函数 <span class="arithmatex">\(\pmb f_{21}\)</span> 的话, 结果就是 <span class="arithmatex">\(2 \times 3\)</span> 的矩阵了：</p>
+<div class="arithmatex">\[
+\frac{\partial \pmb{f}_{2 \times 1}(\pmb{x})}    {\partial \pmb{x}_{3 \times 1}^T}=
+\begin{bmatrix} 
+\frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_1}{\partial x_3} \\\\
+\frac{\partial f_2}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_3}
+\\\end{bmatrix}_{2 \times 3}\\\\ \tag{3}
+\]</div>
+<p><strong>分母布局</strong>, 就是分母是<strong>列向量</strong>形式, 分子是<strong>行向量</strong>形式, 如 <span class="arithmatex">\((1)\)</span> 式。如果这里的 <span class="arithmatex">\(function\)</span> 是实向量函数 <span class="arithmatex">\(\pmb f_{21}\)</span> 的话, 结果就是 <span class="arithmatex">\(3 \times 2\)</span> 的矩阵了：</p>
+<div class="arithmatex">\[
+\frac{\partial \pmb{f}_{2 \times 1}^T(\pmb{x})}    {\partial \pmb{x}_{3 \times 1}}=
+\begin{bmatrix} 
+\frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_1} \\\\
+\frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_2} \\\\
+\frac{\partial f_1}{\partial x_3} &amp; \frac{\partial f_2}{\partial x_3}
+\end{bmatrix}_{3 \times 2}\\\\ \tag{4}
+\]</div>
+<p>直观上理解了之后，我们针对不同类型的 <span class="arithmatex">\(function\)</span> ，不同类型的<strong>变元</strong>，给出<strong>严谨</strong>的布局说明。（这里不讨论标量变元的实值标量函数 <span class="arithmatex">\(f(x)\)</span> ，因为结果就是一个元素嘛~）</p>
+<h3 id="1">1、向量变元的实值函数</h3>
+<div class="arithmatex">\[
+f(\pmb{x}), \pmb{x}=[x_1,x_2,\cdots , x_n]^T
+\]</div>
+<h4 id="11">1.1 行向量偏导形式(行偏导向量)</h4>
+<div class="arithmatex">\[
+D_{\pmb{x}}f(\pmb{x})=\frac{\partial f(\pmb x)}{\partial \pmb{x}^T}=\Big[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots , \frac{\partial f}{\partial x_n}\Big]\\\\
+\tag{5}
+\]</div>
+<h4 id="12">1.2 梯度向量形式(列向量偏导 列偏导向量)</h4>
+<div class="arithmatex">\[
+\nabla_{\pmb {x}}f(\pmb {x})=\frac{\partial f(\pmb{x})}{\partial \pmb{x}}=\Big[\frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \cdots , \frac{\partial f}{\partial x_n}\Big]^T\\\\
+\tag{6}
+\]</div>
+<p>这两种形式<strong>互为转置</strong>。</p>
+<h3 id="2">2、矩阵变元的实值标量函数</h3>
+<div class="arithmatex">\[
+f(\pmb {X}), \pmb {X}_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
+\]</div>
+<p>先介绍一个符号 <span class="arithmatex">\(\text{vec}(\pmb {X})\)</span>, 作用是将矩阵 <span class="arithmatex">\(\pmb {X}\)</span> 按列堆栈来向量化。</p>
+<p>解释一下, <span class="arithmatex">\(\text{vec}(\pmb {X})\)</span> 就是把矩阵 <span class="arithmatex">\(\pmb {X}\)</span> 的第 1 列, 第 2 列, 直到第 n 列取出来，然后按顺序组成一个列向量，即：</p>
+<div class="arithmatex">\[
+\text{vec}(\pmb {X})=[x_{11},x_{21},\cdots ,x_{m1},x_{12},x_{22},\cdots ,x_{m2},\cdots , x_{1n},x_{2n},\cdots ,x_{mn}]^T\\\\
+\tag{7}
+\]</div>
+<h4 id="21_1">2.1 行向量偏导形式(行偏导向量)</h4>
+<p>即先把<strong>矩阵变元</strong> <span class="arithmatex">\(\pmb {X}\)</span> 按 <span class="arithmatex">\(vec\)</span> <strong>向量化</strong>，转换成<strong>向量</strong>变元，再对该<strong>向量变元</strong>使用 <span class="arithmatex">\((5)\)</span> 式：</p>
+<div class="arithmatex">\[
+\begin{align*} \text{D}_{\text{vec}\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \text{vec}^T(\pmb{X})} \\\\ &amp;= \left[ \frac{\partial f}{\partial x_{11}},\frac{\partial f}{\partial x_{21}},\cdots,\frac{\partial f}{\partial x_{m1}},\frac{\partial f}{\partial x_{12}},\frac{\partial f}{\partial x_{22}},\cdots,\frac{\partial f}{\partial x_{m2}},\cdots,\frac{\partial f} {\partial x_{1n}},\frac{\partial f}{\partial x_{2n}},\cdots,\frac{\partial f}{\partial  x_{mn}} \right] \end{align*} \\\\  \tag{8}
+\]</div>
+<h4 id="22-jacobian">2.2 Jacobian矩阵形式</h4>
+<p>即先把<strong>矩阵变元</strong> <span class="arithmatex">\(\pmb {X}\)</span> 进行转置, 再对转置后的每个位置的元素逐个求偏导，结果布局和转置布局一样。</p>
+<div class="arithmatex">\[
+\begin{align*} \text{D}_{\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \pmb{X}^T_{m\times n}} \\\\ &amp;= \left[  \matrix{ \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}} } \right]_{n\times m} \end{align*} \\\\  \tag{9}
+\]</div>
+<h4 id="23_1">2.3 梯度向量形式(列偏导向量, 列向量偏导)</h4>
+<p>即线把<strong>矩阵</strong>变元 <span class="arithmatex">\(\pmb{X}\)</span> 按 <span class="arithmatex">\(\text{vec}\)</span> <strong>向量化</strong>, 转换成<strong>向量</strong>变元, 再对该<strong>变元</strong>使用 <span class="arithmatex">\((6)\)</span> 式:</p>
+<div class="arithmatex">\[
+\begin{align*} \nabla_{\text{vec}\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \text{vec}\pmb{X}} \\\\ &amp;= \left[ \frac{\partial f}{\partial x_{11}},\frac{\partial f}{\partial x_{21}},\cdots,\frac{\partial f}{\partial x_{m1}},\frac{\partial f}{\partial x_{12}},\frac{\partial f}{\partial x_{22}},\cdots,\frac{\partial f}{\partial x_{m2}},\cdots,\frac{\partial f} {\partial x_{1n}},\frac{\partial f}{\partial x_{2n}},\cdots,\frac{\partial f}{\partial  x_{mn}} \right]^T \end{align*} \\\\  \tag{10}
+\]</div>
+<h4 id="24">2.4 梯度矩阵形式</h4>
+<p>直接对原矩阵变元 <span class="arithmatex">\(\pmb{X}\)</span> 的每个位置的元素逐个求导, 结果布局和原矩阵布局一样。</p>
+<div class="arithmatex">\[
+\begin{align*} \nabla_{\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \pmb{X}_{m\times n}} \\\\ &amp;= \left[  \matrix{ \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{12}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{1n}} \\ \frac{\partial f}{\partial x_{21}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{2n}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{m1}}&amp;\frac{\partial f}{\partial x_{m2}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}} } \right]_{m\times n} \end{align*} \\\\  \tag{11}
+\]</div>
+<h4 id="25">2.5 一些发现</h4>
+<h5 id="251">2.5.1 转置</h5>
+<p><strong><span class="arithmatex">\((9)\)</span>  式与 <span class="arithmatex">\((11)\)</span> 式互为转置</strong>； <span class="arithmatex">\((8)\)</span>  式与 <span class="arithmatex">\((10)\)</span> 式互为转置。</p>
+<h5 id="252">2.5.2 相等</h5>
+<p>当<strong>矩阵</strong>变元 <span class="arithmatex">\(\pmb{X}\)</span> 本身就是一个<strong>列向量</strong> <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots ,x_n]^T\)</span> 时, <span class="arithmatex">\((5)\)</span> 式、 <span class="arithmatex">\((8)\)</span> 式、 <span class="arithmatex">\((9)\)</span> 式<strong>相等</strong>; <span class="arithmatex">\((6)\)</span> 式、<span class="arithmatex">\((10)\)</span> 式、<span class="arithmatex">\((11)\)</span> 式<strong>相等</strong>; 当然, 前三个式子与后三个式子<strong>互为转置</strong>。</p>
+<p>这一发现说明，对于<strong>向量</strong>变元的<strong>实值标量函数</strong> <span class="arithmatex">\(f(\pmb {x})\)</span> , <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots ,x_n]^T\)</span> , 结果布局本质上有两种形式，一种是 <span class="arithmatex">\(\text{Jacobian}\)</span> 矩阵（<strong>已经成行向量了</strong>）形式，一种是<strong>梯度矩阵（已经成列向量了）</strong>形式。两种形式<strong>互为转置</strong>。</p>
+<p><br></p>
+<p><strong>后面第三大块<u>矩阵变元的实矩阵函数, 暂时用不到</u>，所以就不记了。要用的时候再说。</strong></p>
+<h2 id="_4">四. 分子布局、分母布局的本质</h2>
+<p>看到这里，相信同学们对矩阵求导结果的布局有了很全面的了解了，无非就是<strong>分子的转置、向量化，分母的转置、向量化</strong>，它们的<strong>各种组合</strong>而已。</p>
+<p>结合上述知识，我们总结：</p>
+<p>1、<strong>分子布局的本质</strong>：分子是<strong>标量、列向量</strong>、矩阵向量化后的<strong>列向量</strong>；分母是<strong>标量</strong>、列向量转置后的<strong>行向量</strong>、矩阵的<strong>转置</strong>矩阵、矩阵向量化后的列向量转置后的<strong>行向量</strong>。</p>
+<p>2、<strong>分母布局的本质</strong>：分子是<strong>标量</strong>、列向量<strong>转置</strong>后的<strong>行向量</strong>、矩阵向量化后的列向量<strong>转置</strong>后的<strong>行向量</strong>；分母是<strong>标量、列向量、矩阵自己</strong>、矩阵向量化后的<strong>列向量</strong>。</p>
+<p>思考一下，其实我们可以再简洁一些：<strong>谁转置了，就是另一方的布局</strong>。分子转置了，就是分母布局；分母转置了，就是分子布局。</p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="上一页: 前言和目录" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              前言和目录
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../2.%20M%20derivation/" class="md-footer__link md-footer__link--next" aria-label="下一页: 二. 矩阵求导" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              二. 矩阵求导
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>

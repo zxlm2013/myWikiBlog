@@ -1,12 +1,89 @@
-site_name: My Docs
+site_name: 大白的知识库
 theme:
   name: material
+  # 设置语言-简体中文
+  language: zh
+  features:
+    # 头部导航栏
+    - navigation.tabs
+    - navigation.tabs.sticky
+    # 回到顶端
+    - navigation.top
+
+# 定义文档结构
+nav:
+  - 首页: 'index.md'
+  - 机器学习: 
+    - 前言和目录: machine learning/index.md
+    - 一. 单变量线性回归 : machine learning/1. linear regression-1 v.md
+    - 二. 多变量线性回归 : machine learning/2. linear regression-m v.md
+    - 三. 逻辑回归: machine learning/3. logistic regression.md
+    - 四. 正则化: machine learning/4. regularization.md
+    - 五. 神经网络-表达 : machine learning/5. Neural Networks-R.md
+    - 六. 神经网络-学习 : machine learning/6. Neural Networks-L.md
+  - 机器学习补充:
+    - 前言和目录: math in ML/index.md
+    - 一. 矩阵求导本质: math in ML/1. M derivation essence.md
+    - 二. 矩阵求导 : math in ML/2. M derivation.md
+    - 三. 神经网络BP算法原理和推导: math in ML/3. BP algorithm derivation.md
+  - 推荐系统基础: 
+    - 前言和目录: recommender systems foundation/index.md
+    - 一. 简介: recommender systems foundation/1. introduction.md
+  # 数学部分先隐藏 日后再说
+  # - 机器学习之数学基础:
+  #   - 线性代数: math/Linear.md
+  #   - 概率论: math/Prob.md
+  #   - 数学总: math/Math.md
 
 markdown_extensions:
+  # 无序和有序列表
+  - def_list
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.superfences
+  # 图片对齐，大图片lazy-loading
+  - attr_list
+  - md_in_html
+  # 缩写词解释
+  - abbr
+  - pymdownx.snippets
+  # 告诫提醒
+  - admonition
+  - pymdownx.details
+  # 表格
+  - tables
+  # 加标注
+  - pymdownx.superfences:
+    # 图表 (流程图)
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  # 高亮，下划线，删除线
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  # 代码块
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  # icons, emoji表情
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  # 数学公式支持
   - pymdownx.arithmatex:
       generic: true
 
 extra_javascript:
   - javascripts/mathjax.js
-  # - https://polyfill.io/v3/polyfill.min.js?features=es6
-  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js
+
+plugins:
+  - search:
+      separator: '[\s\u200b\-]'

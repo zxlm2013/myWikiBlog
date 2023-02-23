@@ -1,0 +1,1622 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
+    
+    
+      
+        <title>二. 矩阵求导 - 大白的知识库</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.644de097.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../.." title="大白的知识库" class="md-header__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            大白的知识库
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              二. 矩阵求导
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="清空当前内容" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="标签" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="../.." class="md-tabs__link">
+      首页
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../machine%20learning/" class="md-tabs__link">
+        机器学习
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link md-tabs__link--active">
+        机器学习补充
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-tabs__link">
+        推荐系统基础
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="大白的知识库" class="md-nav__button md-logo" aria-label="大白的知识库" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    大白的知识库
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        首页
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          机器学习
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/1.%20linear%20regression-1%20v/" class="md-nav__link">
+        一. 单变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/2.%20linear%20regression-m%20v/" class="md-nav__link">
+        二. 多变量线性回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/3.%20logistic%20regression/" class="md-nav__link">
+        三. 逻辑回归
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/4.%20regularization/" class="md-nav__link">
+        四. 正则化
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/5.%20Neural%20Networks-R/" class="md-nav__link">
+        五. 神经网络-表达
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../machine%20learning/6.%20Neural%20Networks-L/" class="md-nav__link">
+        六. 神经网络-学习
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          机器学习补充
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="机器学习补充" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          机器学习补充
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.%20M%20derivation%20essence/" class="md-nav__link">
+        一. 矩阵求导本质
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          二. 矩阵求导
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        二. 矩阵求导
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一. 矩阵的迹
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 矩阵的迹">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、一些性质(建议熟记)
+  </a>
+  
+    <nav class="md-nav" aria-label="2、一些性质(建议熟记)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量的迹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 乘积的迹的本质
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    2.6 更多的交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    2.7 熟练使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 微分与全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 微分与全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1、一元函数的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="1、一元函数的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 普通函数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 复合函数的微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2、多元函数的全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="2、多元函数的全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 普通函数的全微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    2.2 复合函数的全微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、微分/全微分的法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3、微分/全微分的法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 常数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 乘法法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 商法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1、向量变元的实值标量函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    2、矩阵变元的实值标量函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3、矩阵变元的实矩阵函数
+  </a>
+  
+    <nav class="md-nav" aria-label="3、矩阵变元的实矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    3.1 四个法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 四个法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    a. 常数矩阵的矩阵微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    b. 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    c. 乘积法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    d. 转置法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    3.2 为什么要使用矩阵微分求导
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 为什么要使用矩阵微分求导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    3.2.1 夹层饼
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    3.2.2 行列式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33_1" class="md-nav__link">
+    3.3 如何使用矩阵微分求导
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.%20BP%20algorithm%20derivation/" class="md-nav__link">
+        三. 神经网络BP算法原理和推导
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          推荐系统基础
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="推荐系统基础" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          推荐系统基础
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/" class="md-nav__link">
+        前言和目录
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recommender%20systems%20foundation/1.%20introduction/" class="md-nav__link">
+        一. 简介
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    一. 矩阵的迹
+  </a>
+  
+    <nav class="md-nav" aria-label="一. 矩阵的迹">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    1、定义
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    2、一些性质(建议熟记)
+  </a>
+  
+    <nav class="md-nav" aria-label="2、一些性质(建议熟记)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21" class="md-nav__link">
+    2.1 标量的迹
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22" class="md-nav__link">
+    2.2 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23" class="md-nav__link">
+    2.3 转置
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24" class="md-nav__link">
+    2.4 乘积的迹的本质
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25" class="md-nav__link">
+    2.5 交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#26" class="md-nav__link">
+    2.6 更多的交换律
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#27" class="md-nav__link">
+    2.7 熟练使用
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    二. 微分与全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="二. 微分与全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    1、一元函数的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="1、一元函数的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    1.1 普通函数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    1.2 复合函数的微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_1" class="md-nav__link">
+    2、多元函数的全微分
+  </a>
+  
+    <nav class="md-nav" aria-label="2、多元函数的全微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21_1" class="md-nav__link">
+    2.1 普通函数的全微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22_1" class="md-nav__link">
+    2.2 复合函数的全微分
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    3、微分/全微分的法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3、微分/全微分的法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    3.1 常数的微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    3.2 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    3.3 乘法法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    3.4 商法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    三. 矩阵的微分
+  </a>
+  
+    <nav class="md-nav" aria-label="三. 矩阵的微分">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1_2" class="md-nav__link">
+    1、向量变元的实值标量函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2_2" class="md-nav__link">
+    2、矩阵变元的实值标量函数
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    3、矩阵变元的实矩阵函数
+  </a>
+  
+    <nav class="md-nav" aria-label="3、矩阵变元的实矩阵函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31_1" class="md-nav__link">
+    3.1 四个法则
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 四个法则">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    a. 常数矩阵的矩阵微分
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b" class="md-nav__link">
+    b. 线性法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c" class="md-nav__link">
+    c. 乘积法则
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d" class="md-nav__link">
+    d. 转置法则
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32_1" class="md-nav__link">
+    3.2 为什么要使用矩阵微分求导
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 为什么要使用矩阵微分求导">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    3.2.1 夹层饼
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    3.2.2 行列式
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33_1" class="md-nav__link">
+    3.3 如何使用矩阵微分求导
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+  <h1>二. 矩阵求导</h1>
+
+<div class="admonition info">
+<p>参考链接:</p>
+<p><a href="https://zhuanlan.zhihu.com/p/288541909">矩阵求导公式的数学推导（矩阵求导——进阶篇）</a></p>
+</div>
+<h2 id="_1">一. 矩阵的迹</h2>
+<h3 id="1">1、定义</h3>
+<p><span class="arithmatex">\(n \times n\)</span>的<strong>方阵</strong> <span class="arithmatex">\(A_{n \times n}\)</span> 的主对角线元素之和就叫做矩阵 <span class="arithmatex">\(A\)</span> 的迹(trace), 记作 <span class="arithmatex">\(tr(A)\)</span> , 即: </p>
+<p><span class="arithmatex">\(\pmb{A}_{n \times n} = \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nn} \\ \end{bmatrix}_{n \times n}\\\\\)</span></p>
+<p><span class="arithmatex">\(A\)</span>的迹为: </p>
+<div class="arithmatex">\[tr(\pmb{A})=a_{11} + a_{22} + \cdots + a_{nn} = \sum_{i=1}^n{a_{ii}} \tag{1}\]</div>
+<p>注意：只有<strong>方阵</strong>才有迹。</p>
+<h3 id="2">2、一些性质(建议熟记)</h3>
+<h4 id="21">2.1 标量的迹</h4>
+<p>对于一个标量 <span class="arithmatex">\(x\)</span> ,可以看成是 <span class="arithmatex">\(1 \times 1\)</span> 的矩阵，它的迹就是它自己。</p>
+<div class="arithmatex">\[x=tr(x)\\\\ \tag{2}\]</div>
+<h4 id="22">2.2 线性法则</h4>
+<p>相加再求迹等于求迹再相加，标量提外面</p>
+<div class="arithmatex">\[tr(c_1A+c_2B)=c_1tr(A)+c_2tr(B)\\\\ \tag{3}\]</div>
+<p>其中, <span class="arithmatex">\(c_1,c_2\)</span>为标量。</p>
+<p><strong>证明：</strong></p>
+<div class="arithmatex">\[
+\begin{align} tr(c_1\pmb{A}+c_2\pmb{B})  &amp;= tr \begin{bmatrix} c_1a_{11}+c_2b_{11} &amp; c_1a_{12}+c_2b_{12} &amp; \cdots &amp; c_1a_{1n}+c_2b_{1n} \\ c_1a_{21}+c_2b_{21} &amp; c_1a_{22}+c_2b_{22} &amp; \cdots &amp; c_1a_{2n}+c_2b_{2n} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ c_1a_{n1}+c_2b_{n1} &amp; c_1a_{n2}+c_2b_{n2} &amp; \cdots &amp; c_1a_{nn}+c_2b_{nn} \\ \end{bmatrix}  \\\\  &amp;= (c_1a_{11}+c_2b_{11})+(c_1a_{22}+c_2b_{22})+\cdots + (c_1a_{nn}+c_2b_{nn})   \\\\  &amp;= c_1(a_{11}+a_{22}+\cdots+a_{nn}) + c_2(b_{11}+b_{22}+\cdots+b_{nn})  \\\\  &amp;= c_1tr(\pmb{A})+c_2tr(\pmb{B})  \end{align} \\\\ \tag{4}
+\]</div>
+<p><strong>证毕。</strong></p>
+<h4 id="23">2.3 转置</h4>
+<p>转置的迹等于原矩阵的迹</p>
+<div class="arithmatex">\[tr(A^T)=tr(A)\\\\ \tag{5}\]</div>
+<p><strong>证明：</strong></p>
+<p>因为转置不会改变主对角线的元素，故成立。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="24">2.4 乘积的迹的本质</h4>
+<p>对于两个阶数都是 <span class="arithmatex">\(m \times n\)</span> 的矩阵 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 其中一个矩阵乘以（左乘右乘都可以）另一个矩阵的转置的迹，本质是 <span class="arithmatex">\(A_{m \times n}, B_{m \times n}\)</span> 两个矩阵对应位置的元素相乘并相加，可以理解为向量的点积在矩阵上的推广，即：</p>
+<div class="arithmatex">\[\begin{align} tr(\pmb{A}\pmb{B}^T)  &amp;= a_{11}b_{11}+a_{12}b_{12}+\cdots+a_{1n}b_{1n}\\ &amp;  +a_{21}b_{21}+a_{22}b_{22}+ \cdots +a_{2n}b_{2n}\\ &amp; + \cdots \\ &amp; + a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots a_{mn}b_{mn} \end{align} \\\\ \tag{6}\]</div>
+<p><strong>证明</strong></p>
+<div class="arithmatex">\[
+\begin{align}  tr(\pmb{A}\pmb{B}^T) &amp;= tr( \begin{bmatrix} a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\ a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\ \end{bmatrix} \begin{bmatrix} b_{11} &amp; b_{21} &amp; \cdots &amp; b_{m1} \\ b_{12} &amp; b_{22} &amp; \cdots &amp; b_{m2} \\ \vdots &amp; \vdots &amp; \vdots &amp; \vdots \\ b_{1n} &amp; b_{2n} &amp; \cdots &amp; b_{mn} \\ \end{bmatrix} )   \\\\   &amp;=  tr \begin{bmatrix} a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n} &amp; 不用管 &amp; \cdots &amp; 不用管 \\ 不用管 &amp; a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n} &amp; \cdots &amp; 不用管 \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ 不用管 &amp; 不用管 &amp; \cdots &amp; a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \\ \end{bmatrix}_{m \times m} \\\\ &amp;= a_{11}b_{11} + a_{12}b_{12} + \cdots + a_{1n}b_{1n}\\ &amp; + a_{21}b_{21} + a_{22}b_{22} + \cdots + a_{2n}b_{2n}\\ &amp; +  \cdots \\ &amp; +  a_{m1}b_{m1} + a_{m2}b_{m2} + \cdots + a_{mn}b_{mn} \end{align} \\\\ \tag{7}
+\]</div>
+<p><strong>证毕。</strong></p>
+<h4 id="25">2.5 交换律</h4>
+<p>矩阵乘积位置互换，迹不变</p>
+<div class="arithmatex">\[tr(AB)=tr(BA)\\\\ \tag{8}\]</div>
+<p>其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span>。</p>
+<p><strong>证明：</strong></p>
+<p>把 <span class="arithmatex">\(B_{n \times m}\)</span> 看做是 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 的转置。由乘积的迹的本质，即 <span class="arithmatex">\((6)\)</span> 式可知，无论乘积怎么交换顺序， <span class="arithmatex">\(A_{m \times n}\)</span> 与 <span class="arithmatex">\((B^T)_{m \times n}\)</span> 对应位置的元素相乘并相加，永远是不变的。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="26">2.6 更多的交换律</h4>
+<div class="arithmatex">\[tr(ABC)=tr(CAB)=tr(BCA)\\\\ \tag{9}\]</div>
+<p>其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times p}, C_{p \times m}\)</span> 。</p>
+<p><strong>证明：</strong></p>
+<p>把两个矩阵的乘积看做一个矩阵，和另外的一个矩阵应用交换律即可。</p>
+<p><strong>证毕。</strong></p>
+<h4 id="27">2.7 熟练使用</h4>
+<div class="arithmatex">\[tr(AB^T)=tr(B^TA)=tr(A^TB)=tr(BA^T)\\\\ \tag{10}\]</div>
+<p>其中, <span class="arithmatex">\(A_{m \times n}, B_{n \times m}\)</span> 。</p>
+<p><strong>证明：</strong></p>
+<p>第一个和第二个是交换律，第二个和三个是转置，第三个和第四个是交换律。</p>
+<p><strong>证毕。</strong></p>
+<h2 id="_2">二. 微分与全微分</h2>
+<p>我们先来复习一下本科阶段所学的高等数学中的微分与全微分。</p>
+<h3 id="1_1">1、一元函数的微分</h3>
+<h4 id="11">1.1 普通函数的微分</h4>
+<p>设 <span class="arithmatex">\(y=f(x)\)</span> , <span class="arithmatex">\(y\)</span> 可导, 则其微分为：</p>
+<div class="arithmatex">\[\mathbb{d}y=\mathbb{d}f(x)=f'(x)\mathbb{d}x\\\\ \tag{11}\]</div>
+<h4 id="12">1.2 复合函数的微分</h4>
+<p>设 <span class="arithmatex">\(y=f(u), u=g(x)\)</span> , 均可导, 则 <span class="arithmatex">\(y\)</span> 微分为：</p>
+<div class="arithmatex">\[\mathbb{d}y=\mathbb{d}f(u)=f'(u)\mathbb{d}g(x)=f'(u)g'(x)\mathbb{d}x\\\\ \tag{12}\]</div>
+<p>乍一看很复杂，其实举个例子就很简单：</p>
+<p>设 <span class="arithmatex">\(y=sin(2x+1), u=2x+1\)</span> , 则 <span class="arithmatex">\(y\)</span> 的微分为：</p>
+<div class="arithmatex">\[\begin{align} \mathbb{d}y&amp;=\mathbb{d}(\sin{u})=\cos{u}\mathbb{d}u=\cos(2x+1)\mathbb{d}(2x+1) \\\\ &amp;=\cos(2x+1) \cdot 2 \mathbb{d}x=2\cos(2x+1) \mathbb{d}x \end{align} \\\\ \tag{13}\]</div>
+<h3 id="2_1">2、多元函数的全微分</h3>
+<h4 id="21_1">2.1 普通函数的全微分</h4>
+<p>设 <span class="arithmatex">\(z=f(x,y), z\)</span> 可微, 则其全微分为：</p>
+<div class="arithmatex">\[\mathbb{d}z=\frac{\partial z}{\partial x}\mathbb{d}x+\frac{\partial z}{\partial y}\mathbb{d}y\\\\ \tag{14}\]</div>
+<h4 id="22_1">2.2 复合函数的全微分</h4>
+<p>设 <span class="arithmatex">\(z=f(u), u=\varphi(x,y), z\)</span> 可导, <span class="arithmatex">\(u\)</span>可微, 则其全微分为：</p>
+<div class="arithmatex">\[
+\begin{align}
+dz &amp; = df(u)-f'(u)du=f'(u)(\frac{\partial u}{\partial x}dx+\frac{\partial u}{\partial y}dy)\\
+&amp;=f'(u)\frac{\partial u}{\partial x}dx+f'(u)\frac{\partial u}{\partial y}dy
+\end{align}\\\ \tag{15}
+\]</div>
+<p>举个例子：
+设 <span class="arithmatex">\(z=sin(2x+y^2), u=2x+y^2\)</span>, 则 <span class="arithmatex">\(z\)</span> 的全微分为：</p>
+<div class="arithmatex">\[
+\begin{align}
+dz &amp; = d(sin(u)) = cosudu=cos(2x+y^2)d(2x+y^2)\\
+&amp; = cos(2x+y^2)(2dx+2ydy)\\
+&amp; = 2cos(2x+y^2)dx+2ycos(2x+y^2)dy\\\
+\end{align}
+\]</div>
+<h3 id="3">3、微分/全微分的法则</h3>
+<h4 id="31">3.1 常数的微分</h4>
+<div class="arithmatex">\[dc=0\\\\ \tag{16.1}\]</div>
+<p>其中,  <span class="arithmatex">\(c\)</span> 为常数。</p>
+<h4 id="32">3.2 线性法则</h4>
+<p>相加再微分等于微分再相加，常数提外面</p>
+<div class="arithmatex">\[d(c_1u+c_2v)=c_1du+c_2dv\\\\ \tag{16.2}\]</div>
+<p>其中, 一元函数 <span class="arithmatex">\(u=u(x), v=v(x)\)</span> 或多元函数 <span class="arithmatex">\(u=u(x,y, v=v(x,y), c_1,c_2\)</span> 为常数。</p>
+<h4 id="33">3.3 乘法法则</h4>
+<p>前微后不微 + 前不微后微</p>
+<div class="arithmatex">\[d(uv)=d(u)v+ud(v)\\ \tag{16.3}\]</div>
+<h4 id="34">3.4 商法则</h4>
+<p>(上微下不微 减 上不微下微）<strong>除以</strong>（下的平方）</p>
+<div class="arithmatex">\[d(\frac{u}{v})=\frac{1}{v^2}(d(u)v-ud(v))\]</div>
+<p>其中, 一元函数 <span class="arithmatex">\(v=v(x)\neq0, u=u(x)\)</span> 或多元函数 <span class="arithmatex">\(v=v(x,y)\neq0, u=u(x,y)\)</span> 。</p>
+<h2 id="_3">三. 矩阵的微分</h2>
+<h3 id="1_2">1、向量变元的实值标量函数</h3>
+<div class="arithmatex">\[f(\pmb{x}),\pmb{x}=[x_1,x_2,\cdots,x_n]^T\\\\\]</div>
+<p>他其实就是多元函数, 设其可微, 则他的全微分, 即 <span class="arithmatex">\((14)\)</span> 式：</p>
+<div class="arithmatex">\[
+\begin{align} df(\pmb{x}) &amp;=\frac{\partial f}{\partial x_1}dx_1+\frac{\partial f}{\partial x_2}dx_2 + \cdots+\frac{\partial f}{\partial x_n}dx_n\\\\  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}  \end{align}  \\\ \tag{17}
+\]</div>
+<p>结果是标量, 由 <span class="arithmatex">\((2)\)</span> 式可知, <span class="arithmatex">\((17)\)</span>式可写成迹的形式, 即:</p>
+<div class="arithmatex">\[
+\begin{align} df(\pmb{x})  &amp;= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix} \\\\  &amp;=\mathbb{tr}\Big((\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},\cdots,\frac{\partial f}{\partial x_n})  \begin{bmatrix} dx_1 \\ dx_2\\ \vdots \\ dx_n \end{bmatrix}\Big)  \end{align}  \\\ \tag{18}
+\]</div>
+<h3 id="2_2">2、矩阵变元的实值标量函数</h3>
+<div class="arithmatex">\[
+f(X), X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
+\]</div>
+<p>它也是多元函数，设其可微，则它的全微分，仍是 <span class="arithmatex">\((14)\)</span> 式: </p>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \end{align}  \\\ \tag{19}\]</div>
+<p>我们从这个结果中发现，它其实就是矩阵 <span class="arithmatex">\((\frac{\partial f}{\partial x_{ij}})_{i=1,\ j=1}^{m,\ n}\)</span> 与矩阵 <span class="arithmatex">\((dx_{ij})_{i=1,j=1}^{m,n}\)</span> 对应位置的元素相乘并相加，由 <span class="arithmatex">\((6)\)</span> 式可知， <span class="arithmatex">\((19)\)</span> 式也可以写成迹的形式，即：</p>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=tr( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<h3 id="3_1">3、矩阵变元的实矩阵函数</h3>
+<div class="arithmatex">\[
+F(X), F_{p \times q}=(f_{ij})_{i=1, j=1}^{p,q}, X_{m \times n}=(x_{ij})_{i=1,j=1}^{m,n}
+\]</div>
+<p>矩阵变元的实矩阵函数，它的每个元素其实就是一个矩阵变元的实值标量函数 <span class="arithmatex">\(f_{i,j}(X)\)</span> 。</p>
+<p>我们定义：设  <span class="arithmatex">\(f_{i,j}(X)\)</span> 可微, 则矩阵变元的实矩阵函数的矩阵微分，就是对应每个位置的元素 <span class="arithmatex">\(f_{i,j}(X)\)</span> 求全微分，排列布局<strong>不变</strong>, 即：</p>
+<div class="arithmatex">\[
+\begin{align} d\pmb{F}_{p \times q}(\pmb{X}) &amp; = \begin{bmatrix} df_{11}(\pmb{X})&amp; df_{12}(\pmb{X}) &amp; \cdots &amp; df_{1q}(\pmb{X}) \\ df_{21}(\pmb{X})&amp; df_{22}(\pmb{X}) &amp; \cdots &amp; df_{2q}(\pmb{X}) \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\ df_{p1}(\pmb{X})&amp; df_{p2}(\pmb{X}) &amp; \cdots &amp; df_{pq}(\pmb{X})  \end{bmatrix}_{p \times q}  \end{align}  \\\ \tag{21}
+\]</div>
+<h4 id="31_1">3.1 四个法则</h4>
+<h5 id="a">a. 常数矩阵的矩阵微分</h5>
+<div class="arithmatex">\[
+dA_{m \times n}=0_{m \times n}\\\ \tag{22.1}
+\]</div>
+<p><strong>证明:</strong></p>
+<p><span class="arithmatex">\(A\)</span>的每个元素都是常数, 由 <span class="arithmatex">\((16.1)\)</span> 得, 每个元素的微分都是 0。</p>
+<p><strong>证毕。</strong></p>
+<h5 id="b">b. 线性法则</h5>
+<p>相加再微分等于微分再相加, 常数提外面</p>
+<div class="arithmatex">\[
+d \big(c_1F(X)+c_2G(X)\big)=c_1dF(x)+c_2dG(x)\\\ \tag{22.2}
+\]</div>
+<p>其中, <span class="arithmatex">\(c_1,c_2\)</span> 是常数。</p>
+<p><strong>证明:</strong></p>
+<p><span class="arithmatex">\(c_1F(X)+c_2G(X)\)</span> 的每个元素都是 <span class="arithmatex">\(c_1f_{ij}(X)+c_2g_{ij}(X)\)</span>, 由 <span class="arithmatex">\((16.2)\)</span> 式可知, 每个元素的全微分是 <span class="arithmatex">\(c_1df_{ij}(X)+c_2dg_{ij}(X)\)</span> 。</p>
+<p><strong>证毕。</strong></p>
+<h5 id="c">c. 乘积法则</h5>
+<p>前微后不微 + 前不微后微</p>
+<div class="arithmatex">\[
+d \big(F(X)G(X) \big)=d\big(F(X)\big)G(X)+F(X)dG(X)\\\ \tag{22.3.1}
+\]</div>
+<p>其中, <span class="arithmatex">\(F_{p \times q}(X),\ G_{p \times q}(X)\)</span> 。</p>
+<p><strong>注意：</strong> 此时的微分是矩阵, <strong>不能</strong>交换乘机的左右顺序。</p>
+<p><strong>证明：</strong></p>
+<p><span class="arithmatex">\(F(X)G(X)\)</span> 的每个元素都是   , 由 <span class="arithmatex">\((16.2)\)</span> 式、 <span class="arithmatex">\((16.3)\)</span> 式可知, 每个元素的全微分是</p>
+<div class="arithmatex">\[
+\begin{align}
+d\left( \sum_{k=1}^q[f_{ik}(\pmb{X})g_{kj}(\pmb{X})] \right) &amp; =\sum_{k=1}^q d(f_{ik}(\pmb{X})g_{kj}(\pmb{X})) \\\\
+&amp; = \sum_{k=1}^q[d(f_{ik}(\pmb{X}))g_{kj}(\pmb{X})+f_{ik}(\pmb{X})dg_{kj}(\pmb{X})] \\\\ 
+&amp; = \sum_{k=1}^q[d(f_{ik}(\pmb{X}))g_{kj}(\pmb{X})]+ \sum_{k=1}^q[f_{ik}(\pmb{X})dg_{kj}(\pmb{X})]   
+\end{align}  \\\ \tag{22.3.1a}
+\]</div>
+<p>结果左边的求和式，就是 <span class="arithmatex">\(d\big(F(X)\big)G(X)\)</span> 的每个元素，结果右边的求和式，就是 <span class="arithmatex">\(F(X)dG(X)\)</span> 的每个元素。</p>
+<p><strong>证毕。</strong></p>
+<p>由此，很容易得到更多个乘积的法则：</p>
+<div class="arithmatex">\[
+\mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X})+ \pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X}) \\\\ \tag{22.3.2}
+\]</div>
+<p><strong>证明：</strong></p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}(\pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))  &amp;= \mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X})+\pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}))  \\\\  &amp;=  \mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) +\pmb{F}(\pmb{X})[\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X}) + \pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X})]   \\\\  &amp;=\mathbb{d}(\pmb{F}(\pmb{X}))\pmb{G}(\pmb{X})\pmb{H}(\pmb{X}) + \pmb{F}(\pmb{X})\mathbb{d}(\pmb{G}(\pmb{X}))\pmb{H}(\pmb{X})+ \pmb{F}(\pmb{X})\pmb{G}(\pmb{X})\mathbb{d}\pmb{H}(\pmb{X})  \end{align} \\\\ \tag{22.3.2a}
+\]</div>
+<h5 id="d">d. 转置法则</h5>
+<p>转置的矩阵微分等于矩阵微分的转置</p>
+<div class="arithmatex">\[
+\mathbb{d}\pmb{F}_{p \times q}^T(\pmb{X})=(\mathbb{d}\pmb{F}_{p \times q})^T\\\ \tag{22.4.1}
+\]</div>
+<p><strong>证明：</strong></p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}\pmb{F}^T_{p \times q}(\pmb{X})  &amp;= \mathbb{d} \begin{bmatrix}  f_{11}(\pmb{X})&amp; f_{21}(\pmb{X}) &amp; \cdots &amp; f_{p1}(\pmb{X}) \\ f_{12}(\pmb{X})&amp; f_{22}(\pmb{X}) &amp; \cdots &amp; f_{p2}(\pmb{X}) \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  f_{1q}(\pmb{X})&amp;f_{2q}(\pmb{X}) &amp; \cdots &amp; f_{pq}(\pmb{X})   \end{bmatrix}_{q \times p}   \\\\ &amp;= \begin{bmatrix}  \mathbb{d}f_{11}(\pmb{X})&amp; \mathbb{d}f_{21}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{p1}(\pmb{X}) \\ \mathbb{d}f_{12}(\pmb{X})&amp; \mathbb{d}f_{22}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{p2}(\pmb{X}) \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  \mathbb{d}f_{1q}(\pmb{X})&amp;\mathbb{d}f_{2q}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{pq}(\pmb{X})   \end{bmatrix}_{q \times p}   \\\\  &amp;= \begin{bmatrix} \mathbb{d}f_{11}(\pmb{X})&amp; \mathbb{d}f_{12}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{1q}(\pmb{X}) \\ \mathbb{d}f_{21}(\pmb{X})&amp; \mathbb{d}f_{22}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{2q}(\pmb{X}) \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\ \mathbb{d}f_{p1}(\pmb{X})&amp; \mathbb{d}f_{p2}(\pmb{X}) &amp; \cdots &amp; \mathbb{d}f_{pq}(\pmb{X})  \end{bmatrix}_{p \times q}^T \\\\ &amp;=  (\mathbb{d}\pmb{F}_{p \times q}(\pmb{X}))^T \end{align}  \\\ \tag{22.4.2}
+\]</div>
+<p><strong>证毕。</strong></p>
+<h4 id="32_1">3.2 为什么要使用矩阵微分求导</h4>
+<p><span class="arithmatex">\(\pmb{X}_{m \times n}\)</span> 自己就是矩阵变元 <span class="arithmatex">\(\pmb{X}_{m \times n}\)</span> 的实矩阵函数，他的每个元素是 <span class="arithmatex">\(x_{ij}\)</span>, 每个元素的全微分是 <span class="arithmatex">\(\pmb{d}x_{ij}\)</span> 。</p>
+<p>因此, <span class="arithmatex">\(\pmb{X}_{m \times n}\)</span>的矩阵微分是:</p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{d}\pmb{X}_{m \times n} &amp;=  \begin{bmatrix} \mathbb{d}x_{11}&amp; \mathbb{d}x_{12} &amp; \cdots &amp; \mathbb{d}x_{1n} \\  \mathbb{d}x_{21}&amp; \mathbb{d}x_{22} &amp; \cdots &amp; \mathbb{d}x_{2n} \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  \mathbb{d}x_{m1}&amp; \mathbb{d}x_{m2} &amp; \cdots &amp; \mathbb{d}x_{mn} \\  \end{bmatrix}_{m \times n}  
+\end{align}  \\\ \tag{23.1}
+\]</div>
+<p>向量 <span class="arithmatex">\(\pmb{x}=[x_1,x_2,\cdots,x_n]^T\)</span>的矩阵微分是:</p>
+<div class="arithmatex">\[
+\begin{align} \mathbb{d}\pmb{x} &amp;=   \begin{bmatrix}  \mathbb{d}x_{1}\\   \mathbb{d}x_{2}\\   \vdots \\  \mathbb{d}x_{n} \\   \end{bmatrix}_{n \times 1}   \end{align}  \\\ \tag{23.2}
+\]</div>
+<p>于是，我们刚刚讲到的矩阵微分四个法则，对于 <span class="arithmatex">\(\pmb{dX}_{m \times n},\pmb{dx}\)</span> 也是适用的。</p>
+<p>我们现在回到矩阵变元的实值标量函数的全微分，即 <span class="arithmatex">\((20)\)</span> 式：</p>
+<div class="arithmatex">\[\begin{align} df(\pmb{X}) &amp;=\frac{\partial f}{\partial x_{11}}dx_{11}+\frac{\partial f}{\partial x_{12}}dx_{12} + \cdots+\frac{\partial f}{\partial x_{1n}}dx_{1n}\\ &amp;+\frac{\partial f}{\partial x_{21}}dx_{21}+\frac{\partial f}{\partial x_{22}}dx_{22} + \cdots+\frac{\partial f}{\partial x_{2n}}dx_{2n}\\ &amp;+\cdots\\ &amp;+\frac{\partial f}{\partial x_{m1}}dx_{m1}+\frac{\partial f}{\partial x_{m2}}dx_{m2} + \cdots+\frac{\partial f}{\partial x_{mn}}dx_{mn}  \\\\  &amp;=tr( \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \begin{bmatrix} dx_{11}  &amp; dx_{12} &amp; \cdots  &amp; dx_{1n} \\ dx_{21}  &amp; dx_{22} &amp; \cdots  &amp; dx_{2n} \\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ dx_{m1}  &amp; dx_{m2} &amp; \cdots  &amp; dx_{mn}  \end{bmatrix}_{m \times n} ) \end{align}  \\\ \tag{20}\]</div>
+<p>观察 <span class="arithmatex">\((20)\)</span> 式的结果, 发现在 <span class="arithmatex">\(tr\)</span> 中, 左边的矩阵其实就是上一篇 (本质篇_9) 式: </p>
+<div class="arithmatex">\[
+\begin{align} \text{D}_{\pmb{X}}f(\pmb{X})&amp;= \frac{\partial f(\pmb{X})}{\partial \pmb{X}^T_{m\times n}} \\\\ &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_{11}}&amp;\frac{\partial f}{\partial x_{21}}&amp;\cdots&amp;\frac{\partial f}{\partial x_{m1}} \\ \frac{\partial f}{\partial x_{12}}&amp;\frac{\partial f}{\partial x_{22}}&amp; \cdots &amp; \frac{\partial f}{\partial x_{m2}}\\ \vdots&amp;\vdots&amp;\vdots&amp;\vdots\\ \frac{\partial f} {\partial x_{1n}}&amp;\frac{\partial f}{\partial x_{2n}}&amp;\cdots&amp;\frac{\partial f}{\partial  x_{mn}}  \end{bmatrix}_{n\times m} \end{align} \\\\
+\tag{本质篇_9}
+\]</div>
+<p>而右边的矩阵，其实就是 <span class="arithmatex">\((23.1)\)</span> 式: </p>
+<div class="arithmatex">\[
+\begin{align}
+\mathbb{d}\pmb{X}_{m \times n} &amp;=  \begin{bmatrix} \mathbb{d}x_{11}&amp; \mathbb{d}x_{12} &amp; \cdots &amp; \mathbb{d}x_{1n} \\  \mathbb{d}x_{21}&amp; \mathbb{d}x_{22} &amp; \cdots &amp; \mathbb{d}x_{2n} \\  \vdots&amp;\vdots&amp;\vdots&amp;\vdots \\  \mathbb{d}x_{m1}&amp; \mathbb{d}x_{m2} &amp; \cdots &amp; \mathbb{d}x_{mn} \\  \end{bmatrix}_{m \times n}  
+\end{align}  \\\ \tag{23.1}
+\]</div>
+<p>因此, 矩阵变元的实值标量函数的全微分，即 <span class="arithmatex">\((20)\)</span> 式，可以写成：</p>
+<div class="arithmatex">\[
+\pmb{d}f(\pmb{X})= \operatorname{tr}(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\pmb{dX})\\\\ \tag{24}
+\]</div>
+<p>别忘了我们的目标是什么，其实就是要求 <span class="arithmatex">\(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\)</span> 。所以，只要我们可以把一个矩阵变元的实值标量函数的全微分写成 <span class="arithmatex">\((24)\)</span> 式，我们就找到了矩阵求导的结果。（已经有人证明，这样的结果是唯一的。即若 <span class="arithmatex">\(\pmb{d}f(\pmb{X})=\pmb{tr}(A_1\pmb{dX})=\pmb{tr}(A_2\pmb{dX})\)</span> ，则 <span class="arithmatex">\(A_1=A_2\)</span> )</p>
+<p>对于向量变元的实值标量函数的全微分，即 <span class="arithmatex">\((18)\)</span> 式，同样可以写成：</p>
+<div class="arithmatex">\[
+\mathbb{d}f (\pmb{x}) = \operatorname{tr}(\frac{\partial f (\pmb{x})}{\partial \pmb {x}^T} \mathbb{d}\pmb{x})\\\\
+\tag{25}
+\]</div>
+<p>当矩阵变元 <span class="arithmatex">\(X\)</span> 本身就是一个列向量时 <span class="arithmatex">\(\pmb{x}\)</span> 时</p>
+<div class="arithmatex">\[
+\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}= \frac{\partial f (\pmb{x})}{\partial \pmb {x}^T}
+\]</div>
+<p>同时，由 <span class="arithmatex">\((23.1)\)</span> 式、 <span class="arithmatex">\((23.2)\)</span> 式，当矩阵 $\pmb X $ 本身是列向量 、<span class="arithmatex">\(\pmb x\)</span> 时，也有</p>
+<div class="arithmatex">\[
+\mathbb{d} \pmb X = \mathbb{d} \pmb x \\\\
+\tag{27}
+\]</div>
+<p>所以，矩阵变元或向量变元的实值标量函数的矩阵求导的结果，都可以通过 <span class="arithmatex">\((24)\)</span> 式得到：</p>
+<div class="arithmatex">\[
+\pmb{d}f(\pmb{X})= \operatorname{tr}(\frac{\partial f(\pmb{X})}{\partial \pmb{X}^T}\pmb{dX})\\\\ \tag{24}
+\]</div>
+<p>那么，我们该如何写成形如 <span class="arithmatex">\((24)\)</span> 式的结果呢，别急，让我们先给出 <span class="arithmatex">\(3\times 2=6\)</span> 个你应该记住的公式（以后就直接用了）。</p>
+<h5 id="321">3.2.1 夹层饼</h5>
+<div class="arithmatex">\[
+\mathbb{d} (\pmb {AXB})=\pmb A \mathbb{d}(\pmb X)\pmb B \\\\
+\tag{25.1.1}
+\]</div>
+<p>其中, <span class="arithmatex">\(\pmb {A}_{p \times m},\ \pmb B_{n \times q}\)</span> 是常数矩阵。</p>
+<p><strong>证明:</strong></p>
+<p>由乘积法则 <span class="arithmatex">\((22.3.2)\)</span> 式得:</p>
+<div class="arithmatex">\[
+\mathbb{d}(\pmb {AXB})=\mathbb{d}(\pmb A)\pmb {XB}+\pmb A \mathbb{d}(\pmb X)\pmb B+\pmb {AX}\mathbb{d}\pmb B\\\\
+\tag{25.1.a}
+\]</div>
+<p>由常数矩阵微分 <span class="arithmatex">\((22.1)\)</span> 式得:</p>
+<div class="arithmatex">\[
+\mathbb{d} \pmb A = \pmb 0_{p \times m}, \mathbb{d} \pmb B =\pmb 0_{n \times q}\\\\
+\tag{25.1.b}
+\]</div>
+<p><strong>证毕。</strong></p>
+<p><span class="arithmatex">\(\pmb X_{m\times n}\)</span> 可以代入其他任意的矩阵函数:</p>
+<div class="arithmatex">\[
+\mathbb{d}\big( \pmb{AF}(\pmb X)\pmb B \big)=\pmb A \mathbb{d}\big( \pmb F(\pmb X) \big)\pmb B\\\\
+\tag{25.1.2}
+\]</div>
+<h5 id="322">3.2.2 行列式</h5>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb X| = |\pmb X|\operatorname{tr}(\pmb X^{-1}\mathbb{d}\pmb X) = \operatorname{tr}(|\pmb X|\pmb X^{-1}\mathbb{d}\pmb X)\\\\
+\tag{25.2.1}
+\]</div>
+<p>其中, <span class="arithmatex">\(\pmb X_{n \times n}\)</span> 。</p>
+<p><strong>证明:</strong></p>
+<p>首先明确, 行列式是一个实值标量函数, 故可以使用 <span class="arithmatex">\((24)\)</span> 式。</p>
+<p>我们知道, 行列式可以按照一行展开, 即一行中每个元素乘以他的<strong>代数余子式</strong>然后求和。</p>
+<p>我们按照元素 <span class="arithmatex">\(x_{ij}\)</span> 所在的第 <span class="arithmatex">\(i\)</span> 行展开:</p>
+<div class="arithmatex">\[
+|\pmb X|=x_{i1}A_{i1}+x_{i2}A_{i2}+\cdots +x_{in}A_{in}\\\\
+\tag{25.2.a}
+\]</div>
+<p>因此，行列式对元素 <span class="arithmatex">\(x_{ij}\)</span> 的偏导，即为该元素对应的代数余子式。</p>
+<div class="arithmatex">\[
+\frac{\partial |\pmb X|}{\partial x_{ij}}=A_{ij}\\\\
+\tag{25.2.b}
+\]</div>
+<p>因此, 行列式对矩阵求导的结果为:</p>
+<div class="arithmatex">\[
+\begin{align} \frac{\partial |\pmb{X}|}{\partial \pmb{X}^T} &amp;=  \begin{bmatrix} A_{11} &amp; A_{21} &amp; \cdots &amp; A_{n1} \\ A_{12} &amp; A_{22} &amp; \cdots &amp; A_{n2} \\ \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\ A_{1n} &amp; A_{2n} &amp; \cdots &amp; A_{nn} \\ \end{bmatrix}  \end{align} \\\\ \tag{25.2.c}
+\]</div>
+<p>这个结果其实就是伴随矩阵 <span class="arithmatex">\(\pmb X^*\)</span>。</p>
+<p>又因为伴随矩阵和逆矩阵的关系: </p>
+<div class="arithmatex">\[
+\pmb X^{-1} = \frac{\pmb X^*}{|\pmb X|}\\\\
+\tag{25.2.d}
+\]</div>
+<p>代入 <span class="arithmatex">\((24)\)</span>:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\mathbb{d} |\pmb X| &amp; = \operatorname{tr}(\frac{\partial |\pmb X|}{\partial \pmb X^T})\\\\
+ &amp; = \operatorname{tr}(|\pmb X|\pmb X^{-1}\mathbb{d}\pmb X)
+\end{aligned}
+\]</div>
+<p>又因为行列式是标量，由 <span class="arithmatex">\((3)\)</span> 式，可以提到迹的外面，得:</p>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb X| = |\pmb X| \operatorname{tr}(\pmb X^{-1}\mathbb{d}\pmb X) = \operatorname{tr}(|\pmb X|\pmb X^{-1}\mathbb{d}\pmb X)\\\\
+\tag{25.2.1}
+\]</div>
+<p><strong>证毕。</strong></p>
+<p><span class="arithmatex">\(\pmb X_{n\times n}\)</span> 可以代入其他任意的矩阵函数:</p>
+<div class="arithmatex">\[
+\mathbb{d} |\pmb F (\pmb X)| = |\pmb F (\pmb X)| \operatorname{tr}(\pmb F (\pmb X)^{-1}\mathbb{d}\pmb F (\pmb X)) = \operatorname{tr}(|\pmb F (\pmb X)|\pmb F (\pmb X)^{-1}\mathbb{d}\pmb F (\pmb X))\\\\
+\tag{25.2.2}
+\]</div>
+<h4 id="33_1">3.3 如何使用矩阵微分求导</h4>
+<p>对于实值标量函数 <span class="arithmatex">\(f (\pmb{X})\)</span>, <span class="arithmatex">\(\operatorname{tr}\big( f(\pmb X) \big)=f(\pmb X)\)</span> , <span class="arithmatex">\(\mathbb{d}f(\pmb X)=\operatorname{tr}\big( \mathbb{d}f(\pmb X) \big)\)</span></p>
+<p>所以有</p>
+<p><span class="arithmatex">\(\mathbb{d}f(\pmb X)=\mathbb{d}\big(\operatorname{tr}f(\pmb X)\big)=\operatorname{tr}\big( \mathbb{d}f(\pmb X) \big)\)</span></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" data-md-state="hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"/></svg>
+            回到页面顶部
+          </a>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="页脚">
+      
+        
+        <a href="../1.%20M%20derivation%20essence/" class="md-footer__link md-footer__link--prev" aria-label="上一页: 一. 矩阵求导本质" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                上一页
+              </span>
+              一. 矩阵求导本质
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../3.%20BP%20algorithm%20derivation/" class="md-footer__link md-footer__link--next" aria-label="下一页: 三. 神经网络BP算法原理和推导" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                下一页
+              </span>
+              三. 神经网络BP算法原理和推导
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.config.lang": "ja", "search.config.pipeline": "trimmer, stemmer", "search.config.separator": "[\\uff0c\\u3002]+", "search.placeholder": "\u641c\u7d22", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version.title": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c44cc438.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.1/es5/tex-mml-chtml.min.js"></script>
+      
+    
+  </body>
+</html>
